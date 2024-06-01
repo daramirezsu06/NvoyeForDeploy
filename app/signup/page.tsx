@@ -5,11 +5,13 @@ export default function SignUp() {
         <h1>
           
           Sign Up Page
+          
+          
           </h1>
-        <p>Welcome to the Sign Up page.
 
 
-        </p>
+          
+        <p>Welcome to the Sign Up page.</p>
       </section>
     </main>
   );
