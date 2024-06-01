@@ -1,8 +1,9 @@
+import { Typography } from "@mui/material";
 export default function Login() {
   return (
     <main>
       <section>
-        <h1>Log In Page</h1>
+        <Typography variant="h5">Log In Page</Typography>
         <p>Welcome to the login page.</p>
       </section>
     </main>
