@@ -25,3 +25,20 @@ npm run dev
 ```
 
 Open http://localhost:3000 with your browser to see the result.
+
+## Folder structure
+
+- **app/**: Contains the main application components and pages.
+  - **layout.tsx**: The root layout for the entire app.
+  - **page.tsx**: The root page for the entire app.
+  - **globals.css**: Global CSS for the application.
+  - **(auth)**: Handles authentication-related pages such as signup, signin.
+  - **(profile)**: Manages profile.
+  - **(hubs)**: Manages hub and related pages suchs as transport, housing, etc.
+  - **(checklist)**: Manages checklist related informations.
+  - **(location)**: Manages location information.
+  - **components/**: Contains shared components used across the application.
+- **lib/**: Shared utility functions used throughout the application.
+- **state/**: Redux state management setup
+- **mocks/**: Mock data of api's.
+- **public/**: Public assets such as images and fonts.
