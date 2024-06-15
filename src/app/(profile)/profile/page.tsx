@@ -1,13 +1,12 @@
 import MissionDetails from './components/MissionDetails';
-import LanguageSkills from './components/LanguageSkills';
-import IdentityEssentials from './components/IdentityEssentials';
+import Layout from './layout';
 
 export default function Profile() {
   return (
     <>
-      <MissionDetails></MissionDetails>
-      <LanguageSkills></LanguageSkills>
-      <IdentityEssentials></IdentityEssentials>
+      <Layout>
+        <MissionDetails></MissionDetails>
+      </Layout>
     </>
   );
 }

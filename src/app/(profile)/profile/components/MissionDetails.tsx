@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { TextField, MenuItem, Button, Box, Typography } from '@mui/material';
+import { TextField, MenuItem, Button, Typography } from '@mui/material';
 
 const MissionDetails: React.FC = () => {
   const [homeNation, setHomeNation] = useState('');
