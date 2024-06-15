@@ -25,13 +25,7 @@ const IdentityEssentials = () => {
   return (
     <Paper
       sx={{
-        width: '386px',
-        maxHeight: '747px',
-        borderRadius: '16px',
-        border: '16px',
-        padding: '24px',
         display: 'flex',
-        flexDirection: 'column',
       }}
     >
       <Stack width={'100%'} height={'699px'} paddingX={'16px'} paddingY={'0px'}>
