@@ -17,7 +17,10 @@ interface Language {
   proficiency: string;
 }
 
-const LanguageSkills: React.FC = () => {
+const LanguageSkills: React.FC<{ onNext: () => void; onBack: () => void }> = ({
+  onBack,
+  onNext,
+}) => {
   const [open, setOpen] = useState(false);
   const [languages, setLanguages] = useState<Language[]>([]);
   const [language, setLanguage] = useState('');
@@ -156,10 +159,10 @@ const LanguageSkills: React.FC = () => {
       </Dialog>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={onBack}>
           Back
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={onNext}>
           Next
         </Button>
       </Box>

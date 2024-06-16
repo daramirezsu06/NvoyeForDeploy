@@ -15,7 +15,10 @@ import {
   Box,
 } from '@mui/material';
 
-const IdentityEssentials = () => {
+const IdentityEssentials: React.FC<{
+  onNext: () => void;
+  onBack: () => void;
+}> = ({ onNext, onBack }) => {
   const [gender, setGender] = useState('');
 
   const handleGenderChange = (event: SelectChangeEvent<string>) => {
@@ -25,7 +28,12 @@ const IdentityEssentials = () => {
   return (
     <>
       <HeaderSection />
-      <FormSection gender={gender} handleGenderChange={handleGenderChange} />
+      <FormSection
+        gender={gender}
+        handleGenderChange={handleGenderChange}
+        onNext={onNext}
+        onBack={onBack}
+      />
     </>
   );
 };
@@ -44,9 +52,16 @@ const HeaderSection = () => (
 interface FormSectionProps {
   gender: string;
   handleGenderChange: (event: SelectChangeEvent<string>) => void;
+  onNext: () => void;
+  onBack: () => void;
 }
 
-const FormSection = ({ gender, handleGenderChange }: FormSectionProps) => (
+const FormSection = ({
+  gender,
+  handleGenderChange,
+  onNext,
+  onBack,
+}: FormSectionProps) => (
   <Stack spacing={3}>
     <TextField
       required
@@ -79,7 +94,7 @@ const FormSection = ({ gender, handleGenderChange }: FormSectionProps) => (
       </Select>
     </FormControl>
     <ProfilePictureSection />
-    <ButtonSection />
+    <ButtonSection onNext={onNext} onBack={onBack} />
   </Stack>
 );
 
@@ -128,7 +143,10 @@ const ProfilePictureSection = () => (
   </Stack>
 );
 
-const ButtonSection = () => (
+const ButtonSection: React.FC<{ onNext: () => void; onBack: () => void }> = ({
+  onNext,
+  onBack,
+}) => (
   <Stack direction="row" justifyContent="space-between">
     <Button
       color="inherit"
@@ -140,6 +158,7 @@ const ButtonSection = () => (
       }}
       size="large"
       variant="outlined"
+      onClick={onBack}
     >
       Back
     </Button>
@@ -153,6 +172,7 @@ const ButtonSection = () => (
       size="large"
       variant="contained"
       color="primary"
+      onClick={onNext}
     >
       Next
     </Button>

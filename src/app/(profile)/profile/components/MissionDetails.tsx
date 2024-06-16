@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { TextField, MenuItem, Button, Typography } from '@mui/material';
 
-const MissionDetails: React.FC = () => {
+const MissionDetails: React.FC<{ onNext: () => void }> = ({ onNext }) => {
   const [homeNation, setHomeNation] = useState('');
   const [assignedCountry, setAssignedCountry] = useState('');
 
@@ -62,7 +62,13 @@ const MissionDetails: React.FC = () => {
           </MenuItem>
         ))}
       </TextField>
-      <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        sx={{ mt: 2 }}
+        onClick={onNext}
+      >
         Next
       </Button>
     </>
