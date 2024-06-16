@@ -6,13 +6,13 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
   Stack,
   TextField,
   Link,
   SelectChangeEvent,
   Typography,
+  Box,
 } from '@mui/material';
 
 const IdentityEssentials = () => {
@@ -23,45 +23,22 @@ const IdentityEssentials = () => {
   };
 
   return (
-    <Paper
-      sx={{
-        display: 'flex',
-      }}
-    >
-      <Stack width={'100%'} height={'699px'} paddingX={'16px'} paddingY={'0px'}>
-        <Stack
-          width={'100%'}
-          height={'699px'}
-          display={'flex'}
-          flexDirection={'column'}
-          gap={'32px'}
-        >
-          <HeaderSection />
-          <FormSection
-            gender={gender}
-            handleGenderChange={handleGenderChange}
-          />
-        </Stack>
-      </Stack>
-    </Paper>
+    <>
+      <HeaderSection />
+      <FormSection gender={gender} handleGenderChange={handleGenderChange} />
+    </>
   );
 };
 
 const HeaderSection = () => (
-  <Stack
-    width={'100%'}
-    alignSelf={'stretch'}
-    display={'flex'}
-    flexDirection={'column'}
-    alignItems={'center'}
-  >
-    <Stack width={'100%'} display={'flex'}>
-      <Typography variant="h5">Identity Essentials</Typography>
-    </Stack>
-    <Typography variant="caption">
+  <>
+    <Typography variant="h4" gutterBottom>
+      Identity essentials
+    </Typography>
+    <Typography paragraph>
       Please complete the information below to help us accurately address you.
     </Typography>
-  </Stack>
+  </>
 );
 
 interface FormSectionProps {
@@ -70,85 +47,68 @@ interface FormSectionProps {
 }
 
 const FormSection = ({ gender, handleGenderChange }: FormSectionProps) => (
-  <Stack
-    display={'flex'}
-    flexDirection={'column'}
-    gap={'28px'}
-    alignSelf={'stretch'}
-  >
-    <Stack>
-      <TextField required id="first-name" label="First Name" size="small" />
-    </Stack>
-    <Stack>
-      <TextField required id="last-name" label="Last Name" size="small" />
-    </Stack>
-    <Stack>
-      <FormControl required size="small">
-        <InputLabel id="gender-select-label">Gender</InputLabel>
-        <Select
-          labelId="gender-select-label"
-          id="gender-select"
-          size="small"
-          value={gender}
-          label="Gender"
-          onChange={handleGenderChange}
-        >
-          <MenuItem value={'Female'}>Female</MenuItem>
-          <MenuItem value={'Male'}>Male</MenuItem>
-          <MenuItem value={'Other'}>Other</MenuItem>
-        </Select>
-      </FormControl>
-    </Stack>
+  <Stack spacing={3}>
+    <TextField
+      required
+      id="first-name"
+      label="First name"
+      size="small"
+      fullWidth
+    />
+    <TextField
+      required
+      id="last-name"
+      label="Last name"
+      size="small"
+      fullWidth
+    />
+    <FormControl required size="small" fullWidth>
+      <InputLabel id="gender-select-label">Gender</InputLabel>
+      <Select
+        labelId="gender-select-label"
+        id="gender-select"
+        value={gender}
+        label="Gender"
+        onChange={handleGenderChange}
+      >
+        <MenuItem value="Female">Female</MenuItem>
+        <MenuItem value="Male">Male</MenuItem>
+        <MenuItem value="Non-binary">Non-binary</MenuItem>
+        <MenuItem value="Prefer not to say">Prefer not to say</MenuItem>
+        <MenuItem value="Other">Other</MenuItem>
+      </Select>
+    </FormControl>
     <ProfilePictureSection />
     <ButtonSection />
   </Stack>
 );
 
 const ProfilePictureSection = () => (
-  <>
-    <Stack>
-      <Stack display={'flex'} flexDirection={'column'} gap={'8px'}>
-        <Typography variant="subtitle2">Profile picture</Typography>
-        <Typography variant="body1">
-          Not ready to upload a profile picture now? You can update this at
-          anytime in your Profile Settings.
-        </Typography>
-      </Stack>
-    </Stack>
+  <Stack spacing={1}>
+    <Typography variant="subtitle2">Profile picture</Typography>
+    <Typography variant="body2">
+      Not ready to upload a profile picture now? You can update this at any time
+      in your Profile Settings.
+    </Typography>
     <Container
       sx={{
         borderStyle: 'dashed',
         borderColor: 'divider',
-        borderWidth: '1px',
-        position: 'relative',
+        borderRadius: '8px',
         height: 152,
-        maxHeight: '152px',
-        borderRadius: '4px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingX: '16px',
-        paddingY: '24px',
+        position: 'relative',
         cursor: 'pointer',
       }}
     >
-      <Stack
-        display={'flex'}
-        flexDirection={'column'}
-        alignItems={'center'}
-        gap={'8px'}
-        position={'absolute'}
-        zIndex={'2'}
-      >
-        <Stack
-          width={'40px'}
-          height={'40px'}
-          borderRadius={'100%'}
-          bgcolor={'black'}
-        ></Stack>
+      <Stack spacing={1} alignItems="center" position="absolute" zIndex={2}>
+        <Box width={40} height={40} borderRadius="50%" bgcolor="#ccc" />
         <Link sx={{ '&:hover': { color: 'action.hover' } }}>
           <Typography variant="subtitle1">Click to upload</Typography>
         </Link>
+        <Typography variant="body2">or drag and drop</Typography>
         <Typography variant="body2">SVG, PNG, JPG or GIF (max. 3MB)</Typography>
       </Stack>
       <input
@@ -165,29 +125,34 @@ const ProfilePictureSection = () => (
         }}
       />
     </Container>
-  </>
+  </Stack>
 );
 
 const ButtonSection = () => (
-  <Stack
-    padding="10px"
-    width="100%"
-    display="flex"
-    justifyContent="space-between"
-    flexDirection={'row'}
-  >
+  <Stack direction="row" justifyContent="space-between">
     <Button
       color="inherit"
-      sx={{ width: '61px', height: '30px', fontFamily: 'Outfit-Medium' }}
-      size="small"
+      sx={{
+        width: '100px',
+        height: '40px',
+        fontFamily: 'Outfit-Medium',
+        borderRadius: '8px',
+      }}
+      size="large"
       variant="outlined"
     >
-      BACK
+      Back
     </Button>
     <Button
-      sx={{ width: '61px', height: '30px', fontFamily: 'Outfit-Medium' }}
-      size="small"
+      sx={{
+        width: '100px',
+        height: '40px',
+        fontFamily: 'Outfit-Medium',
+        borderRadius: '8px',
+      }}
+      size="large"
       variant="contained"
+      color="primary"
     >
       Next
     </Button>
