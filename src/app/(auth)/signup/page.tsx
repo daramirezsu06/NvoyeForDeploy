@@ -2,7 +2,7 @@
 import React from 'react';
 import { Container, Box } from '@mui/material';
 import Image from 'next/image';
-import SignUp from './components/SignUp'; // Ensure the correct path to the SignUp component
+import SignupForm from './components/signupForm';
 
 const SignUpPage = () => {
   return (
@@ -42,7 +42,7 @@ const SignUpPage = () => {
             backgroundColor: '#f5f5f5',
           }}
         >
-          <SignUp />
+          <SignupForm />
         </Box>
       </Box>
     </Container>

@@ -43,7 +43,6 @@ export default function LoginForm() {
           control={<Checkbox color="primary" />}
           label="Remember me"
         />
-        <p> add remember me check box here</p>
         <Button
           sx={{ borderRadius: '8px', marginBottom: 1.5 }}
           type="submit"
