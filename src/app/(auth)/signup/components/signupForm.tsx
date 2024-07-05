@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   CssBaseline,
@@ -11,12 +11,22 @@ import {
 } from '@mui/material';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { signUp } from '../../redux/authSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/src/app/state/store';
 
 export default function SignupForm() {
   const dispatch = useAppDispatch();
+  const { isCodeSent, error } = useSelector((state: RootState) => state.auth);
+  const [email, setEmail] = useState('');
+  const [userType, setUserType] = useState(2);
 
-  const handleSignUp = async (event: React.FormEvent) => {
-    dispatch(signUp('test@test.nl')); // hardcoded for now
+  const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(signUp({ email, userType }));
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
   };
 
   return (
@@ -27,42 +37,48 @@ export default function SignupForm() {
           <Typography component="h1" variant="h5" align="center">
             Sign up
           </Typography>
-          <TextField
-            label="Email address"
-            type="email"
-            fullWidth
-            variant="outlined"
-            InputProps={{
-              sx: { borderRadius: '16px', marginBottom: 2 },
-            }}
-            required
-          />
-          <Typography variant="subtitle2" align="center">
-            We have sent a verification code to your email
-          </Typography>
-          <Typography variant="caption" align="center">
-            Please check your inbox and paste the signup code below
-          </Typography>
+          <form onSubmit={handleSignUp}>
+            <TextField
+              label="Email address"
+              type="email"
+              fullWidth
+              variant="outlined"
+              onChange={handleEmailChange}
+              InputProps={{
+                sx: { borderRadius: '16px', marginBottom: 2 },
+              }}
+              required
+            />
+            {isCodeSent && (
+              <>
+                <Typography variant="subtitle2" align="center">
+                  We have sent a verification code to your email
+                </Typography>
+                <Typography variant="caption" align="center">
+                  Please check your inbox and paste the signup code below
+                </Typography>
 
-          <TextField
-            label="Enter verification code"
-            type="text"
-            fullWidth
-            variant="outlined"
-            InputProps={{
-              sx: { borderRadius: '16px', marginBottom: 2 },
-            }}
-            required
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            onClick={handleSignUp}
-          >
-            Sign Up
-          </Button>
+                <TextField
+                  label="Enter verification code"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  InputProps={{
+                    sx: { borderRadius: '16px', marginBottom: 2 },
+                  }}
+                  required
+                />
+              </>
+            )}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              {isCodeSent ? 'Continue' : 'Sign Up'}
+            </Button>
+          </form>
           <Divider>Or</Divider>
           <Button
             fullWidth
