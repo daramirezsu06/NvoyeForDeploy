@@ -10,7 +10,7 @@ import {
   Grid,
 } from '@mui/material';
 import { useAppDispatch } from '@/src/app/state/hooks';
-import { signUp } from '../../redux/authSlice';
+import { signUp, verifyOtp } from '../../redux/authSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/app/state/store';
 
@@ -19,14 +19,23 @@ export default function SignupForm() {
   const { isCodeSent, error } = useSelector((state: RootState) => state.auth);
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState(2);
+  const [code, setOtp] = useState<string>('');
 
   const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(signUp({ email, userType }));
+    if (isCodeSent) {
+      dispatch(verifyOtp({ email, code }));
+    } else {
+      dispatch(signUp({ email, userType }));
+    }
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
+  };
+
+  const handleOtpChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOtp(event.target.value);
   };
 
   return (
@@ -63,6 +72,7 @@ export default function SignupForm() {
                   type="text"
                   fullWidth
                   variant="outlined"
+                  onChange={handleOtpChange}
                   InputProps={{
                     sx: { borderRadius: '16px', marginBottom: 2 },
                   }}
