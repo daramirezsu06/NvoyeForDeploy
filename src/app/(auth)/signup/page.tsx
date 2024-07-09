@@ -23,7 +23,7 @@ const SignUpPage = () => {
           priority
         />
       </Box>
-      <Box
+      <Container
         sx={{
           flex: 2,
           pl: { xs: 0, sm: 4 },
@@ -44,7 +44,7 @@ const SignUpPage = () => {
         >
           <SignupForm />
         </Box>
-      </Box>
+      </Container>
     </Container>
   );
 };

@@ -6,6 +6,7 @@ interface AuthState {
   isCodeSent: boolean;
   requestId: number | null;
   isOtpVerified: boolean;
+  isPasswordCreated: boolean;
 }
 
 const initialState: AuthState = {
@@ -14,6 +15,7 @@ const initialState: AuthState = {
   isCodeSent: false,
   requestId: null,
   isOtpVerified: false,
+  isPasswordCreated: false,
 };
 
 interface SignUpPayload {
@@ -24,6 +26,17 @@ interface SignUpPayload {
 interface VerifyOtpPayload {
   email: string;
   code: string;
+}
+
+interface SetPasswordPayload {
+  email: string;
+  code: string;
+  password: string;
+}
+
+interface LoginPayload {
+  email: string;
+  password: string;
 }
 
 // Async thunk for signup
@@ -38,7 +51,6 @@ export const signUp = createAsyncThunk(
         },
         body: JSON.stringify({ email, userType }),
       });
-      debugger;
       if (!response.ok) {
         const errorData = await response.json();
         return rejectWithValue(errorData.message);
@@ -63,6 +75,59 @@ export const verifyOtp = createAsyncThunk(
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, code }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData.message);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const setPassword = createAsyncThunk(
+  'auth/setPassword',
+  async (
+    { email, code, password }: SetPasswordPayload,
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await fetch('http://localhost:8000/auth/setPassword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, code, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData.message);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const login = createAsyncThunk(
+  'auth/login',
+  async ({ email, password }: LoginPayload, { rejectWithValue }) => {
+    try {
+      const response = await fetch('http://localhost:8000/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
@@ -113,6 +178,12 @@ const authSlice = createSlice({
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.error = (action.payload as string) || 'OTP verification failed';
+      })
+      .addCase(setPassword.fulfilled, (state) => {
+        state.isPasswordCreated = true;
+      })
+      .addCase(setPassword.rejected, (state, action) => {
+        state.error = (action.payload as string) || 'Password setting failed';
       });
   },
 });

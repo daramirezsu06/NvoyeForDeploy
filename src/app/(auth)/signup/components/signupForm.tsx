@@ -10,20 +10,25 @@ import {
   Grid,
 } from '@mui/material';
 import { useAppDispatch } from '@/src/app/state/hooks';
-import { signUp, verifyOtp } from '../../redux/authSlice';
+import { signUp, verifyOtp, setPassword } from '../../redux/authSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/app/state/store';
 
 export default function SignupForm() {
   const dispatch = useAppDispatch();
-  const { isCodeSent, error } = useSelector((state: RootState) => state.auth);
+  const { isCodeSent, isOtpVerified, error } = useSelector(
+    (state: RootState) => state.auth
+  );
   const [email, setEmail] = useState('');
-  const [userType, setUserType] = useState(2);
+  const [userType, setUserType] = useState(2); // hardcoded for now
   const [code, setOtp] = useState<string>('');
+  const [password, setNewPassword] = useState<string>('');
 
   const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (isCodeSent) {
+    if (isOtpVerified) {
+      dispatch(setPassword({ email, code, password }));
+    } else if (isCodeSent) {
       dispatch(verifyOtp({ email, code }));
     } else {
       dispatch(signUp({ email, userType }));
@@ -36,6 +41,10 @@ export default function SignupForm() {
 
   const handleOtpChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOtp(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewPassword(event.target.value);
   };
 
   return (
@@ -58,7 +67,7 @@ export default function SignupForm() {
               }}
               required
             />
-            {isCodeSent && (
+            {isCodeSent && !isOtpVerified && (
               <>
                 <Typography variant="subtitle2" align="center">
                   We have sent a verification code to your email
@@ -80,6 +89,22 @@ export default function SignupForm() {
                 />
               </>
             )}
+
+            {isOtpVerified && (
+              <>
+                <TextField
+                  label="Create your password"
+                  type="password"
+                  fullWidth
+                  variant="outlined"
+                  onChange={handlePasswordChange}
+                  InputProps={{
+                    sx: { borderRadius: '16px', marginBottom: 2 },
+                  }}
+                  required
+                />
+              </>
+            )}
             <Button
               type="submit"
               fullWidth
@@ -91,6 +116,7 @@ export default function SignupForm() {
           </form>
           <Divider>Or</Divider>
           <Button
+            disabled={isCodeSent || isOtpVerified}
             fullWidth
             variant="outlined"
             startIcon={
