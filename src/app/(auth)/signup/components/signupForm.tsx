@@ -10,9 +10,10 @@ import {
   Grid,
 } from '@mui/material';
 import { useAppDispatch } from '@/src/app/state/hooks';
-import { signUp, verifyOtp, setPassword } from '../../redux/authSlice';
-import { useSelector } from 'react-redux';
 import { RootState } from '@/src/app/state/store';
+import { useSelector } from 'react-redux';
+
+import { setPassword, signUp, verifyOtp } from '../../redux';
 
 export default function SignupForm() {
   const dispatch = useAppDispatch();
