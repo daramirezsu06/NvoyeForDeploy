@@ -1,3 +1,4 @@
+'use client';
 import { Container, Box } from '@mui/material';
 import Image from 'next/image';
 import LoginForm from './components/LoginForm';

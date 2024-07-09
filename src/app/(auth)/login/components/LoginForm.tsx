@@ -10,7 +10,28 @@ import {
   Typography,
 } from '@mui/material';
 
+import { useState } from 'react';
+import { login } from '../../redux';
+import { useAppDispatch } from '@/src/app/state/hooks';
+
 export default function LoginForm() {
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(login({ email, password }));
+  };
+
   return (
     <Container component="main" maxWidth="md">
       <Stack sx={{ marginBottom: 4 }}>
@@ -18,7 +39,7 @@ export default function LoginForm() {
           Log in
         </Typography>
       </Stack>
-      <form>
+      <form onSubmit={handleLogin}>
         <TextField
           label="Email address"
           type="email"
@@ -27,6 +48,7 @@ export default function LoginForm() {
           InputProps={{
             sx: { borderRadius: '16px', marginBottom: 2 },
           }}
+          onChange={handleEmailChange}
           required
         />
         <TextField
@@ -37,6 +59,7 @@ export default function LoginForm() {
           InputProps={{
             sx: { borderRadius: '16px', marginBottom: 1 },
           }}
+          onChange={handlePasswordChange}
           required
         />
         <FormControlLabel

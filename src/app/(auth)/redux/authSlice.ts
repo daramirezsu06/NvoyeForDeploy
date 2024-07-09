@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from './authTypes';
-import { setPassword, signUp, verifyOtp } from './authThunks';
+import { login, setPassword, signUp, verifyOtp } from './authThunks';
 
 const initialState: AuthState = {
   user: null,
@@ -52,6 +52,13 @@ const authSlice = createSlice({
       })
       .addCase(setPassword.rejected, (state, action) => {
         state.error = (action.payload as string) || 'Password setting failed';
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.meta.arg.email;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.user = action.meta.arg.email;
+        state.error = (action.payload as string) || 'Login failed';
       });
   },
 });

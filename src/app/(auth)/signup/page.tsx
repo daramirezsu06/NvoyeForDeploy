@@ -1,10 +1,15 @@
 'use client';
 import React from 'react';
 import { Container, Box } from '@mui/material';
+import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import SignupForm from './components/signupForm';
+import { RootState } from '@/src/app/state/store';
+import Confirmation from './components/confirmation';
 
 const SignUpPage = () => {
+  const { isPasswordCreated } = useSelector((state: RootState) => state.auth);
+
   return (
     <Container
       sx={{
@@ -42,7 +47,9 @@ const SignUpPage = () => {
             backgroundColor: '#f5f5f5',
           }}
         >
-          <SignupForm />
+          {!isPasswordCreated && <SignupForm />}
+
+          {isPasswordCreated && <Confirmation />}
         </Box>
       </Container>
     </Container>
