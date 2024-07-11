@@ -5,6 +5,7 @@ export interface AuthState {
   requestId: number | null;
   isOtpVerified: boolean;
   isPasswordCreated: boolean;
+  isOtpSent: boolean;
 }
 
 export interface SignUpPayload {
@@ -15,6 +16,10 @@ export interface SignUpPayload {
 export interface VerifyOtpPayload {
   email: string;
   code: string;
+}
+
+export interface SendOtpPayload {
+  email: string;
 }
 
 export interface SetPasswordPayload {

@@ -4,6 +4,7 @@ import {
   VerifyOtpPayload,
   SetPasswordPayload,
   LoginPayload,
+  SendOtpPayload,
 } from './authTypes';
 
 export const signUp = createAsyncThunk(
@@ -30,7 +31,6 @@ export const signUp = createAsyncThunk(
   }
 );
 
-// Async thunk for verifying OTP
 export const verifyOtp = createAsyncThunk(
   'auth/verifyOtp',
   async ({ email, code }: VerifyOtpPayload, { rejectWithValue }) => {
@@ -41,6 +41,31 @@ export const verifyOtp = createAsyncThunk(
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, code }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData.message);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const sendOtp = createAsyncThunk(
+  'auth/sendOtp',
+  async ({ email }: SendOtpPayload, { rejectWithValue }) => {
+    try {
+      const response = await fetch('http://localhost:8000/auth/sendOtp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
       });
 
       if (!response.ok) {

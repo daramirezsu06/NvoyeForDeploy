@@ -96,13 +96,13 @@ export default function LoginForm() {
         </Typography>
 
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-          <Link href="#">Reset password</Link> or{' '}
+          <Link href="/forgot-password">Reset password</Link> or{' '}
           <Link href="#">Visit our help center</Link>
         </Typography>
 
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
           New to Nvoye?
-          <Link href="#">Create an account</Link>
+          <Link href="/signup">Create an account</Link>
         </Typography>
       </form>
     </Container>

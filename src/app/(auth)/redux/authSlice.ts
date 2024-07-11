@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from './authTypes';
-import { login, setPassword, signUp, verifyOtp } from './authThunks';
+import { login, sendOtp, setPassword, signUp, verifyOtp } from './authThunks';
 
 const initialState: AuthState = {
   user: null,
@@ -9,6 +9,7 @@ const initialState: AuthState = {
   requestId: null,
   isOtpVerified: false,
   isPasswordCreated: false,
+  isOtpSent: false,
 };
 
 const authSlice = createSlice({
@@ -38,8 +39,12 @@ const authSlice = createSlice({
       .addCase(signUp.rejected, (state, action) => {
         state.error = (action.payload as string) || 'Signup failed';
       })
-      .addCase(verifyOtp.pending, (state) => {
-        state.error = null;
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.meta.arg.email;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.user = action.meta.arg.email;
+        state.error = (action.payload as string) || 'Login failed';
       })
       .addCase(verifyOtp.fulfilled, (state) => {
         state.isOtpVerified = true;
@@ -47,18 +52,19 @@ const authSlice = createSlice({
       .addCase(verifyOtp.rejected, (state, action) => {
         state.error = (action.payload as string) || 'OTP verification failed';
       })
+      .addCase(sendOtp.fulfilled, (state, action) => {
+        state.user = action.meta.arg.email;
+        state.isOtpSent = true;
+      })
+      .addCase(sendOtp.rejected, (state, action) => {
+        state.user = action.meta.arg.email;
+        state.error = (action.payload as string) || 'OTP sent failed';
+      })
       .addCase(setPassword.fulfilled, (state) => {
         state.isPasswordCreated = true;
       })
       .addCase(setPassword.rejected, (state, action) => {
         state.error = (action.payload as string) || 'Password setting failed';
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.user = action.meta.arg.email;
-      })
-      .addCase(login.rejected, (state, action) => {
-        state.user = action.meta.arg.email;
-        state.error = (action.payload as string) || 'Login failed';
       });
   },
 });
