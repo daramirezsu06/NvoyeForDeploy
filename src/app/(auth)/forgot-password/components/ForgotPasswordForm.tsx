@@ -157,8 +157,7 @@ export default function ForgotPasswordForm() {
             sx={{ marginBottom: 1.5 }}
           >
             <Typography variant="subtitle2">
-              {' '}
-              Didn't receive your email?
+              Didnt receive your email?
             </Typography>
             <Button variant="text" color="primary" size="small">
               Resend code in 50s

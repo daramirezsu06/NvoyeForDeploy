@@ -1,10 +1,14 @@
 'use client';
 
-import { Container, Box } from '@mui/material';
+import { Container, Box, Alert } from '@mui/material';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/src/app/state/store';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
 
 const ForgotPasswordPage = () => {
+  const { isOtpSent, error } = useSelector((state: RootState) => state.auth);
+
   return (
     <Container
       sx={{
@@ -30,8 +34,21 @@ const ForgotPasswordPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
+        {isOtpSent && (
+          <Alert severity="info" sx={{ margin: 4 }}>
+            Recovery code sent to your email.
+          </Alert>
+        )}
+
+        {error && (
+          <Alert severity="error" sx={{ margin: 4 }}>
+            {error}
+          </Alert>
+        )}
+
         <Box
           sx={{
             maxWidth: 425,
