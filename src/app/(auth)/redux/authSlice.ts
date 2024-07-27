@@ -10,6 +10,7 @@ const initialState: AuthState = {
   isOtpVerified: false,
   isPasswordCreated: false,
   isOtpSent: false,
+  isLoggedIn: false,
 };
 
 const authSlice = createSlice({
@@ -43,6 +44,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.meta.arg.email;
         state.error = null;
+        state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.user = action.meta.arg.email;

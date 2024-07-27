@@ -67,6 +67,7 @@ export default function SignupForm() {
                 sx: { borderRadius: '16px', marginBottom: 2 },
               }}
               required
+              disabled={isCodeSent}
             />
             {isCodeSent && !isOtpVerified && (
               <>

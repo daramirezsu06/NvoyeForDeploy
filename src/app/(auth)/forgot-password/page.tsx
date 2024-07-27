@@ -7,7 +7,9 @@ import { RootState } from '@/src/app/state/store';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
 
 const ForgotPasswordPage = () => {
-  const { isOtpSent, error } = useSelector((state: RootState) => state.auth);
+  const { isOtpSent, isOtpVerified, error } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   return (
     <Container
@@ -37,7 +39,7 @@ const ForgotPasswordPage = () => {
           flexDirection: 'column',
         }}
       >
-        {isOtpSent && (
+        {isOtpSent && !isOtpVerified && (
           <Alert severity="info" sx={{ margin: 4 }}>
             Recovery code sent to your email.
           </Alert>

@@ -6,6 +6,7 @@ export interface AuthState {
   isOtpVerified: boolean;
   isPasswordCreated: boolean;
   isOtpSent: boolean;
+  isLoggedIn: boolean;
 }
 
 export interface SignUpPayload {

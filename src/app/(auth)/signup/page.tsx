@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Container, Box } from '@mui/material';
+import { Container, Box, Alert } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import SignupForm from './components/signupForm';
@@ -8,7 +8,9 @@ import { RootState } from '@/src/app/state/store';
 import Confirmation from './components/confirmation';
 
 const SignUpPage = () => {
-  const { isPasswordCreated } = useSelector((state: RootState) => state.auth);
+  const { isPasswordCreated, isCodeSent, isOtpVerified, error } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   return (
     <Container
@@ -35,8 +37,21 @@ const SignUpPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
+        {error && (
+          <Alert severity="error" sx={{ margin: 4 }}>
+            {error}
+          </Alert>
+        )}
+
+        {!error && !isOtpVerified && isCodeSent && (
+          <Alert severity="info" sx={{ margin: 4 }}>
+            Verification code sent to your email
+          </Alert>
+        )}
+
         <Box
           sx={{
             maxWidth: 425,

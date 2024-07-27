@@ -1,9 +1,13 @@
 'use client';
-import { Container, Box } from '@mui/material';
+import { Container, Box, Alert } from '@mui/material';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/src/app/state/store';
 import LoginForm from './components/LoginForm';
 
 const LoginPage = () => {
+  const { error } = useSelector((state: RootState) => state.auth);
+
   return (
     <Container
       sx={{
@@ -29,8 +33,15 @@ const LoginPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
+        {error && (
+          <Alert severity="error" sx={{ margin: 4 }}>
+            {error}
+          </Alert>
+        )}
+
         <Box
           sx={{
             maxWidth: 425,
