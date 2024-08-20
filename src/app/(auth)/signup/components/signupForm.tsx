@@ -8,12 +8,23 @@ import {
   Divider,
   Link,
   Grid,
+  RadioGroup,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  Radio,
 } from '@mui/material';
+import { Check, Close } from '@mui/icons-material';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { RootState } from '@/src/app/state/store';
 import { useSelector } from 'react-redux';
 
 import { setPassword, signUp, verifyOtp } from '../../redux';
+import {
+  IValidateInput,
+  validatefield,
+} from '@/src/utils/validation.ts/validateForm';
+import { fields } from '@/src/utils/validation.ts/fieldsValidation';
 
 export default function SignupForm() {
   const dispatch = useAppDispatch();
@@ -24,6 +35,7 @@ export default function SignupForm() {
   const [userType, setUserType] = useState(2); // hardcoded for now
   const [code, setOtp] = useState<string>('');
   const [password, setNewPassword] = useState<string>('');
+  const [inputError, setError] = useState<IValidateInput[]>([]);
 
   const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,20 +55,50 @@ export default function SignupForm() {
   const handleOtpChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOtp(event.target.value);
   };
+  const handleUserTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserType(Number(event.target.value));
+    console.log(userType);
+  };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewPassword(event.target.value);
+    const { value, name } = event.target;
+    setError(validatefield(name as keyof typeof fields, value));
+
+    console.log(inputError);
+
+    setNewPassword(value);
   };
 
   return (
     <Container component="main" maxWidth="md">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Grid container justifyContent="center" alignItems="center">
         <Grid>
-          <Typography component="h1" variant="h5" align="center">
+          <Typography sx={{ mb: 4 }} component="h1" variant="h5" align="center">
             Sign up
           </Typography>
           <form onSubmit={handleSignUp}>
+            {!isCodeSent && (
+              <FormControl sx={{ mb: 2 }}>
+                <FormLabel>Join as</FormLabel>
+                <RadioGroup
+                  row
+                  value={userType}
+                  onChange={handleUserTypeChange}
+                >
+                  <FormControlLabel
+                    value={2}
+                    control={<Radio />}
+                    label="Diplomat"
+                  />
+                  <FormControlLabel
+                    value={3}
+                    control={<Radio />}
+                    label="Service Provider"
+                  />
+                </RadioGroup>
+              </FormControl>
+            )}
             <TextField
               label="Email address"
               type="email"
@@ -69,6 +111,7 @@ export default function SignupForm() {
               required
               disabled={isCodeSent}
             />
+
             {isCodeSent && !isOtpVerified && (
               <>
                 <Typography variant="subtitle2" align="center">
@@ -95,6 +138,7 @@ export default function SignupForm() {
             {isOtpVerified && (
               <>
                 <TextField
+                  name="password"
                   label="Create your password"
                   type="password"
                   fullWidth
@@ -105,9 +149,37 @@ export default function SignupForm() {
                   }}
                   required
                 />
+                {inputError.map((itemError, index) => (
+                  <div
+                    key={index}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    {itemError.test ? (
+                      <Check
+                        color={itemError.test ? 'success' : 'error'}
+                        fontSize="small"
+                      />
+                    ) : (
+                      <Close
+                        color={itemError.test ? 'success' : 'error'}
+                        fontSize="small"
+                      />
+                    )}
+
+                    <Typography
+                      variant="caption"
+                      key={index}
+                      display="block"
+                      color={itemError.test ? 'success.main' : 'error'}
+                    >
+                      {itemError.textValidation}
+                    </Typography>
+                  </div>
+                ))}
               </>
             )}
             <Button
+              disabled={inputError.some((item) => item.test == false)}
               type="submit"
               fullWidth
               variant="contained"

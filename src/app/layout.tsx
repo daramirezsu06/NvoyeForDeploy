@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import './globals.css';
 import StoreProvider from './StoreProvider';
+import { CssBaseline } from '@mui/material';
 
 export default function RootLayout({
   children,
@@ -15,7 +16,10 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <AppRouterCacheProvider>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              {children}
+            </ThemeProvider>
           </AppRouterCacheProvider>
         </body>
       </html>
