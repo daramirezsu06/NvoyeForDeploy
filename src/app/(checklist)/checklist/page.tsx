@@ -1,38 +1,22 @@
-import { Typography, Container, Box } from '@mui/material';
-import Image from 'next/image';
-import Question from './components/question';
+'use client';
+import { Container, Box } from '@mui/material';
+import QuestionContainer from './components/principalContainer';
+import { AnswersProvider } from './components/answersContext';
+import GetStarted from './components/getStarted';
+import { useState } from 'react';
 
 export default function Checklist() {
+  const [start, setStart] = useState(false);
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        height: '100vh',
-        padding: 0,
-        flexDirection: { xs: 'column', sm: 'row' },
-      }}
-    >
-      <Box sx={{ flex: 1, position: 'relative' }}>
-        <Image
-          src="/images/sign_up.png"
-          alt="Profile image"
-          layout="fill"
-          objectFit="cover"
-          priority
-        />
-      </Box>
+    <AnswersProvider>
       <Container
         sx={{
-          flex: 2,
-          pl: { xs: 0, sm: 4 },
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
+          height: '100vh',
         }}
       >
-        <Question />
+        {start ? <QuestionContainer /> : <GetStarted setStart={setStart} />}
       </Container>
-    </Container>
+    </AnswersProvider>
   );
 }

@@ -25,8 +25,8 @@ const SignUpPage = () => {
         <Image
           src="/images/sign_up.png"
           alt="Profile image"
-          layout="fill"
-          objectFit="cover"
+          fill={true}
+          style={{ objectFit: 'cover' }}
           priority
         />
       </Box>
