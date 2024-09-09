@@ -1,3 +1,7 @@
-/*
-* add global css
-*/
+/* globals.css */
+body {
+  font-family: 'Outfit', sans-serif;
+}
+html {
+  font-size: 14px; /* Si tu diseño está basado en 14px en lugar de 16px */
+}

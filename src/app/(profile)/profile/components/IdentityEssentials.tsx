@@ -14,11 +14,13 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import ProgressWithLabel from './ProgressWithLabel';
 
 const IdentityEssentials: React.FC<{
   onNext: () => void;
   onBack: () => void;
-}> = ({ onNext, onBack }) => {
+  step: number;
+}> = ({ onNext, onBack, step }) => {
   const [gender, setGender] = useState('');
 
   const handleGenderChange = (event: SelectChangeEvent<string>) => {
@@ -27,7 +29,7 @@ const IdentityEssentials: React.FC<{
 
   return (
     <>
-      <HeaderSection />
+      <HeaderSection step={step} />
       <FormSection
         gender={gender}
         handleGenderChange={handleGenderChange}
@@ -38,11 +40,15 @@ const IdentityEssentials: React.FC<{
   );
 };
 
-const HeaderSection = () => (
+const HeaderSection: React.FC<{ step: number }> = ({ step }) => (
   <>
-    <Typography variant="h4" gutterBottom>
-      Identity essentials
-    </Typography>
+    <Stack direction="row" justifyContent="space-between">
+      <Typography variant="h4" gutterBottom>
+        Identity essentials
+      </Typography>
+      <ProgressWithLabel value={step} />
+    </Stack>
+
     <Typography paragraph>
       Please complete the information below to help us accurately address you.
     </Typography>

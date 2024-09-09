@@ -9,9 +9,17 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 import theme from '@/src/app/theme';
-import questionsUpdated from './arrayChecklist';
 import { Verified } from '@mui/icons-material';
-const GetStarted = ({ setStart }) => {
+const sectionsArray = [
+  'Housing',
+  'Family care',
+  'Pets',
+  'Healthcare',
+  'Transportation',
+  'General living',
+];
+
+const IntroPage = ({ setStart }: { setStart: () => void }) => {
   return (
     <>
       <Box sx={{ flex: 1, position: 'relative' }}>
@@ -60,11 +68,11 @@ const GetStarted = ({ setStart }) => {
                 These questionnaires helps us personalize content for:
               </Typography>
               <Grid container spacing={1}>
-                {questionsUpdated.map((item) => (
-                  <Grid item xs={6} key={item.section}>
+                {sectionsArray.map((item) => (
+                  <Grid item xs={6} key={item}>
                     <ListItem>
                       <Verified sx={{ mr: 1 }} />
-                      {item.section}
+                      {item}
                     </ListItem>
                   </Grid>
                 ))}
@@ -76,7 +84,7 @@ const GetStarted = ({ setStart }) => {
             <Button
               variant="contained"
               sx={{ px: 3, py: 1, borderRadius: 1 }}
-              onClick={() => setStart(true)}
+              onClick={() => setStart()}
             >
               Get started
             </Button>
@@ -87,4 +95,4 @@ const GetStarted = ({ setStart }) => {
   );
 };
 
-export default GetStarted;
+export default IntroPage;

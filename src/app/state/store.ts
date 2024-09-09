@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authSlice from '../(auth)/redux/authSlice';
+import prechecklistReducer from '../(pre-checklist)/redux/checkListSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       auth: authSlice,
+      preChecklistanswers: prechecklistReducer,
     },
   });
 };

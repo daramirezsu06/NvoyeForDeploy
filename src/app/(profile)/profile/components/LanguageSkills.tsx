@@ -10,17 +10,20 @@ import {
   DialogTitle,
   TextField,
   MenuItem,
+  Stack,
 } from '@mui/material';
+import ProgressWithLabel from './ProgressWithLabel';
 
 interface Language {
   language: string;
   proficiency: string;
 }
 
-const LanguageSkills: React.FC<{ onNext: () => void; onBack: () => void }> = ({
-  onBack,
-  onNext,
-}) => {
+const LanguageSkills: React.FC<{
+  onNext: () => void;
+  onBack: () => void;
+  step: number;
+}> = ({ onBack, onNext, step }) => {
   const [open, setOpen] = useState(false);
   const [languages, setLanguages] = useState<Language[]>([]);
   const [language, setLanguage] = useState('');
@@ -67,9 +70,13 @@ const LanguageSkills: React.FC<{ onNext: () => void; onBack: () => void }> = ({
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Language Skills
-      </Typography>
+      <Stack direction="row" justifyContent="space-between">
+        <Typography variant="h4" gutterBottom>
+          Language Skills
+        </Typography>
+        <ProgressWithLabel value={step} />
+      </Stack>
+
       <Typography paragraph>
         Please indicate the languages you speak and your proficiency level in
         each below.

@@ -63,12 +63,22 @@ export default function Profile() {
               backgroundColor: '#f5f5f5',
             }}
           >
-            {!completed && step === 1 && <MissionDetails onNext={handleNext} />}
+            {!completed && step === 1 && (
+              <MissionDetails onNext={handleNext} step={step} />
+            )}
             {!completed && step === 2 && (
-              <IdentityEssentials onNext={handleNext} onBack={handleBack} />
+              <IdentityEssentials
+                onNext={handleNext}
+                onBack={handleBack}
+                step={step}
+              />
             )}
             {!completed && step === 3 && (
-              <LanguageSkills onBack={handleBack} onNext={handleNext} />
+              <LanguageSkills
+                onBack={handleBack}
+                onNext={handleNext}
+                step={step}
+              />
             )}
             {completed && <ProfileCompletion />}
           </Box>
