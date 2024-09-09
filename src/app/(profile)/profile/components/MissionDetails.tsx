@@ -1,8 +1,19 @@
 'use client';
 import React, { useState } from 'react';
-import { TextField, MenuItem, Button, Typography } from '@mui/material';
+import {
+  TextField,
+  MenuItem,
+  Button,
+  Typography,
+  Stack,
+  CircularProgress,
+} from '@mui/material';
+import ProgressWithLabel from './ProgressWithLabel';
 
-const MissionDetails: React.FC<{ onNext: () => void }> = ({ onNext }) => {
+const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
+  onNext,
+  step,
+}) => {
   const [homeNation, setHomeNation] = useState('');
   const [assignedCountry, setAssignedCountry] = useState('');
 
@@ -23,9 +34,13 @@ const MissionDetails: React.FC<{ onNext: () => void }> = ({ onNext }) => {
 
   return (
     <>
-      <Typography variant="h4" gutterBottom>
-        Mission Details
-      </Typography>
+      <Stack direction="row" justifyContent="space-between">
+        <Typography variant="h4" gutterBottom>
+          Mission Details
+        </Typography>
+        <ProgressWithLabel value={step} />
+      </Stack>
+
       <Typography paragraph>
         Please provide the details of the home nation you represent and the
         country of your current assignation.
