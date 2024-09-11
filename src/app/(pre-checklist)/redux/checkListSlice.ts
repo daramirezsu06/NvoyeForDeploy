@@ -5,8 +5,8 @@ interface AnswersState {
   typeOfPets: string[] | null;
   wantAdoptingPet: string | null;
   TypeOfInsurance: string | null;
-  ChronicConditions: string | null;
-  typeOfVehicle: string | null;
+  ChronicConditions: string[] | null;
+  typeOfVehicle: string[] | null;
   hepWhenArrive: string | null;
   isMovingWithPartner: string | null;
   hasChildrenMoving: string | null;
