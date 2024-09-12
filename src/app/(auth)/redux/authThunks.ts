@@ -9,14 +9,14 @@ import {
 
 export const signUp = createAsyncThunk(
   'auth/signUp',
-  async ({ email, userType }: SignUpPayload, { rejectWithValue }) => {
+  async ({ email, userTypeId }: SignUpPayload, { rejectWithValue }) => {
     try {
       const response = await fetch('http://localhost:8000/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, userType }),
+        body: JSON.stringify({ email, userTypeId }),
       });
       if (!response.ok) {
         const errorData = await response.json();

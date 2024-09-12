@@ -32,7 +32,7 @@ export default function SignupForm() {
     (state: RootState) => state.auth
   );
   const [email, setEmail] = useState('');
-  const [userType, setUserType] = useState(2); // hardcoded for now
+  const [userTypeId, setUserType] = useState(2); // hardcoded for now
   const [code, setOtp] = useState<string>('');
   const [password, setNewPassword] = useState<string>('');
   const [inputError, setError] = useState<IValidateInput[]>([]);
@@ -44,7 +44,7 @@ export default function SignupForm() {
     } else if (isCodeSent) {
       dispatch(verifyOtp({ email, code }));
     } else {
-      dispatch(signUp({ email, userType }));
+      dispatch(signUp({ email, userTypeId }));
     }
   };
 
@@ -57,7 +57,7 @@ export default function SignupForm() {
   };
   const handleUserTypeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserType(Number(event.target.value));
-    console.log(userType);
+    console.log(userTypeId);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,7 +83,7 @@ export default function SignupForm() {
                 <FormLabel>Join as</FormLabel>
                 <RadioGroup
                   row
-                  value={userType}
+                  value={userTypeId}
                   onChange={handleUserTypeChange}
                 >
                   <FormControlLabel
