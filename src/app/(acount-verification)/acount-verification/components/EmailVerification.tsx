@@ -1,7 +1,10 @@
 import { Drawer } from '@mui/material';
 import { useState } from 'react';
+import IntroEmailVerification from './intro';
+import Verification from './verification';
+import CheckYourInbox from './checkYourInbox';
 
-const EmailVerification = ({ isOpen }: { isOpen: boolean }) => {
+const EmailVerification = () => {
   const [step, setStep] = useState(1);
   const [completed, setCompleted] = useState(false);
 
@@ -20,11 +23,11 @@ const EmailVerification = ({ isOpen }: { isOpen: boolean }) => {
   };
 
   return (
-    <Drawer open={isOpen}>
-      <div>
-        <h1>este es el drawer</h1>
-      </div>
-    </Drawer>
+    <>
+      {step == 1 && <IntroEmailVerification handleNext={handleNext} />}
+      {step == 2 && <Verification handleNext={handleNext} />}
+      {step == 3 && <CheckYourInbox />}
+    </>
   );
 };
 

@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 
-const Verification = () => {
+const Verification = ({ handleNext }: { handleNext: () => void }) => {
   return (
     <VerificationContainer>
       <Stack gap={3}>
@@ -31,6 +31,7 @@ const Verification = () => {
         />
         <Stack direction="row" justifyContent="end">
           <Button
+            onClick={handleNext}
             sx={{
               width: 'auto',
               borderRadius: 1,

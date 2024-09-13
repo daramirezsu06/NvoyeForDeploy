@@ -1,8 +1,9 @@
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 import VerificationContainer from './share/container';
 import FileValidateIcon from '@/src/icons/FileValidateIcon';
+import { CheckCircle, CheckCircleOutline } from '@mui/icons-material';
 
-const IntroEmailVerification = () => {
+const IntroEmailVerification = ({ handleNext }: { handleNext: () => void }) => {
   return (
     <VerificationContainer>
       <Stack gap={3}>
@@ -21,7 +22,8 @@ const IntroEmailVerification = () => {
         {/* contenido */}
         <Stack gap={3}>
           <Stack gap={1}>
-            <Stack>
+            <Stack direction="row" alignItems="center" gap="10px">
+              <CheckCircleOutline />
               <Typography variant="h5">Enhanced security</Typography>
             </Stack>
             <Typography variant="body1">
@@ -30,7 +32,8 @@ const IntroEmailVerification = () => {
             </Typography>
           </Stack>
           <Stack gap={1}>
-            <Stack>
+            <Stack direction="row" alignItems="center" gap="10px">
+              <CheckCircleOutline />
               <Typography variant="h5">Trusted status</Typography>
             </Stack>
             <Typography variant="body1">
@@ -39,7 +42,8 @@ const IntroEmailVerification = () => {
             </Typography>
           </Stack>
           <Stack gap={1}>
-            <Stack>
+            <Stack direction="row" alignItems="center" gap="10px">
+              <CheckCircleOutline />
               <Typography variant="h5">Access to premium features</Typography>
             </Stack>
             <Typography variant="body1">
@@ -51,6 +55,7 @@ const IntroEmailVerification = () => {
         {/* boton verification */}
         <Stack direction="row" justifyContent="end">
           <Button
+            onClick={handleNext}
             sx={{
               width: 'auto',
               borderRadius: 1,

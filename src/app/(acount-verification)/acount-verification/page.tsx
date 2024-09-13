@@ -15,14 +15,15 @@ const PruebaEmailVerification = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={handleClick}>
+      <EmailVerification />
+      {/* <Button variant="contained" onClick={handleClick}>
         click para abrir verificacion
-      </Button>
-      {/* <EmailVerification isOpen={showMailVerification} /> */}
-      <IntroEmailVerification />
+      </Button> */}
+
+      {/* <IntroEmailVerification />
       <Verification />
       <CheckYourInbox />
-      <EmailVerified />
+      <EmailVerified /> */}
     </>
   );
 };
