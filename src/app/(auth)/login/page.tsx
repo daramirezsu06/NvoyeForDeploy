@@ -6,7 +6,7 @@ import { RootState } from '@/src/app/state/store';
 import LoginForm from './components/LoginForm';
 
 const LoginPage = () => {
-  const { error } = useSelector((state: RootState) => state.auth);
+  const { error, isLoggedIn } = useSelector((state: RootState) => state.auth);
 
   return (
     <Container

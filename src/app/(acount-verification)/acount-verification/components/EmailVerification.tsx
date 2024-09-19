@@ -6,20 +6,9 @@ import CheckYourInbox from './checkYourInbox';
 
 const EmailVerification = () => {
   const [step, setStep] = useState(1);
-  const [completed, setCompleted] = useState(false);
 
   const handleNext = () => {
-    if (step < 3) {
-      setStep(step + 1);
-    } else {
-      setCompleted(true);
-    }
-  };
-
-  const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    }
+    setStep(step + 1);
   };
 
   return (
