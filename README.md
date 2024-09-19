@@ -42,5 +42,3 @@ Open http://localhost:3000 with your browser to see the result.
   - **layout.tsx**: The root layout for the entire app.
   - **page.tsx**: The root page for the entire app.
   - **globals.css**: Global CSS for the application.
-
-# prueba!
