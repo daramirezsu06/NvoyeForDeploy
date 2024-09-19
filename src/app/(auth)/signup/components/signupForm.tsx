@@ -23,8 +23,8 @@ import { setPassword, signUp, verifyOtp } from '../../redux';
 import {
   IValidateInput,
   validatefield,
-} from '@/src/utils/validation.ts/validateForm';
-import { fields } from '@/src/utils/validation.ts/fieldsValidation';
+} from '@/src/utils/validations/validateForm';
+import { fields } from '@/src/utils/validations/fieldsValidation';
 
 export default function SignupForm() {
   const dispatch = useAppDispatch();

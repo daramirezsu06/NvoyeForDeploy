@@ -7,11 +7,13 @@ import {
   SendOtpPayload,
 } from './authTypes';
 
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export const signUp = createAsyncThunk(
   'auth/signUp',
   async ({ email, userTypeId }: SignUpPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:8000/auth/register', {
+      const response = await fetch(`${baseURL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +37,7 @@ export const verifyOtp = createAsyncThunk(
   'auth/verifyOtp',
   async ({ email, code }: VerifyOtpPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:8000/auth/verifyOTP', {
+      const response = await fetch(`${baseURL}/auth/verifyOTP`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +62,7 @@ export const sendOtp = createAsyncThunk(
   'auth/sendOtp',
   async ({ email }: SendOtpPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:8000/auth/sendOtp', {
+      const response = await fetch(`${baseURL}/auth/sendOtp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +90,7 @@ export const setPassword = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch('http://localhost:8000/auth/setPassword', {
+      const response = await fetch(`${baseURL}/auth/setPassword`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }: LoginPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:8000/auth/login', {
+      const response = await fetch(`${baseURL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

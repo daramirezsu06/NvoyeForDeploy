@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import theme from '@/src/app/theme';
 import { ReactNode } from 'react';
 
@@ -11,7 +11,7 @@ const VerificationContainer = ({ children }: Props) => {
     <Paper
       sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
-      <Box
+      <Stack
         sx={{
           p: 8,
           backgroundColor: theme.custom.paperElevationTwo,
@@ -20,7 +20,7 @@ const VerificationContainer = ({ children }: Props) => {
         }}
       >
         {children}
-      </Box>
+      </Stack>
     </Paper>
   );
 };

@@ -22,8 +22,8 @@ const PruebaEmailVerification = () => {
 
       {/* <IntroEmailVerification />
       <Verification />
-      <CheckYourInbox />
-      <EmailVerified /> */}
+      <CheckYourInbox /> */}
+      {/* <EmailVerified />  */}
     </>
   );
 };

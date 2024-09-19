@@ -4,6 +4,7 @@ import { login, sendOtp, setPassword, signUp, verifyOtp } from './authThunks';
 
 const initialState: AuthState = {
   user: null,
+  token: null,
   error: null,
   isCodeSent: false,
   requestId: null,
@@ -44,6 +45,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.meta.arg.email;
         state.error = null;
+        state.token = action.payload.data.token;
         state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {

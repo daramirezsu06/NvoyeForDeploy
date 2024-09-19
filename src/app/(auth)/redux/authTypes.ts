@@ -1,5 +1,6 @@
 export interface AuthState {
   user: string | null;
+  token: string | null;
   error: string | null;
   isCodeSent: boolean;
   requestId: number | null;
