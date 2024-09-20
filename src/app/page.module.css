@@ -1,3 +1,15 @@
 /*
 * Add page style 
 **/
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.login_button {
+  padding: 1rem 2rem;
+}

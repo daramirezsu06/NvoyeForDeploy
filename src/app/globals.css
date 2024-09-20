@@ -1,7 +1,9 @@
 /* globals.css */
 body {
   font-family: 'Outfit', sans-serif;
+  /* padding: 0 0; */
 }
 html {
   font-size: 14px; /* Si tu diseño está basado en 14px en lugar de 16px */
+  /* padding: 0 0; */
 }
