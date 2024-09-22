@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material';
+import theme from '@/src/app/theme';
 
 interface questiondropdownMenuProps {
   question: {
@@ -38,7 +39,12 @@ const DropdownMenu1: React.FC<questiondropdownMenuProps> = ({
 
   return (
     <FormControl sx={{ m: 1, width: 300 }}>
-      <InputLabel id="example">{question.question}</InputLabel>
+      <InputLabel
+        id="example"
+        sx={{ backgroundColor: theme.custom.paperElevationThree }}
+      >
+        {question.question}
+      </InputLabel>
       <Select
         labelId="example"
         multiple={question.multiple}
