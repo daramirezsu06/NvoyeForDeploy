@@ -69,7 +69,7 @@ const LanguageSkills: React.FC<{
   };
 
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
+    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, minHeight: 300 }}>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h4" gutterBottom>
           Language Skills
@@ -166,10 +166,28 @@ const LanguageSkills: React.FC<{
       </Dialog>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-        <Button variant="contained" color="primary" onClick={onBack}>
+        <Button
+          variant="contained"
+          onClick={onBack}
+          sx={{
+            backgroundColor: 'inherit',
+            color: 'black',
+            width: '100px',
+            '&:hover': {
+              // El selector correcto para hover
+              backgroundColor: 'inherit',
+              color: 'black', // Aquí mantienes el color negro en hover
+            },
+          }}
+        >
           Back
         </Button>
-        <Button variant="contained" color="primary" onClick={onNext}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onNext}
+          sx={{ width: '100px' }}
+        >
           Next
         </Button>
       </Box>

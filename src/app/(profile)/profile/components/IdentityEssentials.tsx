@@ -155,30 +155,27 @@ const ButtonSection: React.FC<{ onNext: () => void; onBack: () => void }> = ({
 }) => (
   <Stack direction="row" justifyContent="space-between">
     <Button
+      onClick={onBack}
+      variant="contained"
       color="inherit"
       sx={{
+        backgroundColor: 'inherit',
+        color: 'black',
         width: '100px',
-        height: '40px',
-        fontFamily: 'Outfit-Medium',
-        borderRadius: '8px',
+        '&:hover': {
+          // El selector correcto para hover
+          backgroundColor: 'inherit',
+          color: 'black', // Aquí mantienes el color negro en hover
+        },
       }}
-      size="large"
-      variant="outlined"
-      onClick={onBack}
     >
       Back
     </Button>
     <Button
-      sx={{
-        width: '100px',
-        height: '40px',
-        fontFamily: 'Outfit-Medium',
-        borderRadius: '8px',
-      }}
-      size="large"
       variant="contained"
       color="primary"
       onClick={onNext}
+      sx={{ width: '100px' }}
     >
       Next
     </Button>

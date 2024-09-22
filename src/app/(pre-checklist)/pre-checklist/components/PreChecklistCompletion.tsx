@@ -38,7 +38,10 @@ const PreChecklistCompletion = () => {
     >
       <Box
         sx={{
-          width: 644,
+          width: {
+            xs: '90%',
+            sm: 644,
+          },
           height: 552,
           borderRadius: 7,
           backgroundColor: theme.custom.paperElevationTwo,
@@ -51,7 +54,14 @@ const PreChecklistCompletion = () => {
       >
         <DashboardCustomize sx={{ fontSize: 50 }} />
 
-        <Stack sx={{ width: 450 }}>
+        <Stack
+          sx={{
+            width: {
+              xs: '90%',
+              sm: 450,
+            },
+          }}
+        >
           <Typography sx={{ mb: 2, textAlign: 'center' }} variant="h6">
             Building your dashboard
           </Typography>

@@ -72,7 +72,7 @@ const SignUpPage = () => {
           }}
         >
           <Image
-            src="/images/login_movil.png"
+            src="/images/login-movil.png"
             alt="Profile image"
             layout="fill"
             objectFit="cover"

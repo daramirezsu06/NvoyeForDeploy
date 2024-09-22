@@ -1,12 +1,23 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 
 export const ProfileCompletion: React.FC = () => (
-  <Stack spacing={2} alignItems="center">
+  <Stack
+    spacing={2}
+    alignItems="center"
+    justifyContent={'center'}
+    sx={{ width: '100%', height: 350, gap: 2 }}
+  >
     <Box
       sx={{
-        width: 100,
-        height: 100,
-        borderRadius: '50%',
+        width: {
+          xs: 100,
+          sm: 100,
+        },
+        height: {
+          xs: 100,
+          sm: 100,
+        },
+        borderRadius: '100%',
         bgcolor: '#3f51b5',
         display: 'flex',
         alignItems: 'center',
