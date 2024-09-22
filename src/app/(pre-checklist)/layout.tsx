@@ -53,6 +53,10 @@ export default function RootLayout({
             display: {
               sm: 'none',
             },
+            //agregado
+            position: 'fixed',
+            bottom: 0,
+            width: '100%',
           }}
         >
           <BottomNavigationAction label="Recents" icon={<Home />} />

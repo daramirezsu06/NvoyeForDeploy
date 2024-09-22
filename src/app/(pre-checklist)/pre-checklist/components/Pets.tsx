@@ -1,4 +1,11 @@
-import { Box, Container, Stack, Button, Divider } from '@mui/material';
+import {
+  Box,
+  Container,
+  Stack,
+  Button,
+  Divider,
+  Typography,
+} from '@mui/material';
 import CuestionBase from './shares/cuestionBase';
 import Image from 'next/image';
 import { ChevronLeft } from '@mui/icons-material';
@@ -7,6 +14,7 @@ import ProgressLine from './shares/progressLine';
 import DropdownMenu1 from './shares/dropdownMenuCopy';
 import { UseAnswers } from '../hooks/useAnswers';
 import { useMemo } from 'react';
+import Brandlogo from '@/src/icons/BrandLogo';
 
 const Pets = ({
   onNext,
@@ -17,8 +25,6 @@ const Pets = ({
   onBack: () => void;
   step: number;
 }) => {
-  const HousingImage = '/images/Housing.png';
-
   const questions = useMemo(
     () => [
       {
@@ -64,35 +70,184 @@ const Pets = ({
   const showWantAdoptingPetQuestion = answers.isBringingPets === 'No';
 
   return (
-    <>
+    <Container
+      sx={{
+        display: 'flex',
+        height: '100vh',
+        pl: 0,
+        margin: 0,
+        padding: 0,
+        width: '100%',
+        flexDirection: { xs: 'column', sm: 'row' },
+        maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+        paddingLeft: { xs: '0px', sm: '0px' },
+        paddingRight: { xs: '0px', sm: '0px' },
+      }}
+    >
       <Box sx={{ flex: 1, position: 'relative' }}>
-        <Image
-          src={HousingImage}
-          alt="Profile image"
-          fill={true}
-          style={{ objectFit: 'cover' }}
-        />
+        <Box
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            position: 'relative',
+            height: '100%',
+            // width: 700,
+          }}
+        >
+          {' '}
+          {/* Logo en la esquina superior izquierda */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '100px',
+              left: '170px',
+              zIndex: 20,
+              width: '120px',
+              height: 'auto',
+              scale: '3',
+              // transform: 'rotate(90deg)',
+            }}
+          >
+            <Brandlogo />
+          </Box>
+          <Image
+            src="/images/pets-big.jpg"
+            alt="Profile image"
+            layout="fill"
+            objectFit="cover"
+            priority
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background:
+                'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6))',
+              zIndex: 1,
+            }}
+          />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'absolute',
+              justifyContent: 'center',
+              gap: 4,
+              bottom: 100,
+              left: 50,
+              zIndex: 2,
+            }}
+          >
+            <Typography variant="h3" color="#F7910B">
+              Insight
+            </Typography>
+            <Typography
+              variant="h5"
+              color="#FFFFFFDE"
+              sx={{
+                width: '90%',
+              }}
+            >
+              The Netherlands is known for its pet-friendly culture, with many
+              public spaces and accommodations accommodating pets. Additionally,
+              there's a strong emphasis on responsible pet ownership, including
+              pet-friendly rental housing options and ample green spaces for
+              outdoor activities with pets.
+            </Typography>
+          </Box>
+        </Box>
+        {/* Imagen para pantallas pequeñas */}
+        <Box
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            position: 'relative',
+            height: 350,
+            width: '100%',
+            transform: { xs: 'translateX(0px)', sm: 'none' },
+          }}
+        >
+          <Image
+            src="/images/pets-big.jpg"
+            alt="Profile image"
+            layout="fill"
+            objectFit="cover"
+            priority
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background:
+                'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7))',
+              zIndex: 1,
+            }}
+          />
+          <Typography
+            variant="h6"
+            sx={{
+              position: 'absolute',
+              top: '25%',
+              left: '10%',
+              // transform: 'translate(-55%, -0%)',
+              color: 'white',
+              width: '80%',
+              // textAlign: 'center',
+              fontSize: '1.2rem',
+              zIndex: 2,
+            }}
+          >
+            The Netherlands is known for its pet-friendly culture, with many
+            public spaces and accommodations accommodating pets. Additionally,
+            there's a strong emphasis on responsible pet ownership, including
+            pet-friendly rental housing options and ample green spaces for
+            outdoor activities with pets.
+          </Typography>
+        </Box>
       </Box>
       <Container
         sx={{
           flex: 1,
-          py: 6,
-          px: 6,
+          display: 'flex',
+          flexDirection: 'column',
+          // justifyContent: 'center',
+          // alignItems: 'center',
+          // justifyItems: 'center',
+          padding: { xs: 2, md: 6 }, // Diferente padding para móvil y desktop
+          transform: { xs: 'translateY(-20px)', sm: 'none' },
         }}
       >
         <ProgressLine step={step} />
 
         <Box
           sx={{
-            maxWidth: 624,
-            width: '100%',
-            padding: 6,
-            boxShadow: 3,
+            padding: {
+              sx: 4,
+              sm: 4,
+            },
+            paddingBottom: {
+              xs: 10,
+              sm: 4,
+            },
+            boxShadow: {
+              xs: 0,
+              sm: 3,
+            },
             display: 'flex',
             flexDirection: 'column',
-            gap: 4,
+            gap: 2,
             borderRadius: 4,
-            backgroundColor: theme.custom.paperElevationTwo,
+            backgroundColor: {
+              xs: theme.custom.paperElevationOne,
+              sm: theme.custom.paperElevationTwo,
+            },
+
+            // width: '90%',
+            // margin: 'auto',
           }}
         >
           {questions.map((question) => (
@@ -145,7 +300,7 @@ const Pets = ({
           </Stack>
         </Box>
       </Container>
-    </>
+    </Container>
   );
 };
 

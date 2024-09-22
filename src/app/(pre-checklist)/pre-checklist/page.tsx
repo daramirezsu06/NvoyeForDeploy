@@ -69,12 +69,9 @@ export default function PreChecklist() {
   return !completed ? (
     <Container
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
-        '@media (min-width: 900px)': {
-          flexDirection: 'row',
-        },
+        maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+        paddingLeft: { xs: '0px', sm: '0px' },
+        paddingRight: { xs: '0px', sm: '0px' },
       }}
     >
       {!completed && sections[step].component}

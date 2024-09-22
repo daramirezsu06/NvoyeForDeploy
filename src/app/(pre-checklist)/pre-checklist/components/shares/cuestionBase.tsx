@@ -32,13 +32,15 @@ const CuestionBase = ({
       <>
         <Stack spacing={2}>
           <Box>
-            <Typography variant="h5">{question.question}</Typography>
+            <Typography variant="h5" sx={{ pb: 1 }}>
+              {question.question}
+            </Typography>
             <Typography variant="body1">{question.smallQuestion}</Typography>
           </Box>
           <Box
             sx={{
               backgroundColor: theme.custom.paperElevationFour,
-              borderRadius: 2,
+              borderRadius: 4,
               py: 3,
               px: 3,
             }}
