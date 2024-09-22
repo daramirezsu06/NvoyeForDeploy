@@ -10,11 +10,14 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { login } from '../../redux';
-import { useAppDispatch } from '@/src/app/state/hooks';
+import { useAppDispatch, useAppSelector } from '@/src/app/state/hooks';
+import { selectToken } from '../../redux/authSlice';
+import { getProfile } from '@/src/app/(dashboard)/redux/profileThunks';
 
 export default function LoginForm() {
+  const token = useAppSelector(selectToken);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,6 +34,9 @@ export default function LoginForm() {
     event.preventDefault();
     dispatch(login({ email, password }));
   };
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [token, dispatch]);
 
   return (
     <Container component="main" maxWidth="md">
