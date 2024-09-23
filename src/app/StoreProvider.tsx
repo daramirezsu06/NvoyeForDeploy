@@ -12,7 +12,7 @@ export default function StoreProvider({
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        {children} {/* Envuelve los hijos con PersistGate */}
+        {children}
       </PersistGate>
     </Provider>
   );
