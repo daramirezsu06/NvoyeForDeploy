@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TextField,
   MenuItem,
@@ -28,6 +28,7 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   ) => {
     setAssignedCountry(event.target.value);
   };
+  useEffect(() => {});
 
   const homeNations = ['USA', 'Canada', 'UK', 'Australia'];
   const assignedCountries = ['India', 'Germany', 'France', 'Japan'];
