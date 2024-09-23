@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProfileState } from './profileTypes';
 import { getProfile } from './profileThunks';
+import { RootState } from '../../state/store';
 
 const initialState: ProfileState = {
   userState: {
@@ -72,5 +73,7 @@ const profileSlice = createSlice({
 });
 
 export const { setProfile } = profileSlice.actions;
+
+export const selectProfile = (state: RootState) => state.profile.userState;
 
 export default profileSlice.reducer;

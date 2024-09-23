@@ -4,7 +4,7 @@ export interface ProfileState {
   userState: UserData;
 }
 
-interface UserData {
+export interface UserData {
   userId: number;
   firstName: string;
   lastName: string;

@@ -9,16 +9,18 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-
 import { useEffect, useState } from 'react';
 import { login } from '../../redux';
 import { useAppDispatch, useAppSelector } from '@/src/app/state/hooks';
 import { selectToken } from '../../redux/authSlice';
 import { getProfile } from '@/src/app/(dashboard)/redux/profileThunks';
+import { selectProfile } from '@/src/app/(dashboard)/redux/profileSlice';
+import { UseRedirectionProfile } from '@/src/app/hooks/useRedirectConditional'; // Asegúrate de importar el hook
 
 export default function LoginForm() {
   const token = useAppSelector(selectToken);
   const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,9 +36,16 @@ export default function LoginForm() {
     event.preventDefault();
     dispatch(login({ email, password }));
   };
+
   useEffect(() => {
-    dispatch(getProfile());
+    if (token) {
+      // Si hay token, obtenemos el perfil
+      dispatch(getProfile());
+    }
   }, [token, dispatch]);
+
+  // Hook para redireccionamiento basado en el perfil cargado
+  UseRedirectionProfile();
 
   return (
     <Container component="main" maxWidth="md">
