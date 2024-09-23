@@ -1,16 +1,22 @@
 import { useRouter } from 'next/navigation';
 import { selectProfile } from '../(dashboard)/redux/profileSlice';
-import { selectToken } from '../(auth)/redux/authSlice'; // Seleccionamos el token
+import { selectToken } from '../(auth)/redux/authSlice';
 import { UserData } from '../(dashboard)/redux/profileTypes';
 import { useAppSelector } from '@/src/app/state/hooks';
-import { useEffect } from 'react';
 
-export const UseRedirectionProfile = () => {
+export const useRedirectionProfile = () => {
   const router = useRouter();
   const profile = useAppSelector(selectProfile);
-  const token = useAppSelector(selectToken); // Obtenemos el token
+  const token = useAppSelector(selectToken);
 
-  const conditionalRedirect = (profile: UserData) => {
+  const conditionalRedirect = () => {
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+
+    if (!profile) return;
+
     const {
       firstName,
       lastName,
@@ -58,15 +64,5 @@ export const UseRedirectionProfile = () => {
     }
   };
 
-  useEffect(() => {
-    // Verifica si el usuario está autenticado antes de intentar redirigir
-    if (token && profile) {
-      conditionalRedirect(profile);
-    } else if (!token) {
-      // Si no está autenticado, redirigir al login
-      router.push('/login');
-    }
-  }, [profile, token]);
-
-  return null;
+  return conditionalRedirect;
 };

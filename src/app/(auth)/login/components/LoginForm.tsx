@@ -15,10 +15,11 @@ import { useAppDispatch, useAppSelector } from '@/src/app/state/hooks';
 import { selectToken } from '../../redux/authSlice';
 import { getProfile } from '@/src/app/(dashboard)/redux/profileThunks';
 import { selectProfile } from '@/src/app/(dashboard)/redux/profileSlice';
-import { UseRedirectionProfile } from '@/src/app/hooks/useRedirectConditional'; // Asegúrate de importar el hook
+import { useRedirectionProfile } from '@/src/app/hooks/useRedirectConditional';
 
 export default function LoginForm() {
   const token = useAppSelector(selectToken);
+  const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState('');
@@ -37,15 +38,19 @@ export default function LoginForm() {
     dispatch(login({ email, password }));
   };
 
+  const redirectToProfile = useRedirectionProfile();
+
   useEffect(() => {
     if (token) {
-      // Si hay token, obtenemos el perfil
       dispatch(getProfile());
     }
   }, [token, dispatch]);
 
-  // Hook para redireccionamiento basado en el perfil cargado
-  UseRedirectionProfile();
+  useEffect(() => {
+    if (profile) {
+      redirectToProfile();
+    }
+  }, [profile, redirectToProfile]);
 
   return (
     <Container component="main" maxWidth="md">
