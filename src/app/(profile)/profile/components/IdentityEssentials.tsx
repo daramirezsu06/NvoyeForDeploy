@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Container,
@@ -15,26 +15,95 @@ import {
   Box,
 } from '@mui/material';
 import ProgressWithLabel from './ProgressWithLabel';
+import GetGenders from '@/src/utils/api/profile/getGenders';
+import diplomatUpdate2 from '@/src/utils/api/profile/sendDiplomatUpdate2';
+import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
+import { useAppDispatch } from '@/src/app/state/hooks';
+
+interface Gender {
+  id: number;
+  name: string;
+}
 
 const IdentityEssentials: React.FC<{
   onNext: () => void;
   onBack: () => void;
   step: number;
 }> = ({ onNext, onBack, step }) => {
-  const [gender, setGender] = useState('');
+  const [genderList, setGenderList] = useState<Gender[]>([]);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [gender, setGender] = useState<number | ''>('');
+  const [profilePicture, setProfilePicture] = useState('default');
+  const dispatch = useAppDispatch();
 
-  const handleGenderChange = (event: SelectChangeEvent<string>) => {
-    setGender(event.target.value as string);
+  useEffect(() => {
+    const fetchGenders = async () => {
+      try {
+        const data = await GetGenders();
+        // console.log(data.data);
+        if (Array.isArray(data.data)) {
+          setGenderList(data.data); // Asegurarse de que `data` sea un array
+        } else {
+          console.error('Data format is incorrect:', data);
+        }
+        // setGenderList(data);
+      } catch (error) {
+        console.error('Error fetching genders:', error);
+      }
+    };
+    fetchGenders();
+  }, []);
+
+  const handleChangeFirstName = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFirstName(event.target.value);
   };
 
+  const handleChangeLastName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLastName(event.target.value);
+  };
+
+  const handleGenderChange = (event: SelectChangeEvent<number>) => {
+    setGender(Number(event.target.value)); // Cambiamos a Number para que el valor sea numérico
+  };
+
+  const handleNext = async () => {
+    // Crear el objeto de datos
+    const data = {
+      firstName,
+      lastName,
+      genderId: gender,
+      profilePicture, // Aquí puedes enviar la imagen o un identificador
+    };
+    console.log('Enviando:', data);
+    const updateDiplomat = async () => {
+      try {
+        const response = await diplomatUpdate2({ data });
+        console.log('respuesta', response.data);
+        dispatch(setProfile(response.data));
+        onNext();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    updateDiplomat();
+  };
   return (
     <>
       <HeaderSection step={step} />
       <FormSection
+        firstName={firstName}
+        lastName={lastName}
+        handleChangeFirstName={handleChangeFirstName}
+        handleChangeLastName={handleChangeLastName}
         gender={gender}
         handleGenderChange={handleGenderChange}
-        onNext={onNext}
+        handleNext={handleNext}
         onBack={onBack}
+        genderList={genderList}
       />
     </>
   );
@@ -56,17 +125,27 @@ const HeaderSection: React.FC<{ step: number }> = ({ step }) => (
 );
 
 interface FormSectionProps {
-  gender: string;
-  handleGenderChange: (event: SelectChangeEvent<string>) => void;
-  onNext: () => void;
+  firstName: string;
+  lastName: string;
+  handleChangeFirstName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeLastName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  gender: number | '';
+  handleGenderChange: (event: SelectChangeEvent<number>) => void;
+  handleNext: () => void;
   onBack: () => void;
+  genderList: Gender[];
 }
 
 const FormSection = ({
+  firstName,
+  lastName,
+  handleChangeFirstName,
+  handleChangeLastName,
   gender,
   handleGenderChange,
-  onNext,
+  handleNext,
   onBack,
+  genderList,
 }: FormSectionProps) => (
   <Stack spacing={3}>
     <TextField
@@ -75,6 +154,8 @@ const FormSection = ({
       label="First name"
       size="small"
       fullWidth
+      value={firstName}
+      onChange={handleChangeFirstName}
     />
     <TextField
       required
@@ -82,25 +163,36 @@ const FormSection = ({
       label="Last name"
       size="small"
       fullWidth
+      value={lastName}
+      onChange={handleChangeLastName}
     />
     <FormControl required size="small" fullWidth>
       <InputLabel id="gender-select-label">Gender</InputLabel>
       <Select
         labelId="gender-select-label"
         id="gender-select"
-        value={gender}
+        value={gender !== '' ? gender : ''}
         label="Gender"
         onChange={handleGenderChange}
       >
-        <MenuItem value="Female">Female</MenuItem>
+        {genderList.length > 0 ? (
+          genderList.map((item) => (
+            <MenuItem key={item.id} value={item.id}>
+              {item.name}
+            </MenuItem>
+          ))
+        ) : (
+          <MenuItem disabled>Cargando géneros...</MenuItem>
+        )}
+        {/* <MenuItem value="Female">Female</MenuItem>
         <MenuItem value="Male">Male</MenuItem>
         <MenuItem value="Non-binary">Non-binary</MenuItem>
         <MenuItem value="Prefer not to say">Prefer not to say</MenuItem>
-        <MenuItem value="Other">Other</MenuItem>
+        <MenuItem value="Other">Other</MenuItem> */}
       </Select>
     </FormControl>
     <ProfilePictureSection />
-    <ButtonSection onNext={onNext} onBack={onBack} />
+    <ButtonSection handleNext={handleNext} onBack={onBack} />
   </Stack>
 );
 
@@ -149,10 +241,10 @@ const ProfilePictureSection = () => (
   </Stack>
 );
 
-const ButtonSection: React.FC<{ onNext: () => void; onBack: () => void }> = ({
-  onNext,
-  onBack,
-}) => (
+const ButtonSection: React.FC<{
+  handleNext: () => void;
+  onBack: () => void;
+}> = ({ handleNext, onBack }) => (
   <Stack direction="row" justifyContent="space-between">
     <Button
       onClick={onBack}
@@ -174,7 +266,7 @@ const ButtonSection: React.FC<{ onNext: () => void; onBack: () => void }> = ({
     <Button
       variant="contained"
       color="primary"
-      onClick={onNext}
+      onClick={handleNext}
       sx={{ width: '100px' }}
     >
       Next
