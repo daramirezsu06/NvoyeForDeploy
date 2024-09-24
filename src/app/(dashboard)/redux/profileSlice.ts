@@ -57,6 +57,9 @@ const profileSlice = createSlice({
     setProfile: (state, action) => {
       state.userState = action.payload;
     },
+    logout: (state) => {
+      state.userState = initialState.userState;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -74,7 +77,7 @@ const profileSlice = createSlice({
   },
 });
 
-export const { setProfile } = profileSlice.actions;
+export const { setProfile, logout } = profileSlice.actions;
 
 export const selectProfile = (state: RootState) => state.profile.userState;
 

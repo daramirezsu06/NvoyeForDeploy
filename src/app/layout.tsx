@@ -12,17 +12,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body>
+    <html lang="en">
+      <body>
+        <StoreProvider>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
               <CssBaseline />
               {children}
             </ThemeProvider>
           </AppRouterCacheProvider>
-        </body>
-      </html>
-    </StoreProvider>
+        </StoreProvider>
+      </body>
+    </html>
   );
 }
