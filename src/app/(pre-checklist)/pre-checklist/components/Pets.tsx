@@ -46,7 +46,7 @@ const Pets = ({
     question: 'Please specify:',
     nameState: 'typeOfPets',
     inputType: 'select',
-    multiple: true,
+    multiple: false,
     options: ['Cat', 'Bird', 'Dog', 'Rabbit'],
     condition: {
       stateCondition: 'isWithPets',

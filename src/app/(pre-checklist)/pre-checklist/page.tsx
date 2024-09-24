@@ -13,8 +13,11 @@ import GetChronicDiseases from '@/src/utils/api/prechecklist/getChronicDiseases'
 import GetInsuranceTypes from '@/src/utils/api/prechecklist/getInsuranceType';
 import GetVehicleTypes from '@/src/utils/api/prechecklist/getVehicleTypes';
 import GetHobbies from '@/src/utils/api/prechecklist/getHobbies';
+import PutPrechecklist from '@/src/utils/api/prechecklist/putPrechecklist';
+import { useAppSelector } from '../../state/hooks';
 
 export default function PreChecklist() {
+  const prechecklist = useAppSelector((state) => state.preChecklistanswers);
   const [step, setStep] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [insuranceTypes, setInsuranceTypes] = useState<
@@ -47,10 +50,45 @@ export default function PreChecklist() {
     fechData();
   }, []);
 
+  const sentPrechecklist = async () => {
+    const {
+      isNeedHousingHelp,
+      isWithSpouse,
+      isWithChildren,
+      isWithPets,
+      isPlanAdoptingPets,
+      insuranceTypeId,
+      chronicDiseasesId,
+      vehicleTypeId,
+      hobbies: hobbyIds,
+    } = prechecklist;
+
+    const hobbiesToSend = hobbyIds
+      ?.map((id) => hobbies.find((hobby) => hobby.id === id))
+      .filter(Boolean);
+
+    const prechecklisttosent = {
+      isNeedHousingHelp,
+      isWithSpouse,
+      isWithChildren,
+      isWithPets,
+      isPlanAdoptingPets,
+      insuranceTypeId,
+      chronicDiseasesId,
+      vehicleTypeId,
+      hobbies: hobbiesToSend,
+    };
+    console.log(prechecklisttosent);
+
+    const profile = await PutPrechecklist(prechecklisttosent);
+    console.log(profile);
+  };
+
   const handleNext = () => {
     if (step < 6) {
       setStep(step + 1);
     } else {
+      sentPrechecklist();
       setCompleted(true);
     }
   };

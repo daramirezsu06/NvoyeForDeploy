@@ -9,6 +9,7 @@ import {
   Box,
 } from '@mui/material';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const PreChecklistCompletion = () => {
   const [progress, setProgress] = useState(0);
@@ -74,7 +75,9 @@ const PreChecklistCompletion = () => {
             </Box>
           </Box>
         </Stack>
-        <Button variant="contained">View My dashboard</Button>
+        <Link href="/dashboard">
+          <Button variant="contained">View My dashboard</Button>
+        </Link>
       </Box>
     </Container>
   );
