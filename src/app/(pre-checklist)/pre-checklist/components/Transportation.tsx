@@ -31,7 +31,7 @@ const Transportation = ({
   const conditionalQuestion = {
     id: 1,
     question: 'Please specify:',
-    nameState: 'typeOfVehicle',
+    nameState: 'vehicleTypeId',
     inputType: 'select',
     multiple: true,
     options: ['Bicycle', 'Car', 'Motorbike'],

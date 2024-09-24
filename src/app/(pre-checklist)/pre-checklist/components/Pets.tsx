@@ -29,7 +29,7 @@ const Pets = ({
     () => [
       {
         id: 1,
-        nameState: 'isBringingPets',
+        nameState: 'isWithPets',
         question: 'Will you be bringing any pets with you?',
         inputType: 'radio',
         options: ['Yes', 'No'],
@@ -54,7 +54,7 @@ const Pets = ({
   const conditionalQuestion2 = {
     id: 2,
     question: 'Are you considering adopting a pet upon arrival?',
-    nameState: 'wantAdoptingPet',
+    nameState: 'isPlanAdoptingPets',
     inputType: 'radio',
     options: ['Yes', 'No', 'Maybe'],
     condition: {
@@ -66,8 +66,8 @@ const Pets = ({
   const { buttonDisabled, answers, handleAnswerChange, handleChangeOptions } =
     UseAnswers([...questions, conditionalQuestion, conditionalQuestion2]);
 
-  const showTypeOfPetsQuestion = answers.isBringingPets === 'Yes';
-  const showWantAdoptingPetQuestion = answers.isBringingPets === 'No';
+  const showTypeOfPetsQuestion = answers.isWithPets === 'Yes';
+  const showWantAdoptingPetQuestion = answers.isWithPets === 'No';
 
   return (
     <Container
@@ -152,9 +152,9 @@ const Pets = ({
             >
               The Netherlands is known for its pet-friendly culture, with many
               public spaces and accommodations accommodating pets. Additionally,
-              there's a strong emphasis on responsible pet ownership, including
-              pet-friendly rental housing options and ample green spaces for
-              outdoor activities with pets.
+              there&apos; a strong emphasis on responsible pet ownership,
+              including pet-friendly rental housing options and ample green
+              spaces for outdoor activities with pets.
             </Typography>
           </Box>
         </Box>
@@ -203,9 +203,9 @@ const Pets = ({
           >
             The Netherlands is known for its pet-friendly culture, with many
             public spaces and accommodations accommodating pets. Additionally,
-            there's a strong emphasis on responsible pet ownership, including
-            pet-friendly rental housing options and ample green spaces for
-            outdoor activities with pets.
+            there&apos; a strong emphasis on responsible pet ownership,
+            including pet-friendly rental housing options and ample green spaces
+            for outdoor activities with pets.
           </Typography>
         </Box>
       </Box>

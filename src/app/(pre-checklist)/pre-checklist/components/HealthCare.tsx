@@ -42,7 +42,7 @@ const HealthCare = ({
     id: 1,
     question: 'Please specify:',
     inputType: 'select',
-    nameState: 'TypeOfInsurance',
+    nameState: 'insuranceTypeId',
     multiple: false,
     options: ['Home country insurance', 'International insurance'],
     condition: {
@@ -53,7 +53,7 @@ const HealthCare = ({
   const conditionalQuestion2 = {
     id: 1,
     question: 'Please specify:',
-    nameState: 'ChronicConditions',
+    nameState: 'chronicDiseasesId',
     inputType: 'select',
     multiple: true,
     options: ['Cancer', 'Diabetes', 'Hypertension', 'Asthma'],

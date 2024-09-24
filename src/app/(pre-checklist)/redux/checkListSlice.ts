@@ -2,35 +2,35 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../state/store';
 
 interface AnswersState {
+  isNeedHousingHelp: string | null;
+  isWithSpouse: string | null;
+  isWithChildren: string | null;
+  isWithPets: string | null;
   typeOfPets: string[] | null;
-  wantAdoptingPet: string | null;
-  TypeOfInsurance: string | null;
-  ChronicConditions: string[] | null;
-  typeOfVehicle: string[] | null;
-  hepWhenArrive: string | null;
-  isMovingWithPartner: string | null;
-  hasChildrenMoving: string | null;
-  isBringingPets: string | null;
+  isPlanAdoptingPets: string | null;
   hasHealthInsurance: string | null;
+  insuranceTypeId: string | null;
   hasChronicConditions: string | null;
+  chronicDiseasesId: string[] | null;
+  vehicleTypeId: string[] | null;
   isTransportingVehicle: string | null;
-  hobbiesAndActivities: string | null;
+  hobbies: string | null;
 }
 
 const initialState: AnswersState = {
-  hepWhenArrive: null,
-  isMovingWithPartner: null,
-  hasChildrenMoving: null,
-  isBringingPets: null,
+  isNeedHousingHelp: null,
+  isWithSpouse: null,
+  isWithChildren: null,
+  isWithPets: null,
   typeOfPets: null,
-  wantAdoptingPet: null,
+  isPlanAdoptingPets: null,
   hasHealthInsurance: null,
-  TypeOfInsurance: null,
+  insuranceTypeId: null,
   hasChronicConditions: null,
-  ChronicConditions: null,
+  chronicDiseasesId: null,
   isTransportingVehicle: null,
-  typeOfVehicle: null,
-  hobbiesAndActivities: null,
+  vehicleTypeId: null,
+  hobbies: null,
 };
 
 const prechecklistSlice = createSlice({

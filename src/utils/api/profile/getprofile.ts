@@ -3,7 +3,7 @@ import { axiosApi } from '../api';
 const GetProfile = async () => {
   try {
     const { data } = await axiosApi.get('/diplomat/getDiplomatProfile');
-    return data;
+    return data.data;
   } catch (error: any) {
     // Si el error es de Axios, manejar con error.response, de lo contrario, usar el mensaje genérico
     const message =

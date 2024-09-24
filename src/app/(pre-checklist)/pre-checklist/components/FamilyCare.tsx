@@ -21,7 +21,7 @@ const FamilyCare = ({
     () => [
       {
         id: 1,
-        nameState: 'isMovingWithPartner',
+        nameState: 'isWithSpouse',
         question: 'Are you moving with your spouse?',
         smallQuestion:
           'Is your partner planning to join you both now or in the future, during your mission?',
@@ -30,7 +30,7 @@ const FamilyCare = ({
       },
       {
         id: 2,
-        nameState: 'hasChildrenMoving',
+        nameState: 'isWithChildren',
         question: 'Do you have children who will be moving with you?',
         inputType: 'radio',
         options: ['Yes', 'No'],
