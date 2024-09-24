@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IntroPage from './components/introPage';
 import Housing from './components/Housing';
 import PreChecklistCompletion from './components/PreChecklistCompletion';
@@ -9,15 +9,86 @@ import Pets from './components/Pets';
 import HealthCare from './components/HealthCare';
 import Transportation from './components/Transportation';
 import GeneralLiving from './components/GeneralLiving';
+import GetChronicDiseases from '@/src/utils/api/prechecklist/getChronicDiseases';
+import GetInsuranceTypes from '@/src/utils/api/prechecklist/getInsuranceType';
+import GetVehicleTypes from '@/src/utils/api/prechecklist/getVehicleTypes';
+import GetHobbies from '@/src/utils/api/prechecklist/getHobbies';
+import PutPrechecklist from '@/src/utils/api/prechecklist/putPrechecklist';
+import { useAppSelector } from '../../state/hooks';
 
 export default function PreChecklist() {
+  const prechecklist = useAppSelector((state) => state.preChecklistanswers);
   const [step, setStep] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [insuranceTypes, setInsuranceTypes] = useState<
+    { id: number; name: string; description: string }[]
+  >([]);
+  const [chronicDiseases, setChronicDiseases] = useState<
+    { id: number; name: string; description: string }[]
+  >([]);
+  const [vehicleTypes, setVehicleTypes] = useState<
+    { id: number; name: string; description: string }[]
+  >([]);
+  const [hobbies, setHobbies] = useState<
+    { id: number; name: string; description: string }[]
+  >([]);
+
+  useEffect(() => {
+    const fechData = async () => {
+      const chronicDiseases = await GetChronicDiseases();
+      const insuranceTypes = await GetInsuranceTypes();
+      const vehicleTypes = await GetVehicleTypes();
+      const hobbies = await GetHobbies();
+      console.log(hobbies);
+
+      setInsuranceTypes(insuranceTypes);
+      setChronicDiseases(chronicDiseases);
+      setVehicleTypes(vehicleTypes);
+      setHobbies(hobbies);
+    };
+
+    fechData();
+  }, []);
+
+  const sentPrechecklist = async () => {
+    const {
+      isNeedHousingHelp,
+      isWithSpouse,
+      isWithChildren,
+      isWithPets,
+      isPlanAdoptingPets,
+      insuranceTypeId,
+      chronicDiseasesId,
+      vehicleTypeId,
+      hobbies: hobbyIds,
+    } = prechecklist;
+
+    const hobbiesToSend = hobbyIds
+      ?.map((id) => hobbies.find((hobby) => hobby.id === id))
+      .filter(Boolean);
+
+    const prechecklisttosent = {
+      isNeedHousingHelp,
+      isWithSpouse,
+      isWithChildren,
+      isWithPets,
+      isPlanAdoptingPets,
+      insuranceTypeId,
+      chronicDiseasesId,
+      vehicleTypeId,
+      hobbies: hobbiesToSend,
+    };
+    console.log(prechecklisttosent);
+
+    const profile = await PutPrechecklist(prechecklisttosent);
+    console.log(profile);
+  };
 
   const handleNext = () => {
     if (step < 6) {
       setStep(step + 1);
     } else {
+      sentPrechecklist();
       setCompleted(true);
     }
   };
@@ -48,19 +119,35 @@ export default function PreChecklist() {
     },
     {
       component: (
-        <HealthCare onNext={handleNext} onBack={handleBack} step={step} />
+        <HealthCare
+          onNext={handleNext}
+          onBack={handleBack}
+          step={step}
+          insuranceTypes={insuranceTypes}
+          chronicDiseases={chronicDiseases}
+        />
       ),
       key: 'housing',
     },
     {
       component: (
-        <Transportation onNext={handleNext} onBack={handleBack} step={step} />
+        <Transportation
+          onNext={handleNext}
+          onBack={handleBack}
+          step={step}
+          vehicleTypes={vehicleTypes}
+        />
       ),
       key: 'housing',
     },
     {
       component: (
-        <GeneralLiving onNext={handleNext} onBack={handleBack} step={step} />
+        <GeneralLiving
+          onNext={handleNext}
+          onBack={handleBack}
+          step={step}
+          hobbies={hobbies}
+        />
       ),
       key: 'housing',
     },

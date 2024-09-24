@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { selectProfile } from '../(dashboard)/redux/profileSlice';
 import { selectToken } from '../(auth)/redux/authSlice';
-import { UserData } from '../(dashboard)/redux/profileTypes';
 import { useAppSelector } from '@/src/app/state/hooks';
 
 export const useRedirectionProfile = () => {
@@ -14,6 +13,7 @@ export const useRedirectionProfile = () => {
       router.push('/login');
       return;
     }
+    console.log(profile);
 
     if (!profile) return;
 

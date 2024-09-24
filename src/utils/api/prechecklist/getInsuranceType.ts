@@ -1,8 +1,8 @@
 import { axiosApi } from '../api';
 
-const GetProfile = async () => {
+const GetInsuranceTypes = async () => {
   try {
-    const { data } = await axiosApi.get('/diplomat/getDiplomatProfile');
+    const { data } = await axiosApi.get('/getInsuranceTypes');
     return data.data;
   } catch (error: any) {
     // Si el error es de Axios, manejar con error.response, de lo contrario, usar el mensaje genérico
@@ -12,4 +12,4 @@ const GetProfile = async () => {
   }
 };
 
-export default GetProfile;
+export default GetInsuranceTypes;

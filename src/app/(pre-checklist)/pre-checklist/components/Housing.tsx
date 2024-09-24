@@ -21,12 +21,15 @@ const Housing = ({
     () => [
       {
         id: 1,
-        nameState: 'hepWhenArrive',
+        nameState: 'isNeedHousingHelp',
         question: 'Would you like help finding housing when you arrive?',
         smallQuestion:
           'Tell us more about you to help us make your journey better and more personalized?',
         inputType: 'radio',
-        options: ['Yes, I need assistance', "It's already taken care of"],
+        options: [
+          { answer: 'Yes, I need assistance', value: true },
+          { answer: "It's already taken care of", value: false },
+        ],
       },
     ],
     []
@@ -114,7 +117,7 @@ const Housing = ({
                 width: '90%',
               }}
             >
-              In the Netherlands, the concept of "housing cooperatives" is
+              In the Netherlands, the concept of &apohousing cooperatives&apo is
               gaining popularity, where residents collectively own and manage
               their housing, offering a sense of community and shared
               responsibility.
@@ -164,9 +167,10 @@ const Housing = ({
               zIndex: 2,
             }}
           >
-            In the Netherlands, the concept of "housing cooperatives" is gaining
-            popularity, where residents collectively own and manage their
-            housing, offering a sense of community and shared responsibility.
+            In the Netherlands, the concept of&apohousing cooperatives&apo is
+            gaining popularity, where residents collectively own and manage
+            their housing, offering a sense of community and shared
+            responsibility.
           </Typography>
         </Box>
       </Box>

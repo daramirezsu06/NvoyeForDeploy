@@ -2,35 +2,35 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../state/store';
 
 interface AnswersState {
+  isNeedHousingHelp: boolean | null;
+  isWithSpouse: boolean | null;
+  isWithChildren: boolean | null;
+  isWithPets: boolean | null;
   typeOfPets: string[] | null;
-  wantAdoptingPet: string | null;
-  TypeOfInsurance: string | null;
-  ChronicConditions: string[] | null;
-  typeOfVehicle: string[] | null;
-  hepWhenArrive: string | null;
-  isMovingWithPartner: string | null;
-  hasChildrenMoving: string | null;
-  isBringingPets: string | null;
-  hasHealthInsurance: string | null;
-  hasChronicConditions: string | null;
-  isTransportingVehicle: string | null;
-  hobbiesAndActivities: string | null;
+  isPlanAdoptingPets: boolean | null;
+  hasHealthInsurance: boolean | null;
+  insuranceTypeId: number | number[] | null;
+  hasChronicConditions: boolean | null;
+  chronicDiseasesId: number | null; // Cambiado a number[] para manejar arrays de números
+  vehicleTypeId: number | number[] | null; // Cambiado a number[] para manejar arrays de números
+  isTransportingVehicle: boolean | null;
+  hobbies: number[] | null; // Cambiado a number[] para manejar arrays de números
 }
 
 const initialState: AnswersState = {
-  hepWhenArrive: null,
-  isMovingWithPartner: null,
-  hasChildrenMoving: null,
-  isBringingPets: null,
+  isNeedHousingHelp: null,
+  isWithSpouse: null,
+  isWithChildren: null,
+  isWithPets: null,
   typeOfPets: null,
-  wantAdoptingPet: null,
+  isPlanAdoptingPets: null,
   hasHealthInsurance: null,
-  TypeOfInsurance: null,
+  insuranceTypeId: null,
   hasChronicConditions: null,
-  ChronicConditions: null,
+  chronicDiseasesId: null,
   isTransportingVehicle: null,
-  typeOfVehicle: null,
-  hobbiesAndActivities: null,
+  vehicleTypeId: null,
+  hobbies: null,
 };
 
 const prechecklistSlice = createSlice({
@@ -41,17 +41,39 @@ const prechecklistSlice = createSlice({
       state,
       action: PayloadAction<{
         name: keyof AnswersState;
-        value: string | string[];
+        value: boolean | string | number | string[] | number[] | null; // Tipo extendido para aceptar múltiples tipos
       }>
     ) {
       const { name, value } = action.payload;
       state[name] = value;
+    },
+    // Opcional: agregar un método para manejar la adición o eliminación de elementos en arrays (para selección múltiple)
+    toggleArrayAnswer(
+      state,
+      action: PayloadAction<{
+        name: keyof AnswersState;
+        value: number; // Para manejar selección de múltiples elementos como hobbies, etc.
+      }>
+    ) {
+      const { name, value } = action.payload;
+      const currentArray = state[name] as number[] | null;
+
+      if (currentArray) {
+        // Si el valor ya está en el array, lo eliminamos, de lo contrario, lo añadimos
+        if (currentArray.includes(value)) {
+          state[name] = currentArray.filter((item) => item !== value);
+        } else {
+          state[name] = [...currentArray, value];
+        }
+      } else {
+        state[name] = [value]; // Si no existe un array aún, lo inicializamos con el primer valor
+      }
     },
   },
 });
 
 export const selectAnswers = (state: RootState) => state.preChecklistanswers;
 
-export const { setAnswer } = prechecklistSlice.actions;
+export const { setAnswer, toggleArrayAnswer } = prechecklistSlice.actions;
 
 export default prechecklistSlice.reducer;

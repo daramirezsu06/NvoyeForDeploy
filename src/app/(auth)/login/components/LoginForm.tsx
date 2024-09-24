@@ -21,6 +21,7 @@ export default function LoginForm() {
   const token = useAppSelector(selectToken);
   const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
+  const redirectToProfile = useRedirectionProfile();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,8 +38,6 @@ export default function LoginForm() {
     event.preventDefault();
     dispatch(login({ email, password }));
   };
-
-  const redirectToProfile = useRedirectionProfile();
 
   useEffect(() => {
     if (token) {

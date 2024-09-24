@@ -6,36 +6,33 @@ import theme from '@/src/app/theme';
 import ProgressLine from './shares/progressLine';
 import { UseAnswers } from '../hooks/useAnswers';
 import Brandlogo from '@/src/icons/BrandLogo';
+import CuestionBaseMultichose from './shares/cuestionBaseMultiChose';
 
 const GeneralLiving = ({
   onNext,
   onBack,
   step,
+  hobbies,
 }: {
   onNext: () => void;
   onBack: () => void;
   step: number;
+  hobbies: { id: number; name: string; description: string }[];
 }) => {
   const questions = [
     {
       id: 1,
-      nameState: 'hobbiesAndActivities',
+      nameState: 'hobbies',
       question: 'What are your hobbies and favorite activities?',
       smallQuestion:
         'Feel free to select multiple options for both your hobbies and activities.',
       inputType: 'select',
       multiple: true,
-      options: [
-        'Reading',
-        'Cooking',
-        'Traveling',
-        'Photography',
-        'Gardening',
-        'Hiking',
-      ],
+      options: hobbies,
     },
   ];
-  const { buttonDisabled, answers, handleAnswerChange } = UseAnswers(questions);
+  const { buttonDisabled, answers, handleAnswerChangeMultichose } =
+    UseAnswers(questions);
   return (
     <Container
       sx={{
@@ -117,9 +114,9 @@ const GeneralLiving = ({
                 width: '90%',
               }}
             >
-              The Netherlands is a cyclist's paradise with extensive bike paths,
-              making it a fun and healthy way to explore the beautiful scenery
-              and charming towns, while also serving as a magnet for
+              The Netherlands is a cyclist&apos; paradise with extensive bike
+              paths, making it a fun and healthy way to explore the beautiful
+              scenery and charming towns, while also serving as a magnet for
               professionals in agriculture tech, life sciences, and
               sustainability, thanks to its focus on innovation and leadership
               in these sectors.
@@ -169,11 +166,12 @@ const GeneralLiving = ({
               zIndex: 2,
             }}
           >
-            The Netherlands is a cyclist's paradise with extensive bike paths,
-            making it a fun and healthy way to explore the beautiful scenery and
-            charming towns, while also serving as a magnet for professionals in
-            agriculture tech, life sciences, and sustainability, thanks to its
-            focus on innovation and leadership in these sectors.
+            The Netherlands is a cyclist&apos; paradise with extensive bike
+            paths, making it a fun and healthy way to explore the beautiful
+            scenery and charming towns, while also serving as a magnet for
+            professionals in agriculture tech, life sciences, and
+            sustainability, thanks to its focus on innovation and leadership in
+            these sectors.
           </Typography>
         </Box>
       </Box>
@@ -219,11 +217,11 @@ const GeneralLiving = ({
           }}
         >
           {questions.map((question) => (
-            <CuestionBase
+            <CuestionBaseMultichose
               question={question}
               key={question.id}
               answers={answers}
-              handleAnswerChange={handleAnswerChange}
+              handleAnswerChangeMultichose={handleAnswerChangeMultichose}
             />
           ))}
 

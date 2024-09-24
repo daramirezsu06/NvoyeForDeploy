@@ -13,7 +13,7 @@ import theme from '@/src/app/theme';
 import ProgressLine from './shares/progressLine';
 import DropdownMenu1 from './shares/dropdownMenuCopy';
 import { UseAnswers } from '../hooks/useAnswers';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import Brandlogo from '@/src/icons/BrandLogo';
 
 const Pets = ({
@@ -29,10 +29,13 @@ const Pets = ({
     () => [
       {
         id: 1,
-        nameState: 'isBringingPets',
+        nameState: 'isWithPets',
         question: 'Will you be bringing any pets with you?',
         inputType: 'radio',
-        options: ['Yes', 'No'],
+        options: [
+          { answer: 'Yes', value: true },
+          { answer: 'NO', value: false },
+        ],
       },
     ],
     []
@@ -43,31 +46,38 @@ const Pets = ({
     question: 'Please specify:',
     nameState: 'typeOfPets',
     inputType: 'select',
-    multiple: true,
+    multiple: false,
     options: ['Cat', 'Bird', 'Dog', 'Rabbit'],
     condition: {
-      stateCondition: 'isBringingPets',
-      expectedAnswer: 'Yes',
+      stateCondition: 'isWithPets',
+      expectedAnswer: true,
     },
   };
 
   const conditionalQuestion2 = {
     id: 2,
     question: 'Are you considering adopting a pet upon arrival?',
-    nameState: 'wantAdoptingPet',
+    nameState: 'isPlanAdoptingPets',
     inputType: 'radio',
-    options: ['Yes', 'No', 'Maybe'],
+    options: [
+      { answer: 'Yes', value: true },
+      { answer: 'NO', value: false },
+      { answer: 'Maybe', value: false },
+    ],
     condition: {
-      stateCondition: 'isBringingPets',
-      expectedAnswer: 'No',
+      stateCondition: 'isWithPets',
+      expectedAnswer: false,
     },
   };
 
   const { buttonDisabled, answers, handleAnswerChange, handleChangeOptions } =
     UseAnswers([...questions, conditionalQuestion, conditionalQuestion2]);
+  useEffect(() => {
+    console.log(answers);
+  }, [answers]);
 
-  const showTypeOfPetsQuestion = answers.isBringingPets === 'Yes';
-  const showWantAdoptingPetQuestion = answers.isBringingPets === 'No';
+  const showTypeOfPetsQuestion = answers.isWithPets === true;
+  const showWantAdoptingPetQuestion = answers.isWithPets === false;
 
   return (
     <Container
@@ -152,9 +162,9 @@ const Pets = ({
             >
               The Netherlands is known for its pet-friendly culture, with many
               public spaces and accommodations accommodating pets. Additionally,
-              there's a strong emphasis on responsible pet ownership, including
-              pet-friendly rental housing options and ample green spaces for
-              outdoor activities with pets.
+              there&apos; a strong emphasis on responsible pet ownership,
+              including pet-friendly rental housing options and ample green
+              spaces for outdoor activities with pets.
             </Typography>
           </Box>
         </Box>
@@ -203,9 +213,9 @@ const Pets = ({
           >
             The Netherlands is known for its pet-friendly culture, with many
             public spaces and accommodations accommodating pets. Additionally,
-            there's a strong emphasis on responsible pet ownership, including
-            pet-friendly rental housing options and ample green spaces for
-            outdoor activities with pets.
+            there&apos; a strong emphasis on responsible pet ownership,
+            including pet-friendly rental housing options and ample green spaces
+            for outdoor activities with pets.
           </Typography>
         </Box>
       </Box>
