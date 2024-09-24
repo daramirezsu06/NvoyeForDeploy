@@ -59,6 +59,7 @@ const profileSlice = createSlice({
     },
     logout: (state) => {
       state.userState = initialState.userState;
+      state.status = 'idle';
     },
   },
   extraReducers: (builder) => {

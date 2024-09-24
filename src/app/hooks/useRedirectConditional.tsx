@@ -60,7 +60,7 @@ export const useRedirectionProfile = () => {
     } else if (isPreChecklistIncomplete) {
       router.push('/pre-checklist');
     } else {
-      router.push('/dashboard/home');
+      router.push('/dashboard/guide/home');
     }
   };
 

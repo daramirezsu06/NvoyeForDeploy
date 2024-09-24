@@ -94,7 +94,7 @@ export default function SignupForm() {
                   <FormControlLabel
                     value={3}
                     control={<Radio />}
-                    label="Service Provider"
+                    label="Organization"
                   />
                 </RadioGroup>
               </FormControl>

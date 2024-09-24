@@ -71,7 +71,15 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   }, []);
 
   // const homeNations = ['USA', 'Canada', 'UK', 'Australia'];
-  // const assignedCountries = ['India', 'Germany', 'France', 'Japan'];
+  const possibleCountries = [
+    {
+      id: 121,
+      name: 'Netherlands',
+      code: 'NL',
+      dialingCode: '+31',
+      flag: '🇳🇱',
+    },
+  ];
 
   const handleNext = () => {
     const data = { homeCountry: homeNation, assignedCountry };
@@ -153,8 +161,8 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
         margin="normal"
         variant="outlined"
       >
-        {nationsList.length > 0 ? (
-          nationsList.map((nation) => (
+        {possibleCountries.length > 0 ? (
+          possibleCountries.map((nation) => (
             <MenuItem key={nation.id} value={nation.id.toString()}>
               <Box
                 sx={{

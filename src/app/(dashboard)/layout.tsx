@@ -38,6 +38,7 @@ import {
 import { useAppDispatch } from '../state/hooks';
 import { logout } from './redux/profileSlice';
 import { useRouter } from 'next/navigation';
+import { authlogout } from '../(auth)/redux/authSlice';
 
 export default function DashboardLayout({
   children,
@@ -157,6 +158,7 @@ export default function DashboardLayout({
               <Button
                 onClick={() => {
                   dispatch(logout());
+                  dispatch(authlogout());
                   router.push('/');
                 }}
               >

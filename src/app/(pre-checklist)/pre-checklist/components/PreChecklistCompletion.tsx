@@ -75,7 +75,7 @@ const PreChecklistCompletion = () => {
             </Box>
           </Box>
         </Stack>
-        <Link href="/dashboard">
+        <Link href="/dashboard/guide">
           <Button variant="contained">View My dashboard</Button>
         </Link>
       </Box>
