@@ -12,14 +12,38 @@ export const UseAnswers = (questions: any[], trackButton: boolean = true) => {
     e: React.ChangeEvent<HTMLInputElement> | SelectChangeEvent<string>
   ) => {
     const { name, value } = e.target;
-    dispatch(setAnswer({ name: name as keyof typeof answers, value }));
+
+    const parsedValue =
+      value === 'true' ? true : value === 'false' ? false : value;
+
+    dispatch(
+      setAnswer({ name: name as keyof typeof answers, value: parsedValue })
+    );
+
     console.log(answers);
+  };
+  const handleAnswerChangeMultichose = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    optionId: number
+  ) => {
+    const { name } = e.target;
+
+    // Obtener las respuestas actuales para esta pregunta
+    const currentAnswers = answers[name] || [];
+
+    // Añadir o quitar la opción seleccionada
+    const newAnswers = currentAnswers.includes(optionId)
+      ? currentAnswers.filter((id: number) => id !== optionId) // Eliminar si ya está seleccionado
+      : [...currentAnswers, optionId]; // Añadir si no está seleccionado
+
+    dispatch(setAnswer({ name, value: newAnswers }));
   };
 
   const handleChangeOptions = (event: SelectChangeEvent<string[]>) => {
     const { value, name } = event.target;
-    const options = typeof value === 'string' ? value.split(',') : value;
-    dispatch(setAnswer({ name: name as keyof typeof answers, value: options }));
+    console.log({ value, name });
+
+    dispatch(setAnswer({ name: name as keyof typeof answers, value }));
   };
 
   const shouldQuestionBeAnswered = (question) => {
@@ -46,5 +70,11 @@ export const UseAnswers = (questions: any[], trackButton: boolean = true) => {
     }
   }, [answers, questions, trackButton]);
 
-  return { answers, handleAnswerChange, buttonDisabled, handleChangeOptions };
+  return {
+    answers,
+    handleAnswerChange,
+    buttonDisabled,
+    handleChangeOptions,
+    handleAnswerChangeMultichose,
+  };
 };

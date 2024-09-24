@@ -12,10 +12,12 @@ const Transportation = ({
   onNext,
   onBack,
   step,
+  vehicleTypes,
 }: {
   onNext: () => void;
   onBack: () => void;
   step: number;
+  vehicleTypes: { id: number; name: string; description: string }[];
 }) => {
   const questions = [
     {
@@ -25,7 +27,10 @@ const Transportation = ({
       smallQuestion:
         'Choose Yes, if you intend to move a car, bike, or bicycle to your new place of posting.',
       inputType: 'radio',
-      options: ['Yes', 'No'],
+      options: [
+        { answer: 'Yes', value: true },
+        { answer: 'NO', value: false },
+      ],
     },
   ];
   const conditionalQuestion = {
@@ -33,16 +38,16 @@ const Transportation = ({
     question: 'Please specify:',
     nameState: 'vehicleTypeId',
     inputType: 'select',
-    multiple: true,
-    options: ['Bicycle', 'Car', 'Motorbike'],
+    multiple: false,
+    options: vehicleTypes,
     condition: {
       stateCondition: 'isTransportingVehicle',
-      expectedAnswer: 'Yes',
+      expectedAnswer: true,
     },
   };
   const { buttonDisabled, answers, handleAnswerChange, handleChangeOptions } =
     UseAnswers([...questions, conditionalQuestion]);
-  const showTypeOfVehicle = answers.isTransportingVehicle === 'Yes';
+  const showTypeOfVehicle = answers.isTransportingVehicle === true;
   return (
     <Container
       sx={{

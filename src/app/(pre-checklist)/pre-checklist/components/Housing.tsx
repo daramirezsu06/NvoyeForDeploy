@@ -26,7 +26,10 @@ const Housing = ({
         smallQuestion:
           'Tell us more about you to help us make your journey better and more personalized?',
         inputType: 'radio',
-        options: ['Yes, I need assistance', "It's already taken care of"],
+        options: [
+          { answer: 'Yes, I need assistance', value: true },
+          { answer: "It's already taken care of", value: false },
+        ],
       },
     ],
     []

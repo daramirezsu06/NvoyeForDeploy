@@ -7,15 +7,20 @@ import ProgressLine from './shares/progressLine';
 import { UseAnswers } from '../hooks/useAnswers';
 import DropdownMenu1 from './shares/dropdownMenuCopy';
 import Brandlogo from '@/src/icons/BrandLogo';
+import GetInsuranceTypes from '@/src/utils/api/prechecklist/getInsuranceType';
 
 const HealthCare = ({
   onNext,
   onBack,
   step,
+  insuranceTypes,
+  chronicDiseases,
 }: {
   onNext: () => void;
   onBack: () => void;
   step: number;
+  insuranceTypes: { id: number; name: string; description: string }[];
+  chronicDiseases: { id: number; name: string; description: string }[];
 }) => {
   const questions = [
     {
@@ -25,7 +30,10 @@ const HealthCare = ({
       smallQuestion:
         'It could be a health insurance from your home country or an international health insurance',
       inputType: 'radio',
-      options: ['Yes', 'No'],
+      options: [
+        { answer: 'Yes', value: true },
+        { answer: 'NO', value: false },
+      ],
     },
     {
       id: 2,
@@ -34,7 +42,10 @@ const HealthCare = ({
       smallQuestion:
         'Please let us know if you, your partner, or children have any chronic or medical conditions',
       inputType: 'radio',
-      options: ['Yes', 'No'],
+      options: [
+        { answer: 'Yes', value: true },
+        { answer: 'NO', value: false },
+      ],
     },
   ];
 
@@ -44,10 +55,10 @@ const HealthCare = ({
     inputType: 'select',
     nameState: 'insuranceTypeId',
     multiple: false,
-    options: ['Home country insurance', 'International insurance'],
+    options: insuranceTypes,
     condition: {
       stateCondition: 'hasHealthInsurance',
-      expectedAnswer: 'Yes',
+      expectedAnswer: true,
     },
   };
   const conditionalQuestion2 = {
@@ -55,18 +66,18 @@ const HealthCare = ({
     question: 'Please specify:',
     nameState: 'chronicDiseasesId',
     inputType: 'select',
-    multiple: true,
-    options: ['Cancer', 'Diabetes', 'Hypertension', 'Asthma'],
+    multiple: false,
+    options: chronicDiseases,
     condition: {
       stateCondition: 'hasChronicConditions',
-      expectedAnswer: 'Yes',
+      expectedAnswer: true,
     },
   };
   const { answers, handleAnswerChange, buttonDisabled, handleChangeOptions } =
     UseAnswers([...questions, conditionalQuestion, conditionalQuestion2], true);
 
-  const showTypeOfInsurance = answers.hasHealthInsurance === 'Yes';
-  const showChronicConditions = answers.hasChronicConditions === 'Yes';
+  const showTypeOfInsurance = answers.hasHealthInsurance === true;
+  const showChronicConditions = answers.hasChronicConditions === true;
 
   return (
     <Container

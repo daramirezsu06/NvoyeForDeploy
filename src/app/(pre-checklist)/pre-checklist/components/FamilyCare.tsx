@@ -26,14 +26,20 @@ const FamilyCare = ({
         smallQuestion:
           'Is your partner planning to join you both now or in the future, during your mission?',
         inputType: 'radio',
-        options: ['Yes', 'No'],
+        options: [
+          { answer: 'Yes', value: true },
+          { answer: 'NO', value: false },
+        ],
       },
       {
         id: 2,
         nameState: 'isWithChildren',
         question: 'Do you have children who will be moving with you?',
         inputType: 'radio',
-        options: ['Yes', 'No'],
+        options: [
+          { answer: 'Yes', value: true },
+          { answer: 'NO', value: false },
+        ],
       },
     ],
     []

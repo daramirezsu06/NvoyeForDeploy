@@ -13,7 +13,7 @@ import theme from '@/src/app/theme';
 import ProgressLine from './shares/progressLine';
 import DropdownMenu1 from './shares/dropdownMenuCopy';
 import { UseAnswers } from '../hooks/useAnswers';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import Brandlogo from '@/src/icons/BrandLogo';
 
 const Pets = ({
@@ -32,7 +32,10 @@ const Pets = ({
         nameState: 'isWithPets',
         question: 'Will you be bringing any pets with you?',
         inputType: 'radio',
-        options: ['Yes', 'No'],
+        options: [
+          { answer: 'Yes', value: true },
+          { answer: 'NO', value: false },
+        ],
       },
     ],
     []
@@ -46,8 +49,8 @@ const Pets = ({
     multiple: true,
     options: ['Cat', 'Bird', 'Dog', 'Rabbit'],
     condition: {
-      stateCondition: 'isBringingPets',
-      expectedAnswer: 'Yes',
+      stateCondition: 'isWithPets',
+      expectedAnswer: true,
     },
   };
 
@@ -56,18 +59,25 @@ const Pets = ({
     question: 'Are you considering adopting a pet upon arrival?',
     nameState: 'isPlanAdoptingPets',
     inputType: 'radio',
-    options: ['Yes', 'No', 'Maybe'],
+    options: [
+      { answer: 'Yes', value: true },
+      { answer: 'NO', value: false },
+      { answer: 'Maybe', value: false },
+    ],
     condition: {
-      stateCondition: 'isBringingPets',
-      expectedAnswer: 'No',
+      stateCondition: 'isWithPets',
+      expectedAnswer: false,
     },
   };
 
   const { buttonDisabled, answers, handleAnswerChange, handleChangeOptions } =
     UseAnswers([...questions, conditionalQuestion, conditionalQuestion2]);
+  useEffect(() => {
+    console.log(answers);
+  }, [answers]);
 
-  const showTypeOfPetsQuestion = answers.isWithPets === 'Yes';
-  const showWantAdoptingPetQuestion = answers.isWithPets === 'No';
+  const showTypeOfPetsQuestion = answers.isWithPets === true;
+  const showWantAdoptingPetQuestion = answers.isWithPets === false;
 
   return (
     <Container

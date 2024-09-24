@@ -6,15 +6,18 @@ import theme from '@/src/app/theme';
 import ProgressLine from './shares/progressLine';
 import { UseAnswers } from '../hooks/useAnswers';
 import Brandlogo from '@/src/icons/BrandLogo';
+import CuestionBaseMultichose from './shares/cuestionBaseMultiChose';
 
 const GeneralLiving = ({
   onNext,
   onBack,
   step,
+  hobbies,
 }: {
   onNext: () => void;
   onBack: () => void;
   step: number;
+  hobbies: { id: number; name: string; description: string }[];
 }) => {
   const questions = [
     {
@@ -25,17 +28,11 @@ const GeneralLiving = ({
         'Feel free to select multiple options for both your hobbies and activities.',
       inputType: 'select',
       multiple: true,
-      options: [
-        'Reading',
-        'Cooking',
-        'Traveling',
-        'Photography',
-        'Gardening',
-        'Hiking',
-      ],
+      options: hobbies,
     },
   ];
-  const { buttonDisabled, answers, handleAnswerChange } = UseAnswers(questions);
+  const { buttonDisabled, answers, handleAnswerChangeMultichose } =
+    UseAnswers(questions);
   return (
     <Container
       sx={{
@@ -220,11 +217,11 @@ const GeneralLiving = ({
           }}
         >
           {questions.map((question) => (
-            <CuestionBase
+            <CuestionBaseMultichose
               question={question}
               key={question.id}
               answers={answers}
-              handleAnswerChange={handleAnswerChange}
+              handleAnswerChangeMultichose={handleAnswerChangeMultichose}
             />
           ))}
 
