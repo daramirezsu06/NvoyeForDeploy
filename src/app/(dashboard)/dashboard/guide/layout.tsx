@@ -37,7 +37,7 @@ export default function DashboardGuideLayout({
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', sm: 'row' }, // Columna en pantallas móviles, fila en pantallas grandes
-        minHeight: '100vh',
+        height: { xs: 'auto', sm: 'calc(100vh - 64px)' },
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
         paddingLeft: { xs: '0px', sm: '0px' },
         paddingRight: { xs: '0px', sm: '0px' },

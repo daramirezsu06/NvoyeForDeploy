@@ -37,8 +37,10 @@ import {
 
 import { useAppDispatch } from '../state/hooks';
 import { logout } from './redux/profileSlice';
-import { useRouter } from 'next/navigation';
 import { authlogout } from '../(auth)/redux/authSlice';
+import { useRouter } from 'next/navigation';
+import Menu from './dashboard/components/Menu';
+import React from 'react';
 
 export default function DashboardLayout({
   children,
@@ -47,6 +49,15 @@ export default function DashboardLayout({
 }>) {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Container
@@ -69,6 +80,8 @@ export default function DashboardLayout({
           alignSelf: 'stretch',
           position: 'sticky',
           top: 0,
+          paddingLeft: { xs: '0px', sm: '0px' },
+          paddingRight: { xs: '0px', sm: '0px' },
         }}
         elevation={0}
         square={true}
@@ -155,50 +168,14 @@ export default function DashboardLayout({
                   sx={{ position: 'absolute', right: 8, top: 8 }}
                 ></Badge>
               </Badge>
-              <Button
-                onClick={() => {
-                  dispatch(logout());
-                  dispatch(authlogout());
-                  router.push('/');
-                }}
-              >
+              <Button onClick={handleClick}>
                 <Avatar sx={{ width: 24, height: 24 }}>D</Avatar>
               </Button>
+              <Menu anchorEl={anchorEl} open={open} handleClose={handleClose} />
             </Stack>
           </Toolbar>
         </Paper>
       </AppBar>
-      {/* <Container>
-        <Stack>
-          <Stack>
-            <Stack direction="row">
-              <Typography>Guide</Typography>
-              <KeyboardDoubleArrowLeft />
-            </Stack>
-            <List>
-              <ListItem>
-                <Stack direction="row">
-                  <Home />
-                  <ListItemText>Home</ListItemText>
-                </Stack>
-              </ListItem>
-              <ListItem>
-                <Stack direction="row">
-                  <DeviceHub />
-                  <ListItemText>Hubs</ListItemText>
-                </Stack>
-              </ListItem>
-              <ListItem>
-                <Stack direction="row">
-                  <Checklist />
-                  <ListItemText>Checklist</ListItemText>
-                </Stack>
-              </ListItem>
-            </List>
-          </Stack>
-        </Stack>
-      </Container> */}
-
       {children}
     </Container>
   );
