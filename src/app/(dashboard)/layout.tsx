@@ -8,6 +8,7 @@ import {
   HomeMiniOutlined,
   KeyboardDoubleArrowLeft,
   LibraryBooks,
+  MenuOutlined,
   Notifications,
   NotificationsOutlined,
   OutlinedFlag,
@@ -68,6 +69,7 @@ export default function DashboardLayout({
         paddingLeft: { xs: '0px', sm: '0px' },
         paddingRight: { xs: '0px', sm: '0px' },
         width: '100vw',
+        minHeight: { xs: '0px', sm: '0px' },
       }}
     >
       <CssBaseline />
@@ -82,6 +84,7 @@ export default function DashboardLayout({
           top: 0,
           paddingLeft: { xs: '0px', sm: '0px' },
           paddingRight: { xs: '0px', sm: '0px' },
+          minHeight: { xs: '0px', sm: '0px' },
         }}
         elevation={0}
         square={true}
@@ -92,20 +95,28 @@ export default function DashboardLayout({
             flexDirection: 'column',
             alignItems: 'flex-start',
             alignSelf: 'stretch',
+            paddingLeft: { xs: '0px', sm: '0px' },
+            paddingRight: { xs: '0px', sm: '0px' },
+            minHeight: { xs: '0px', sm: '0px' },
           }}
           elevation={0}
           square={true}
         >
           <Toolbar
             sx={{
-              display: 'flex',
+              display: {
+                xs: 'none',
+                sm: 'flex',
+              },
               alignItems: 'center',
               gap: 1,
               alignSelf: 'stretch',
               paddingY: 1,
               paddingX: 3,
+              paddingLeft: { xs: '0px', sm: '14px' },
+              paddingRight: { xs: '0px', sm: '14px' },
+              minHeight: { xs: '0px', sm: '0px' },
             }}
-            // variant=''
           >
             <BrandIcon />
             <Stack
@@ -139,7 +150,6 @@ export default function DashboardLayout({
             <Stack display="flex" direction="row" alignItems="center" gap={2}>
               <Badge
                 variant="standard"
-                // badgeContent={1}
                 color="primary"
                 sx={{
                   display: 'flex',
@@ -163,12 +173,89 @@ export default function DashboardLayout({
                   </Icon>
                 </IconButton>
                 <Badge
-                  badgeContent={1}
+                  badgeContent={1} //! modificar con el valro que venga del back
                   color="primary"
                   sx={{ position: 'absolute', right: 8, top: 8 }}
                 ></Badge>
               </Badge>
-              <Button onClick={handleClick}>
+              <Button onClick={handleClick} sx={{ width: 24, minWidth: 24 }}>
+                <Avatar sx={{ width: 24, height: 24 }}>D</Avatar>
+              </Button>
+              <Menu anchorEl={anchorEl} open={open} handleClose={handleClose} />
+            </Stack>
+          </Toolbar>
+
+          {/* toolbar para dispositivos moviles */}
+          <Toolbar
+            sx={{
+              display: {
+                xs: 'flex',
+                sm: 'none',
+              },
+              alignItems: 'center',
+              gap: 1,
+              alignSelf: 'stretch',
+              paddingY: 1,
+              paddingX: 3,
+              paddingLeft: { xs: '14px', sm: '14px' },
+              paddingRight: { xs: '14px', sm: '14px' },
+              minHeight: { xs: '0px', sm: '0px' },
+            }}
+          >
+            <Stack
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '24px',
+                flex: '1 0 0',
+              }}
+            >
+              <IconButton
+                sx={{
+                  display: 'flex',
+                  padding: '8px',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Icon sx={{ display: 'flex' }}>
+                  <MenuOutlined sx={{ width: 24, height: 24 }} />
+                </Icon>
+              </IconButton>
+            </Stack>
+            <Stack display="flex" direction="row" alignItems="center" gap={2}>
+              <Badge
+                variant="standard"
+                color="primary"
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <IconButton
+                  size="small"
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 100,
+                    padding: 1,
+                  }}
+                >
+                  <Icon sx={{ display: 'flex' }}>
+                    <NotificationsOutlined sx={{ width: 24, height: 24 }} />
+                  </Icon>
+                </IconButton>
+                <Badge
+                  badgeContent={1} //! modificar con el valro que venga del back
+                  color="primary"
+                  sx={{ position: 'absolute', right: 8, top: 8 }}
+                ></Badge>
+              </Badge>
+              <Button onClick={handleClick} sx={{ width: 24, minWidth: 24 }}>
                 <Avatar sx={{ width: 24, height: 24 }}>D</Avatar>
               </Button>
               <Menu anchorEl={anchorEl} open={open} handleClose={handleClose} />

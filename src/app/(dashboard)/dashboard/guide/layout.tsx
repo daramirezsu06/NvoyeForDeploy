@@ -36,7 +36,7 @@ export default function DashboardGuideLayout({
     <Container
       sx={{
         display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' }, // Columna en pantallas móviles, fila en pantallas grandes
+        flexDirection: { xs: 'column', sm: 'row' },
         height: { xs: 'auto', sm: 'calc(100vh - 64px)' },
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
         paddingLeft: { xs: '0px', sm: '0px' },
@@ -54,9 +54,9 @@ export default function DashboardGuideLayout({
           justifyContent: 'space-between',
           alignItems: 'flex-start',
           alignSelf: 'stretch',
-          maxWidth: { xs: '100%', sm: '210px' },
+          maxWidth: { xs: '100%', sm: '150px' },
           paddingLeft: { xs: '0px', sm: '16px' },
-          paddingRight: { xs: '0px', sm: '0px' },
+          paddingRight: { xs: '0px', sm: '16px' },
         }}
       >
         <Stack
@@ -91,7 +91,6 @@ export default function DashboardGuideLayout({
               <Link
                 href="/dashboard/guide/home"
                 style={{ width: '100%', textDecoration: 'none' }}
-                // sx={{ width: '100%', textDecoration: 'none' }}
               >
                 <Box
                   sx={{
@@ -104,7 +103,6 @@ export default function DashboardGuideLayout({
                     paddingX: '0px',
                     borderRadius: 0,
                   }}
-                  // color="primary"
                 >
                   <Box
                     sx={{
@@ -140,7 +138,15 @@ export default function DashboardGuideLayout({
                       >
                         <HomeOutlined />
                       </Icon>
-                      <ListItemText>
+                      <ListItemText
+                        sx={{
+                          display: 'flex',
+                          padding: 'var(--borderRadius, 4px) 0px',
+                          flexDirection: 'column',
+                          alignItems: 'flex-start',
+                          flex: '1 0 0',
+                        }}
+                      >
                         <Typography variant="body1">Home</Typography>
                       </ListItemText>
                     </IconButton>
@@ -152,7 +158,6 @@ export default function DashboardGuideLayout({
               <Link
                 href="/dashboard/guide/hubs"
                 style={{ width: '100%', textDecoration: 'none' }}
-                // sx={{ width: '100%', textDecoration: 'none' }}
               >
                 <Box
                   sx={{
@@ -164,7 +169,6 @@ export default function DashboardGuideLayout({
                     paddingY: '8px',
                     paddingX: '0px',
                   }}
-                  // color="primary"
                 >
                   <Box
                     sx={{
@@ -199,7 +203,15 @@ export default function DashboardGuideLayout({
                       >
                         <DeviceHub />
                       </Icon>
-                      <ListItemText>
+                      <ListItemText
+                        sx={{
+                          display: 'flex',
+                          padding: 'var(--borderRadius, 4px) 0px',
+                          flexDirection: 'column',
+                          alignItems: 'flex-start',
+                          flex: '1 0 0',
+                        }}
+                      >
                         <Typography variant="body1">Hubs</Typography>
                       </ListItemText>
                     </IconButton>
@@ -211,7 +223,6 @@ export default function DashboardGuideLayout({
               <Link
                 href="/dashboard/guide/checklist"
                 style={{ width: '100%', textDecoration: 'none' }}
-                // sx={{ width: '100%', textDecoration: 'none' }}
               >
                 <Box
                   sx={{
@@ -223,7 +234,6 @@ export default function DashboardGuideLayout({
                     paddingY: '8px',
                     paddingX: '0px',
                   }}
-                  // color="primary"
                 >
                   <Box
                     sx={{
@@ -234,7 +244,6 @@ export default function DashboardGuideLayout({
                     }}
                   >
                     <IconButton
-                      // color="primary" //modificar
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -258,7 +267,15 @@ export default function DashboardGuideLayout({
                       >
                         <Checklist />
                       </Icon>
-                      <ListItemText>
+                      <ListItemText
+                        sx={{
+                          display: 'flex',
+                          padding: 'var(--borderRadius, 4px) 0px',
+                          flexDirection: 'column',
+                          alignItems: 'flex-start',
+                          flex: '1 0 0',
+                        }}
+                      >
                         <Typography variant="body1">Checklist</Typography>
                       </ListItemText>
                     </IconButton>
@@ -266,18 +283,6 @@ export default function DashboardGuideLayout({
                 </Box>
               </Link>
             </ListItem>
-            {/* <ListItem>
-              <Stack direction="row">
-                <DeviceHub />
-                <ListItemText>Hubs</ListItemText>
-              </Stack>
-            </ListItem>
-            <ListItem>
-              <Stack direction="row">
-                <Checklist />
-                <ListItemText>Checklist</ListItemText>
-              </Stack>
-            </ListItem> */}
           </List>
         </Stack>
       </Container>
