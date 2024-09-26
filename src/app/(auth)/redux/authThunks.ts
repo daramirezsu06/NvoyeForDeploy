@@ -6,8 +6,7 @@ import {
   LoginPayload,
   SendOtpPayload,
 } from './authTypes';
-
-const baseURL = process.env.NEXT_PUBLIC_API_URL;
+import { baseURL } from '@/src/utils/api/env';
 
 export const signUp = createAsyncThunk(
   'auth/signUp',

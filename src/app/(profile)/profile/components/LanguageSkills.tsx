@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Typography,
@@ -13,6 +13,11 @@ import {
   Stack,
 } from '@mui/material';
 import ProgressWithLabel from './ProgressWithLabel';
+import GetLanguages from '@/src/utils/api/profile/getLanguages';
+import GetLevels from '@/src/utils/api/profile/getLevels';
+import PutStep3 from '@/src/utils/api/profile/putStep3';
+import { useAppDispatch } from '@/src/app/state/hooks';
+import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 
 interface Language {
   language: string;
@@ -24,26 +29,50 @@ const LanguageSkills: React.FC<{
   onBack: () => void;
   step: number;
 }> = ({ onBack, onNext, step }) => {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [languages, setLanguages] = useState<Language[]>([]);
-  const [language, setLanguage] = useState('');
-  const [proficiency, setProficiency] = useState('');
+  const [languageID, setLanguageID] = useState<number | null>(null); // Inicializado como null
+  const [proficiencyID, setProficiencyID] = useState<number | null>(null); // Inicializado como null
+  const [disableNext, setDisableNext] = useState<boolean>(true);
+  const [disableSave, setDisableSave] = useState<boolean>(true);
+  const [languagesOptions, setLanguagesOptions] = useState<
+    { id: number; name: string }[]
+  >([]);
+  const [levelsOptions, setLevelsOptions] = useState<
+    { id: number; name: string; description: string }[]
+  >([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const languagesData = await GetLanguages();
+        const levelsData = await GetLevels();
+        setLanguagesOptions(languagesData);
+        setLevelsOptions(levelsData);
+      } catch (error) {
+        console.error('Error fetching data', error);
+      }
+    };
 
-  const allLanguages = [
-    'English',
-    'Spanish',
-    'French',
-    'German',
-    'Chinese',
-    'Japanese',
-  ];
-  const proficiencies = [
-    'Beginner',
-    'Intermediate',
-    'Advanced',
-    'Fluent',
-    'Native Speaker',
-  ];
+    fetchData();
+  }, []);
+  useEffect(() => {
+    if (languages.length > 0) {
+      setDisableNext(false);
+    } else {
+      setDisableNext(true);
+    }
+  }, [languages]);
+
+  useEffect(() => {
+    if (languageID && proficiencyID) {
+      setDisableSave(false);
+    } else {
+      setDisableSave(true);
+    }
+  }, [languageID, proficiencyID]);
+
+  const handleNext = () => {};
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,23 +82,27 @@ const LanguageSkills: React.FC<{
     setOpen(false);
   };
 
-  const handleSave = () => {
-    if (language && proficiency) {
-      setLanguages([...languages, { language, proficiency }]);
-      setLanguage('');
-      setProficiency('');
+  const handleSave = async () => {
+    if (languageID && proficiencyID) {
+      const newLanguage = { languageId: languageID, levelId: proficiencyID };
+      const profileUpdate = await PutStep3(newLanguage);
+      dispatch(setProfile(profileUpdate.data));
+
+      setLanguages(
+        profileUpdate.data.languageSkills.map((item) => {
+          return { language: item.language.name, proficiency: item.level.name };
+        })
+      );
+
+      setLanguageID(null);
+      setProficiencyID(null);
       setOpen(false);
+      setDisableSave(true);
     }
   };
 
-  const handleDelete = (index: number) => {
-    const updatedLanguages = [...languages];
-    updatedLanguages.splice(index, 1);
-    setLanguages(updatedLanguages);
-  };
-
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
+    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, minHeight: 300 }}>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h4" gutterBottom>
           Language Skills
@@ -101,7 +134,6 @@ const LanguageSkills: React.FC<{
               <Typography
                 variant="body1"
                 sx={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}
-                onClick={() => handleDelete(index)}
               >
                 X
               </Typography>
@@ -128,14 +160,14 @@ const LanguageSkills: React.FC<{
             select
             fullWidth
             label="Select a language"
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            value={languageID}
+            onChange={(e) => setLanguageID(+e.target.value)}
             margin="normal"
             variant="outlined"
           >
-            {allLanguages.map((lang) => (
-              <MenuItem key={lang} value={lang}>
-                {lang}
+            {languagesOptions.map((lang) => (
+              <MenuItem key={lang.id} value={lang.id}>
+                {lang.name}
               </MenuItem>
             ))}
           </TextField>
@@ -143,14 +175,14 @@ const LanguageSkills: React.FC<{
             select
             fullWidth
             label="Select your proficiency"
-            value={proficiency}
-            onChange={(e) => setProficiency(e.target.value)}
+            value={proficiencyID}
+            onChange={(e) => setProficiencyID(+e.target.value)}
             margin="normal"
             variant="outlined"
           >
-            {proficiencies.map((level) => (
-              <MenuItem key={level} value={level}>
-                {level}
+            {levelsOptions.map((level) => (
+              <MenuItem key={level.id} value={level.id}>
+                {level.name}
               </MenuItem>
             ))}
           </TextField>
@@ -159,17 +191,40 @@ const LanguageSkills: React.FC<{
           <Button onClick={handleClose} color="primary">
             Close
           </Button>
-          <Button onClick={handleSave} color="primary" variant="contained">
+          <Button
+            onClick={handleSave}
+            color="primary"
+            variant="contained"
+            disabled={disableSave}
+          >
             Save
           </Button>
         </DialogActions>
       </Dialog>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-        <Button variant="contained" color="primary" onClick={onBack}>
+        <Button
+          variant="contained"
+          onClick={onBack}
+          sx={{
+            backgroundColor: 'inherit',
+            color: 'black',
+            width: '100px',
+            '&:hover': {
+              backgroundColor: 'inherit',
+              color: 'black',
+            },
+          }}
+        >
           Back
         </Button>
-        <Button variant="contained" color="primary" onClick={onNext}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onNext}
+          sx={{ width: '100px' }}
+          disabled={disableNext}
+        >
           Next
         </Button>
       </Box>

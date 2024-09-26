@@ -29,6 +29,7 @@ Open http://localhost:3000 with your browser to see the result.
 ## Folder structure
 
 - **app/**: Contains the main application components and pages.
+
   - **(auth)**: Handles authentication-related pages such as signup, signin.
   - **(profile)**: Manages profile.
   - **(hubs)**: Manages hub and related pages suchs as transport, housing, etc.
@@ -42,3 +43,4 @@ Open http://localhost:3000 with your browser to see the result.
   - **layout.tsx**: The root layout for the entire app.
   - **page.tsx**: The root page for the entire app.
   - **globals.css**: Global CSS for the application.
+  - ##prueba

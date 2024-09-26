@@ -94,7 +94,7 @@ export default function SignupForm() {
                   <FormControlLabel
                     value={3}
                     control={<Radio />}
-                    label="Service Provider"
+                    label="Organization"
                   />
                 </RadioGroup>
               </FormControl>
@@ -205,7 +205,7 @@ export default function SignupForm() {
             Continue with Google
           </Button>
           <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-            By proceeding, you agree to Nvoye's{' '}
+            By proceeding, you agree to Nvoye&apos;s
             <Link href="#">Terms of Services</Link> and{' '}
             <Link href="#">Privacy Policy</Link>.
           </Typography>

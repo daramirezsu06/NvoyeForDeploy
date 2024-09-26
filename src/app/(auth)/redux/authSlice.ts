@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from './authTypes';
 import { login, sendOtp, setPassword, signUp, verifyOtp } from './authThunks';
+import { RootState } from '../../state/store';
 
 const initialState: AuthState = {
   user: null,
@@ -27,6 +28,17 @@ const authSlice = createSlice({
     setUser: (state, action: PayloadAction<string>) => {
       state.user = action.payload;
     },
+    authlogout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.error = null;
+      state.isCodeSent = false;
+      state.requestId = null;
+      state.isOtpVerified = false;
+      state.isPasswordCreated = false;
+      state.isOtpSent = false;
+      state.isLoggedIn = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -46,6 +58,7 @@ const authSlice = createSlice({
         state.user = action.meta.arg.email;
         state.error = null;
         state.token = action.payload.data.token;
+        state.user = action.payload.data.email;
         state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -78,5 +91,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, setError, clearError } = authSlice.actions;
+export const { setUser, setError, clearError, authlogout } = authSlice.actions;
+export const selectToken = (state: RootState) => state.auth.token;
 export default authSlice.reducer;

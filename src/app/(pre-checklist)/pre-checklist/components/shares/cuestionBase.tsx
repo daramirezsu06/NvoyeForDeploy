@@ -14,7 +14,7 @@ interface CuestionBaseProps {
     question: string;
     smallQuestion?: string;
     nameState: string;
-    options: string[];
+    options: { answer: string; value: boolean }[];
   };
   children?: ReactNode;
   answers: { [key: string]: any };
@@ -32,13 +32,15 @@ const CuestionBase = ({
       <>
         <Stack spacing={2}>
           <Box>
-            <Typography variant="h5">{question.question}</Typography>
+            <Typography variant="h5" sx={{ pb: 1 }}>
+              {question.question}
+            </Typography>
             <Typography variant="body1">{question.smallQuestion}</Typography>
           </Box>
           <Box
             sx={{
               backgroundColor: theme.custom.paperElevationFour,
-              borderRadius: 2,
+              borderRadius: 4,
               py: 3,
               px: 3,
             }}
@@ -47,14 +49,14 @@ const CuestionBase = ({
               row
               name={question.nameState}
               onChange={handleAnswerChange}
-              value={answers[question.nameState] || ''}
+              value={answers[question.nameState]}
             >
               {question.options?.map((option, index) => (
                 <FormControlLabel
                   control={<Radio />}
-                  label={option}
-                  key={option}
-                  value={option}
+                  label={option.answer}
+                  key={option.answer}
+                  value={option.value}
                 />
               ))}
             </RadioGroup>

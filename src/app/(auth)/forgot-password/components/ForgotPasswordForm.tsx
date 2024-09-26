@@ -177,7 +177,7 @@ export default function ForgotPasswordForm() {
         </Stack>
         {!isOtpVerified && (
           <Typography align="center">
-            <Link href="#" variant="body2" align="center">
+            <Link href="/login" variant="body2" align="center">
               Back to log in
             </Link>
           </Typography>
