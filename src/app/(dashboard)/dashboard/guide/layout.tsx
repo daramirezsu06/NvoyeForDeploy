@@ -81,6 +81,8 @@ export default function DashboardGuideLayout({
             >
               Guide
             </Typography>
+
+            {/* //!! DARLE FUNCION A ESTE BOTON */}
             <IconButton
               color={pathname === '/dashboard/guide' ? 'primary' : 'default'}
               onClick={() => {

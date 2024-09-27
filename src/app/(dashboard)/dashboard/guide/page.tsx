@@ -89,7 +89,8 @@ function Guide({}: Props) {
             alignSelf: ' stretch',
             borderRadius: 2,
             border: '1px solid #E6E5E5',
-            background: 'radial-gradient(#FFF 0%, #C2D7FF 76%, #FFF 100%)',
+            background:
+              'radial-gradient(249.19% 158.15% at 19.83% 29.92%, #FFF 0%, #C2D7FF 76%, #FFF 100%)',
             position: 'relative',
             marginTop: '16px',
           }}
@@ -178,12 +179,13 @@ function Guide({}: Props) {
                   fontWeight: '500',
                   lineHeight: '155%',
                   letterSpacing: '0.4px',
+                  textTransform: 'none',
                 }}
               >
                 Get started
               </Typography>
             </Button>
-            <Button>Learn more</Button>
+            <Button sx={{ textTransform: 'none' }}>Learn more</Button>
           </Stack>
         </Box>
       </Box>
