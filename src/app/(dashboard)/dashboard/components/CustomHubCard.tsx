@@ -18,7 +18,10 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
         flexGrow: 1,
         minWidth: { xs: '150px', sm: '200px' },
         minHeight: { xs: '160px', sm: '200px' },
-        maxWidth: '272px',
+        maxWidth: {
+          xs: '160px',
+          sm: '272px',
+        },
         padding: 2,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -52,6 +55,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            textAlign: 'center',
           }}
         >
           {/* //!ESTO DEBE MODIFICARSE */}
