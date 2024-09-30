@@ -10,42 +10,42 @@ import SafetyIcon from '@/src/icons/SafetyIcon.png';
 export const hubMocks = [
   {
     icon: HealthIcon,
-    title: 'Health',
+    title: 'health',
     topics: 'Systems, Insurance',
   },
   {
     icon: Housing,
-    title: 'Housing',
+    title: 'housing',
     topics: 'Rent, Moving',
   },
   {
     icon: GeneralLiving,
-    title: 'General Living',
+    title: 'general Living',
     topics: 'Geography, Culture',
   },
   {
     icon: Finance,
-    title: 'Finance',
+    title: 'finance',
     topics: 'Banking, Cost of living',
   },
   {
     icon: TransportationIcon,
-    title: 'Transportation',
+    title: 'transportation',
     topics: 'Movility, Transport',
   },
   {
     icon: FamilyIcon,
-    title: 'Family',
+    title: 'family',
     topics: 'Childcare, Pet care',
   },
   {
     icon: EducationIcon,
-    title: 'Education',
+    title: 'education',
     topics: 'Schooling, Childcare',
   },
   {
     icon: SafetyIcon,
-    title: 'Safety & Securety',
+    title: 'safety & Securety',
     topics: 'Inclusivity, Security',
   },
 ];
