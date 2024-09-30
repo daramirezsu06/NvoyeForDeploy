@@ -44,20 +44,24 @@ export default function TodoComponent({}: Props) {
         borderRadius: 2,
       }}
     >
-      <Stack px={2} pb={1}>
+      <Stack px={2} pb={1} gap={1}>
         <Stack direction="row" justifyContent="space-between">
           <Typography>EHIC registration</Typography>
           <Flag />
         </Stack>
-        <Stack direction="row" justifyContent="start">
+        <Stack
+          direction="row"
+          justifyContent="start"
+          gap={1}
+          alignItems="center"
+        >
           <FilePresent />
-          <Divider />
+          <Divider orientation="vertical" />
           <Note />
-          <Divider />
+          <Divider orientation="vertical" />
           <NotificationsActive />
-          <Divider />
+          <Divider orientation="vertical" />
           <EventAvailable />
-          <Divider />
         </Stack>
       </Stack>
       <Divider />
