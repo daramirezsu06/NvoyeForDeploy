@@ -33,8 +33,8 @@ export default function Home({}: Props) {
 
         // minWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        paddingLeft: { xs: '0px', sm: 3 },
-        paddingRight: { xs: '0px', sm: 3 },
+        paddingLeft: { xs: '8px', sm: 3 },
+        paddingRight: { xs: '8px', sm: 3 },
         paddingY: { xs: 0, sm: 2 },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
@@ -102,11 +102,12 @@ export default function Home({}: Props) {
                 alignContent: ' center',
                 gap: 3,
                 alignSelf: ' stretch',
-                flexWrap: 'nowrap',
+                flexWrap: 'wrap',
                 // overflowX: 'auto',
               }}
             >
               {/* //! ACA VAN LAS TRES TARJETAS DE HUB */}
+              <CustomHubCard />
               <CustomHubCard />
               <CustomHubCard />
               <CustomHubCard />
@@ -128,6 +129,10 @@ export default function Home({}: Props) {
           gap: 3,
           flex: 1,
           alignSelf: ' stretch',
+          paddingBottom: {
+            xs: '70px',
+            sm: ' 0px',
+          },
         }}
       >
         {/* Box de arriba */}
@@ -159,7 +164,9 @@ export default function Home({}: Props) {
               top: '0px',
             }}
 
-            // onClick={() => {}} //este onclick debe dejar de mostrar este contenedor
+            // onClick={() => {
+            //   console.log('click');
+            //   }} //este onclick debe dejar de mostrar este contenedor
           >
             <Icon>
               <Close />

@@ -323,6 +323,7 @@ export default function DashboardGuideLayout({
         <BottomNavigation>
           <BottomNavigationAction
             label="Home"
+            showLabel={true}
             icon={<Home />}
             component={Link} // Utiliza el componente Link de Next.js para navegar
             href="/dashboard/guide/home"
@@ -335,6 +336,7 @@ export default function DashboardGuideLayout({
           />
           <BottomNavigationAction
             label="Hubs"
+            showLabel={true}
             icon={<DeviceHub />}
             component={Link} // Utiliza Link para la navegación
             href="/dashboard/guide/hubs"
@@ -347,6 +349,7 @@ export default function DashboardGuideLayout({
           />
           <BottomNavigationAction
             label="Checklist"
+            showLabel={true}
             icon={<Checklist />}
             component={Link} // Utiliza Link para la navegación
             href="/dashboard/guide/checklist"
