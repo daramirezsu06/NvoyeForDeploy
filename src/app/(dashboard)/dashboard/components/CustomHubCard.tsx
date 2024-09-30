@@ -1,12 +1,16 @@
 import { Card, Stack, Typography } from '@mui/material';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 import healthicon from '@/src/icons/healthicon.png';
 import Link from 'next/link';
 
-type Props = {};
+type Props = {
+  icon: StaticImageData;
+  title: string;
+  topics: string;
+};
 
-export default function CustomHubCard({}: Props) {
+export default function CustomHubCard({ icon, title, topics }: Props) {
   return (
     <Card
       sx={{
@@ -30,7 +34,7 @@ export default function CustomHubCard({}: Props) {
       }}
     >
       <Link
-        href="/dashboard/guide/hubs" //!modificar esto
+        href={`/dashboard/guide/hubs/${title}`} //!modificar esto
         style={{
           width: '100%',
           height: '100%',
@@ -52,10 +56,10 @@ export default function CustomHubCard({}: Props) {
         >
           {/* //!ESTO DEBE MODIFICARSE */}
           <Stack sx={{}}>
-            <Image src={healthicon} alt="icon" width={48} height={48} />
+            <Image src={icon} alt="icon" width={48} height={48} />
           </Stack>
-          <Typography variant="h5"> Health</Typography>
-          <Typography variant="body2">Systems, Insurance</Typography>
+          <Typography variant="h5"> {title}</Typography>
+          <Typography variant="body2"> {topics}</Typography>
         </Stack>
       </Link>
     </Card>
