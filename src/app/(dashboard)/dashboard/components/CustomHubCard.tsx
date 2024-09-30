@@ -11,13 +11,21 @@ type Props = {
 };
 
 export default function CustomHubCard({ icon, title, topics }: Props) {
+  function toTitleCase(str: string) {
+    return str.replace(
+      /\w\S*/g,
+      (word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
+    );
+  }
+  const titleCaseTitle = toTitleCase(title);
+
   return (
     <Card
       sx={{
         display: { xs: 'inline-flex', sm: 'flex' },
-        flexGrow: 1,
-        minWidth: { xs: '150px', sm: '200px' },
-        minHeight: { xs: '160px', sm: '200px' },
+        // flexGrow: 1,
+        width: { xs: '150px', sm: '270px' },
+        height: { xs: '160px', sm: '200px' },
         maxWidth: {
           xs: '160px',
           sm: '272px',
@@ -62,7 +70,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
           <Stack sx={{}}>
             <Image src={icon} alt="icon" width={48} height={48} />
           </Stack>
-          <Typography variant="h5"> {title}</Typography>
+          <Typography variant="h5"> {titleCaseTitle}</Typography>
           <Typography variant="body2"> {topics}</Typography>
         </Stack>
       </Link>

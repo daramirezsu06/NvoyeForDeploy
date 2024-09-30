@@ -1,26 +1,7 @@
-import {
-  Box,
-  Button,
-  Container,
-  Icon,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import React from 'react';
 import WelcomeUser from '../components/WelcomeUser';
-import CustomHubCard from '../../components/CustomHubCard';
-import { relative } from 'path';
-import { Close, MoreVert } from '@mui/icons-material';
-import BrandLogo from '@/src/icons/BrandLogo';
-import Calendarinfo from '@/src/icons/Calendarinfo.png';
-import Image from 'next/image';
-import LandingListItem from './components/LandingListItem';
 import { hubMocks } from '@/src/app/mocks/hubsMocks';
-import Link from 'next/link';
 import RecommendedHubs from './components/RecommendedHubs';
 import ConnectCalendar from './components/ConnectCalendar';
 import LandingPackage from './components/LandingPackage';
