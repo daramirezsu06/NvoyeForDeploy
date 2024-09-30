@@ -1,10 +1,10 @@
 'use client';
 import {
-  Checklist,
-  DeviceHub,
-  Home,
-  HomeOutlined,
   KeyboardDoubleArrowLeft,
+  Link,
+  PersonOutlined,
+  ReceiptOutlined,
+  SettingsOutlined,
 } from '@mui/icons-material';
 import {
   BottomNavigation,
@@ -20,16 +20,17 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import Link from 'next/link';
+import Links from 'next/link';
 import React from 'react';
 import { usePathname } from 'next/navigation';
 
-export default function DashboardGuideLayout({
+export default function DashboardUserLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
+
   return (
     <Container
       sx={{
@@ -75,16 +76,8 @@ export default function DashboardGuideLayout({
               alignSelf: 'stretch',
             }}
           >
-            <Typography
-              variant="subtitle1"
-              color={pathname === '/dashboard/guide' ? 'primary' : 'default'}
-            >
-              Guide
-            </Typography>
-
-            {/* //!! DARLE FUNCION A ESTE BOTON */}
+            <Typography variant="subtitle1">Guide</Typography>
             <IconButton
-              color={pathname === '/dashboard/guide' ? 'primary' : 'default'}
               onClick={() => {
                 console.log('abriendo/cerrando');
               }}
@@ -94,8 +87,8 @@ export default function DashboardGuideLayout({
           </Stack>
           <List sx={{ padding: 0, width: '100%', borderRadius: 0 }}>
             <ListItem sx={{ padding: 0, width: '100%', borderRadius: 0 }}>
-              <Link
-                href="/dashboard/guide/home"
+              <Links
+                href="/dashboard/user/profile"
                 style={{ width: '100%', textDecoration: 'none' }}
               >
                 <Box
@@ -121,10 +114,10 @@ export default function DashboardGuideLayout({
                   >
                     <IconButton
                       color={
-                        pathname === '/dashboard/guide/home'
+                        pathname === '/dashboard/user/profile'
                           ? 'primary'
                           : 'default'
-                      }
+                      } //!modificar de acuerdo al path
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -146,7 +139,7 @@ export default function DashboardGuideLayout({
                           paddingRight: '20px',
                         }}
                       >
-                        <HomeOutlined />
+                        <PersonOutlined />
                       </Icon>
                       <ListItemText
                         sx={{
@@ -157,16 +150,16 @@ export default function DashboardGuideLayout({
                           flex: '1 0 0',
                         }}
                       >
-                        <Typography variant="body1">Home</Typography>
+                        <Typography variant="body1">Profile</Typography>
                       </ListItemText>
                     </IconButton>
                   </Box>
                 </Box>
-              </Link>
+              </Links>
             </ListItem>
             <ListItem sx={{ padding: 0 }}>
-              <Link
-                href="/dashboard/guide/hubs"
+              <Links
+                href="/dashboard/user/settings"
                 style={{ width: '100%', textDecoration: 'none' }}
               >
                 <Box
@@ -190,10 +183,10 @@ export default function DashboardGuideLayout({
                   >
                     <IconButton
                       color={
-                        pathname === '/dashboard/guide/hubs'
+                        pathname === '/dashboard/user/settings'
                           ? 'primary'
                           : 'default'
-                      }
+                      } //!modificar de acuerdo al path
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -215,7 +208,7 @@ export default function DashboardGuideLayout({
                           paddingRight: '20px',
                         }}
                       >
-                        <DeviceHub />
+                        <SettingsOutlined />
                       </Icon>
                       <ListItemText
                         sx={{
@@ -226,16 +219,16 @@ export default function DashboardGuideLayout({
                           flex: '1 0 0',
                         }}
                       >
-                        <Typography variant="body1">Hubs</Typography>
+                        <Typography variant="body1">Settings</Typography>
                       </ListItemText>
                     </IconButton>
                   </Box>
                 </Box>
-              </Link>
+              </Links>
             </ListItem>
             <ListItem sx={{ padding: 0 }}>
-              <Link
-                href="/dashboard/guide/checklist"
+              <Links
+                href="/dashboard/user/billing"
                 style={{ width: '100%', textDecoration: 'none' }}
               >
                 <Box
@@ -259,10 +252,10 @@ export default function DashboardGuideLayout({
                   >
                     <IconButton
                       color={
-                        pathname === '/dashboard/guide/checklist'
+                        pathname === '/dashboard/user/billing'
                           ? 'primary'
                           : 'default'
-                      }
+                      } //!modificar de acuerdo al path
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -284,7 +277,7 @@ export default function DashboardGuideLayout({
                           paddingRight: '20px',
                         }}
                       >
-                        <Checklist />
+                        <ReceiptOutlined />
                       </Icon>
                       <ListItemText
                         sx={{
@@ -295,12 +288,81 @@ export default function DashboardGuideLayout({
                           flex: '1 0 0',
                         }}
                       >
-                        <Typography variant="body1">Checklist</Typography>
+                        <Typography variant="body1">Billing</Typography>
                       </ListItemText>
                     </IconButton>
                   </Box>
                 </Box>
-              </Link>
+              </Links>
+            </ListItem>
+            <ListItem sx={{ padding: 0 }}>
+              <Links
+                href="/dashboard/user/integrations"
+                style={{ width: '100%', textDecoration: 'none' }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '100%',
+                    alignItems: 'center',
+                    alignSelf: 'stretch',
+                    paddingY: '0px',
+                    paddingX: '0px',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      alignSelf: 'stretch',
+                    }}
+                  >
+                    <IconButton
+                      color={
+                        pathname === '/dashboard/user/integrations'
+                          ? 'primary'
+                          : 'default'
+                      } //!modificar de acuerdo al path
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        borderRadius: 0,
+                      }}
+                    >
+                      <Icon
+                        sx={{
+                          paddingX: '10px',
+                          paddingY: '5px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '20px',
+                          height: '20px',
+                          paddingRight: '20px',
+                        }}
+                      >
+                        <Link />
+                      </Icon>
+                      <ListItemText
+                        sx={{
+                          display: 'flex',
+                          padding: 'var(--borderRadius, 4px) 0px',
+                          flexDirection: 'column',
+                          alignItems: 'flex-start',
+                          flex: '1 0 0',
+                        }}
+                      >
+                        <Typography variant="body1">Integrations</Typography>
+                      </ListItemText>
+                    </IconButton>
+                  </Box>
+                </Box>
+              </Links>
             </ListItem>
           </List>
         </Stack>
@@ -322,40 +384,53 @@ export default function DashboardGuideLayout({
       >
         <BottomNavigation>
           <BottomNavigationAction
-            label="Home"
+            label="Profile"
             showLabel={true}
-            icon={<Home />}
-            component={Link} // Utiliza el componente Link de Next.js para navegar
-            href="/dashboard/guide/home"
+            icon={<PersonOutlined />}
+            href="/dashboard/user/profile"
+            component={Links}
             sx={{
               color:
-                pathname === '/dashboard/guide/home'
+                pathname === '/dashboard/user/profile'
                   ? 'primary.main'
                   : 'default',
             }}
           />
           <BottomNavigationAction
-            label="Hubs"
+            label="Settings"
             showLabel={true}
-            icon={<DeviceHub />}
-            component={Link} // Utiliza Link para la navegación
-            href="/dashboard/guide/hubs"
+            icon={<SettingsOutlined />}
+            component={Links} // Utiliza el componente Link de Next.js para navegar
+            href="/dashboard/user/settings"
             sx={{
               color:
-                pathname === '/dashboard/guide/hubs'
+                pathname === '/dashboard/user/settings'
                   ? 'primary.main'
                   : 'default',
             }}
           />
           <BottomNavigationAction
-            label="Checklist"
+            label="Billing"
             showLabel={true}
-            icon={<Checklist />}
-            component={Link} // Utiliza Link para la navegación
-            href="/dashboard/guide/checklist"
+            icon={<ReceiptOutlined />}
+            component={Links} // Utiliza el componente Link de Next.js para navegar
+            href="/dashboard/user/billing"
             sx={{
               color:
-                pathname === '/dashboard/guide/checklist'
+                pathname === '/dashboard/user/billing'
+                  ? 'primary.main'
+                  : 'default',
+            }}
+          />
+          <BottomNavigationAction
+            label="Integrations"
+            showLabel={true}
+            icon={<Link />}
+            component={Links} // Utiliza el componente Link de Next.js para navegar
+            href="/dashboard/user/integrations"
+            sx={{
+              color:
+                pathname === '/dashboard/user/integrations'
                   ? 'primary.main'
                   : 'default',
             }}

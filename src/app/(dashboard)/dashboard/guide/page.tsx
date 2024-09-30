@@ -1,10 +1,23 @@
-import { Box, Button, Container, Stack, Typography } from '@mui/material';
+'use client';
+
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 
 type Props = {};
 
 function Guide({}: Props) {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <Container
       sx={{
@@ -28,12 +41,15 @@ function Guide({}: Props) {
       <Box
         sx={{
           display: 'flex',
-          width: '800px',
-          maxWidth: '800px',
-          padding: 5,
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
+          width: {
+            xs: 'full',
+            sm: '800px',
+          },
+          maxWidth: '800px',
+          padding: 5,
           backgroundColor: '#F8F6F5',
           borderRadius: 2,
           marginTop: 2,
@@ -52,12 +68,13 @@ function Guide({}: Props) {
           }}
         >
           <Typography
-            variant="h4"
+            variant={isSmallScreen ? 'h5' : 'h4'}
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               alignSelf: 'stretch',
+              textAlign: 'center',
             }}
           >
             Welcome to your diplomatic hub
@@ -89,7 +106,8 @@ function Guide({}: Props) {
             alignSelf: ' stretch',
             borderRadius: 2,
             border: '1px solid #E6E5E5',
-            background: 'radial-gradient(#FFF 0%, #C2D7FF 76%, #FFF 100%)',
+            background:
+              'radial-gradient(249.19% 158.15% at 19.83% 29.92%, #FFF 0%, #C2D7FF 76%, #FFF 100%)',
             position: 'relative',
             marginTop: '16px',
           }}
@@ -178,12 +196,13 @@ function Guide({}: Props) {
                   fontWeight: '500',
                   lineHeight: '155%',
                   letterSpacing: '0.4px',
+                  textTransform: 'none',
                 }}
               >
                 Get started
               </Typography>
             </Button>
-            <Button>Learn more</Button>
+            <Button sx={{ textTransform: 'none' }}>Learn more</Button>
           </Stack>
         </Box>
       </Box>
