@@ -385,6 +385,7 @@ export default function DashboardUserLayout({
         <BottomNavigation>
           <BottomNavigationAction
             label="Profile"
+            showLabel={true}
             icon={<PersonOutlined />}
             href="/dashboard/user/profile"
             component={Links}
@@ -397,6 +398,7 @@ export default function DashboardUserLayout({
           />
           <BottomNavigationAction
             label="Settings"
+            showLabel={true}
             icon={<SettingsOutlined />}
             component={Links} // Utiliza el componente Link de Next.js para navegar
             href="/dashboard/user/settings"
@@ -409,6 +411,7 @@ export default function DashboardUserLayout({
           />
           <BottomNavigationAction
             label="Billing"
+            showLabel={true}
             icon={<ReceiptOutlined />}
             component={Links} // Utiliza el componente Link de Next.js para navegar
             href="/dashboard/user/billing"
@@ -421,6 +424,7 @@ export default function DashboardUserLayout({
           />
           <BottomNavigationAction
             label="Integrations"
+            showLabel={true}
             icon={<Link />}
             component={Links} // Utiliza el componente Link de Next.js para navegar
             href="/dashboard/user/integrations"

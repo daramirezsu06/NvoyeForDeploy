@@ -1,9 +1,18 @@
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
 
-//!this componnent needs to receibe the user name and Date
+//!this componnent needs to receibe the user name
+
+const getCurrentDate = () => {
+  const today = new Date();
+  const weekday = today.toLocaleDateString('en-US', { weekday: 'short' });
+  const day = today.getDate();
+  return `${weekday}, ${day}`;
+};
 
 export default function WelcomeUser() {
+  const currentDate = getCurrentDate();
+
   return (
     <Stack
       sx={{
@@ -37,9 +46,8 @@ export default function WelcomeUser() {
           justifyContent: 'flex-end',
         }}
       >
-        {/* //! HERE GOES THE DATE */}
         <Typography variant="caption">Today&apos;s</Typography>
-        <Typography variant="h6">Wed, 24</Typography>
+        <Typography variant="h6">{currentDate}</Typography>
       </Stack>
     </Stack>
   );
