@@ -7,6 +7,8 @@ export default function Settings() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        alignSelf: 'stretch',
         height: { xs: 'auto', sm: 'calc(100vh - 64px)' },
         minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
         width: '100%',
@@ -15,11 +17,9 @@ export default function Settings() {
         paddingRight: { xs: '0px', sm: '0px' },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
-        backgroundColor: '#FBFAF8',
-        padding: 0,
-        gap: 4,
-        alignItems: 'center',
-        alignSelf: 'stretch',
+        backgroundColor: '#FDFCFB',
+        // padding: 0,
+        // gap: 4,
       }}
     >
       <Typography>user / settings</Typography>
