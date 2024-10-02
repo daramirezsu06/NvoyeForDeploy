@@ -13,7 +13,7 @@ export default function Hubs({}: Props) {
     <Container
       sx={{
         display: 'flex',
-        flexDirection: 'column', // Columna en pantallas móviles, fila en pantallas grandes
+        flexDirection: 'column',
         minHeight: '100vh',
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
@@ -39,7 +39,6 @@ export default function Hubs({}: Props) {
         }}
       >
         {/* IMAGENES */}
-
         <Box
           sx={{
             position: 'absolute',
