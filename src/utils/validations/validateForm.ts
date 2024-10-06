@@ -5,9 +5,13 @@ export interface IValidateInput {
   textValidation: string;
 }
 
-export const validatefield = (field: keyof Fields, value: string) => {
-  console.log('field', field);
-  console.log('value', value);
+export const validatefield = (
+  field: keyof Fields,
+  value: string,
+  compareValue?: string
+) => {
+  // console.log('field', field);
+  // console.log('value', value);
 
   const validationsResponse = fields[field].validations.map((item) => {
     return {
@@ -15,6 +19,12 @@ export const validatefield = (field: keyof Fields, value: string) => {
       textValidation: item.msgError,
     };
   });
+  if (field === 'confirmNewPassword' && compareValue !== value) {
+    validationsResponse.push({
+      test: false,
+      textValidation: 'Passwords do not match',
+    });
+  }
 
   return validationsResponse;
 };
