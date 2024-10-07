@@ -30,6 +30,7 @@ const Verification = ({ handleNext }: { handleNext: () => void }) => {
           variant="outlined" // Puedes usar outlined o filled según prefieras
         />
         <Stack direction="row" justifyContent="end">
+          {/* //! ESTE BOTN DEBE HACER LLAMADA Send OTP To Diplomatic Email */}
           <Button
             onClick={handleNext}
             sx={{
