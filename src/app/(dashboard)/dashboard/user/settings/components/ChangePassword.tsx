@@ -1,8 +1,11 @@
 'use client';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import {
+  Alert,
+  AlertTitle,
   Box,
   Button,
+  Collapse,
   FormControl,
   FormHelperText,
   IconButton,
@@ -18,8 +21,9 @@ import {
   IValidateInput,
   validatefield,
 } from '@/src/utils/validations/validateForm';
+import { useRouter } from 'next/navigation';
 
-export const ChangeEmail = ({ handleShowResetPassword }: any) => {
+export const ChangePassword = ({ handleShowResetPassword }: any) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const userEmail = 'user email'; //!manejar este valor
   const [currentPassword, setCurrentPassword] = useState('');
@@ -34,6 +38,10 @@ export const ChangeEmail = ({ handleShowResetPassword }: any) => {
   const [confirmNewPasswordErrors, setConfirmNewPasswordErrors] = useState<
     IValidateInput[]
   >([]);
+
+  const router = useRouter();
+
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
@@ -83,6 +91,15 @@ export const ChangeEmail = ({ handleShowResetPassword }: any) => {
     console.log('Current Password:', currentPassword);
     console.log('New Password:', newPassword);
     console.log('Confirm New Password:', confirmNewPassword);
+
+    // show succes notification
+    setShowSuccessAlert(true);
+
+    setTimeout(() => {
+      setShowSuccessAlert(false);
+      // redirect to login
+      router.push('/login');
+    }, 2000);
   };
 
   return (
@@ -96,6 +113,22 @@ export const ChangeEmail = ({ handleShowResetPassword }: any) => {
         width: { xs: 'full', sm: '400px', md: '500px' },
       }}
     >
+      <Collapse in={showSuccessAlert}>
+        <Alert
+          variant="filled"
+          severity="success"
+          sx={{
+            position: 'fixed',
+            // left: '520px',
+            top: '60px',
+            zIndex: 10,
+          }}
+        >
+          <AlertTitle>Password changed!</AlertTitle>
+          You will be redirected to the login page.
+        </Alert>
+      </Collapse>
+
       <Stack
         sx={{
           display: 'flex',
@@ -235,7 +268,6 @@ export const ChangeEmail = ({ handleShowResetPassword }: any) => {
           <Button
             size="large"
             color="primary"
-            // disabled={!isFormValid}
             variant="text"
             sx={{ textTransform: 'none' }}
             onClick={handleShowResetPassword}
