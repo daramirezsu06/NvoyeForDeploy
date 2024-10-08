@@ -1,28 +1,10 @@
 'use client';
 
-import {
-  IValidateInput,
-  validatefield,
-} from '@/src/utils/validations/validateForm';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  Modal,
-  OutlinedInput,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Container, Modal, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { ChangeEmail } from './components/ChangeEmail';
+import { ChangePassword } from './components/ChangePassword';
 import ResetPasswordModal from './components/ResetPasswordModal';
+import DateAndTime from './components/DateAndTime';
 
 export default function Settings() {
   const [showResetPassword, setShowResetPassword] = useState(false);
@@ -86,7 +68,7 @@ export default function Settings() {
           }}
         >
           {/* Email y pass */}
-          <ChangeEmail handleShowResetPassword={handleShowResetPassword} />
+          <ChangePassword handleShowResetPassword={handleShowResetPassword} />
 
           {/* Reset Password */}
 
@@ -106,7 +88,7 @@ export default function Settings() {
           </Modal>
 
           {/* date and time */}
-          <Box></Box>
+          <DateAndTime />
         </Stack>
       </Stack>
     </Container>
