@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Box,
   Button,
@@ -8,11 +10,23 @@ import {
   Typography,
 } from '@mui/material';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleIcon from '@/src/icons/GoogleIcon.png';
-import { Sync } from '@mui/icons-material';
+import { Clear, Sync } from '@mui/icons-material';
 
 export default function Integrations() {
+  const [isSync, setIsSync] = useState(false);
+
+  //!logica para hacer la coneccion
+  const handleSync = () => {
+    setIsSync(true);
+  };
+
+  //!logic to disconect
+  const handleCancelSync = () => {
+    setIsSync(false);
+  };
+
   return (
     <Container
       sx={{
@@ -65,7 +79,7 @@ export default function Integrations() {
             alignItems: 'flex-start',
             alignSelf: 'stretch',
             justifyContent: 'center',
-            padding: 4,
+            padding: 2,
             backgroundColor: '#FDFCFB',
           }}
         >
@@ -151,15 +165,18 @@ export default function Integrations() {
                     }}
                   >
                     <Typography variant="h6">Google Calendar</Typography>
-                    <Chip
-                      size="small"
-                      color="success"
-                      variant="outlined"
-                      label="Connected"
-                      sx={{
-                        backgroundColor: 'rgba(0, 129, 12, 0.30)',
-                      }}
-                    ></Chip>
+
+                    {isSync && (
+                      <Chip
+                        size="small"
+                        color="success"
+                        variant="outlined"
+                        label="Connected"
+                        sx={{
+                          backgroundColor: 'rgba(0, 129, 12, 0.30)',
+                        }}
+                      ></Chip>
+                    )}
                   </Stack>
                   <Typography variant="body2">
                     Connect and synchronize your tasks with your Google
@@ -175,17 +192,35 @@ export default function Integrations() {
                     gap: '10px',
                   }}
                 >
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    sx={{
-                      textTransform: 'none',
-                      gap: 1,
-                    }}
-                  >
-                    <Sync />
-                    Disconnect
-                  </Button>
+                  {isSync ? (
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      sx={{
+                        textTransform: 'none',
+                        gap: 1,
+                        borderRadius: 2,
+                      }}
+                      onClick={handleCancelSync}
+                    >
+                      Disconnect
+                      <Clear />
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{
+                        textTransform: 'none',
+                        gap: 1,
+                        borderRadius: 2,
+                      }}
+                      onClick={handleSync}
+                    >
+                      Connect
+                      <Sync />
+                    </Button>
+                  )}
                 </Stack>
               </Stack>
             </Stack>

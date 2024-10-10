@@ -11,13 +11,13 @@ export default function ResetPasswordModal() {
 
   //!logic to send otp to the users email
   useEffect(() => {
-    // creo que aca hay que hacer llamada a send otp
+    //  aca hay que hacer llamada a send otp
     // console.log(email);
   }, []);
 
   //!logic to send code to verify
   const handleSubmitCode = () => {
-    // creo que aca hay que hacer llamada a verify otp
+    // aca hay que hacer llamada a verify otp
     console.log(code);
     setStep(2);
   };
