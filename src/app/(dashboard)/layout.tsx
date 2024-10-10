@@ -135,11 +135,7 @@ export default function DashboardLayout({
                   Guide
                 </Button>
               </Link>
-              <Link href="/dashboard/marketplace">
-                <Button size="medium" color="info" startIcon={<Store />}>
-                  Marketplace
-                </Button>
-              </Link>
+
               <Link href="/dashboard/community">
                 <Button size="medium" color="info" startIcon={<Diversity2 />}>
                   Community

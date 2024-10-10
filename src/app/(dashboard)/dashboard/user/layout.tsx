@@ -56,6 +56,7 @@ export default function DashboardUserLayout({
           maxWidth: { xs: '100%', sm: '150px' },
           paddingLeft: { xs: '0px', sm: '16px' },
           paddingRight: { xs: '0px', sm: '16px' },
+          // zIndex: 10,
         }}
       >
         <Stack
@@ -117,7 +118,7 @@ export default function DashboardUserLayout({
                         pathname === '/dashboard/user/profile'
                           ? 'primary'
                           : 'default'
-                      } //!modificar de acuerdo al path
+                      }
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -186,7 +187,7 @@ export default function DashboardUserLayout({
                         pathname === '/dashboard/user/settings'
                           ? 'primary'
                           : 'default'
-                      } //!modificar de acuerdo al path
+                      }
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -255,7 +256,7 @@ export default function DashboardUserLayout({
                         pathname === '/dashboard/user/billing'
                           ? 'primary'
                           : 'default'
-                      } //!modificar de acuerdo al path
+                      }
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -324,7 +325,7 @@ export default function DashboardUserLayout({
                         pathname === '/dashboard/user/integrations'
                           ? 'primary'
                           : 'default'
-                      } //!modificar de acuerdo al path
+                      }
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
@@ -379,6 +380,7 @@ export default function DashboardUserLayout({
           bottom: 0,
           left: 0,
           right: 0,
+          zIndex: 10,
         }}
         elevation={3}
       >
