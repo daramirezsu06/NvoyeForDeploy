@@ -96,7 +96,6 @@ export default function Checklist({}: Props) {
         </Stack>
         <RecomendedTask />
       </Box>
-      Guide/Checklist
     </Container>
   );
 }

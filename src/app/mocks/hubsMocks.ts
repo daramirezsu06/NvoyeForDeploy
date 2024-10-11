@@ -28,11 +28,11 @@ export const hubMocks = [
     title: 'finance',
     topics: 'Banking, Cost of living',
   },
-  {
-    icon: TransportationIcon,
-    title: 'transportation',
-    topics: 'Movility, Transport',
-  },
+  // {
+  //   icon: TransportationIcon,
+  //   title: 'transportation',
+  //   topics: 'Movility, Transport',
+  // },
   {
     icon: FamilyIcon,
     title: 'family',

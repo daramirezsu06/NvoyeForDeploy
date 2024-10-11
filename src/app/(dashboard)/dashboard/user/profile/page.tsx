@@ -1,5 +1,11 @@
-import { Container, Typography } from '@mui/material';
+'use client';
+import IdentityEssentials from '@/src/app/(profile)/profile/components/IdentityEssentials';
+import { Container, Stack, Typography } from '@mui/material';
 import React from 'react';
+import theme from '@/src/app/theme';
+import { IdentitiForm } from './components/ProfileIdentiti';
+import ProfileLanguageSkills from './components/ProfileLenguages';
+import { AditionalInfo } from './components/AditionalInfo';
 
 export default function Profile() {
   return (
@@ -15,14 +21,48 @@ export default function Profile() {
         paddingRight: { xs: '0px', sm: '0px' },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
-        backgroundColor: '#FBFAF8',
+        backgroundColor: '#FFFF',
         padding: 0,
         gap: 4,
         alignItems: 'center',
         alignSelf: 'stretch',
       }}
     >
-      <Typography>user / profile</Typography>
+      <Stack sx={{ gap: 4 }}>
+        <Stack sx={{ mb: 3 }}>
+          <Typography variant="h4">Profile</Typography>
+        </Stack>
+        <Stack
+          sx={{
+            backgroundColor: theme.custom.paperElevationTwo,
+            width: '565px',
+            borderRadius: 3,
+            p: 4,
+          }}
+        >
+          <IdentitiForm />
+        </Stack>
+        <Stack
+          sx={{
+            backgroundColor: theme.custom.paperElevationTwo,
+            width: '565px',
+            borderRadius: 3,
+            p: 4,
+          }}
+        >
+          <ProfileLanguageSkills />
+        </Stack>
+        <Stack
+          sx={{
+            backgroundColor: theme.custom.paperElevationTwo,
+            width: '565px',
+            borderRadius: 3,
+            p: 4,
+          }}
+        >
+          <AditionalInfo />
+        </Stack>
+      </Stack>
     </Container>
   );
 }
