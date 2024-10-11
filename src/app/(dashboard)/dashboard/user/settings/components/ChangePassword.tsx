@@ -24,83 +24,83 @@ import {
 import { useRouter } from 'next/navigation';
 
 export const ChangePassword = ({ handleShowResetPassword }: any) => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  // const [showPassword, setShowPassword] = React.useState(false);
   const userEmail = 'user email'; //!manejar este valor
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [currentPasswordErrors, setCurrentPasswordErrors] = useState<
-    IValidateInput[]
-  >([]);
-  const [newPasswordErrors, setNewPasswordErrors] = useState<IValidateInput[]>(
-    []
-  );
-  const [confirmNewPasswordErrors, setConfirmNewPasswordErrors] = useState<
-    IValidateInput[]
-  >([]);
+  // const [currentPassword, setCurrentPassword] = useState('');
+  // const [newPassword, setNewPassword] = useState('');
+  // const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  // const [currentPasswordErrors, setCurrentPasswordErrors] = useState<
+  //   IValidateInput[]
+  // >([]);
+  // const [newPasswordErrors, setNewPasswordErrors] = useState<IValidateInput[]>(
+  //   []
+  // );
+  // const [confirmNewPasswordErrors, setConfirmNewPasswordErrors] = useState<
+  //   IValidateInput[]
+  // >([]);
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  // const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+  // const handleClickShowPassword = () => setShowPassword((show) => !show);
+  // const handleMouseDownPassword = (
+  //   event: React.MouseEvent<HTMLButtonElement>
+  // ) => {
+  //   event.preventDefault();
+  // };
 
-  const handleMouseUpPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+  // const handleMouseUpPassword = (
+  //   event: React.MouseEvent<HTMLButtonElement>
+  // ) => {
+  //   event.preventDefault();
+  // };
 
-  const isFormValid =
-    currentPassword &&
-    newPassword &&
-    confirmNewPassword &&
-    !currentPasswordErrors.length &&
-    !newPasswordErrors.length &&
-    !confirmNewPasswordErrors.length;
+  // const isFormValid =
+  //   currentPassword &&
+  //   newPassword &&
+  //   confirmNewPassword &&
+  //   !currentPasswordErrors.length &&
+  //   !newPasswordErrors.length &&
+  //   !confirmNewPasswordErrors.length;
 
-  // Función para validar el currentPassword
-  const validateCurrentPassword = (value: string) => {
-    setCurrentPassword(value);
-    const errors = validatefield('password', value); // Si tienes reglas similares
-    setCurrentPasswordErrors(errors.filter((err) => !err.test));
-  };
+  // // Función para validar el currentPassword
+  // const validateCurrentPassword = (value: string) => {
+  //   setCurrentPassword(value);
+  //   const errors = validatefield('password', value); // Si tienes reglas similares
+  //   setCurrentPasswordErrors(errors.filter((err) => !err.test));
+  // };
 
-  // Función para validar el newPassword
-  const validateNewPassword = (value: string) => {
-    setNewPassword(value);
-    const errors = validatefield('newPassword', value);
-    setNewPasswordErrors(errors.filter((err) => !err.test));
-  };
+  // // Función para validar el newPassword
+  // const validateNewPassword = (value: string) => {
+  //   setNewPassword(value);
+  //   const errors = validatefield('newPassword', value);
+  //   setNewPasswordErrors(errors.filter((err) => !err.test));
+  // };
 
-  // Función para validar el confirmNewPassword
-  const validateConfirmNewPassword = (value: string) => {
-    setConfirmNewPassword(value);
-    const errors = validatefield('confirmNewPassword', value, newPassword); // Pasar newPassword para la comparación
-    setConfirmNewPasswordErrors(errors.filter((err) => !err.test));
-  };
+  // // Función para validar el confirmNewPassword
+  // const validateConfirmNewPassword = (value: string) => {
+  //   setConfirmNewPassword(value);
+  //   const errors = validatefield('confirmNewPassword', value, newPassword); // Pasar newPassword para la comparación
+  //   setConfirmNewPasswordErrors(errors.filter((err) => !err.test));
+  // };
 
   //!logca para madar la info al back!
-  const handleSubmit = () => {
-    console.log('user email:', userEmail);
-    console.log('Current Password:', currentPassword);
-    console.log('New Password:', newPassword);
-    console.log('Confirm New Password:', confirmNewPassword);
+  // const handleSubmit = () => {
+  //   console.log('user email:', userEmail);
+  //   console.log('Current Password:', currentPassword);
+  //   console.log('New Password:', newPassword);
+  //   console.log('Confirm New Password:', confirmNewPassword);
 
-    // show succes notification
-    setShowSuccessAlert(true);
+  //   // show succes notification
+  //   setShowSuccessAlert(true);
 
-    setTimeout(() => {
-      setShowSuccessAlert(false);
-      // redirect to login
-      router.push('/login');
-    }, 2000);
-  };
+  //   setTimeout(() => {
+  //     setShowSuccessAlert(false);
+  //     // redirect to login
+  //     router.push('/login');
+  //   }, 2000);
+  // };
 
   return (
     <Box
@@ -113,7 +113,7 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
         width: { xs: 'full', sm: '400px', md: '500px' },
       }}
     >
-      <Collapse in={showSuccessAlert}>
+      {/* <Collapse in={showSuccessAlert}>
         <Alert
           variant="filled"
           severity="success"
@@ -127,7 +127,7 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
           <AlertTitle>Password changed!</AlertTitle>
           You will be redirected to the login page.
         </Alert>
-      </Collapse>
+      </Collapse> */}
 
       <Stack
         sx={{
@@ -158,7 +158,7 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
           }}
         ></TextField>
 
-        <FormControl
+        {/* <FormControl
           variant="outlined"
           sx={{
             flex: 1,
@@ -220,7 +220,7 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
               {newPasswordErrors[0].textValidation}
             </FormHelperText>
           )}
-          {/* <FormHelperText>Minimun 8 characters</FormHelperText> */}
+
         </FormControl>
 
         <FormControl
@@ -255,7 +255,8 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
               {confirmNewPasswordErrors[0].textValidation}
             </FormHelperText>
           )}
-        </FormControl>
+        </FormControl> */}
+
         <Stack
           sx={{
             display: 'flex',
@@ -268,14 +269,14 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
           <Button
             size="large"
             color="primary"
-            variant="text"
+            variant="contained"
             sx={{ textTransform: 'none' }}
             onClick={handleShowResetPassword}
           >
-            Forgot password
+            Reset password
           </Button>
 
-          <Button
+          {/* <Button
             size="large"
             color="primary"
             disabled={!isFormValid}
@@ -284,7 +285,7 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
             onClick={handleSubmit}
           >
             Save
-          </Button>
+          </Button> */}
         </Stack>
       </Stack>
     </Box>
