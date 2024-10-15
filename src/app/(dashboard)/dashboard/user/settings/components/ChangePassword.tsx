@@ -23,6 +23,8 @@ import {
 } from '@/src/utils/validations/validateForm';
 import { useRouter } from 'next/navigation';
 
+//TODO traer info del user
+
 export const ChangePassword = ({ handleShowResetPassword }: any) => {
   // const [showPassword, setShowPassword] = React.useState(false);
   const userEmail = 'user email'; //!manejar este valor

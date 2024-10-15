@@ -1,7 +1,6 @@
 import { Box, Stack } from '@mui/material';
 import React from 'react';
 import WelcomeUser from '../components/WelcomeUser';
-import { hubMocks } from '@/src/app/mocks/hubsMocks';
 import RecommendedHubs from './components/RecommendedHubs';
 import ConnectCalendar from './components/ConnectCalendar';
 import LandingPackage from './components/LandingPackage';
@@ -9,8 +8,6 @@ import LandingPackage from './components/LandingPackage';
 type Props = {};
 
 export default function Home({}: Props) {
-  const recomendedHubs = hubMocks.slice(0, 4);
-
   return (
     <Box
       sx={{

@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
 
-//!this componnent needs to receibe the user name
+//TODO -> get the user name
 
 const getCurrentDate = () => {
   const today = new Date();
@@ -34,7 +34,7 @@ export default function WelcomeUser() {
           flex: 1,
         }}
       >
-        {/* //! HERE GOES THE NAME */}
+        {/* //! HERE GOES THE USER NAME */}
         <Typography variant="subtitle2">Welcome, Michael</Typography>
         <Typography variant="h6">Netherland diplomatic hub</Typography>
       </Stack>

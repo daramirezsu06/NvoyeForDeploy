@@ -21,7 +21,10 @@ export const SidebarItemDesktop = ({
   const pathname = usePathname();
   return (
     <ListItem key={item.href} sx={{ padding: 0 }}>
-      <Link href={item.href} style={{ width: '100%', textDecoration: 'none' }}>
+      <Link
+        href={item.href}
+        style={{ width: '100%', textDecoration: 'none', height: '50px' }}
+      >
         <Box
           sx={{
             display: 'flex',
@@ -42,7 +45,7 @@ export const SidebarItemDesktop = ({
             }}
           >
             <IconButton
-              color={pathname === item.href ? 'primary' : 'default'}
+              color={pathname.includes(item.href) ? 'primary' : 'default'}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
