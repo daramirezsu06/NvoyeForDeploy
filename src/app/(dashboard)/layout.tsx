@@ -36,20 +36,16 @@ import {
   Link,
 } from '@mui/material';
 
-import { useAppDispatch } from '../state/hooks';
-import { logout } from './redux/profileSlice';
-import { authlogout } from '../(auth)/redux/authSlice';
-import { useRouter } from 'next/navigation';
 import Menu from './dashboard/components/Menu';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
+  const pathname = usePathname();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -102,6 +98,7 @@ export default function DashboardLayout({
           elevation={0}
           square={true}
         >
+          {/* //! Toolbar para desktop */}
           <Toolbar
             sx={{
               display: {
@@ -129,7 +126,9 @@ export default function DashboardLayout({
               <Link href="/dashboard/guide">
                 <Button
                   size="medium"
-                  color="primary"
+                  color={
+                    pathname.includes('/dashboard/guide') ? 'primary' : 'info'
+                  }
                   startIcon={<LibraryBooks />}
                 >
                   Guide
@@ -137,7 +136,15 @@ export default function DashboardLayout({
               </Link>
 
               <Link href="/dashboard/community">
-                <Button size="medium" color="info" startIcon={<Diversity2 />}>
+                <Button
+                  size="medium"
+                  color={
+                    pathname.includes('/dashboard/community')
+                      ? 'primary'
+                      : 'info'
+                  }
+                  startIcon={<Diversity2 />}
+                >
                   Community
                 </Button>
               </Link>

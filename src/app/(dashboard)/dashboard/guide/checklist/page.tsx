@@ -44,14 +44,14 @@ export default function Checklist({}: Props) {
       sx={{
         display: 'flex',
         flexDirection: 'column', // Columna en pantallas móviles, fila en pantallas grandes
-        minHeight: '100vh',
+        minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
-        backgroundColor: '#FFFF',
-        px: 4,
-        py: 3,
+        backgroundColor: '##F8F6F5',
+        paddingX: { xs: '8px', sm: 3 },
+        paddingY: { xs: 0, sm: 2 },
         gap: 4,
       }}
     >

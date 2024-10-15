@@ -26,7 +26,7 @@ export const SidebarDesktop = ({
     <Container
       sx={{
         display: { xs: 'none', sm: 'flex' }, // Ocultar en pantallas pequeñas
-        width: isCollapsed ? '60px' : '200px',
+        width: isCollapsed ? '60px' : '160px',
         paddingX: isCollapsed ? '5px' : '10px',
         paddingY: '20px',
         flexDirection: 'column',
@@ -61,7 +61,9 @@ export const SidebarDesktop = ({
           {!isCollapsed && (
             <Typography
               variant="subtitle1"
-              color={pathname === '/dashboard/guide' ? 'primary' : 'default'}
+              color={
+                pathname.includes('/dashboard/guide') ? 'primary' : 'default'
+              }
             >
               Guide
             </Typography>

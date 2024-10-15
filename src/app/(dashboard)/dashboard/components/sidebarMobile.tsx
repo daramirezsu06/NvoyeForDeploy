@@ -1,28 +1,6 @@
 'use client';
-import {
-  Checklist,
-  DeviceHub,
-  Home,
-  HomeOutlined,
-  KeyboardDoubleArrowLeft,
-} from '@mui/icons-material';
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  Container,
-  Icon,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
-import Link from 'next/link';
+import { BottomNavigation, Paper } from '@mui/material';
 import React from 'react';
-import { usePathname } from 'next/navigation';
 import { SidebarItemType } from '../guide/utils/sidevbarGuideList';
 import { SidebarItemMobile } from './sidebarItemMobile';
 

@@ -1,25 +1,5 @@
 'use client';
-import {
-  Checklist,
-  DeviceHub,
-  Home,
-  HomeOutlined,
-  KeyboardDoubleArrowLeft,
-} from '@mui/icons-material';
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  Container,
-  Icon,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { BottomNavigationAction } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 import { usePathname } from 'next/navigation';
@@ -35,8 +15,7 @@ export const SidebarItemMobile = ({ item }: { item: SidebarItemType }) => {
       component={Link} // Utiliza el componente Link de Next.js para navegar
       href={item.href}
       sx={{
-        color:
-          pathname === '/dashboard/guide/home' ? 'primary.main' : 'default',
+        color: pathname === item.href ? 'primary.main' : 'default',
       }}
     />
   );
