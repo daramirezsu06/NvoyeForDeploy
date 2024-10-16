@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { paymentMethods } from '../../mocks/paymentMethods';
+import React from 'react';
+
 import { Box, Table, TableContainer } from '@mui/material';
 import PaymentMethodsTableBody from './PaymentMethodsTableBody';
 

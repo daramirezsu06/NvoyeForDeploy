@@ -7,6 +7,7 @@ import {
   Checkbox,
   Button,
   IconButton,
+  Modal,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { IPaymentMethod } from '../../mocks/paymentMethods';
@@ -15,12 +16,23 @@ import {
   CreditCardOutlined,
   EditOutlined,
 } from '@mui/icons-material';
+import DefaultPayment from './DefaultPayment';
 
 export default function PaymentMethodsTableRow({
   paymentMethod,
 }: {
   paymentMethod: IPaymentMethod;
 }) {
+  const [isShowSetDefault, setIsShowSetDefault] = useState(false);
+  const handleShowSetDefault = () => setIsShowSetDefault(true);
+  const handleCloseSetDefault = () => setIsShowSetDefault(false);
+
+  const handleDeletePaymentMethod = () => {
+    console.log('delete payment method');
+    console.log(paymentMethod);
+    //TODO send info to backend
+  };
+
   return (
     <>
       <TableRow key={paymentMethod.id}>
@@ -45,9 +57,7 @@ export default function PaymentMethodsTableRow({
           }}
         >
           <Typography
-            onClick={() => {
-              console.log('delete');
-            }}
+            onClick={handleDeletePaymentMethod}
             color="red"
             sx={{ cursor: 'pointer' }}
           >
@@ -69,7 +79,7 @@ export default function PaymentMethodsTableRow({
               color="primary"
               variant="contained"
               onClick={() => {
-                console.log('setting default');
+                handleShowSetDefault();
               }}
               sx={{
                 textTransform: 'none',
@@ -84,6 +94,7 @@ export default function PaymentMethodsTableRow({
             display: { xs: 'none', sm: 'table-cell' },
           }}
         >
+          {/* //TODO give functionality to this button */}
           <IconButton>
             <Icon>
               <EditOutlined />
@@ -95,12 +106,30 @@ export default function PaymentMethodsTableRow({
             display: { xs: 'table-cell', sm: 'none' },
           }}
         >
+          {/* //TODO give functionality to this button */}
           <IconButton>
             <Icon>
               <ChevronRight />
             </Icon>
           </IconButton>
         </TableCell>
+        <Modal
+          open={isShowSetDefault}
+          onClose={handleCloseSetDefault}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'auto',
+          }}
+        >
+          <DefaultPayment
+            paymentMethod={paymentMethod}
+            handleCloseSetDefault={handleCloseSetDefault}
+          />
+        </Modal>
       </TableRow>
     </>
   );

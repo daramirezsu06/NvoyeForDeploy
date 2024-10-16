@@ -1,11 +1,18 @@
+'use client';
+
 import { Add } from '@mui/icons-material';
-import { Box, Button, Icon, Stack, Typography } from '@mui/material';
-import React from 'react';
+import { Box, Button, Icon, Modal, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import PaymentMethodsTable from './PaymentMethodsTable';
+import AddPaymentMethod from './AddPaymentMethod';
 
 type Props = {};
 
 export default function PaymentMethods({}: Props) {
+  const [isAddMethodOpen, setIsAddMethodOpen] = useState(false);
+  const handleOpenAddMethod = () => setIsAddMethodOpen(true);
+  const handleCloseAddMethod = () => setIsAddMethodOpen(false);
+
   return (
     <Box
       sx={{
@@ -50,9 +57,24 @@ export default function PaymentMethods({}: Props) {
             borderRadius: 2,
           }}
           startIcon={<Add />}
+          onClick={handleOpenAddMethod}
         >
           Add
         </Button>
+        <Modal
+          open={isAddMethodOpen}
+          onClose={handleCloseAddMethod}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'auto',
+          }}
+        >
+          <AddPaymentMethod handleCloseAddMethod={handleCloseAddMethod} />
+        </Modal>
       </Stack>
 
       {/* Payment methods Table */}

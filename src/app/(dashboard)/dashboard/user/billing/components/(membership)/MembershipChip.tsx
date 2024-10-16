@@ -1,8 +1,16 @@
 import BrandIcon from '@/src/icons/BrandLogo';
-import { Stack, Container, Typography, Chip } from '@mui/material';
+import {
+  CheckCircle,
+  CheckCircleOutline,
+  WarningAmberOutlined,
+} from '@mui/icons-material';
+import { Stack, Container, Typography, Chip, Icon } from '@mui/material';
 import React from 'react';
 
 export default function MembershipChip() {
+  //!TODO solicitar infor del user para saber si tiene o no suscripción
+  const isSubscribed = true;
+
   return (
     <Stack
       sx={{
@@ -48,7 +56,33 @@ export default function MembershipChip() {
         </Stack>
       </Container>
       {/* //TODO modificar de acuerdo al user */}
-      <Chip size="small" color="success" variant="filled" label="Active"></Chip>
+      {isSubscribed ? (
+        <>
+          <Chip
+            size="small"
+            color="success"
+            variant="filled"
+            label="Active"
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
+          ></Chip>
+          <Icon color="success" sx={{ display: { xs: 'flex', sm: 'none' } }}>
+            <CheckCircleOutline />
+          </Icon>
+        </>
+      ) : (
+        <>
+          <Chip
+            size="small"
+            color="warning"
+            variant="filled"
+            label="Inactive"
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
+          ></Chip>
+          <Icon color="warning" sx={{ display: { xs: 'flex', sm: 'none' } }}>
+            <WarningAmberOutlined />
+          </Icon>
+        </>
+      )}
     </Stack>
   );
 }
