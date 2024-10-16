@@ -1,5 +1,5 @@
-import { Container, Stack, Typography } from '@mui/material';
-import React from 'react';
+import { Container, Modal, Stack, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import MembershipAndSubscriptions from './components/(membership)/MembershipAndSubscriptions';
 import PaymentMethods from './components/(paymentMethods)/PaymentMethods';
 import Invoices from './components/(invoices)/Invoices';

@@ -9,12 +9,10 @@ import DateAndTime from './components/DateAndTime';
 export default function Settings() {
   const [showResetPassword, setShowResetPassword] = useState(false);
   const handleShowResetPassword = () => {
-    console.log('handleShowResetPassword');
     setShowResetPassword(true);
   };
 
   const handleCloseResetPassword = () => {
-    console.log('handleCloseResetPassword');
     setShowResetPassword(false);
   };
 
@@ -29,7 +27,7 @@ export default function Settings() {
         minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        paddingX: { xs: 1, sm: 5 },
+        paddingX: { xs: 0, sm: 5 },
         paddingY: { xs: 1, sm: 2 },
         // paddingLeft: { xs: '0px', sm: '0px' },
         // paddingRight: { xs: '0px', sm: '0px' },

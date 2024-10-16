@@ -3,7 +3,9 @@ import React from 'react';
 import { paymentMethods } from '../../mocks/paymentMethods';
 import PaymentMethodsTableRow from './PaymentMethodsTableRow';
 
-export default function PaymentMethodsTableBody() {
+type Props = {};
+
+export default function PaymentMethodsTableBody({}: Props) {
   return (
     <TableBody>
       {paymentMethods.map((paymentMethod, index) => (
