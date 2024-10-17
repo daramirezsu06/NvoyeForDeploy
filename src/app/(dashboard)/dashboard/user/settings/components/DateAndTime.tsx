@@ -25,7 +25,7 @@ export default function DateAndTime() {
         alignSelf: 'stretch',
         backgroundColor: '#F8F6F5',
         borderRadius: 2,
-        width: { xs: 'full', sm: '400px', md: '500px' },
+        width: { xs: 'full', sm: '400px', md: '565px' },
         marginBottom: { xs: '60px', sm: 0 },
       }}
     >

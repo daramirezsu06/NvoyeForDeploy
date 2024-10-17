@@ -112,7 +112,7 @@ export const ChangePassword = ({ handleShowResetPassword }: any) => {
         padding: 4,
         backgroundColor: '#F8F6F5',
         borderRadius: 2,
-        width: { xs: 'full', sm: '400px', md: '500px' },
+        width: { xs: 'full', sm: '400px', md: '565px' },
       }}
     >
       {/* <Collapse in={showSuccessAlert}>

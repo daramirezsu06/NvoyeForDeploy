@@ -24,43 +24,45 @@ export default function Profile() {
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
         backgroundColor: '#FDFCFB',
-        padding: 0,
-        gap: 4,
+        // padding: 0,
+        // gap: 4,
       }}
     >
-      <Stack sx={{ gap: 4 }}>
-        <Stack sx={{ mb: 3 }}>
+      <Stack sx={{ mb: 8 }}>
+        <Stack sx={{ mb: 0, padding: 2 }}>
           <Typography variant="h4">Profile</Typography>
         </Stack>
-        <Stack
-          sx={{
-            backgroundColor: theme.custom.paperElevationTwo,
-            width: '565px',
-            borderRadius: 3,
-            p: 4,
-          }}
-        >
-          <IdentitiForm />
-        </Stack>
-        <Stack
-          sx={{
-            backgroundColor: theme.custom.paperElevationTwo,
-            width: '565px',
-            borderRadius: 3,
-            p: 4,
-          }}
-        >
-          <ProfileLanguageSkills />
-        </Stack>
-        <Stack
-          sx={{
-            backgroundColor: theme.custom.paperElevationTwo,
-            width: '565px',
-            borderRadius: 3,
-            p: 4,
-          }}
-        >
-          <AditionalInfo />
+        <Stack sx={{ gap: 4 }}>
+          <Stack
+            sx={{
+              backgroundColor: theme.custom.paperElevationTwo,
+              width: { xs: 'full', sm: '400px', md: '565px' },
+              borderRadius: 3,
+              p: 4,
+            }}
+          >
+            <IdentitiForm />
+          </Stack>
+          <Stack
+            sx={{
+              backgroundColor: theme.custom.paperElevationTwo,
+              width: { xs: 'full', sm: '400px', md: '565px' },
+              borderRadius: 3,
+              p: 4,
+            }}
+          >
+            <ProfileLanguageSkills />
+          </Stack>
+          <Stack
+            sx={{
+              backgroundColor: theme.custom.paperElevationTwo,
+              width: { xs: 'full', sm: '400px', md: '565px' },
+              borderRadius: 3,
+              p: 4,
+            }}
+          >
+            <AditionalInfo />
+          </Stack>
         </Stack>
       </Stack>
     </Container>

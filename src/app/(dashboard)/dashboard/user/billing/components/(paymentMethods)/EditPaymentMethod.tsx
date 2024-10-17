@@ -2,15 +2,24 @@
 
 import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { IPaymentMethod } from '../../mocks/paymentMethods';
 
 interface Props {
-  handleCloseAddMethod: () => void;
+  handleCloseEditMethod: () => void;
+  paymentMethod: IPaymentMethod;
 }
 
-export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardholderName, setCardholderName] = useState('');
-  const [expirationDate, setExpirationDate] = useState('');
+export default function EditPaymentMethod({
+  handleCloseEditMethod,
+  paymentMethod,
+}: Props) {
+  const [cardNumber, setCardNumber] = useState(paymentMethod.cardNumber);
+  const [cardholderName, setCardholderName] = useState(
+    paymentMethod.cardHolderName
+  );
+  const [expirationDate, setExpirationDate] = useState(
+    paymentMethod.expiryMonth + '/' + paymentMethod.expiryYear
+  );
   const [cvv, setCvv] = useState('');
 
   const handleConfirm = () => {
@@ -36,7 +45,7 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
         width: { xs: '95%', sm: '500px' },
       }}
     >
-      <Typography variant="h5">Add payment method</Typography>
+      <Typography variant="h5">Edit payment method</Typography>
 
       <TextField
         variant="outlined"
@@ -112,7 +121,7 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
               textTransform: 'none',
               borderRadius: 2,
             }}
-            onClick={handleCloseAddMethod}
+            onClick={handleCloseEditMethod}
           >
             Cancel
           </Button>
