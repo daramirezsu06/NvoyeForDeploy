@@ -17,6 +17,7 @@ import {
   EditOutlined,
 } from '@mui/icons-material';
 import DefaultPayment from './DefaultPayment';
+import EditPaymentMethod from './EditPaymentMethod';
 
 export default function PaymentMethodsTableRow({
   paymentMethod,
@@ -26,6 +27,10 @@ export default function PaymentMethodsTableRow({
   const [isShowSetDefault, setIsShowSetDefault] = useState(false);
   const handleShowSetDefault = () => setIsShowSetDefault(true);
   const handleCloseSetDefault = () => setIsShowSetDefault(false);
+
+  const [isShowEditMethod, setIsShowEditMethod] = useState(false);
+  const handleShowEditMethod = () => setIsShowEditMethod(true);
+  const handleCloseEditMethod = () => setIsShowEditMethod(false);
 
   const handleDeletePaymentMethod = () => {
     console.log('delete payment method');
@@ -94,8 +99,11 @@ export default function PaymentMethodsTableRow({
             display: { xs: 'none', sm: 'table-cell' },
           }}
         >
-          {/* //TODO give functionality to this button */}
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              handleShowEditMethod();
+            }}
+          >
             <Icon>
               <EditOutlined />
             </Icon>
@@ -113,6 +121,23 @@ export default function PaymentMethodsTableRow({
             </Icon>
           </IconButton>
         </TableCell>
+        <Modal
+          open={isShowEditMethod}
+          onClose={handleCloseEditMethod}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'auto',
+          }}
+        >
+          <EditPaymentMethod
+            paymentMethod={paymentMethod}
+            handleCloseEditMethod={handleCloseEditMethod}
+          />
+        </Modal>
         <Modal
           open={isShowSetDefault}
           onClose={handleCloseSetDefault}

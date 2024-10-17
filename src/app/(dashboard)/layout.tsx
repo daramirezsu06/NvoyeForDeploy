@@ -39,6 +39,7 @@ import {
 import Menu from './dashboard/components/Menu';
 import React from 'react';
 import { usePathname } from 'next/navigation';
+import MenuLayout from './dashboard/components/MenuLayout';
 
 export default function DashboardLayout({
   children,
@@ -54,6 +55,16 @@ export default function DashboardLayout({
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const [anchorElMenuLayout, setAnchorElMenuLayout] =
+    React.useState<null | HTMLElement>(null);
+  const openMenuLayout = Boolean(anchorElMenuLayout);
+  const handleClickMenuLayout = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElMenuLayout(event.currentTarget);
+  };
+  const handleCloseMenuLayout = () => {
+    setAnchorElMenuLayout(null);
   };
 
   return (
@@ -221,11 +232,18 @@ export default function DashboardLayout({
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
+                onClick={handleClickMenuLayout}
               >
                 <Icon sx={{ display: 'flex' }}>
                   <MenuOutlined sx={{ width: 24, height: 24 }} />
                 </Icon>
               </IconButton>
+
+              <MenuLayout
+                anchorElMenuLayout={anchorElMenuLayout}
+                openMenuLayout={openMenuLayout}
+                handleCloseMenuLayout={handleCloseMenuLayout}
+              />
             </Stack>
             <Stack display="flex" direction="row" alignItems="center" gap={2}>
               <Badge
