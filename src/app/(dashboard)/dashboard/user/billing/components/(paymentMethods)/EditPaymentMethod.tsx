@@ -1,8 +1,16 @@
 'use client';
 
 import { Box, Button, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IPaymentMethod } from '../../mocks/paymentMethods';
+import {
+  formatCardNumber,
+  formatExpirationDate,
+  validateCardNumber,
+  validateExpirationDate,
+  validateCardholderName,
+  validateCvv,
+} from './utils/paymentUtils';
 
 interface Props {
   handleCloseEditMethod: () => void;
@@ -21,10 +29,84 @@ export default function EditPaymentMethod({
     paymentMethod.expiryMonth + '/' + paymentMethod.expiryYear
   );
   const [cvv, setCvv] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const [cardNumberError, setCardNumberError] = useState('');
+  const [cardholderNameError, setCardholderNameError] = useState('');
+  const [expirationDateError, setExpirationDateError] = useState('');
+  const [cvvError, setCvvError] = useState('');
+
+  useEffect(() => {
+    const hasErrors =
+      !!cardNumberError ||
+      !!cardholderNameError ||
+      !!expirationDateError ||
+      !!cvvError;
+
+    const isCardNumberValid = cardNumber.replace(/\s/g, '').length === 16; // Verificar si la tarjeta tiene 16 dígitos
+    const isCardholderNameValid = cardholderName.trim() !== '';
+    const isExpirationDateValid = expirationDate.length === 7; // Formato MM/YYYY (7 caracteres)
+    const isCvvValid = cvv.length === 3 || cvv.length === 4; // Verificar si el CVV tiene 3 o 4 dígitos
+
+    setIsFormValid(
+      !hasErrors && // No debe haber errores
+        isCardNumberValid &&
+        isCardholderNameValid &&
+        isExpirationDateValid &&
+        isCvvValid
+    );
+  }, [
+    cardNumber,
+    cardholderName,
+    expirationDate,
+    cvv,
+    cardNumberError,
+    cardholderNameError,
+    expirationDateError,
+    cvvError,
+  ]);
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    const formattedCardNumber = formatCardNumber(inputValue);
+    setCardNumber(formattedCardNumber);
+    setCardNumberError(validateCardNumber(formattedCardNumber));
+  };
+
+  const handleCardholderNameChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const nameValue = e.target.value;
+    setCardholderName(nameValue);
+    setCardholderNameError(validateCardholderName(nameValue));
+  };
+
+  const handleExpirationDateChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const inputValue = e.target.value;
+    const formattedDate = formatExpirationDate(inputValue);
+    setExpirationDate(formattedDate);
+    setExpirationDateError(validateExpirationDate(formattedDate));
+  };
+
+  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const cvvValue = e.target.value;
+    setCvv(cvvValue);
+    setCvvError(validateCvv(cvvValue));
+  };
 
   const handleConfirm = () => {
-    console.log('sending data to back');
-    console.log(cardNumber, cardholderName, expirationDate, cvv);
+    const cardNumberToSend = cardNumber.replace(/\s/g, ''); // Elimina los espacios antes de enviar
+    const [expiryMonth, expiryYear] = expirationDate.split('/'); // Dividir mes y año
+    console.log('Enviando datos al backend:');
+    console.log({
+      cardNumber: cardNumberToSend,
+      cardholderName,
+      expiryMonth: Number(expiryMonth),
+      expiryYear: Number(expiryYear),
+      cvv,
+    });
     //TODO send info to backend
   };
 
@@ -51,30 +133,32 @@ export default function EditPaymentMethod({
         variant="outlined"
         label="Card Number"
         value={cardNumber}
-        onChange={(e) => setCardNumber(e.target.value)}
+        onChange={handleCardNumberChange}
         placeholder="4242 **** **** ****"
+        error={!!cardNumberError}
+        helperText={cardNumberError}
         sx={{
-          // width: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignSelf: 'stretch',
         }}
-      ></TextField>
+      />
 
       <TextField
         variant="outlined"
         label="Cardholder name"
         value={cardholderName}
-        onChange={(e) => setCardholderName(e.target.value)}
+        onChange={handleCardholderNameChange}
         placeholder="Full name"
+        error={!!cardholderNameError}
+        helperText={cardholderNameError}
         sx={{
-          // width: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignSelf: 'stretch',
           borderRadius: 2,
         }}
-      ></TextField>
+      />
 
       <Box
         sx={{
@@ -87,17 +171,21 @@ export default function EditPaymentMethod({
         <TextField
           variant="outlined"
           label="Expiration date"
-          placeholder="MM/YY"
+          placeholder="MM/YYYY"
           value={expirationDate}
-          onChange={(e) => setExpirationDate(e.target.value)}
-        ></TextField>
+          onChange={handleExpirationDateChange}
+          error={!!expirationDateError}
+          helperText={expirationDateError}
+        />
         <TextField
           variant="outlined"
           label="CVV"
           placeholder="123"
           value={cvv}
-          onChange={(e) => setCvv(e.target.value)}
-        ></TextField>
+          onChange={handleCvvChange}
+          error={!!cvvError}
+          helperText={cvvError}
+        />
       </Box>
       <Box
         sx={{
@@ -132,6 +220,7 @@ export default function EditPaymentMethod({
               borderRadius: 2,
             }}
             onClick={handleConfirm}
+            disabled={!isFormValid}
           >
             Confirm
           </Button>
