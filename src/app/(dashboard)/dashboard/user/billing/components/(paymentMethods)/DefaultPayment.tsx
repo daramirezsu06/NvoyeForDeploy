@@ -7,16 +7,12 @@ import { Box, Button, Typography } from '@mui/material';
 export default function DefaultPayment({
   paymentMethod,
   handleCloseSetDefault,
+  handleSetDefault,
 }: {
   paymentMethod: IPaymentMethod;
   handleCloseSetDefault: () => void;
+  handleSetDefault: () => void;
 }) {
-  const handleSetDefault = () => {
-    console.log(paymentMethod);
-
-    //!TODO funcion que mande al back la info correspondiente y muestre alerta
-  };
-
   return (
     <Box
       sx={{
