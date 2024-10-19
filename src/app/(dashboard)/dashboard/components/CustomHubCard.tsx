@@ -23,12 +23,12 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
     <Card
       sx={{
         display: { xs: 'inline-flex', sm: 'flex' },
-        // flexGrow: 1,
-        width: { xs: '150px', sm: '270px' },
+        flexGrow: 1,
+        width: { xs: '150px', sm: '150px' },
         height: { xs: '160px', sm: '200px' },
         maxWidth: {
-          xs: '160px',
-          sm: '272px',
+          xs: '200px',
+          sm: '472px',
         },
         padding: 2,
         flexDirection: 'column',
