@@ -25,6 +25,7 @@ export default function Billing() {
         backgroundColor: '#FDFCFB',
         flex: 1,
         gap: 1,
+        marginBottom: '50px',
       }}
     >
       <Stack
