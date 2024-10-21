@@ -1,16 +1,15 @@
 import { Box, Stack } from '@mui/material';
 import React from 'react';
 import WelcomeUser from '../components/WelcomeUser';
-import { hubMocks } from '@/src/app/mocks/hubsMocks';
 import RecommendedHubs from './components/RecommendedHubs';
 import ConnectCalendar from './components/ConnectCalendar';
 import LandingPackage from './components/LandingPackage';
+import theme from '@/src/app/theme';
+import ScheduledTasks from './components/ScheduledTasks';
 
 type Props = {};
 
 export default function Home({}: Props) {
-  const recomendedHubs = hubMocks.slice(0, 4);
-
   return (
     <Box
       sx={{
@@ -40,6 +39,7 @@ export default function Home({}: Props) {
       >
         <WelcomeUser />
 
+        {/* Recommended hubs */}
         <Stack
           sx={{
             display: 'flex',
@@ -51,11 +51,22 @@ export default function Home({}: Props) {
             backgroundColor: '#F8F6F5',
           }}
         >
-          {/* Recommended hubs */}
           <RecommendedHubs />
+        </Stack>
 
-          {/* Scheduled task */}
-          <Box></Box>
+        {/* Scheduled task */}
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            gap: 4,
+            alignSelf: 'stretch',
+            borderRadius: 2,
+            backgroundColor: '#F8F6F5',
+          }}
+        >
+          <ScheduledTasks />
         </Stack>
       </Box>
 

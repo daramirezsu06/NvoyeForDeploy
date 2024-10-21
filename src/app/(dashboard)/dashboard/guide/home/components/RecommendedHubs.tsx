@@ -1,12 +1,12 @@
 import { hubMocks } from '@/src/app/mocks/hubsMocks';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
-
 import React from 'react';
 import CustomHubCard from '../../../components/CustomHubCard';
 
 export default function RecommendedHubs() {
-  const recomendedHubs = hubMocks.slice(0, 4);
+  const recomendedHubsThree = hubMocks.slice(0, 3);
+  const recomendedHubsFour = hubMocks.slice(0, 4);
   return (
     <Box
       sx={{
@@ -47,9 +47,10 @@ export default function RecommendedHubs() {
           </Link>
         </Button>
       </Stack>
+      {/* Three hubs for desktop version */}
       <Stack
         sx={{
-          display: 'flex',
+          display: { xs: 'none', sm: 'flex' },
           flexDirection: 'row',
           alignItems: 'center',
           alignContent: ' center',
@@ -59,8 +60,30 @@ export default function RecommendedHubs() {
           // overflowX: 'auto',
         }}
       >
-        {/* //! HERE GOES THE HUBS */}
-        {recomendedHubs.map((hub) => (
+        {recomendedHubsThree.map((hub) => (
+          <CustomHubCard
+            key={hub.title}
+            icon={hub.icon}
+            title={hub.title}
+            topics={hub.topics}
+          />
+        ))}
+      </Stack>
+
+      {/* Four hubs for mobile version */}
+      <Stack
+        sx={{
+          display: { xs: 'flex', sm: 'none' },
+          flexDirection: 'row',
+          alignItems: 'center',
+          alignContent: ' center',
+          gap: 3,
+          alignSelf: ' stretch',
+          flexWrap: 'wrap',
+          // overflowX: 'auto',
+        }}
+      >
+        {recomendedHubsFour.map((hub) => (
           <CustomHubCard
             key={hub.title}
             icon={hub.icon}

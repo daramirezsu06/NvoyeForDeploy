@@ -64,6 +64,7 @@ export default function Menu({ anchorEl, open, handleClose }: any) {
             padding: '0px 0px',
             borderRadius: '4px',
           }}
+          onClick={handleClose}
         >
           <Links
             href="/dashboard/user/profile"

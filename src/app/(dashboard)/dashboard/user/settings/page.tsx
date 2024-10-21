@@ -9,12 +9,10 @@ import DateAndTime from './components/DateAndTime';
 export default function Settings() {
   const [showResetPassword, setShowResetPassword] = useState(false);
   const handleShowResetPassword = () => {
-    console.log('handleShowResetPassword');
     setShowResetPassword(true);
   };
 
   const handleCloseResetPassword = () => {
-    console.log('handleCloseResetPassword');
     setShowResetPassword(false);
   };
 
@@ -23,28 +21,25 @@ export default function Settings() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: { xs: 'stretch', sm: 'center' },
         alignSelf: 'stretch',
         height: { xs: 'auto', sm: 'calc(100vh - 64px)' },
         minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        // paddingLeft: { xs: '0px', sm: '0px' },
-        // paddingRight: { xs: '0px', sm: '0px' },
         paddingX: { xs: 1, sm: 5 },
         paddingY: { xs: 1, sm: 2 },
+        // paddingLeft: { xs: '0px', sm: '0px' },
+        // paddingRight: { xs: '0px', sm: '0px' },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
         backgroundColor: '#FDFCFB',
-        flex: 1,
+        // flex: 1,
       }}
     >
       <Stack
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          maxWidth: '800px',
+          alignItems: 'stretch',
         }}
       >
         {/* Tittle */}
@@ -52,7 +47,8 @@ export default function Settings() {
           sx={{
             display: 'flex',
             padding: 2,
-            alignSelf: 'stretch',
+            alignItems: 'stretch',
+            // alignSelf: 'stretch',
           }}
         >
           <Typography variant="h4">Settings</Typography>

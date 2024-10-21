@@ -36,20 +36,17 @@ import {
   Link,
 } from '@mui/material';
 
-import { useAppDispatch } from '../state/hooks';
-import { logout } from './redux/profileSlice';
-import { authlogout } from '../(auth)/redux/authSlice';
-import { useRouter } from 'next/navigation';
 import Menu from './dashboard/components/Menu';
 import React from 'react';
+import { usePathname } from 'next/navigation';
+import MenuLayout from './dashboard/components/MenuLayout';
 
 export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
+  const pathname = usePathname();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -58,6 +55,16 @@ export default function DashboardLayout({
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const [anchorElMenuLayout, setAnchorElMenuLayout] =
+    React.useState<null | HTMLElement>(null);
+  const openMenuLayout = Boolean(anchorElMenuLayout);
+  const handleClickMenuLayout = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElMenuLayout(event.currentTarget);
+  };
+  const handleCloseMenuLayout = () => {
+    setAnchorElMenuLayout(null);
   };
 
   return (
@@ -102,6 +109,7 @@ export default function DashboardLayout({
           elevation={0}
           square={true}
         >
+          {/* //! Toolbar para desktop */}
           <Toolbar
             sx={{
               display: {
@@ -129,7 +137,9 @@ export default function DashboardLayout({
               <Link href="/dashboard/guide">
                 <Button
                   size="medium"
-                  color="primary"
+                  color={
+                    pathname.includes('/dashboard/guide') ? 'primary' : 'info'
+                  }
                   startIcon={<LibraryBooks />}
                 >
                   Guide
@@ -137,7 +147,15 @@ export default function DashboardLayout({
               </Link>
 
               <Link href="/dashboard/community">
-                <Button size="medium" color="info" startIcon={<Diversity2 />}>
+                <Button
+                  size="medium"
+                  color={
+                    pathname.includes('/dashboard/community')
+                      ? 'primary'
+                      : 'info'
+                  }
+                  startIcon={<Diversity2 />}
+                >
                   Community
                 </Button>
               </Link>
@@ -214,11 +232,18 @@ export default function DashboardLayout({
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
+                onClick={handleClickMenuLayout}
               >
                 <Icon sx={{ display: 'flex' }}>
                   <MenuOutlined sx={{ width: 24, height: 24 }} />
                 </Icon>
               </IconButton>
+
+              <MenuLayout
+                anchorElMenuLayout={anchorElMenuLayout}
+                openMenuLayout={openMenuLayout}
+                handleCloseMenuLayout={handleCloseMenuLayout}
+              />
             </Stack>
             <Stack display="flex" direction="row" alignItems="center" gap={2}>
               <Badge

@@ -13,54 +13,56 @@ export default function Profile() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        alignSelf: 'stretch',
         height: { xs: 'auto', sm: 'calc(100vh - 64px)' },
         minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        paddingLeft: { xs: '0px', sm: '0px' },
-        paddingRight: { xs: '0px', sm: '0px' },
+        paddingX: { xs: 1, sm: 5 },
+        paddingY: { xs: 1, sm: 2 },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
-        backgroundColor: '#FFFF',
-        padding: 0,
-        gap: 4,
-        alignItems: 'center',
-        alignSelf: 'stretch',
+        backgroundColor: '#FDFCFB',
+        // padding: 0,
+        // gap: 4,
       }}
     >
-      <Stack sx={{ gap: 4 }}>
-        <Stack sx={{ mb: 3 }}>
+      <Stack sx={{ mb: 8 }}>
+        <Stack sx={{ mb: 0, padding: 2 }}>
           <Typography variant="h4">Profile</Typography>
         </Stack>
-        <Stack
-          sx={{
-            backgroundColor: theme.custom.paperElevationTwo,
-            width: '565px',
-            borderRadius: 3,
-            p: 4,
-          }}
-        >
-          <IdentitiForm />
-        </Stack>
-        <Stack
-          sx={{
-            backgroundColor: theme.custom.paperElevationTwo,
-            width: '565px',
-            borderRadius: 3,
-            p: 4,
-          }}
-        >
-          <ProfileLanguageSkills />
-        </Stack>
-        <Stack
-          sx={{
-            backgroundColor: theme.custom.paperElevationTwo,
-            width: '565px',
-            borderRadius: 3,
-            p: 4,
-          }}
-        >
-          <AditionalInfo />
+        <Stack sx={{ gap: 4 }}>
+          <Stack
+            sx={{
+              backgroundColor: theme.custom.paperElevationTwo,
+              width: { xs: 'full', sm: '400px', md: '565px' },
+              borderRadius: 3,
+              p: 4,
+            }}
+          >
+            <IdentitiForm />
+          </Stack>
+          <Stack
+            sx={{
+              backgroundColor: theme.custom.paperElevationTwo,
+              width: { xs: 'full', sm: '400px', md: '565px' },
+              borderRadius: 3,
+              p: 4,
+            }}
+          >
+            <ProfileLanguageSkills />
+          </Stack>
+          <Stack
+            sx={{
+              backgroundColor: theme.custom.paperElevationTwo,
+              width: { xs: 'full', sm: '400px', md: '565px' },
+              borderRadius: 3,
+              p: 4,
+            }}
+          >
+            <AditionalInfo />
+          </Stack>
         </Stack>
       </Stack>
     </Container>
