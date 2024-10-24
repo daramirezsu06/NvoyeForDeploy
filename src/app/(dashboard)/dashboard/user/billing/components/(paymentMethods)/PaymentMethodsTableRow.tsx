@@ -47,6 +47,8 @@ export default function PaymentMethodsTableRow({
   const handleDeletePaymentMethod = () => {
     console.log('delete payment method');
     console.log(paymentMethod);
+    //TODO show a confirmation card
+
     //TODO send info to backend using de DELETE (Delete Payment Method) -> {{url}}/payment-methods/delete/id
   };
 

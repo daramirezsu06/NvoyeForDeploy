@@ -12,15 +12,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import {
-  CheckBoxOutlineBlank,
-  ChevronRight,
-  ExpandLess,
-  ExpandMore,
-  FiberManualRecordRounded,
-} from '@mui/icons-material';
-
-type Props = {};
+import { ChevronRight, FiberManualRecordRounded } from '@mui/icons-material';
 
 export default function InvoicesTableRow({ invoice }: { invoice: Iinvoice }) {
   const date = new Date(invoice.createdAt);
@@ -113,6 +105,7 @@ export default function InvoicesTableRow({ invoice }: { invoice: Iinvoice }) {
               flexDirection: 'column',
               alignItems: 'flex-start',
               flex: 1,
+              ml: 2,
             }}
           >
             <Typography variant="body2" sx={{ textWrap: 'nowrap' }}>
@@ -138,7 +131,8 @@ export default function InvoicesTableRow({ invoice }: { invoice: Iinvoice }) {
             paddingX: 0,
           }}
         >
-          {' '}
+          {/* //TODO give function to this button to show detail */}
+
           <IconButton
             onClick={() => {
               // handleShowPaymentMethodDetail();

@@ -1,6 +1,6 @@
 'use client';
 
-import { TableBody } from '@mui/material';
+import { TableBody, TableCell, TableRow } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { paymentMethods } from '../../mocks/paymentMethods';
 import PaymentMethodsTableRow from './PaymentMethodsTableRow';
@@ -21,6 +21,13 @@ export default function PaymentMethodsTableBody({}: Props) {
       {paymentMethods.map((paymentMethod, index) => (
         <PaymentMethodsTableRow key={index} paymentMethod={paymentMethod} />
       ))}
+      {paymentMethods.length === 0 && (
+        <TableRow>
+          <TableCell colSpan={6} sx={{ textAlign: 'center' }}>
+            You have no saved payment methods
+          </TableCell>
+        </TableRow>
+      )}
     </TableBody>
   );
 }
