@@ -8,6 +8,8 @@ import MembershipTableRow from './MembershipTableRow';
 type Props = {};
 
 export default function MembershipTableBody({}: Props) {
+  //TODO fetch the subscriptions
+
   return (
     <TableBody>
       {subscriptions.map((subscription, index) => (
