@@ -199,34 +199,58 @@ export default function InvoicesFilters({
           <RadioGroup value={status} onChange={handleStatusChange}>
             <FormControlLabel
               value="Paid"
-              control={<Radio sx={{ color: 'success.main' }} />}
-              label={<FormLabel sx={{ color: 'success.main' }}>Paid</FormLabel>}
+              control={<Radio sx={{ '&.Mui-checked': { color: 'blue' } }} />}
+              label="Paid"
+              sx={{
+                color: 'success.main', // Define el color inicial del label
+                '& .MuiFormControlLabel-label': {
+                  color: 'success.main', // Define el color al estar seleccionado
+                },
+              }}
             />
             <FormControlLabel
               value="Pending"
-              control={<Radio sx={{ color: 'primary.main' }} />}
-              label={
-                <FormLabel sx={{ color: 'primary.main' }}>Pending</FormLabel>
-              }
+              control={<Radio sx={{ '&.Mui-checked': { color: 'blue' } }} />}
+              label="Pending"
+              sx={{
+                color: 'primary.main',
+                '& .MuiFormControlLabel-label': {
+                  color: 'primary.main',
+                },
+              }}
             />
             <FormControlLabel
               value="Failed"
-              control={<Radio sx={{ color: 'error.main' }} />}
-              label={<FormLabel sx={{ color: 'error.main' }}>Failed</FormLabel>}
+              control={<Radio sx={{ '&.Mui-checked': { color: 'blue' } }} />}
+              label="Failed"
+              sx={{
+                color: 'error.main',
+                '& .MuiFormControlLabel-label': {
+                  color: 'error.main',
+                },
+              }}
             />
             <FormControlLabel
               value="Overdue"
-              control={<Radio sx={{ color: 'warning.main' }} />}
-              label={
-                <FormLabel sx={{ color: 'warning.main' }}>Overdue</FormLabel>
-              }
+              control={<Radio sx={{ '&.Mui-checked': { color: 'blue' } }} />}
+              label="Overdue"
+              sx={{
+                color: 'warning.main',
+                '& .MuiFormControlLabel-label': {
+                  color: 'warning.main',
+                },
+              }}
             />
             <FormControlLabel
               value="Canceled"
-              control={<Radio sx={{ color: 'error.main' }} />}
-              label={
-                <FormLabel sx={{ color: 'error.main' }}>Canceled</FormLabel>
-              }
+              control={<Radio sx={{ '&.Mui-checked': { color: 'blue' } }} />}
+              label="Canceled"
+              sx={{
+                color: 'error.main',
+                '& .MuiFormControlLabel-label': {
+                  color: 'error.main',
+                },
+              }}
             />
           </RadioGroup>
         </FormControl>
@@ -239,7 +263,6 @@ export default function InvoicesFilters({
           alignItems: 'center',
           alignSelf: 'stretch',
           height: '64px',
-          // backgroundColor: '#F7F5F2',
           borderRadius: '0px 0px 8px 8px',
           padding: { xs: '0px 8px 0px 24px', sm: '0px 8px 0px 24px' },
           gap: 4,

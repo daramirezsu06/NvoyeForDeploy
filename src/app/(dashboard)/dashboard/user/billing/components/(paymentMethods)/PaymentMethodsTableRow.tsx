@@ -20,6 +20,7 @@ import DefaultPayment from './DefaultPayment';
 import EditPaymentMethod from './EditPaymentMethod';
 import valid from 'card-validator';
 import PaymentMethodDetail from './PaymentMethodDetail';
+import DeletePaymentMethod from './DeletePaymentMethod';
 
 export default function PaymentMethodsTableRow({
   paymentMethod,
@@ -40,22 +41,31 @@ export default function PaymentMethodsTableRow({
     console.log(paymentMethod);
     setIsShowPaymentMethodDetail(true);
   };
-
   const handleClosePaymentMethodDetail = () =>
     setIsShowPaymentMethodDetail(false);
+
+  const [isShowDeleteMethod, setIsShowDeleteMethod] = useState(false);
+  const handleShowDeleteMethod = () => setIsShowDeleteMethod(true);
+  const handleCloseDeleteMethod = () => setIsShowDeleteMethod(false);
 
   const handleDeletePaymentMethod = () => {
     console.log('delete payment method');
     console.log(paymentMethod);
-    //TODO show a confirmation card
-
     //TODO send info to backend using de DELETE (Delete Payment Method) -> {{url}}/payment-methods/delete/id
+
+    //close modal
+    handleCloseDeleteMethod();
+    //TODO show alert success
   };
 
   const handleSetDefault = () => {
     console.log(paymentMethod);
 
-    //!TODO funcion que mande al back la info correspondiente y muestre alerta
+    //!TODO funcion que mande al back la info correspondiente
+
+    //close modal
+    handleCloseSetDefault();
+    //TODO show alert
   };
 
   const last4 = paymentMethod.cardNumber.slice(-4);
@@ -91,7 +101,7 @@ export default function PaymentMethodsTableRow({
           }}
         >
           <Typography
-            onClick={handleDeletePaymentMethod}
+            onClick={handleShowDeleteMethod}
             color="red"
             sx={{ cursor: 'pointer' }}
           >
@@ -171,6 +181,25 @@ export default function PaymentMethodsTableRow({
           />
         </Modal>
 
+        {/* Modal for Set Delete card */}
+        <Modal
+          open={isShowDeleteMethod}
+          onClose={handleCloseDeleteMethod}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'auto',
+          }}
+        >
+          <DeletePaymentMethod
+            handleDeletePaymentMethod={handleDeletePaymentMethod}
+            paymentMethod={paymentMethod}
+            handleCloseDeleteMethod={handleCloseDeleteMethod}
+          />
+        </Modal>
         {/* Modal for Set Default card */}
         <Modal
           open={isShowSetDefault}
@@ -205,6 +234,8 @@ export default function PaymentMethodsTableRow({
           }}
         >
           <PaymentMethodDetail
+            handleShowSetDefault={handleShowSetDefault}
+            handleShowDeleteMethod={handleShowDeleteMethod}
             handleShowEditMethod={handleShowEditMethod}
             handleSetDefault={handleSetDefault}
             handleDeletePaymentMethod={handleDeletePaymentMethod}
