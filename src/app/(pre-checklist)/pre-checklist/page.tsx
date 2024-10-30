@@ -65,7 +65,10 @@ export default function PreChecklist() {
 
     const hobbiesToSend = hobbyIds
       ?.map((id) => hobbies.find((hobby) => hobby.id === id))
-      .filter(Boolean);
+      .filter(
+        (hobby): hobby is { id: number; name: string; description: string } =>
+          hobby !== undefined
+      );
 
     const prechecklisttosent = {
       isNeedHousingHelp,
@@ -73,9 +76,13 @@ export default function PreChecklist() {
       isWithChildren,
       isWithPets,
       isPlanAdoptingPets,
-      insuranceTypeId,
+      insuranceTypeId: Array.isArray(insuranceTypeId)
+        ? insuranceTypeId[0]
+        : insuranceTypeId,
       chronicDiseasesId,
-      vehicleTypeId,
+      vehicleTypeId: Array.isArray(vehicleTypeId)
+        ? vehicleTypeId[0]
+        : vehicleTypeId,
       hobbies: hobbiesToSend,
     };
     console.log(prechecklisttosent);

@@ -24,8 +24,6 @@ export default function Profile() {
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
         backgroundColor: '#FDFCFB',
-        // padding: 0,
-        // gap: 4,
       }}
     >
       <Stack sx={{ mb: 8 }}>

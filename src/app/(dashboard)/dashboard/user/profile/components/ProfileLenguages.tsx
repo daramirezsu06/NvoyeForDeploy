@@ -17,17 +17,14 @@ import GetLevels from '@/src/utils/api/profile/getLevels';
 import PutStep3 from '@/src/utils/api/profile/putStep3';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
+import { UserData } from '@/src/app/(dashboard)/redux/profileTypes';
 
 interface Language {
   language: string;
   proficiency: string;
 }
 
-const ProfileLanguageSkills: React.FC<{
-  onNext: () => void;
-  onBack: () => void;
-  step: number;
-}> = ({ onBack, onNext, step }) => {
+const ProfileLanguageSkills: React.FC = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [languages, setLanguages] = useState<Language[]>([]);
@@ -84,11 +81,11 @@ const ProfileLanguageSkills: React.FC<{
   const handleSave = async () => {
     if (languageID && proficiencyID) {
       const newLanguage = { languageId: languageID, levelId: proficiencyID };
-      const profileUpdate = await PutStep3(newLanguage);
-      dispatch(setProfile(profileUpdate.data));
+      const profileUpdate: UserData = await PutStep3(newLanguage);
+      dispatch(setProfile(profileUpdate));
 
       setLanguages(
-        profileUpdate.data.languageSkills.map((item) => {
+        profileUpdate.languageSkills.map((item) => {
           return { language: item.language.name, proficiency: item.level.name };
         })
       );
@@ -199,33 +196,6 @@ const ProfileLanguageSkills: React.FC<{
           </Button>
         </DialogActions>
       </Dialog>
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-        <Button
-          variant="contained"
-          onClick={onBack}
-          sx={{
-            backgroundColor: 'inherit',
-            color: 'black',
-            width: '100px',
-            '&:hover': {
-              backgroundColor: 'inherit',
-              color: 'black',
-            },
-          }}
-        >
-          Back
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={onNext}
-          sx={{ width: '100px' }}
-          disabled={disableNext}
-        >
-          Next
-        </Button>
-      </Box>
     </Box>
   );
 };

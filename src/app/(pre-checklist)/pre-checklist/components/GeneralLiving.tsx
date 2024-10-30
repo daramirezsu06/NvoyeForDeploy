@@ -7,6 +7,7 @@ import ProgressLine from './shares/progressLine';
 import { UseAnswers } from '../hooks/useAnswers';
 import Brandlogo from '@/src/icons/BrandLogo';
 import CuestionBaseMultichose from './shares/cuestionBaseMultiChose';
+import { Question } from '../types/question.types';
 
 const GeneralLiving = ({
   onNext,
@@ -19,7 +20,7 @@ const GeneralLiving = ({
   step: number;
   hobbies: { id: number; name: string; description: string }[];
 }) => {
-  const questions = [
+  const questions: Question[] = [
     {
       id: 1,
       nameState: 'hobbies',

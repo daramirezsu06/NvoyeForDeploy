@@ -7,6 +7,7 @@ import {
   SendOtpPayload,
 } from './authTypes';
 import { baseURL } from '@/src/utils/api/env';
+import { log } from 'console';
 
 export const signUp = createAsyncThunk(
   'auth/signUp',
@@ -125,11 +126,13 @@ export const login = createAsyncThunk(
       if (!response.ok) {
         const errorData = await response.json();
         return rejectWithValue(errorData.message);
+        console.log('el error es', errorData);
       }
 
       const result = await response.json();
       return result;
     } catch (error) {
+      console.log('el error es', error);
       return rejectWithValue(error);
     }
   }

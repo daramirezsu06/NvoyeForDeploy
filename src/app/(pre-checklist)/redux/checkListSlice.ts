@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../state/store';
 
-interface AnswersState {
+export interface AnswersState {
   isNeedHousingHelp: boolean | null;
   isWithSpouse: boolean | null;
   isWithChildren: boolean | null;
@@ -11,10 +11,10 @@ interface AnswersState {
   hasHealthInsurance: boolean | null;
   insuranceTypeId: number | number[] | null;
   hasChronicConditions: boolean | null;
-  chronicDiseasesId: number | null; // Cambiado a number[] para manejar arrays de números
-  vehicleTypeId: number | number[] | null; // Cambiado a number[] para manejar arrays de números
+  chronicDiseasesId: number | null;
+  vehicleTypeId: number | number[] | null;
   isTransportingVehicle: boolean | null;
-  hobbies: number[] | null; // Cambiado a number[] para manejar arrays de números
+  hobbies: number[] | null;
 }
 
 const initialState: AnswersState = {
@@ -41,32 +41,34 @@ const prechecklistSlice = createSlice({
       state,
       action: PayloadAction<{
         name: keyof AnswersState;
-        value: boolean | string | number | string[] | number[] | null; // Tipo extendido para aceptar múltiples tipos
+        value: boolean | string | number | string[] | number[] | null;
       }>
     ) {
       const { name, value } = action.payload;
-      state[name] = value;
+      (state[name] as boolean | string | number | string[] | number[] | null) =
+        value;
     },
-    // Opcional: agregar un método para manejar la adición o eliminación de elementos en arrays (para selección múltiple)
+
     toggleArrayAnswer(
       state,
       action: PayloadAction<{
         name: keyof AnswersState;
-        value: number; // Para manejar selección de múltiples elementos como hobbies, etc.
+        value: number;
       }>
     ) {
       const { name, value } = action.payload;
       const currentArray = state[name] as number[] | null;
 
       if (currentArray) {
-        // Si el valor ya está en el array, lo eliminamos, de lo contrario, lo añadimos
         if (currentArray.includes(value)) {
-          state[name] = currentArray.filter((item) => item !== value);
+          (state[name] as number[]) = currentArray.filter(
+            (item) => item !== value
+          );
         } else {
-          state[name] = [...currentArray, value];
+          (state[name] as number[]) = [...currentArray, value];
         }
       } else {
-        state[name] = [value]; // Si no existe un array aún, lo inicializamos con el primer valor
+        (state[name] as number[]) = [value];
       }
     },
   },
