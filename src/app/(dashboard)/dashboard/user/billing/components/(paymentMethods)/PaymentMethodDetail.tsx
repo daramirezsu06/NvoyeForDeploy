@@ -25,12 +25,16 @@ export default function PaymentMethodDetail({
   handleDeletePaymentMethod,
   handleSetDefault,
   handleShowEditMethod,
+  handleShowDeleteMethod,
+  handleShowSetDefault,
 }: {
   paymentMethod: IPaymentMethod;
   handleClosePaymentMethodDetail: () => void;
   handleDeletePaymentMethod: () => void;
   handleSetDefault: () => void;
   handleShowEditMethod: () => void;
+  handleShowDeleteMethod: () => void;
+  handleShowSetDefault: () => void;
 }) {
   const last4 = paymentMethod.cardNumber.slice(-4);
   const [cardCompany, setCardCompany] = useState<string>('');
@@ -49,11 +53,21 @@ export default function PaymentMethodDetail({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         gap: '40px',
-        padding: { xs: 1, sm: 4 },
+        padding: { xs: 0, sm: 4 },
         boxSizing: 'border-box',
         position: 'relative',
-        width: '95%',
-        height: '95%',
+        width: '100%',
+        height: '100%',
+        // display: { xs: 'flex', sm: 'none' },
+        // flexDirection: 'column',
+        // alignItems: 'flex-start',
+        // justifyContent: 'flex-start',
+        // gap: '40px',
+        // padding: { xs: 1, sm: 4 },
+        // boxSizing: 'border-box',
+        // position: 'relative',
+        // width: '95%',
+        // height: '95%',
       }}
     >
       <Box
@@ -65,7 +79,8 @@ export default function PaymentMethodDetail({
           gap: '10px',
           width: { xs: '100%' },
           height: { xs: '100%' },
-          borderRadius: '16px',
+          borderRadius: '0x',
+          // borderRadius: '16px',
           backgroundColor: theme.custom.paperElevationTwo,
           elevation: 8,
           paddingY: 4,
@@ -163,7 +178,7 @@ export default function PaymentMethodDetail({
               size="large"
               color="error"
               sx={{ borderRadius: 2, textTransform: 'none', gap: 1 }}
-              onClick={handleDeletePaymentMethod}
+              onClick={handleShowDeleteMethod}
             >
               <DeleteOutline />
               Remove
@@ -171,7 +186,7 @@ export default function PaymentMethodDetail({
             <Button
               variant="contained"
               sx={{ borderRadius: 2, textTransform: 'none' }}
-              onClick={handleSetDefault}
+              onClick={handleShowSetDefault}
             >
               Set as default
             </Button>
