@@ -244,7 +244,6 @@ export default function InvoicesTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* //TODO add pagination */}
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           count={filteredInvoices.length} // Total facturas filtradas
@@ -275,13 +274,9 @@ export default function InvoicesTable() {
             {paginatedInvoices.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} sx={{ textAlign: 'center' }}>
-                  You have no invoices
-                </TableCell>
-              </TableRow>
-            ) : invoices.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={6} sx={{ textAlign: 'center' }}>
-                  There are no results matching your filtering options
+                  {invoices.length === 0
+                    ? 'You have no invoices'
+                    : 'There are no results matching your filtering options'}
                 </TableCell>
               </TableRow>
             ) : (

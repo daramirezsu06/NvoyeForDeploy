@@ -1,4 +1,4 @@
-import { tasksList } from '@/src/app/mocks/tasksMocks';
+import { tasksList } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
 import { Box, Stack, Typography, Button } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
