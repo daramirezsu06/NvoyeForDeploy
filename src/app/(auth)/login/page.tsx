@@ -25,7 +25,6 @@ const LoginPage = () => {
       }}
     >
       <Box sx={{ flex: 1, position: 'relative' }}>
-        {/* Imagen para pantallas grandes */}
         <Box
           sx={{
             display: { xs: 'none', sm: 'block' },
@@ -33,14 +32,13 @@ const LoginPage = () => {
             height: '100%',
           }}
         >
-          {/* Logo en la esquina superior izquierda */}
           <Box
             sx={{
               position: 'absolute',
               top: '100px',
               right: '-70px',
-              zIndex: 20, // Asegura que el logo esté por encima de la imagen grande
-              width: '230px', // Ajusta el tamaño del logo
+              zIndex: 20,
+              width: '230px',
               height: 'auto',
               transform: 'rotate(90deg)',
             }}
@@ -57,7 +55,6 @@ const LoginPage = () => {
           />
         </Box>
 
-        {/* Imagen para pantallas pequeñas */}
         <Box
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -89,13 +86,15 @@ const LoginPage = () => {
             xs: 0,
             sm: 'auto',
           },
-          // Mueve el formulario hacia arriba en pantallas pequeñas
+
           transform: { xs: 'translateY(-60px)', sm: 'none' },
         }}
       >
         {error && (
           <Alert severity="error" sx={{ margin: 4 }}>
-            {error}
+            {typeof error === 'string'
+              ? error
+              : 'Ha ocurrido un error inesperado.'}
           </Alert>
         )}
 

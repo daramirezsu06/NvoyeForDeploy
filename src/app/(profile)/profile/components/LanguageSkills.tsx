@@ -18,6 +18,7 @@ import GetLevels from '@/src/utils/api/profile/getLevels';
 import PutStep3 from '@/src/utils/api/profile/putStep3';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
+import { UserData } from '@/src/app/(dashboard)/redux/profileTypes';
 
 interface Language {
   language: string;
@@ -85,11 +86,11 @@ const LanguageSkills: React.FC<{
   const handleSave = async () => {
     if (languageID && proficiencyID) {
       const newLanguage = { languageId: languageID, levelId: proficiencyID };
-      const profileUpdate = await PutStep3(newLanguage);
-      dispatch(setProfile(profileUpdate.data));
+      const profileUpdate: UserData = await PutStep3(newLanguage);
+      dispatch(setProfile(profileUpdate));
 
       setLanguages(
-        profileUpdate.data.languageSkills.map((item) => {
+        profileUpdate.languageSkills.map((item) => {
           return { language: item.language.name, proficiency: item.level.name };
         })
       );

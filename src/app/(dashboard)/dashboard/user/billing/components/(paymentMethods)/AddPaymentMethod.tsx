@@ -2,7 +2,7 @@
 
 import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import valid from 'card-validator';
+
 import {
   formatCardNumber,
   formatExpirationDate,
@@ -27,7 +27,6 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
   const [expirationDateError, setExpirationDateError] = useState('');
   const [cvvError, setCvvError] = useState('');
 
-  // Función para manejar el cambio en el campo de fecha de expiración
   const handleExpirationDateChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -37,14 +36,12 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
     setExpirationDateError(validateExpirationDate(formattedDate));
   };
 
-  // Función para manejar el cambio en el CVV
   const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cvvValue = e.target.value;
     setCvv(cvvValue);
     setCvvError(validateCvv(cvvValue));
   };
 
-  // Función para manejar el cambio del número de tarjeta
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     const formattedCardNumber = formatCardNumber(inputValue);
@@ -60,7 +57,7 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
     setCardholderNameError(validateCardholderName(nameValue));
   };
 
-  // Validar que todos los campos estén completos
+  // validate every field
   useEffect(() => {
     const hasErrors =
       !!cardNumberError ||
@@ -74,7 +71,7 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
     const isCvvValid = cvv.length === 3 || cvv.length === 4; // Verificar si el CVV tiene 3 dígitos
 
     setIsFormValid(
-      !hasErrors && // No debe haber errores
+      !hasErrors &&
         isCardNumberValid &&
         isCardholderNameValid &&
         isExpirationDateValid &&
@@ -91,7 +88,6 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
     cvvError,
   ]);
 
-  // Elimina los espacios antes de enviar los datos al backend
   const handleConfirm = () => {
     const cardNumberToSend = cardNumber.replace(/\s/g, ''); // Elimina los espacios antes de enviar
     const [expiryMonth, expiryYear] = expirationDate.split('/'); // Dividir mes y año
@@ -104,6 +100,8 @@ export default function AddPaymentMethod({ handleCloseAddMethod }: Props) {
       cvv,
     });
     // TODO: enviar la información al backend
+
+    //TODO: mostrar alerta dependiendo el resultado
   };
 
   return (

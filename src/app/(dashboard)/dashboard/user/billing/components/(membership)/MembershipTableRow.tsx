@@ -41,11 +41,16 @@ export default function MembershipTableRow({
       <TableRow key={subscription.id}>
         <TableCell
           onClick={toggleExpanded}
-          sx={{ cursor: { xs: 'pointer', sm: 'default' } }}
+          sx={{
+            // display: 'flex',
+            // flexDirection: 'column',
+            cursor: { xs: 'pointer', sm: 'pointer' },
+            padding: { xs: 0, sm: 2 },
+          }}
         >
           <IconButton
             onClick={toggleExpanded}
-            sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
+            // sx={{ display: { xs: 'inline-flex', sm: 'inline-flex' } }}
           >
             {isExpanded ? <ExpandLess /> : <ExpandMore />}
           </IconButton>

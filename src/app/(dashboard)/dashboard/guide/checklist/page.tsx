@@ -1,46 +1,25 @@
 'use client';
-import {
-  AddTaskOutlined,
-  ArchiveOutlined,
-  CheckBoxOutlineBlank,
-  EventAvailable,
-  FilePresent,
-  Flag,
-  HealthAndSafetyOutlined,
-  Label,
-  ListAlt,
-  Note,
-  NotificationsActive,
-  Task,
-  TaskAltOutlined,
-  TaskOutlined,
-} from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  Chip,
-  Container,
-  Divider,
-  List,
-  ListItem,
-  Paper,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-} from '@mui/material';
-import React from 'react';
+import { ArchiveOutlined, ListAlt, TaskOutlined } from '@mui/icons-material';
+import { Box, Container, Stack, Tab, Tabs } from '@mui/material';
+import React, { useState } from 'react';
 import TitleAndButton from './components/ titleAndButton';
-import BrandIcon from '@/src/icons/BrandLogo';
 import TodoComponent from './components/ToDoComponent';
-import RecomendedTask from './components/RecomendedTasks';
 import theme from '@/src/app/theme';
-import { tasksList } from '@/src/app/mocks/tasksMocks';
+import {
+  ITask,
+  tasksList,
+} from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
+import RecomendedTasksList from './components/RecomendedTasksList';
+import { IRecomendedTask, recomendedTasksMocks } from './mocks/recomendedTasks';
 
-type Props = {};
+export default function Checklist() {
+  //TODO connect to the backend and get the recomended tasks  -> {{url}}/tasks/getRecommendedTasks
+  const [recomendedTasks, setRecomendedTasks] =
+    useState<IRecomendedTask[]>(recomendedTasksMocks);
 
-export default function Checklist({}: Props) {
-  //TODO improve de recomended task view in mobile
+  //TODO connect to the backend and get the checklist tasks
+  const [userTaskList, setUserTaskList] = useState<ITask[]>(tasksList);
+
   return (
     <Container
       sx={{
@@ -97,12 +76,12 @@ export default function Checklist({}: Props) {
               gap: 2,
             }}
           >
-            {tasksList.map((task) => (
+            {userTaskList.map((task: ITask) => (
               <TodoComponent key={task.id} task={task} />
             ))}
           </Box>
         </Stack>
-        <RecomendedTask />
+        <RecomendedTasksList recomendedTasks={userTaskList} />
       </Box>
     </Container>
   );

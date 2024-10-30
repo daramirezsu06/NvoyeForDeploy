@@ -8,6 +8,7 @@ import { UseAnswers } from '../hooks/useAnswers';
 import DropdownMenu1 from './shares/dropdownMenuCopy';
 import Brandlogo from '@/src/icons/BrandLogo';
 import GetInsuranceTypes from '@/src/utils/api/prechecklist/getInsuranceType';
+import { Question } from '../types/question.types';
 
 const HealthCare = ({
   onNext,
@@ -22,7 +23,7 @@ const HealthCare = ({
   insuranceTypes: { id: number; name: string; description: string }[];
   chronicDiseases: { id: number; name: string; description: string }[];
 }) => {
-  const questions = [
+  const questions: Question[] = [
     {
       id: 1,
       nameState: 'hasHealthInsurance',
@@ -31,8 +32,8 @@ const HealthCare = ({
         'It could be a health insurance from your home country or an international health insurance',
       inputType: 'radio',
       options: [
-        { answer: 'Yes', value: true },
-        { answer: 'NO', value: false },
+        { id: 1, name: 'yes', value: true },
+        { id: 2, name: 'NO', value: false },
       ],
     },
     {
@@ -43,13 +44,13 @@ const HealthCare = ({
         'Please let us know if you, your partner, or children have any chronic or medical conditions',
       inputType: 'radio',
       options: [
-        { answer: 'Yes', value: true },
-        { answer: 'NO', value: false },
+        { id: 1, name: 'yes', value: true },
+        { id: 2, name: 'NO', value: false },
       ],
     },
   ];
 
-  const conditionalQuestion = {
+  const conditionalQuestion: Question = {
     id: 1,
     question: 'Please specify:',
     inputType: 'select',
@@ -61,7 +62,7 @@ const HealthCare = ({
       expectedAnswer: true,
     },
   };
-  const conditionalQuestion2 = {
+  const conditionalQuestion2: Question = {
     id: 1,
     question: 'Please specify:',
     nameState: 'chronicDiseasesId',

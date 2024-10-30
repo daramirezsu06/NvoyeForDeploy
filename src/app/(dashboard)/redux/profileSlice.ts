@@ -62,20 +62,20 @@ const profileSlice = createSlice({
       state.status = 'idle';
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getProfile.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(getProfile.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.userState = action.payload;
-      })
-      .addCase(getProfile.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = (action.error.message as string) || 'get profile failed';
-      });
-  },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(getProfile.pending, (state) => {
+  //       state.status = 'loading';
+  //     })
+  //     .addCase(getProfile.fulfilled, (state, action) => {
+  //       state.status = 'succeeded';
+  //       state.userState = action.payload;
+  //     })
+  //     .addCase(getProfile.rejected, (state, action) => {
+  //       state.status = 'failed';
+  //       state.error = (action.error.message as string) || 'get profile failed';
+  //     });
+  // },
 });
 
 export const { setProfile, logout } = profileSlice.actions;

@@ -1,9 +1,17 @@
 import { useAppDispatch, useAppSelector } from '@/src/app/state/hooks';
-import { selectAnswers, setAnswer } from '../../redux/checkListSlice';
+import {
+  AnswersState,
+  selectAnswers,
+  setAnswer,
+} from '../../redux/checkListSlice';
 import { useEffect, useState } from 'react';
 import { SelectChangeEvent } from '@mui/material';
+import { Question } from '../types/question.types';
 
-export const UseAnswers = (questions: any[], trackButton: boolean = true) => {
+export const UseAnswers = (
+  questions: Question[],
+  trackButton: boolean = true
+) => {
   const answers = useAppSelector(selectAnswers);
   const dispatch = useAppDispatch();
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -16,46 +24,50 @@ export const UseAnswers = (questions: any[], trackButton: boolean = true) => {
     const parsedValue =
       value === 'true' ? true : value === 'false' ? false : value;
 
+    // Asegúrate de que `name` es una clave válida en AnswersState
     dispatch(
-      setAnswer({ name: name as keyof typeof answers, value: parsedValue })
+      setAnswer({ name: name as keyof AnswersState, value: parsedValue })
     );
 
     console.log(answers);
   };
+
   const handleAnswerChangeMultichose = (
     e: React.ChangeEvent<HTMLInputElement>,
     optionId: number
   ) => {
     const { name } = e.target;
 
-    // Obtener las respuestas actuales para esta pregunta
-    const currentAnswers = answers[name] || [];
+    const currentAnswers = (answers[name as keyof AnswersState] ||
+      []) as number[];
 
-    // Añadir o quitar la opción seleccionada
     const newAnswers = currentAnswers.includes(optionId)
-      ? currentAnswers.filter((id: number) => id !== optionId) // Eliminar si ya está seleccionado
-      : [...currentAnswers, optionId]; // Añadir si no está seleccionado
+      ? currentAnswers.filter((id: number) => id !== optionId)
+      : [...currentAnswers, optionId];
 
-    dispatch(setAnswer({ name, value: newAnswers }));
+    dispatch(
+      setAnswer({ name: name as keyof AnswersState, value: newAnswers })
+    );
   };
 
-  const handleChangeOptions = (event: SelectChangeEvent<string[]>) => {
+  const handleChangeOptions = (event: SelectChangeEvent<number | number[]>) => {
     const { value, name } = event.target;
     console.log({ value, name });
 
-    dispatch(setAnswer({ name: name as keyof typeof answers, value }));
-  };
-
-  const shouldQuestionBeAnswered = (question) => {
-    if (!question.condition) {
-      return true;
-    }
-
-    const { stateCondition, expectedAnswer } = question.condition;
-    return answers[stateCondition] === expectedAnswer;
+    // Asegúrate de que `name` es una clave válida en AnswersState
+    dispatch(setAnswer({ name: name as keyof AnswersState, value }));
   };
 
   useEffect(() => {
+    const shouldQuestionBeAnswered = (question: Question) => {
+      if (!question.condition) {
+        return true;
+      }
+
+      const { stateCondition, expectedAnswer } = question.condition;
+      return answers[stateCondition] === expectedAnswer;
+    };
+
     if (trackButton) {
       const allQuestionsAnswered = questions.every((question) => {
         if (!shouldQuestionBeAnswered(question)) {
@@ -63,7 +75,7 @@ export const UseAnswers = (questions: any[], trackButton: boolean = true) => {
         }
 
         const answer = answers[question.nameState];
-        return answer !== undefined && answer !== null && answer !== '';
+        return answer !== undefined && answer !== null;
       });
 
       setButtonDisabled(!allQuestionsAnswered);

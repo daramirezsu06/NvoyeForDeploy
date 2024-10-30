@@ -31,7 +31,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import BrandIcon from '@/src/icons/BrandLogo';
-import { ITask } from '@/src/app/mocks/tasksMocks';
+import { ITask } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
 
 export default function TodoComponent({ task }: { task: ITask }) {
   //TODO improve customization to this component

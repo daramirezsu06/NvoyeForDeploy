@@ -25,6 +25,7 @@ import {
   validatefield,
 } from '@/src/utils/validations/validateForm';
 import { fields } from '@/src/utils/validations/fieldsValidation';
+import Image from 'next/image';
 
 export default function SignupForm() {
   const dispatch = useAppDispatch();
@@ -194,10 +195,12 @@ export default function SignupForm() {
             fullWidth
             variant="outlined"
             startIcon={
-              <img
+              <Image
                 src="/images/google_icon.png"
                 alt="Google"
-                style={{ width: 24, height: 24 }}
+                width={24}
+                height={24}
+                priority
               />
             }
             sx={{ mt: 2, mb: 2 }}

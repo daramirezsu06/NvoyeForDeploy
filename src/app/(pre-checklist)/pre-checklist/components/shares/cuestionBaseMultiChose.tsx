@@ -7,14 +7,10 @@ import {
 } from '@mui/material';
 import theme from '@/src/app/theme';
 import { ReactNode } from 'react';
+import { Question } from '../../types/question.types';
 
 interface CuestionBaseProps {
-  question: {
-    question: string;
-    smallQuestion?: string;
-    nameState: string;
-    options: { id: number; name: string; description: string }[]; // Estructura de las opciones
-  };
+  question: Question;
   children?: ReactNode;
   answers: { [key: string]: any };
   handleAnswerChangeMultichose: (

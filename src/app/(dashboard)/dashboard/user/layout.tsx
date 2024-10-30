@@ -47,10 +47,8 @@ export default function DashboardUserLayout({
     >
       <SidebarDesktop sidevbarList={userSidebarList} />
 
-      {/* Contenido principal */}
       <>{children}</>
 
-      {/* Menú inferior para pantallas móviles */}
       <SidebarMobile sidevbarList={userSidebarList} />
     </Container>
   );

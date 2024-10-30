@@ -16,6 +16,7 @@ import { selectToken } from '../../redux/authSlice';
 import { getProfile } from '@/src/app/(dashboard)/redux/profileThunks';
 import { selectProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { useRedirectionProfile } from '@/src/app/hooks/useRedirectConditional';
+import Image from 'next/image';
 
 export default function LoginForm() {
   const token = useAppSelector(selectToken);
@@ -100,10 +101,12 @@ export default function LoginForm() {
           fullWidth
           variant="outlined"
           startIcon={
-            <img
+            <Image
               src="/images/google_icon.png"
               alt="Google"
-              style={{ width: 24, height: 24 }}
+              width={24}
+              height={24}
+              priority
             />
           }
           sx={{ mt: 2, mb: 2 }}
