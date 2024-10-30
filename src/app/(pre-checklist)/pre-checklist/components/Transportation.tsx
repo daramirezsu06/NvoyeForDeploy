@@ -7,6 +7,7 @@ import ProgressLine from './shares/progressLine';
 import { UseAnswers } from '../hooks/useAnswers';
 import DropdownMenu1 from './shares/dropdownMenuCopy';
 import Brandlogo from '@/src/icons/BrandLogo';
+import { Question } from '../types/question.types';
 
 const Transportation = ({
   onNext,
@@ -19,7 +20,7 @@ const Transportation = ({
   step: number;
   vehicleTypes: { id: number; name: string; description: string }[];
 }) => {
-  const questions = [
+  const questions: Question[] = [
     {
       id: 1,
       nameState: 'isTransportingVehicle',
@@ -28,12 +29,12 @@ const Transportation = ({
         'Choose Yes, if you intend to move a car, bike, or bicycle to your new place of posting.',
       inputType: 'radio',
       options: [
-        { answer: 'Yes', value: true },
-        { answer: 'NO', value: false },
+        { id: 1, name: 'Yes', value: true },
+        { id: 1, name: 'NO', value: false },
       ],
     },
   ];
-  const conditionalQuestion = {
+  const conditionalQuestion: Question = {
     id: 1,
     question: 'Please specify:',
     nameState: 'vehicleTypeId',

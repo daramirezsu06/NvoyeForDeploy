@@ -7,6 +7,7 @@ import ProgressLine from './shares/progressLine';
 import { useMemo } from 'react';
 import { UseAnswers } from '../hooks/useAnswers';
 import Brandlogo from '@/src/icons/BrandLogo';
+import { Question } from '../types/question.types';
 
 const FamilyCare = ({
   onNext,
@@ -17,7 +18,7 @@ const FamilyCare = ({
   onBack: () => void;
   step: number;
 }) => {
-  const questions = useMemo(
+  const questions: Question[] = useMemo(
     () => [
       {
         id: 1,
@@ -27,8 +28,8 @@ const FamilyCare = ({
           'Is your partner planning to join you both now or in the future, during your mission?',
         inputType: 'radio',
         options: [
-          { answer: 'Yes', value: true },
-          { answer: 'NO', value: false },
+          { id: 1, name: 'yes', value: true },
+          { id: 2, name: 'NO', value: false },
         ],
       },
       {
@@ -37,8 +38,8 @@ const FamilyCare = ({
         question: 'Do you have children who will be moving with you?',
         inputType: 'radio',
         options: [
-          { answer: 'Yes', value: true },
-          { answer: 'NO', value: false },
+          { id: 1, name: 'yes', value: true },
+          { id: 2, name: 'NO', value: false },
         ],
       },
     ],

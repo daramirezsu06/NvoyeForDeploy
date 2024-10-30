@@ -10,17 +10,12 @@ import {
 import { useState, useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import theme from '@/src/app/theme';
+import { Question } from '../../types/question.types';
 
 interface questiondropdownMenuProps {
-  question: {
-    question: string;
-    smallQuestion?: string;
-    nameState: string;
-    options: { id: number; name: string; description: string }[]; // Estructura de las opciones
-    multiple: boolean; // Indica si es selección múltiple
-  };
+  question: Question;
   answers: { [key: string]: any };
-  handleChangeOptions: (event: SelectChangeEvent<number[] | number>) => void; // Ajustado para manejar diferentes tipos
+  handleChangeOptions: (event: SelectChangeEvent<number | number[]>) => void; // Ajustado para manejar diferentes tipos
 }
 
 const DropdownMenu1: React.FC<questiondropdownMenuProps> = ({
@@ -40,10 +35,17 @@ const DropdownMenu1: React.FC<questiondropdownMenuProps> = ({
   }, [answers, question.nameState, question.multiple]);
 
   const handleChange = (event: SelectChangeEvent<number[] | number>) => {
+    // Manejo del cambio de valor
     const value = question.multiple
       ? event.target.value
-      : parseInt(event.target.value);
-    setOptionsChosen(value); // Actualizamos el estado local
+      : parseInt(event.target.value as string);
+
+    // Asegúrate de que value sea el tipo correcto
+    if (question.multiple && Array.isArray(value)) {
+      setOptionsChosen(value);
+    } else {
+      setOptionsChosen(value as number); // Convertir a number si no es múltiple
+    }
 
     handleChangeOptions(event); // Llamamos a la función de manejo de cambios para Redux
   };
@@ -63,30 +65,40 @@ const DropdownMenu1: React.FC<questiondropdownMenuProps> = ({
         onChange={handleChange}
         input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
         name={question.nameState}
-        renderValue={(selected) =>
-          question.multiple ? (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {(selected as number[]).map((value) => {
-                // Buscamos el nombre correspondiente al id
-                const option = question.options.find(
-                  (option) => option.id === value
-                );
-                return (
-                  <Chip key={value} label={option?.name} /> // Usamos el nombre de la opción
-                );
-              })}
-            </Box>
-          ) : (
+        renderValue={(selected) => {
+          if (question.multiple && Array.isArray(question.options)) {
+            return (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                {(selected as number[]).map((value) => {
+                  const option = question.options.find(
+                    (option) => option.id === value // Usamos el ID directamente
+                  );
+                  return (
+                    <Chip key={value} label={option?.name} /> // Usamos el nombre de la opción
+                  );
+                })}
+              </Box>
+            );
+          } else if (question.options) {
             // Para selección única
-            question.options.find((option) => option.id === selected)?.name // Buscamos y mostramos el nombre
-          )
-        }
+            const singleOption = question.options.find(
+              (option) => option.id === (selected as number)
+            );
+            return singleOption ? singleOption.name : ''; // Usamos el nombre de la opción
+          }
+          return null; // Si options es undefined, retornar null
+        }}
       >
-        {question.options.map((item) => (
-          <MenuItem key={item.id} value={item.id}>
-            {item.name}
-          </MenuItem>
-        ))}
+        {question.options &&
+          question.options.map(
+            (
+              item // Verificamos si options está definido
+            ) => (
+              <MenuItem key={item.id} value={item.id}>
+                {item.name}
+              </MenuItem>
+            )
+          )}
       </Select>
     </FormControl>
   );

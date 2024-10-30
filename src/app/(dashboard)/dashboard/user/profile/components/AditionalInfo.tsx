@@ -35,9 +35,8 @@ export const AditionalInfo = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value="" // String vacío para que no haya un valor seleccionado inicialmente
+            value=""
             label="Assigned city"
-            // onChange={handleChange}
           >
             <MenuItem value="">
               <em>None</em>
@@ -55,9 +54,8 @@ export const AditionalInfo = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value="" // String vacío para placeholder
+            value=""
             label="Mission institution"
-            // onChange={handleChange}
           >
             <MenuItem value="">
               <em>None</em>
@@ -73,9 +71,8 @@ export const AditionalInfo = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value="" // String vacío para placeholder
+            value=""
             label="Job role"
-            // onChange={handleChange}
           >
             <MenuItem value="">
               <em>None</em>
@@ -93,9 +90,8 @@ export const AditionalInfo = () => {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value="" // String vacío para placeholder
+            value=""
             label="Years of experience"
-            // onChange={handleChange}
           >
             <MenuItem value="">
               <em>None</em>

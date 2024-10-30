@@ -40,7 +40,6 @@ import { tasksList } from '@/src/app/mocks/tasksMocks';
 type Props = {};
 
 export default function Checklist({}: Props) {
-  //TODO improve de recomended task view in mobile
   return (
     <Container
       sx={{

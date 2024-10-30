@@ -8,14 +8,10 @@ import {
 } from '@mui/material';
 import theme from '@/src/app/theme';
 import { ReactNode } from 'react';
+import { Question } from '../../types/question.types';
 
 interface CuestionBaseProps {
-  question: {
-    question: string;
-    smallQuestion?: string;
-    nameState: string;
-    options: { answer: string; value: boolean }[];
-  };
+  question: Question;
   children?: ReactNode;
   answers: { [key: string]: any };
   handleAnswerChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -29,41 +25,39 @@ const CuestionBase = ({
 }: CuestionBaseProps) => {
   return (
     <>
-      <>
-        <Stack spacing={2}>
-          <Box>
-            <Typography variant="h5" sx={{ pb: 1 }}>
-              {question.question}
-            </Typography>
-            <Typography variant="body1">{question.smallQuestion}</Typography>
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: theme.custom.paperElevationFour,
-              borderRadius: 4,
-              py: 3,
-              px: 3,
-            }}
+      <Stack spacing={2}>
+        <Box>
+          <Typography variant="h5" sx={{ pb: 1 }}>
+            {question.question}
+          </Typography>
+          <Typography variant="body1">{question.smallQuestion}</Typography>
+        </Box>
+        <Box
+          sx={{
+            backgroundColor: theme.custom.paperElevationFour,
+            borderRadius: 4,
+            py: 3,
+            px: 3,
+          }}
+        >
+          <RadioGroup
+            row
+            name={question.nameState}
+            onChange={handleAnswerChange}
+            value={answers[question.nameState]}
           >
-            <RadioGroup
-              row
-              name={question.nameState}
-              onChange={handleAnswerChange}
-              value={answers[question.nameState]}
-            >
-              {question.options?.map((option, index) => (
-                <FormControlLabel
-                  control={<Radio />}
-                  label={option.answer}
-                  key={option.answer}
-                  value={option.value}
-                />
-              ))}
-            </RadioGroup>
-            <> {children || null}</>
-          </Box>
-        </Stack>
-      </>
+            {question.options?.map((option, index) => (
+              <FormControlLabel
+                control={<Radio />}
+                label={'answer' in option ? option.name : option.name}
+                key={'answer' in option ? option.name : option.name}
+                value={'value' in option ? option.value : option.id}
+              />
+            ))}
+          </RadioGroup>
+          {children}
+        </Box>
+      </Stack>
     </>
   );
 };

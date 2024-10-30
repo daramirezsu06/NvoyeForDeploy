@@ -7,6 +7,7 @@ import ProgressLine from './shares/progressLine';
 import { useMemo } from 'react';
 import { UseAnswers } from '../hooks/useAnswers';
 import Brandlogo from '@/src/icons/BrandLogo';
+import { Question } from '../types/question.types';
 
 const Housing = ({
   onNext,
@@ -17,7 +18,7 @@ const Housing = ({
   onBack: () => void;
   step: number;
 }) => {
-  const questions = useMemo(
+  const questions: Question[] = useMemo(
     () => [
       {
         id: 1,
@@ -27,8 +28,8 @@ const Housing = ({
           'Tell us more about you to help us make your journey better and more personalized?',
         inputType: 'radio',
         options: [
-          { answer: 'Yes, I need assistance', value: true },
-          { answer: "It's already taken care of", value: false },
+          { id: 1, name: 'Yes, I need assistance', value: true },
+          { id: 2, name: "It's already taken care of", value: false },
         ],
       },
     ],

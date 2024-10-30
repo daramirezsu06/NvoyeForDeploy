@@ -8,7 +8,9 @@ interface addLanguage {
 const PutStep3 = async (newLanguage: addLanguage) => {
   try {
     const { data } = await axiosApi.put('/diplomat/updateStep3', newLanguage);
-    return data;
+    console.log('respuesta update lengues', data);
+
+    return data.data;
   } catch (error: any) {
     // Si el error es de Axios, manejar con error.response, de lo contrario, usar el mensaje genérico
     const message =

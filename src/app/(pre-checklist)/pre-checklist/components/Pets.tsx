@@ -15,6 +15,7 @@ import DropdownMenu1 from './shares/dropdownMenuCopy';
 import { UseAnswers } from '../hooks/useAnswers';
 import { useEffect, useMemo } from 'react';
 import Brandlogo from '@/src/icons/BrandLogo';
+import { Question } from '../types/question.types';
 
 const Pets = ({
   onNext,
@@ -25,7 +26,7 @@ const Pets = ({
   onBack: () => void;
   step: number;
 }) => {
-  const questions = useMemo(
+  const questions: Question[] = useMemo(
     () => [
       {
         id: 1,
@@ -33,36 +34,41 @@ const Pets = ({
         question: 'Will you be bringing any pets with you?',
         inputType: 'radio',
         options: [
-          { answer: 'Yes', value: true },
-          { answer: 'NO', value: false },
+          { id: 1, name: 'Yes', value: true },
+          { id: 2, name: 'NO', value: false },
         ],
       },
     ],
     []
   );
 
-  const conditionalQuestion = {
+  const conditionalQuestion: Question = {
     id: 1,
     question: 'Please specify:',
     nameState: 'typeOfPets',
     inputType: 'select',
     multiple: false,
-    options: ['Cat', 'Bird', 'Dog', 'Rabbit'],
+    options: [
+      { id: 1, name: 'Cat' },
+      { id: 2, name: 'Bird' },
+      { id: 3, name: 'Dog' },
+      { id: 4, name: 'Rabbit' },
+    ],
     condition: {
       stateCondition: 'isWithPets',
       expectedAnswer: true,
     },
   };
 
-  const conditionalQuestion2 = {
+  const conditionalQuestion2: Question = {
     id: 2,
     question: 'Are you considering adopting a pet upon arrival?',
     nameState: 'isPlanAdoptingPets',
     inputType: 'radio',
     options: [
-      { answer: 'Yes', value: true },
-      { answer: 'NO', value: false },
-      { answer: 'Maybe', value: false },
+      { id: 1, name: 'Yes', value: true },
+      { id: 1, name: 'NO', value: false },
+      { id: 1, name: 'Maybe', value: false },
     ],
     condition: {
       stateCondition: 'isWithPets',
