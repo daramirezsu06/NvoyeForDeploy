@@ -90,7 +90,7 @@ export default function DashboardLayout({
           position: 'sticky',
           top: 0,
           paddingLeft: { xs: '0px', sm: '0px' },
-          paddingRight: { xs: '0px', sm: '0px' },
+          paddingRight: { xs: '0px', sm: ' 0px !important' },
           minHeight: { xs: '0px', sm: '0px' },
         }}
         elevation={0}

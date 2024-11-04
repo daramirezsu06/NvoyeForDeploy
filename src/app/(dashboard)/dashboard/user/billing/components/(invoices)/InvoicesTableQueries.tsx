@@ -157,47 +157,55 @@ export default function InvoicesTableQueries({ handleApplyFilters }: Props) {
             flex: 1,
           }}
         >
-          {/* here goes the filter chips depending con filters set e.g. */}
-          {/* Renderizando los chips según los filtros aplicados */}
-          {filters.status && (
-            <Chip
-              label={` ${filters.status}`}
-              onDelete={() => handleDeleteChip('status')}
-              variant="outlined"
-              color={chipColor}
-              size="small"
-            />
-          )}
-          {filters.startDate && (
-            <Chip
-              label={`Start Date: ${filters.startDate.format('DD-MM-YYYY')}`}
-              onDelete={() => handleDeleteChip('startDate')}
-              variant="outlined"
-              size="small"
-              color="primary"
-            />
-          )}
-          {filters.endDate && (
-            <Chip
-              label={`End Date: ${filters.endDate.format('DD-MM-YYYY')}`}
-              onDelete={() => handleDeleteChip('endDate')}
-              variant="outlined"
-              size="small"
-              color="primary"
-            />
-          )}
-          {filters.amountFilterValues &&
-            (filters.amountFilterValues[0] !== 0 ||
-              filters.amountFilterValues[1] !== 1000) && (
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+              gap: 1,
+            }}
+          >
+            {/* here goes the filter chips depending con filters set e.g. */}
+            {/* Renderizando los chips según los filtros aplicados */}
+            {filters.status && (
               <Chip
-                label={`Amount: €${filters.amountFilterValues[0]} - €${filters.amountFilterValues[1]}`}
-                onDelete={() => handleDeleteChip('amountFilterValues')}
+                label={` ${filters.status}`}
+                onDelete={() => handleDeleteChip('status')}
                 variant="outlined"
+                color={chipColor}
                 size="small"
-                color="warning"
               />
             )}
-
+            {filters.startDate && (
+              <Chip
+                label={`Start Date: ${filters.startDate.format('DD-MM-YYYY')}`}
+                onDelete={() => handleDeleteChip('startDate')}
+                variant="outlined"
+                size="small"
+                color="primary"
+              />
+            )}
+            {filters.endDate && (
+              <Chip
+                label={`End Date: ${filters.endDate.format('DD-MM-YYYY')}`}
+                onDelete={() => handleDeleteChip('endDate')}
+                variant="outlined"
+                size="small"
+                color="primary"
+              />
+            )}
+            {filters.amountFilterValues &&
+              (filters.amountFilterValues[0] !== 0 ||
+                filters.amountFilterValues[1] !== 1000) && (
+                <Chip
+                  label={`Amount: €${filters.amountFilterValues[0]} - €${filters.amountFilterValues[1]}`}
+                  onDelete={() => handleDeleteChip('amountFilterValues')}
+                  variant="outlined"
+                  size="small"
+                  color="warning"
+                />
+              )}
+          </Box>
           {/* here goes the download button */}
           <Button variant="contained" sx={{ textTransform: 'none', gap: 1 }}>
             Download <DownloadOutlined />

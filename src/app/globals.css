@@ -2,6 +2,7 @@
 body {
   font-family: 'Outfit', sans-serif;
   padding-right: 0px !important;
+  overflow: auto !important;
   /* padding: 0 0; */
 }
 html {
