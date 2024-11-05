@@ -11,8 +11,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { TableHubsType } from '../hubs.Types';
 
-const TableHubs = () => {
+const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
   return (
     <Stack
       sx={{
@@ -23,19 +24,31 @@ const TableHubs = () => {
       }}
     >
       <Stack sx={{ px: 2, py: 1, borderBottom: '1px solid #E5E5E5' }}>
-        <Typography variant="h6">medium</Typography>
+        <Typography variant="h6">{tableInfo.title}</Typography>
       </Stack>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ p: 2 }}>Head</TableCell>
-            <TableCell sx={{ p: 2 }}>Head</TableCell>
-            <TableCell sx={{ p: 2 }}>Head</TableCell>
-            <TableCell sx={{ p: 2 }}>Head</TableCell>
+            {tableInfo.colums.map((column, index) => (
+              <TableCell key={index} sx={{ p: 2 }}>
+                {column}
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
+          {tableInfo.rows.map((row, index) => {
+            return (
+              <TableRow key={index}>
+                {row.map((column, index) => (
+                  <TableCell key={index} sx={{ p: 2 }}>
+                    {column}
+                  </TableCell>
+                ))}
+              </TableRow>
+            );
+          })}
+          {/* <TableRow>
             <TableCell sx={{ p: 2 }}>
               <Typography variant="body2">List item</Typography>
             </TableCell>
@@ -48,7 +61,7 @@ const TableHubs = () => {
             <TableCell sx={{ p: 2 }}>
               <Typography variant="body2">List item</Typography>
             </TableCell>
-          </TableRow>
+          </TableRow> */}
         </TableBody>
       </Table>
     </Stack>

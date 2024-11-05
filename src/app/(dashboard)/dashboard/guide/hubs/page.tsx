@@ -1,17 +1,7 @@
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
-import RecommendedHubs from '../home/components/RecommendedHubs';
-import Image from 'next/image';
-import Image1 from './components/Ellipse 38.png';
 import { hubMocks } from '@/src/app/mocks/hubsMocks';
 import CustomHubCard from '../../components/CustomHubCard';
-import BulletedList from './components/bulletedList';
-import TableHubs from './components/table';
-import TextButton from './components/textButton';
-import Text from './components/text';
-import ResourceList from './components/resourceList';
-import Finance from './components/finance';
-import RecommendedTasks from './components/recommendedTasks';
 import SubCategory_Header from './components/subCategory_Header';
 
 type Props = {};
@@ -132,15 +122,6 @@ export default function Hubs({}: Props) {
             topics={hub.topics}
           />
         ))}
-
-        <Finance />
-        <RecommendedTasks />
-        <BulletedList />
-        <TableHubs />
-        <TextButton />
-        <Text />
-        <ResourceList />
-        <SubCategory_Header />
       </Grid>
     </Container>
   );

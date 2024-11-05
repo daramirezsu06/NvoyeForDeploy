@@ -1,6 +1,6 @@
 import { title } from 'process';
 
-const jsonPropuesto = {
+export const jsonPropuesto = {
   statusCode: 200,
   message: 'Operation successful',
   data: {

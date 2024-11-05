@@ -7,8 +7,9 @@ import {
 } from '@mui/icons-material';
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import theme from '@/src/app/theme';
+import { FinanceItemhubsType } from '../hubs.Types';
 
-const Finance = () => {
+const Finance = ({ financeInfo }: { financeInfo: FinanceItemhubsType[] }) => {
   return (
     <Stack
       sx={{
@@ -26,10 +27,40 @@ const Finance = () => {
           backgroundColor: theme.custom.paperElevationFour,
         }}
       >
-        <Typography variant="h6">medium</Typography>
+        <Typography variant="h6">Finance</Typography>
       </Stack>
       <List sx={{ p: 2, gap: 8, display: 'flex', flexDirection: 'column' }}>
-        <ListItem
+        {financeInfo.map((item, index) => {
+          return (
+            <ListItem
+              key={index}
+              sx={{
+                borderRadius: 1,
+                backgroundColor: theme.custom.paperElevationTwo,
+                border: '1px solid #E5E5E5',
+              }}
+            >
+              <Stack
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: '100%',
+                  px: 2,
+                  py: '4px',
+                }}
+              >
+                <ListItemText
+                  sx={{ flexGrow: 1 }}
+                  primary={item.title}
+                  secondary={item.secounText}
+                />
+                <Typography variant="body2">{item.value}</Typography>
+              </Stack>
+            </ListItem>
+          );
+        })}
+        {/* <ListItem
           sx={{
             borderRadius: 1,
             backgroundColor: theme.custom.paperElevationTwo,
@@ -53,7 +84,7 @@ const Finance = () => {
             />
             <Typography variant="body2">Typography</Typography>
           </Stack>
-        </ListItem>
+        </ListItem> */}
       </List>
     </Stack>
   );

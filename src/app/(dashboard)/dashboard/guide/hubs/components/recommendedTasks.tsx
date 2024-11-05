@@ -8,8 +8,13 @@ import {
   Typography,
   IconButton,
 } from '@mui/material';
+import { recomendedTaskItemType } from '../hubs.Types';
 
-const RecommendedTasks = () => {
+const RecommendedTasks = ({
+  recomendedTaskInfo,
+}: {
+  recomendedTaskInfo: recomendedTaskItemType[];
+}) => {
   return (
     <Stack
       sx={{
@@ -25,7 +30,28 @@ const RecommendedTasks = () => {
       </Typography>
       <Stack sx={{ gap: 2 }}>
         <List sx={{ display: 'flex', flexDirection: 'column', py: 1, gap: 1 }}>
-          <ListItem
+          {recomendedTaskInfo.map((item, index) => {
+            return (
+              <ListItem
+                key={index}
+                sx={{
+                  backgroundColor: '#FFFF',
+                  borderRadius: 1,
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <ListItemText
+                  sx={{ flexGrow: 1, py: 0.5 }}
+                  primary={item.title}
+                />
+                <IconButton sx={{ p: 1 }}>
+                  <MoreVert />
+                </IconButton>
+              </ListItem>
+            );
+          })}
+          {/* <ListItem
             sx={{
               backgroundColor: '#FFFF',
               borderRadius: 1,
@@ -50,7 +76,7 @@ const RecommendedTasks = () => {
             <IconButton sx={{ p: 1 }}>
               <MoreVert />
             </IconButton>
-          </ListItem>
+          </ListItem> */}
         </List>
       </Stack>
     </Stack>

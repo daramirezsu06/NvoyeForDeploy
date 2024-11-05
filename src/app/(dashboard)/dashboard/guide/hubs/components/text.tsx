@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 
-const Text = () => {
+const Text = ({ info }: { info: string }) => {
   return (
     <Stack
       sx={{
@@ -24,7 +24,7 @@ const Text = () => {
       <Stack
         sx={{ px: 2, py: 1, display: 'flex', flexDirection: 'column', gap: 2 }}
       >
-        <Typography>Typography</Typography>
+        <Typography>{info}</Typography>
       </Stack>
     </Stack>
   );
