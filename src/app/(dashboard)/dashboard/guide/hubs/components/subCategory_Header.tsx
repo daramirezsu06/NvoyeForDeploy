@@ -1,8 +1,13 @@
 import { Chip, Stack, Typography } from '@mui/material';
 import Finance from '@/src/icons/FinanceIcon.png';
 import Image from 'next/image';
+import { SubCategoryHubsType } from '../hubs.Types';
 
-const SubCategory_Header = () => {
+const SubCategory_Header = ({
+  infoHeader,
+}: {
+  infoHeader: SubCategoryHubsType;
+}) => {
   return (
     <Stack
       sx={{
@@ -15,11 +20,13 @@ const SubCategory_Header = () => {
       }}
     >
       <Stack sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        <Typography variant="h4">Banking</Typography>
+        <Typography variant="h4">
+          {infoHeader.name && infoHeader.name}
+        </Typography>
         <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
-          <Chip label="Convenient banking" />
-          <Chip label="Easy payments" />
-          <Chip label="Atm access" />
+          {infoHeader.tags.map((tag, index) => {
+            return <Chip key={index} label={tag} />;
+          })}
         </Stack>
       </Stack>
       <Image src={Finance} alt="Finance" width={48} height={48} />
