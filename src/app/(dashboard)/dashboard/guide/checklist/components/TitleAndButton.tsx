@@ -2,6 +2,7 @@ import { AddTaskOutlined } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import theme from '@/src/app/theme';
 import React from 'react';
+import NewTaskButton from './NewTaskButton';
 
 type Props = {};
 
@@ -24,10 +25,11 @@ export default function TitleAndButton({}: Props) {
           A guided list of tasks to help you relocate and integrate.
         </Typography>
       </Stack>
-      <Button variant="contained" sx={{ py: 1, px: 3, gap: 1 }}>
+      {/* <Button variant="contained" sx={{ py: 1, px: 3, gap: 1 , textTransform:"none"}}>
         <AddTaskOutlined sx={{ mx: 0, my: 0 }} />
         <Typography sx={{ mx: 0, my: 0 }}>New task</Typography>
-      </Button>
+      </Button> */}
+      <NewTaskButton />
     </Box>
   );
 }

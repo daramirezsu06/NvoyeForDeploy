@@ -37,11 +37,11 @@ export default function TodoComponent({ task }: { task: ITask }) {
   //TODO improve customization to this component
 
   const flagColor =
-    task.priority === 'Low'
+    task.priority.name === 'Low'
       ? 'success.main'
-      : task.priority === 'Medium'
+      : task.priority.name === 'Medium'
         ? 'warning.main'
-        : task.priority === 'High'
+        : task.priority.name === 'High'
           ? 'error.main'
           : 'info';
 
@@ -89,7 +89,7 @@ export default function TodoComponent({ task }: { task: ITask }) {
           <Chip icon={<BrandIcon />} label="Landing package" />
         </Stack>
 
-        {task.complete ? (
+        {task.taskStatus.name === 'Completed' ? (
           <Button
             sx={{
               textTransform: 'none',

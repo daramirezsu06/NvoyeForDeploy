@@ -1,16 +1,18 @@
 'use client';
 import { ArchiveOutlined, ListAlt, TaskOutlined } from '@mui/icons-material';
-import { Box, Container, Stack, Tab, Tabs } from '@mui/material';
+import { Box, Container, Stack, Tab, Tabs, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import TitleAndButton from './components/ titleAndButton';
+import TitleAndButton from './components/TitleAndButton';
 import TodoComponent from './components/ToDoComponent';
 import theme from '@/src/app/theme';
 import {
   ITask,
-  tasksList,
+  tasksListMock,
 } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
 import RecomendedTasksList from './components/RecomendedTasksList';
 import { IRecomendedTask, recomendedTasksMocks } from './mocks/recomendedTasks';
+
+import NoTasksComponent from './components/NoTasksComponent';
 
 export default function Checklist() {
   //TODO connect to the backend and get the recomended tasks  -> {{url}}/tasks/getRecommendedTasks
@@ -18,7 +20,8 @@ export default function Checklist() {
     useState<IRecomendedTask[]>(recomendedTasksMocks);
 
   //TODO connect to the backend and get the checklist tasks
-  const [userTaskList, setUserTaskList] = useState<ITask[]>(tasksList);
+  // const [userTaskList, setUserTaskList] = useState<ITask[]>(tasksListMock);
+  const [userTaskList, setUserTaskList] = useState<ITask[]>([]);
 
   return (
     <Container
@@ -76,9 +79,15 @@ export default function Checklist() {
               gap: 2,
             }}
           >
-            {userTaskList.map((task: ITask) => (
-              <TodoComponent key={task.id} task={task} />
-            ))}
+            {userTaskList.length === 0 ? (
+              // TODO a mostrar cuando no haya tareas
+
+              <NoTasksComponent />
+            ) : (
+              userTaskList.map((task: ITask) => (
+                <TodoComponent key={task.id} task={task} />
+              ))
+            )}
           </Box>
         </Stack>
         <RecomendedTasksList recomendedTasks={userTaskList} />

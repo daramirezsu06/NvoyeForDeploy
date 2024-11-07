@@ -45,7 +45,6 @@ export default function RecomendedTasksList({
         Recommended checklist tasks to help you meet your needs.
       </Typography>
       <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        {/* //TODO create a componente for this ListItem */}
         {recomendedTasks.map((task: ITask) => (
           <RecomendedTasksListItem key={task.id} recomendedTask={task} />
         ))}
