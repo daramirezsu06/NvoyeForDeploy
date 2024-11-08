@@ -46,6 +46,7 @@ export default function TodoComponent({ task }: { task: ITask }) {
           : 'info';
 
   return (
+    // TODO ponerle onClick que habra el detalle de la task
     <Paper
       sx={{
         display: 'flex',
@@ -53,6 +54,11 @@ export default function TodoComponent({ task }: { task: ITask }) {
         gap: 1,
         py: 2,
         borderRadius: 2,
+        '&:hover': {
+          backgroundColor: '#F4F0ED',
+          boxShadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.2)',
+          cursor: 'pointer',
+        },
       }}
     >
       <Stack px={2} pb={1} gap={1}>
@@ -89,6 +95,7 @@ export default function TodoComponent({ task }: { task: ITask }) {
           <Chip icon={<BrandIcon />} label="Landing package" />
         </Stack>
 
+        {/* //TODO darle funcionalidad a este boton */}
         {task.taskStatus.name === 'Completed' ? (
           <Button
             sx={{

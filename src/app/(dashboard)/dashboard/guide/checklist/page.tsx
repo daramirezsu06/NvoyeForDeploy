@@ -20,8 +20,22 @@ export default function Checklist() {
     useState<IRecomendedTask[]>(recomendedTasksMocks);
 
   //TODO connect to the backend and get the checklist tasks
-  // const [userTaskList, setUserTaskList] = useState<ITask[]>(tasksListMock);
-  const [userTaskList, setUserTaskList] = useState<ITask[]>([]);
+  const [userTaskList, setUserTaskList] = useState<ITask[]>(tasksListMock);
+  // const [userTaskList, setUserTaskList] = useState<ITask[]>([]);
+
+  const [activeTab, setActiveTab] = useState(0);
+  // Función para manejar el cambio de pestaña
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setActiveTab(newValue);
+  };
+
+  // Filtrar las tareas según la pestaña activa
+  const filteredTasks = userTaskList.filter((task) => {
+    if (activeTab === 0) return task.taskStatus.name !== 'Completed';
+    if (activeTab === 1) return task.taskStatus.name === 'Completed';
+    if (activeTab === 2) return task.taskStatus.name === 'Archived';
+    return true;
+  });
 
   return (
     <Container
@@ -45,7 +59,7 @@ export default function Checklist() {
         sx={{
           gap: 4,
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
+          flexDirection: { xs: 'column-reverse', md: 'row' },
         }}
       >
         <Stack sx={{ width: '100%' }} gap={1}>
@@ -53,9 +67,25 @@ export default function Checklist() {
             sx={{
               backgroundColor: theme.custom.paperElevationOne,
               borderRadius: 2,
+              height: '40px',
             }}
           >
-            <Tabs>
+            <Tabs
+              value={activeTab}
+              onChange={handleTabChange}
+              sx={{
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                '& .MuiTab-root': {
+                  textTransform: 'none', // Remueve el uppercase
+                  fontWeight: 500,
+                },
+                '& .Mui-selected': {
+                  color: 'blue', // Cambia el color de la pestaña activa
+                },
+              }}
+            >
               <Tab iconPosition="start" icon={<ListAlt />} label="To do" />
               <Tab
                 iconPosition="start"
@@ -80,11 +110,11 @@ export default function Checklist() {
             }}
           >
             {userTaskList.length === 0 ? (
-              // TODO a mostrar cuando no haya tareas
-
               <NoTasksComponent />
+            ) : filteredTasks.length === 0 ? (
+              <Typography>No tasks matching the filter</Typography>
             ) : (
-              userTaskList.map((task: ITask) => (
+              filteredTasks.map((task: ITask) => (
                 <TodoComponent key={task.id} task={task} />
               ))
             )}
