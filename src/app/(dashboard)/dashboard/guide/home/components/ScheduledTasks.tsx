@@ -1,4 +1,4 @@
-import { tasksList } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
+import { tasksListMock } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
 import { Box, Stack, Typography, Button } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
@@ -60,7 +60,7 @@ export default function ScheduledTasks({}: Props) {
           gap: 2,
         }}
       >
-        {tasksList.map((task) => (
+        {tasksListMock.map((task) => (
           <TodoComponent key={task.id} task={task} />
         ))}
       </Box>
