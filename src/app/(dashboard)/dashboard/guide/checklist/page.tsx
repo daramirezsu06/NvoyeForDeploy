@@ -6,8 +6,8 @@ import TitleAndButton from './components/TitleAndButton';
 import TodoComponent from './components/ToDoComponent';
 import theme from '@/src/app/theme';
 import {
-  ITask,
-  tasksListMock,
+  backendTasksListMock,
+  IBackendTasks,
 } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
 import RecomendedTasksList from './components/RecomendedTasksList';
 import { IRecomendedTask, recomendedTasksMocks } from './mocks/recomendedTasks';
@@ -19,9 +19,12 @@ export default function Checklist() {
   const [recomendedTasks, setRecomendedTasks] =
     useState<IRecomendedTask[]>(recomendedTasksMocks);
 
-  //TODO connect to the backend and get the checklist tasks
-  const [userTaskList, setUserTaskList] = useState<ITask[]>(tasksListMock);
-  // const [userTaskList, setUserTaskList] = useState<ITask[]>([]);
+  //TODO connect to the backend and get the checklist tasks -> {{url}}/tasks/getAll?page=1&limit=10&statusId=3
+  //TODO get property data
+
+  const [userTaskList, setUserTaskList] =
+    useState<IBackendTasks[]>(backendTasksListMock);
+  // const [userTaskList, setUserTaskList] = useState<ITask[]>([]); //for no tasks
 
   const [activeTab, setActiveTab] = useState(0);
   // Función para manejar el cambio de pestaña
@@ -114,13 +117,13 @@ export default function Checklist() {
             ) : filteredTasks.length === 0 ? (
               <Typography>No tasks matching the filter</Typography>
             ) : (
-              filteredTasks.map((task: ITask) => (
+              filteredTasks.map((task: IBackendTasks) => (
                 <TodoComponent key={task.id} task={task} />
               ))
             )}
           </Box>
         </Stack>
-        <RecomendedTasksList recomendedTasks={userTaskList} />
+        <RecomendedTasksList recomendedTasks={recomendedTasks} />
       </Box>
     </Container>
   );

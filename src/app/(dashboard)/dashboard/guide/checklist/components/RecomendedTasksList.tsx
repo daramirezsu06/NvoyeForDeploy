@@ -18,7 +18,7 @@ import {
   MoreVert,
 } from '@mui/icons-material';
 import { IRecomendedTask } from '../mocks/recomendedTasks';
-import { ITask } from '../mocks/tasksMocks';
+import { IBackendTasks } from '../mocks/tasksMocks';
 import RecomendedTasksListItem from './RecomendedTasksListItem';
 import Image from 'next/image';
 import icon from '@/src/icons/AddTaskIcon.png';
@@ -26,7 +26,7 @@ import icon from '@/src/icons/AddTaskIcon.png';
 export default function RecomendedTasksList({
   recomendedTasks,
 }: {
-  recomendedTasks: ITask[];
+  recomendedTasks: IRecomendedTask[];
 }) {
   const [isShowList, setIsShowList] = useState(false);
 
@@ -142,7 +142,7 @@ export default function RecomendedTasksList({
             gap: 1,
           }}
         >
-          {recomendedTasks.map((task: ITask) => (
+          {recomendedTasks.map((task: IRecomendedTask) => (
             <RecomendedTasksListItem key={task.id} recomendedTask={task} />
           ))}
         </List>

@@ -2,10 +2,10 @@ import { MoreVert } from '@mui/icons-material';
 import { Container, IconButton, ListItem } from '@mui/material';
 import React from 'react';
 import { IRecomendedTask } from '../mocks/recomendedTasks';
-import { ITask } from '../mocks/tasksMocks';
+import { IBackendTasks } from '../mocks/tasksMocks';
 
 type Props = {
-  recomendedTask: ITask;
+  recomendedTask: IRecomendedTask;
 };
 
 export default function RecomendedTasksListItem({ recomendedTask }: Props) {
@@ -32,7 +32,7 @@ export default function RecomendedTasksListItem({ recomendedTask }: Props) {
           paddingRight: { xs: '16px', sm: '16px' },
         }}
       >
-        {recomendedTask.title}
+        {recomendedTask.taskType.name}
         <IconButton>
           {/* //TODO este boton debe mostrar el modal que muesrte opciones */}
           <MoreVert sx={{ ml: 'auto' }} />

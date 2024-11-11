@@ -1,39 +1,30 @@
+'use client';
 import {
-  AddTaskOutlined,
-  ArchiveOutlined,
   CheckBoxOutlineBlank,
   CheckBoxOutlined,
   EventAvailable,
   FilePresent,
   Flag,
-  HealthAndSafetyOutlined,
-  Label,
-  ListAlt,
-  Note,
+  NoteTwoTone,
   NotificationsActive,
-  Task,
-  TaskAltOutlined,
-  TaskOutlined,
+  NotificationsActiveTwoTone,
 } from '@mui/icons-material';
 import {
-  Box,
   Button,
   Chip,
-  Container,
   Divider,
-  List,
-  ListItem,
+  Modal,
   Paper,
   Stack,
-  Tab,
-  Tabs,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import BrandIcon from '@/src/icons/BrandLogo';
-import { ITask } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
+import { IBackendTasks } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
+import { wrap } from 'module';
+import TaskDetail from './TaskDetail';
 
-export default function TodoComponent({ task }: { task: ITask }) {
+export default function TodoComponent({ task }: { task: IBackendTasks }) {
   //TODO improve customization to this component
 
   const flagColor =
@@ -44,6 +35,13 @@ export default function TodoComponent({ task }: { task: ITask }) {
         : task.priority.name === 'High'
           ? 'error.main'
           : 'info';
+
+  const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
+  const handleOpenTaskDetail = () => setIsTaskDetailOpen(true);
+  const handleCloseTaskDetail = () => {
+    setIsTaskDetailOpen(false);
+    console.log('cerrando');
+  };
 
   return (
     // TODO ponerle onClick que habra el detalle de la task
@@ -61,9 +59,23 @@ export default function TodoComponent({ task }: { task: ITask }) {
         },
       }}
     >
-      <Stack px={2} pb={1} gap={1}>
+      <Modal
+        open={isTaskDetailOpen} //modificar
+        onClose={handleCloseTaskDetail} //modificar
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'auto',
+        }}
+      >
+        <TaskDetail task={task} handleCloseTaskDetail={handleCloseTaskDetail} />
+      </Modal>
+      <Stack px={2} pb={1} gap={1} onClick={handleOpenTaskDetail}>
         <Stack direction="row" justifyContent="space-between">
-          <Typography>{task.title}</Typography>
+          <Typography>{task.customTitle}</Typography>
           <Flag sx={{ color: flagColor }} />
         </Stack>
         <Stack
@@ -72,16 +84,34 @@ export default function TodoComponent({ task }: { task: ITask }) {
           gap={1}
           alignItems="center"
         >
-          <FilePresent />
-          <Divider orientation="vertical" />
-          <Note />
-          <Divider orientation="vertical" />
-          <NotificationsActive />
-          <Divider orientation="vertical" />
-          <EventAvailable />
+          {/* //TODO adjust depending on taks */}
+          {task.documents.length > 0 && (
+            <>
+              <FilePresent sx={{ color: 'primary.main' }} />
+              <Divider orientation="vertical" />
+            </>
+          )}
+          {task.notes && (
+            <>
+              <NoteTwoTone sx={{ color: 'primary.main' }} />
+              <Divider orientation="vertical" />
+            </>
+          )}
+          {task.remindDate && (
+            <>
+              <NotificationsActiveTwoTone sx={{ color: 'primary.main' }} />
+              <Divider orientation="vertical" />
+            </>
+          )}
+          {task.dueDate && (
+            <>
+              <EventAvailable sx={{ color: 'primary.main' }} />
+            </>
+          )}
         </Stack>
       </Stack>
       <Divider />
+
       <Stack
         px={2}
         sx={{
@@ -90,9 +120,26 @@ export default function TodoComponent({ task }: { task: ITask }) {
           justifyContent: { xs: 'flex-end', sm: 'space-between' },
         }}
       >
-        <Stack direction="row" gap={1}>
-          <Chip icon={<HealthAndSafetyOutlined />} label={task.category} />
-          <Chip icon={<BrandIcon />} label="Landing package" />
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 1,
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* <Chip icon={<HealthAndSafetyOutlined />} label={task.category} /> */}
+
+          {task.categories.length === 0 && (
+            <Chip icon={<BrandIcon />} label="Landing package" />
+          )}
+          {task.categories.map((category, index) => (
+            <Chip
+              key={index}
+              // icon={<BrandIcon />}
+              label={category.category.name}
+            />
+          ))}
         </Stack>
 
         {/* //TODO darle funcionalidad a este boton */}
@@ -104,6 +151,9 @@ export default function TodoComponent({ task }: { task: ITask }) {
               color: 'success.main',
               justifyContent: 'flex-end',
             }}
+            onClick={() => {
+              console.log('click');
+            }}
           >
             Completed <CheckBoxOutlined />
           </Button>
@@ -114,6 +164,9 @@ export default function TodoComponent({ task }: { task: ITask }) {
               gap: 1,
               color: 'black',
               justifyContent: 'flex-end',
+            }}
+            onClick={() => {
+              console.log('click');
             }}
           >
             Mark as complete <CheckBoxOutlineBlank />
