@@ -8,17 +8,18 @@ import {
   Typography,
   IconButton,
 } from '@mui/material';
-import { recomendedTaskItemType } from '../hubs.Types';
+import { recomendedTaskItemType, recomendedTaskType } from '../hubs.Types';
 
-const RecommendedTasks = ({
+const RecommendedTasks2 = ({
   recomendedTaskInfo,
 }: {
-  recomendedTaskInfo: recomendedTaskItemType[];
+  recomendedTaskInfo: recomendedTaskType;
 }) => {
   return (
     <Stack
       sx={{
         p: 2,
+        backgroundColor: '#F5F3F1',
       }}
     >
       <Stack
@@ -29,7 +30,7 @@ const RecommendedTasks = ({
           justifyContent: 'space-between',
         }}
       >
-        <Typography variant="h6">Recommended Tasks</Typography>
+        <Typography variant="h6">{recomendedTaskInfo.title}</Typography>
         <Button variant="contained">View checklist</Button>
       </Stack>
       <Typography sx={{ mb: 2 }} variant="caption">
@@ -37,7 +38,7 @@ const RecommendedTasks = ({
       </Typography>
       <Stack sx={{ gap: 2 }}>
         <List sx={{ display: 'flex', flexDirection: 'column', py: 1, gap: 1 }}>
-          {recomendedTaskInfo.map((item, index) => {
+          {recomendedTaskInfo.items.map((item, index) => {
             return (
               <ListItem
                 key={index}
@@ -90,4 +91,4 @@ const RecommendedTasks = ({
   );
 };
 
-export default RecommendedTasks;
+export default RecommendedTasks2;

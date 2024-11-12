@@ -1,6 +1,6 @@
 export interface BulletedListHubsType {
   title: string;
-  content: string[];
+  items: string[];
 }
 export interface TableHubsType {
   title: string;
@@ -26,4 +26,18 @@ export interface ResourceItemHubsType {
 export interface SubCategoryHubsType {
   name: string;
   tags: string[];
+}
+export interface recomendedTaskType {
+  title: string;
+  items: recomendedTaskItemType[];
+}
+
+export interface FinanceType {
+  title: string;
+  items: FinanceItemhubsType[];
+}
+
+export interface ResourceType {
+  title: string;
+  items: ResourceItemHubsType[];
 }

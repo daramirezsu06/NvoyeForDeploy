@@ -1,30 +1,68 @@
-import { Stack } from '@mui/material';
-import { jsonPropuesto } from '../components/jsonPropuesto';
+import { Grid, Stack } from '@mui/material';
 import Finance from '../components/finance';
 import RecommendedTasks from '../components/recommendedTasks';
 import BulletedList from '../components/bulletedList';
 import TableHubs from '../components/table';
 import TextButton from '../components/textButton';
-import Text from '../components/text';
 import ResourceList from '../components/resourceList';
 import SubCategory_Header from '../components/subCategory_Header';
+import Finance2 from '../components/finance2';
+import RecommendedTasks2 from '../components/recommendedTasks2';
+import ResourceList2 from '../components/resourceList2';
+import { proposalJSON } from '../components/JsonPropuesto4';
+
 export default function SubHubs() {
-  const { name, tags, overview, detail } = jsonPropuesto.data;
+  const { name, tags, overview, PrincipalContent, rightContend, description } =
+    proposalJSON.data;
+
+  const renderComponent = (component, index) => {
+    switch (component.type) {
+      case 'list':
+        return <BulletedList key={index} bulletInfo={component.data} />;
+      case 'table':
+        return <TableHubs key={index} tableInfo={component.data} />;
+      case 'recomendedTasks':
+        return (
+          <RecommendedTasks2 key={index} recomendedTaskInfo={component.data} />
+        );
+      case 'financial':
+        return <Finance2 key={index} financeInfo={component.data} />;
+      case 'resource':
+        return <ResourceList2 key={index} resourceInfo={component.data} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <Stack>
-      <SubCategory_Header infoHeader={{ name, tags }} />
-      <Finance financeInfo={detail.finance} />
-      <RecommendedTasks recomendedTaskInfo={detail.recomendedTasks} />
-      {detail.bulletedLists.map((list, index) => {
-        return <BulletedList key={index} bulletInfo={list} />;
-      })}
-      {detail.tables.map((table, index) => {
-        return <TableHubs key={index} tableInfo={table} />;
-      })}
-
-      <TextButton info={overview} />
-
-      <ResourceList resourceInfo={detail.resources} />
-    </Stack>
+    <Grid container spacing={2} sx={{ px: 2 }}>
+      <Grid item xs={8}>
+        <Stack spacing={2}>
+          <SubCategory_Header infoHeader={{ name, tags }} />
+          <Stack
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 3,
+              p: 3,
+              borderRadius: 2,
+              backgroundColor: '#F5F3F1',
+            }}
+          >
+            <TextButton info={overview} />
+            {PrincipalContent.map((component, index) =>
+              renderComponent(component, index)
+            )}
+          </Stack>
+        </Stack>
+      </Grid>
+      <Grid item xs={4}>
+        <Stack spacing={2}>
+          {rightContend.map((component, index) =>
+            renderComponent(component, index)
+          )}
+        </Stack>
+      </Grid>
+    </Grid>
   );
 }

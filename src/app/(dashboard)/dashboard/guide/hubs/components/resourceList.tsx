@@ -17,7 +17,7 @@ const ResourceList = ({
   return (
     <Stack
       sx={{
-        minWidth: '752px',
+        // minWidth: '752px',
         backgroundColor: '#FFFF',
         borderRadius: 1,
         border: '1px solid #E5E5E5',
