@@ -3,12 +3,32 @@ import { Container, IconButton, ListItem } from '@mui/material';
 import React from 'react';
 import { IRecomendedTask } from '../mocks/recomendedTasks';
 import { IBackendTasks } from '../mocks/tasksMocks';
+import RecomendedTaskItemMenu from './RecomendedTaskItemMenu';
 
 type Props = {
   recomendedTask: IRecomendedTask;
 };
 
 export default function RecomendedTasksListItem({ recomendedTask }: Props) {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const [anchorElMenuLayout, setAnchorElMenuLayout] =
+    React.useState<null | HTMLElement>(null);
+  const openMenuLayout = Boolean(anchorElMenuLayout);
+  const handleClickMenuLayout = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElMenuLayout(event.currentTarget);
+  };
+  const handleCloseMenuLayout = () => {
+    setAnchorElMenuLayout(null);
+  };
+
   return (
     <ListItem
       sx={{
@@ -33,10 +53,14 @@ export default function RecomendedTasksListItem({ recomendedTask }: Props) {
         }}
       >
         {recomendedTask.taskType.name}
-        <IconButton>
-          {/* //TODO este boton debe mostrar el modal que muesrte opciones */}
+        <IconButton onClick={handleClick}>
           <MoreVert sx={{ ml: 'auto' }} />
         </IconButton>
+        <RecomendedTaskItemMenu
+          anchorEl={anchorEl}
+          open={open}
+          handleClose={handleClose}
+        />
       </Container>
     </ListItem>
   );

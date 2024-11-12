@@ -43,7 +43,7 @@ export default function TaskDetail({ task, handleCloseTaskDetail }: Iprops) {
   const [priority, setPriority] = useState<string>(task.priority.name);
 
   const [categories, setCategories] = useState<ICategoryDetail[]>(
-    task.categories.map((category) => category.category)
+    task.categories ? task.categories.map((category) => category.category) : []
   );
 
   const [filesAttached, setFilesAttached] = useState<IDocument[]>(

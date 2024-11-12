@@ -1,12 +1,21 @@
+'use client';
 import { AddTaskOutlined } from '@mui/icons-material';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Button, Modal, Stack, Typography } from '@mui/material';
 import theme from '@/src/app/theme';
-import React from 'react';
+import React, { useState } from 'react';
 import NewTaskButton from './NewTaskButton';
+import NewTaskModal from './NewTaskModal';
 
 type Props = {};
 
 export default function TitleAndButton({}: Props) {
+  const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
+  const handleOpenNewTask = () => setIsNewTaskOpen(true);
+  const handleCloseNewTask = () => {
+    setIsNewTaskOpen(false);
+    // console.log('cerrando');
+  };
+
   return (
     <Box
       sx={{
@@ -26,7 +35,22 @@ export default function TitleAndButton({}: Props) {
         </Typography>
       </Stack>
 
-      <NewTaskButton />
+      <NewTaskButton handleOpenNewTask={handleOpenNewTask} />
+
+      <Modal
+        open={isNewTaskOpen} //modificar
+        onClose={handleCloseNewTask} //modificar
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'auto',
+        }}
+      >
+        <NewTaskModal handleCloseNewTask={handleCloseNewTask} />
+      </Modal>
     </Box>
   );
 }

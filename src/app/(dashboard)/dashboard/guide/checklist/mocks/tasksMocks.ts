@@ -1,11 +1,11 @@
 export interface IBackendTasks {
-  id: number;
-  userId: number;
-  taskTypeId: number;
+  id?: number;
+  userId?: number;
+  taskTypeId?: number;
   taskStatusId: number;
-  remindDate: string;
-  dueDate: string;
-  priorityId: number;
+  remindDate: string | null;
+  dueDate: string | null;
+  priorityId: number | undefined;
   documents: IDocument[];
   notes: string;
   subTasks: ISubTask[];
@@ -16,11 +16,11 @@ export interface IBackendTasks {
   taskStatus: ITaskStatus;
   taskType: ITaskType;
   priority: IPriority;
-  categories: ICategory[];
+  categories?: ICategory[] | undefined;
 }
 
 export interface IDocument {
-  url: string;
+  url?: string;
   name: string;
 }
 

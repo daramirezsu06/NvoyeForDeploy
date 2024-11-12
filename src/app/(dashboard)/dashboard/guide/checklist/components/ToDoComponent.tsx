@@ -40,7 +40,7 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
   const handleOpenTaskDetail = () => setIsTaskDetailOpen(true);
   const handleCloseTaskDetail = () => {
     setIsTaskDetailOpen(false);
-    console.log('cerrando');
+    // console.log('cerrando');
   };
 
   return (

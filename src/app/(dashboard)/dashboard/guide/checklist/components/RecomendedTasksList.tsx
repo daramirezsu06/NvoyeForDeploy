@@ -6,19 +6,14 @@ import {
   Icon,
   IconButton,
   List,
-  ListItem,
   Stack,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
 import theme from '@/src/app/theme';
-import {
-  KeyboardArrowRight,
-  KeyboardDoubleArrowRight,
-  MoreVert,
-} from '@mui/icons-material';
+import { KeyboardDoubleArrowRight } from '@mui/icons-material';
 import { IRecomendedTask } from '../mocks/recomendedTasks';
-import { IBackendTasks } from '../mocks/tasksMocks';
+
 import RecomendedTasksListItem from './RecomendedTasksListItem';
 import Image from 'next/image';
 import icon from '@/src/icons/AddTaskIcon.png';
@@ -70,7 +65,6 @@ export default function RecomendedTasksList({
           </Icon>
         </IconButton>
 
-        {/* //TODO give function to this button -> should show the list */}
         <Button
           sx={{
             display: { xs: 'flex', md: 'none' },

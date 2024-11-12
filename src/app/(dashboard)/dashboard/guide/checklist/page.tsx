@@ -24,7 +24,7 @@ export default function Checklist() {
 
   const [userTaskList, setUserTaskList] =
     useState<IBackendTasks[]>(backendTasksListMock);
-  // const [userTaskList, setUserTaskList] = useState<ITask[]>([]); //for no tasks
+  // const [userTaskList, setUserTaskList] = useState<IBackendTasks[]>([]); //for no tasks
 
   const [activeTab, setActiveTab] = useState(0);
   // Función para manejar el cambio de pestaña
@@ -81,11 +81,11 @@ export default function Checklist() {
                 display: 'flex',
                 alignItems: 'center',
                 '& .MuiTab-root': {
-                  textTransform: 'none', // Remueve el uppercase
+                  textTransform: 'none',
                   fontWeight: 500,
                 },
                 '& .Mui-selected': {
-                  color: 'blue', // Cambia el color de la pestaña activa
+                  color: 'blue',
                 },
               }}
             >
