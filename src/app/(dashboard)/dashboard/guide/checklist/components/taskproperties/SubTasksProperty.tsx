@@ -46,6 +46,9 @@ export default function SubTasksProperty({
       }}
     >
       <Typography variant="subtitle1">Subtask</Typography>
+      <Typography variant="body2">
+        These could be actions steps to get this task completed.
+      </Typography>
       <Stack
         sx={{
           display: 'flex',
@@ -62,7 +65,7 @@ export default function SubTasksProperty({
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              width: '500px',
+              width: { xs: '100%', md: '500px' },
               justifyContent: 'space-between', // Asegura que el checkbox y el icono estén distribuidos
             }}
           >
@@ -120,7 +123,7 @@ export default function SubTasksProperty({
               </InputAdornment>
             ),
           }}
-          sx={{ width: '500px' }}
+          sx={{ width: { xs: '100%', md: '500px' } }}
         />
       </Stack>
     </Stack>

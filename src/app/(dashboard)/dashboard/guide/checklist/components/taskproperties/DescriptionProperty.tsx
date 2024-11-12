@@ -23,12 +23,15 @@ export default function DescriptionProperty({
       <Typography variant="h6">Description</Typography>
 
       <TextField
+        variant="standard"
         multiline
+        minRows={3}
         value={description}
         placeholder="Write a description"
         sx={{
           backgroundColor: theme.custom.paperElevationFour,
           width: '100%',
+          borderRadius: 2,
         }}
         onChange={(e) => setDescription(e.target.value)}
       />

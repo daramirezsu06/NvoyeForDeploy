@@ -40,7 +40,7 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
   const handleOpenTaskDetail = () => setIsTaskDetailOpen(true);
   const handleCloseTaskDetail = () => {
     setIsTaskDetailOpen(false);
-    console.log('cerrando');
+    // console.log('cerrando');
   };
 
   return (
@@ -130,10 +130,10 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
         >
           {/* <Chip icon={<HealthAndSafetyOutlined />} label={task.category} /> */}
 
-          {task.categories.length === 0 && (
+          {task.categories?.length === 0 && (
             <Chip icon={<BrandIcon />} label="Landing package" />
           )}
-          {task.categories.map((category, index) => (
+          {task.categories?.map((category, index) => (
             <Chip
               key={index}
               // icon={<BrandIcon />}
