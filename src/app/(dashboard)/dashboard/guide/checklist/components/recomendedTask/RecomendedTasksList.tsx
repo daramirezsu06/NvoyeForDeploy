@@ -12,9 +12,9 @@ import {
 import React, { useState } from 'react';
 import theme from '@/src/app/theme';
 import { KeyboardDoubleArrowRight } from '@mui/icons-material';
-import { IRecomendedTask } from '../mocks/recomendedTasks';
+import { IRecomendedTask } from '../../mocks/recomendedTasks';
 
-import RecomendedTasksListItem from './RecomendedTasksListItem';
+import RecomendedTasksListItem from '../recomendedTask/RecomendedTasksListItem';
 import Image from 'next/image';
 import icon from '@/src/icons/AddTaskIcon.png';
 
