@@ -296,7 +296,6 @@ export default function NewTaskModal({ handleCloseNewTask }: Props) {
         <Button
           variant="outlined"
           color="info"
-          startIcon={<ArchiveOutlined />}
           sx={{ textTransform: 'none', borderRadius: 2 }}
           onClick={handleCloseNewTask}
         >
@@ -305,7 +304,7 @@ export default function NewTaskModal({ handleCloseNewTask }: Props) {
 
         <Button
           variant="contained"
-          color="success"
+          color="primary"
           startIcon={<AddTaskOutlined sx={{ mx: 0, my: 0 }} />}
           sx={{ textTransform: 'none', borderRadius: 2 }}
           onClick={handleCreateTask}

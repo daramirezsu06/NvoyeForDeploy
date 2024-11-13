@@ -1,8 +1,8 @@
 import { MoreVert } from '@mui/icons-material';
 import { Container, IconButton, ListItem } from '@mui/material';
 import React from 'react';
-import { IRecomendedTask } from '../mocks/recomendedTasks';
-import { IBackendTasks } from '../mocks/tasksMocks';
+import { IRecomendedTask } from '../../mocks/recomendedTasks';
+import { IBackendTasks } from '../../mocks/tasksMocks';
 import RecomendedTaskItemMenu from './RecomendedTaskItemMenu';
 
 type Props = {
@@ -17,16 +17,6 @@ export default function RecomendedTasksListItem({ recomendedTask }: Props) {
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const [anchorElMenuLayout, setAnchorElMenuLayout] =
-    React.useState<null | HTMLElement>(null);
-  const openMenuLayout = Boolean(anchorElMenuLayout);
-  const handleClickMenuLayout = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElMenuLayout(event.currentTarget);
-  };
-  const handleCloseMenuLayout = () => {
-    setAnchorElMenuLayout(null);
   };
 
   return (
@@ -60,6 +50,7 @@ export default function RecomendedTasksListItem({ recomendedTask }: Props) {
           anchorEl={anchorEl}
           open={open}
           handleClose={handleClose}
+          recomendedTask={recomendedTask}
         />
       </Container>
     </ListItem>

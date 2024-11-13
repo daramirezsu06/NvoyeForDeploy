@@ -9,7 +9,7 @@ import {
   backendTasksListMock,
   IBackendTasks,
 } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
-import RecomendedTasksList from './components/RecomendedTasksList';
+import RecomendedTasksList from './components/recomendedTask/RecomendedTasksList';
 import { IRecomendedTask, recomendedTasksMocks } from './mocks/recomendedTasks';
 
 import NoTasksComponent from './components/NoTasksComponent';
