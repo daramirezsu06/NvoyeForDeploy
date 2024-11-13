@@ -1,12 +1,12 @@
 import { Grid, Stack } from '@mui/material';
 import { jsonPropuesto } from '../components/examples/jsonPropuesto';
-import Finance from '../components/finance';
-import RecommendedTasks from '../components/recommendedTasks';
+import Finance from '../components/oters/finance';
+import RecommendedTasks from '../components/oters/recommendedTasks';
 import BulletedList from '../components/bulletedList';
 import TableHubs from '../components/table';
 import TextButton from '../components/textButton';
 import Text from '../components/text';
-import ResourceList from '../components/resourceList';
+import ResourceList from '../components/oters/resourceList';
 import SubCategory_Header from '../components/subCategory_Header';
 export default function SubHubs() {
   const { name, tags, overview, detail } = jsonPropuesto.data;

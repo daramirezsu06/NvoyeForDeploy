@@ -4,7 +4,7 @@ export interface BulletedListHubsType {
 }
 export interface TableHubsType {
   title: string;
-  colums: string[];
+  columns: string[];
   rows: string[][];
 }
 

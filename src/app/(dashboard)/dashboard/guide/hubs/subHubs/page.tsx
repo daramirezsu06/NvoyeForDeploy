@@ -1,68 +1,129 @@
-import { Grid, Stack } from '@mui/material';
-import Finance from '../components/finance';
-import RecommendedTasks from '../components/recommendedTasks';
-import BulletedList from '../components/bulletedList';
-import TableHubs from '../components/table';
-import TextButton from '../components/textButton';
-import ResourceList from '../components/resourceList';
+import { Box, Container, Grid, Stack, Typography } from '@mui/material';
+import React from 'react';
+import { hubMocks } from '@/src/app/mocks/hubsMocks';
+import CustomHubCard from '../../../components/CustomHubCard';
 import SubCategory_Header from '../components/subCategory_Header';
-import Finance2 from '../components/finance2';
-import RecommendedTasks2 from '../components/recommendedTasks2';
-import ResourceList2 from '../components/resourceList2';
-import { proposalJSON } from '../components/JsonPropuesto4';
+import { subHubMocks } from '@/src/app/mocks/supHubs';
 
-export default function SubHubs() {
-  const { name, tags, overview, PrincipalContent, rightContend, description } =
-    proposalJSON.data;
+type Props = {};
 
-  const renderComponent = (component, index) => {
-    switch (component.type) {
-      case 'list':
-        return <BulletedList key={index} bulletInfo={component.data} />;
-      case 'table':
-        return <TableHubs key={index} tableInfo={component.data} />;
-      case 'recomendedTasks':
-        return (
-          <RecommendedTasks2 key={index} recomendedTaskInfo={component.data} />
-        );
-      case 'financial':
-        return <Finance2 key={index} financeInfo={component.data} />;
-      case 'resource':
-        return <ResourceList2 key={index} resourceInfo={component.data} />;
-      default:
-        return null;
-    }
-  };
-
+export default function Hubs({}: Props) {
   return (
-    <Grid container spacing={2} sx={{ px: 2 }}>
-      <Grid item xs={8}>
-        <Stack spacing={2}>
-          <SubCategory_Header infoHeader={{ name, tags }} />
-          <Stack
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
-              p: 3,
-              borderRadius: 2,
-              backgroundColor: '#F5F3F1',
-            }}
-          >
-            <TextButton info={overview} />
-            {PrincipalContent.map((component, index) =>
-              renderComponent(component, index)
-            )}
-          </Stack>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        width: '100%',
+        maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+        paddingLeft: { xs: '8px', sm: 3 },
+        paddingRight: { xs: '8px', sm: 3 },
+        paddingY: { xs: 0, sm: 2 },
+        marginLeft: { xs: '0px', sm: '0px' },
+        marginRight: { xs: '0px', sm: '0px' },
+        flex: 1,
+      }}
+    >
+      {/* UPPER BOX */}
+      <Box
+        sx={{
+          display: 'flex',
+          minHeight: '200px',
+          padding: 3,
+          flexDirection: ' column',
+          justifyContent: 'flex-end',
+          alignItems: ' flex-start',
+          alignSelf: 'stretch',
+          position: 'relative',
+        }}
+      >
+        {/* IMAGENES */}
+        <Box
+          sx={{
+            position: 'absolute',
+            width: '336px',
+            height: '336px',
+            zIndex: -1,
+            right: '208px',
+            top: '-104px',
+            borderRadius: ' 336px',
+            backgroundColor: ' #F4F0ED',
+          }}
+        ></Box>
+        <Box
+          sx={{
+            position: 'absolute',
+            width: '234px',
+            height: '234px',
+            zIndex: -1,
+            right: '0px',
+            top: '-34px',
+            borderRadius: ' 336px',
+            backgroundColor: '#3D5BA51F',
+            opacity: 0.4,
+          }}
+        ></Box>
+
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 1,
+            alignSelf: 'stretch',
+          }}
+        >
+          <Typography variant="h5" color={'primary'}>
+            The Netherlands
+          </Typography>
+          <Typography variant="h5">diplomatic hub</Typography>
         </Stack>
+        <Typography
+          variant="body1"
+          sx={{
+            display: 'flex',
+            maxWidth: '450px',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            alignSelf: ' stretch',
+          }}
+        >
+          A curated collection of resources to help you navigate the nuances of
+          daily life in this vibrant and unique country.
+        </Typography>
+      </Box>
+
+      {/* GRID */}
+      <Grid
+        sx={{
+          display: 'flex',
+          paddingY: 2,
+          paddingX: {
+            xs: 0,
+            sm: 3,
+          },
+          paddingBottom: {
+            xs: '80px',
+            sm: 2,
+          },
+          justifyContent: ' center',
+          alignItems: 'flex-start',
+          alignContent: 'flex-start',
+          gap: '24px',
+          alignSelf: ' stretch',
+          flexWrap: 'wrap',
+          backgroundColor: '#F8F6F5',
+          borderRadius: '8px',
+        }}
+      >
+        {subHubMocks.map((hub) => (
+          <CustomHubCard
+            key={hub.title}
+            icon={hub.icon}
+            title={hub.title}
+            topics={hub.topics}
+          />
+        ))}
       </Grid>
-      <Grid item xs={4}>
-        <Stack spacing={2}>
-          {rightContend.map((component, index) =>
-            renderComponent(component, index)
-          )}
-        </Stack>
-      </Grid>
-    </Grid>
+    </Container>
   );
 }

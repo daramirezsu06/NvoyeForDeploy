@@ -8,7 +8,7 @@ import {
   Typography,
   IconButton,
 } from '@mui/material';
-import { recomendedTaskItemType } from '../hubs.Types';
+import { recomendedTaskItemType } from '../../hubs.Types';
 
 const RecommendedTasks = ({
   recomendedTaskInfo,

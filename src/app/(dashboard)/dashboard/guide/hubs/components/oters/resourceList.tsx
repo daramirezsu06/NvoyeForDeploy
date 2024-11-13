@@ -7,9 +7,13 @@ import {
 } from '@mui/icons-material';
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import theme from '@/src/app/theme';
-import { FinanceItemhubsType } from '../hubs.Types';
+import { ResourceItemHubsType } from '../../hubs.Types';
 
-const Finance = ({ financeInfo }: { financeInfo: FinanceItemhubsType[] }) => {
+const ResourceList = ({
+  resourceInfo,
+}: {
+  resourceInfo: ResourceItemHubsType[];
+}) => {
   return (
     <Stack
       sx={{
@@ -27,10 +31,10 @@ const Finance = ({ financeInfo }: { financeInfo: FinanceItemhubsType[] }) => {
           backgroundColor: theme.custom.paperElevationFour,
         }}
       >
-        <Typography variant="h6">Finance</Typography>
+        <Typography variant="h6">Resources</Typography>
       </Stack>
       <List sx={{ p: 2, gap: 8, display: 'flex', flexDirection: 'column' }}>
-        {financeInfo.map((item, index) => {
+        {resourceInfo.map((resource, index) => {
           return (
             <ListItem
               key={index}
@@ -46,20 +50,32 @@ const Finance = ({ financeInfo }: { financeInfo: FinanceItemhubsType[] }) => {
                   flexDirection: 'row',
                   alignItems: 'center',
                   width: '100%',
-                  px: 2,
-                  py: '4px',
                 }}
               >
-                <ListItemText
-                  sx={{ flexGrow: 1 }}
-                  primary={item.title}
-                  secondary={item.secounText}
+                <TextSnippetOutlined
+                  color="primary"
+                  sx={{ width: '24px', height: '24px', flexGrow: 0 }}
                 />
-                <Typography variant="body2">{item.value}</Typography>
+
+                <ListItemText
+                  sx={{
+                    flexGrow: 1,
+                  }}
+                  primary={resource.title}
+                  secondary={resource.link}
+                />
+
+                <Stack sx={{ p: 1 }}>
+                  <ArrowOutward
+                    color="primary"
+                    sx={{ width: '24px', height: '24px', flexGrow: 0 }}
+                  />
+                </Stack>
               </Stack>
             </ListItem>
           );
         })}
+
         {/* <ListItem
           sx={{
             borderRadius: 1,
@@ -73,16 +89,27 @@ const Finance = ({ financeInfo }: { financeInfo: FinanceItemhubsType[] }) => {
               flexDirection: 'row',
               alignItems: 'center',
               width: '100%',
-              px: 2,
-              py: '4px',
             }}
           >
+            <TextSnippetOutlined
+              color="primary"
+              sx={{ width: '24px', height: '24px', flexGrow: 0 }}
+            />
+
             <ListItemText
-              sx={{ flexGrow: 1 }}
+              sx={{
+                flexGrow: 1,
+              }}
               primary="List item"
               secondary="Secondary"
             />
-            <Typography variant="body2">Typography</Typography>
+
+            <Stack sx={{ p: 1 }}>
+              <ArrowOutward
+                color="primary"
+                sx={{ width: '24px', height: '24px', flexGrow: 0 }}
+              />
+            </Stack>
           </Stack>
         </ListItem> */}
       </List>
@@ -90,4 +117,4 @@ const Finance = ({ financeInfo }: { financeInfo: FinanceItemhubsType[] }) => {
   );
 };
 
-export default Finance;
+export default ResourceList;

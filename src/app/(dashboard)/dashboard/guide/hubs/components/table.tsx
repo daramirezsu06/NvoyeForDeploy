@@ -29,8 +29,8 @@ const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
       <Table>
         <TableHead>
           <TableRow>
-            {tableInfo.colums &&
-              tableInfo.colums.map((column, index) => (
+            {tableInfo.columns &&
+              tableInfo.columns.map((column, index) => (
                 <TableCell key={index} sx={{ p: 2 }}>
                   {column}
                 </TableCell>
