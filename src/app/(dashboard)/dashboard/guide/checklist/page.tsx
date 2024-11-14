@@ -65,7 +65,7 @@ export default function Checklist() {
           flexDirection: { xs: 'column-reverse', md: 'row' },
         }}
       >
-        <Stack sx={{ width: '100%' }} gap={1}>
+        <Stack sx={{ width: '100%', flexGrow: 1 }} gap={1}>
           <Box
             sx={{
               backgroundColor: theme.custom.paperElevationOne,
@@ -123,7 +123,12 @@ export default function Checklist() {
             )}
           </Box>
         </Stack>
-        <RecomendedTasksList recomendedTasks={recomendedTasks} />
+        <RecomendedTasksList
+          recomendedTasks={recomendedTasks}
+          sx={{
+            minWidth: { xs: '60px', md: 'auto' }, // Establece un ancho mínimo en modo colapsado
+          }}
+        />
       </Box>
     </Container>
   );

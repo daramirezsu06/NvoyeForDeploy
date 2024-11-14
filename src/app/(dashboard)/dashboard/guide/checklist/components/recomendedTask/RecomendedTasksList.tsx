@@ -3,6 +3,7 @@ import {
   Badge,
   Box,
   Button,
+  Collapse,
   Icon,
   IconButton,
   List,
@@ -18,12 +19,17 @@ import RecomendedTasksListItem from '../recomendedTask/RecomendedTasksListItem';
 import Image from 'next/image';
 import icon from '@/src/icons/AddTaskIcon.png';
 
+interface RecomendedTasksListProps {
+  recomendedTasks: IRecomendedTask[];
+  sx?: object; // Prop para aplicar estilos personalizados desde el componente padre
+}
+
 export default function RecomendedTasksList({
   recomendedTasks,
-}: {
-  recomendedTasks: IRecomendedTask[];
-}) {
+  sx = {},
+}: RecomendedTasksListProps) {
   const [isShowList, setIsShowList] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <Stack
@@ -33,32 +39,38 @@ export default function RecomendedTasksList({
         borderRadius: 3,
         height: 'min-content',
         border: { xs: '0.5px solid #E5E5E5', md: 'none' },
+        width: isCollapsed ? '60px' : { xs: 'auto', md: '380px' }, // Ajuste de ancho según el estado de colapsado
+        transition: 'width 0.5s ease', // Transición suave para el ancho
+        ...sx, // Permitir estilos personalizados desde el padre
       }}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Typography variant="h6">Recommended tasks</Typography>
+        {!isCollapsed && (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Typography variant="h6">Recommended tasks</Typography>
 
-          <Badge
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              backgroundColor: 'secondary.main',
-              color: 'white',
-              borderRadius: '100px',
-              padding: '0px 8px',
-            }}
-            variant="standard"
-          >
-            {recomendedTasks.length}{' '}
-          </Badge>
-        </Box>
+            <Badge
+              sx={{
+                display: { xs: 'flex', md: 'none' },
+                backgroundColor: 'secondary.main',
+                color: 'white',
+                borderRadius: '100px',
+                padding: '0px 8px',
+              }}
+              variant="standard"
+            >
+              {recomendedTasks.length}
+            </Badge>
+          </Box>
+        )}
 
-        {/* //TODO give function to this button -> should collapse the list  */}
         <IconButton
           sx={{
             display: { xs: 'none', md: 'flex' },
+            transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)', // Rotación del ícono
+            transition: 'transform 0.3s ease', // Transición para la rotación
           }}
-          // onClick={() => {}}
+          onClick={() => setIsCollapsed(!isCollapsed)}
         >
           <Icon>
             <KeyboardDoubleArrowRight />
@@ -79,68 +91,96 @@ export default function RecomendedTasksList({
         </Button>
       </Stack>
 
-      <Typography
-        sx={{
-          display: { xs: 'none', md: 'flex' },
-        }}
-      >
-        Recommended checklist tasks to help you meet your needs.
-      </Typography>
-
-      {recomendedTasks.length === 0 ? (
-        <Box
+      {!isCollapsed && (
+        <Typography
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            flex: 1,
-            alignSelf: 'stretch',
-            padding: 2,
-            minHeight: '400px',
-            borderRadius: 3,
+            display: { xs: 'none', md: 'flex' },
           }}
         >
-          <Stack
+          Recommended checklist tasks to help you meet your needs.
+        </Typography>
+      )}
+
+      {!isCollapsed &&
+        (recomendedTasks.length === 0 ? (
+          <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               flex: 1,
               alignSelf: 'stretch',
+              padding: 2,
+              minHeight: '400px',
+              borderRadius: 3,
             }}
           >
-            <Stack mb={3}>
-              <Image src={icon} alt="icon" width={48} height={48} />
-            </Stack>
             <Stack
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
+                justifyContent: 'center',
                 alignItems: 'center',
+                flex: 1,
+                alignSelf: 'stretch',
               }}
-              mb={3}
             >
-              <Typography variant="h6">Nothing here yet!</Typography>
+              <Stack mb={3}>
+                <Image src={icon} alt="icon" width={48} height={48} />
+              </Stack>
+              <Stack
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+                mb={3}
+              >
+                <Typography variant="h6">Nothing here yet!</Typography>
+              </Stack>
             </Stack>
-          </Stack>
-        </Box>
-      ) : (
-        <List
-          sx={{
-            display: {
-              xs: isShowList ? 'flex' : 'none', // Muestra u oculta la lista en pantallas xs
-              md: 'flex', // Siempre muestra la lista en pantallas sm o más grandes
-            },
-            flexDirection: 'column',
-            gap: 1,
-          }}
-        >
-          {recomendedTasks.map((task: IRecomendedTask) => (
-            <RecomendedTasksListItem key={task.id} recomendedTask={task} />
-          ))}
-        </List>
-      )}
+          </Box>
+        ) : (
+          // Aplica Collapse solo para pantallas pequeñas (xs)
+          <Box
+            sx={{
+              display: { xs: 'block', md: 'flex' }, // Siempre visible en pantallas grandes
+              flexDirection: 'column',
+              gap: 1,
+            }}
+          >
+            {/* Animación de despliegue solo en pantallas xs */}
+            <Collapse in={isShowList} timeout="auto">
+              <List
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 1,
+                }}
+              >
+                {recomendedTasks.map((task) => (
+                  <RecomendedTasksListItem
+                    key={task.id}
+                    recomendedTask={task}
+                  />
+                ))}
+              </List>
+            </Collapse>
+
+            {/* Lista estática visible en pantallas grandes */}
+            <List
+              sx={{
+                display: { xs: 'none', md: 'flex' }, // Siempre visible en pantallas grandes
+                flexDirection: 'column',
+                gap: 1,
+              }}
+            >
+              {recomendedTasks.map((task) => (
+                <RecomendedTasksListItem key={task.id} recomendedTask={task} />
+              ))}
+            </List>
+          </Box>
+        ))}
     </Stack>
   );
 }
