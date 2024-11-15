@@ -24,7 +24,15 @@ import { IBackendTasks } from '@/src/app/(dashboard)/dashboard/guide/checklist/m
 import { wrap } from 'module';
 import TaskDetail from './TaskDetail';
 
-export default function TodoComponent({ task }: { task: IBackendTasks }) {
+export default function TodoComponent({
+  task,
+  onMarkAsComplete,
+  onMarkAsIncomplete,
+}: {
+  task: IBackendTasks;
+  onMarkAsComplete: (taskId: number) => void;
+  onMarkAsIncomplete: (taskId: number) => void;
+}) {
   //TODO improve customization to this component
 
   const flagColor =
@@ -38,10 +46,7 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
 
   const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
   const handleOpenTaskDetail = () => setIsTaskDetailOpen(true);
-  const handleCloseTaskDetail = () => {
-    setIsTaskDetailOpen(false);
-    // console.log('cerrando');
-  };
+  const handleCloseTaskDetail = () => setIsTaskDetailOpen(false);
 
   return (
     <Paper
@@ -70,7 +75,12 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
           overflow: 'auto',
         }}
       >
-        <TaskDetail task={task} handleCloseTaskDetail={handleCloseTaskDetail} />
+        <TaskDetail
+          task={task}
+          handleCloseTaskDetail={handleCloseTaskDetail}
+          onMarkAsComplete={onMarkAsComplete}
+          onMarkAsIncomplete={onMarkAsIncomplete}
+        />
       </Modal>
       <Stack px={2} pb={1} gap={1} onClick={handleOpenTaskDetail}>
         <Stack direction="row" justifyContent="space-between">
@@ -149,9 +159,7 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
               color: 'success.main',
               justifyContent: 'flex-end',
             }}
-            onClick={() => {
-              console.log('click');
-            }}
+            onClick={() => onMarkAsIncomplete(task.id)}
           >
             Completed <CheckBoxOutlined />
           </Button>
@@ -163,9 +171,7 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
               color: 'black',
               justifyContent: 'flex-end',
             }}
-            onClick={() => {
-              console.log('click');
-            }}
+            onClick={() => onMarkAsComplete(task.id)}
           >
             Mark as complete <CheckBoxOutlineBlank />
           </Button>
