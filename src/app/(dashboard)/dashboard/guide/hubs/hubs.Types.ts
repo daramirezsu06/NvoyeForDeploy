@@ -51,3 +51,13 @@ export interface TextButtonType {
   info: string;
   button: string;
 }
+
+export type ComponentDataType =
+  | BulletedListHubsType
+  | TableHubsType
+  | recomendedTaskType
+  | FinanceType
+  | ResourceType
+  | TextType
+  | TextButtonType
+  | SubCategoryHubsType;

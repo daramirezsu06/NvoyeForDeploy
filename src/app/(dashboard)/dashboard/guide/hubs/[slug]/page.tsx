@@ -1,10 +1,7 @@
 import { Grid, Stack } from '@mui/material';
-import Finance from '../components/oters/finance';
-import RecommendedTasks from '../components/oters/recommendedTasks';
 import BulletedList from '../components/bulletedList';
 import TableHubs from '../components/table';
 import TextButton from '../components/textButton';
-import ResourceList from '../components/oters/resourceList';
 import SubCategory_Header from '../components/subCategory_Header';
 import Finance2 from '../components/finance2';
 import RecommendedTasks2 from '../components/recommendedTasks2';
@@ -19,7 +16,10 @@ export default function SubHubs({
   const { name, tags, overview, PrincipalContent, rightContend, description } =
     subHubsJson[params.slug];
 
-  const renderComponent = (component, index) => {
+  const renderComponent = (
+    component: { type: string; data: any },
+    index: number
+  ) => {
     switch (component.type) {
       case 'list':
         return <BulletedList key={index} bulletInfo={component.data} />;
