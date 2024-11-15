@@ -12,7 +12,7 @@ const TextButton = ({ info }: { info: string }) => {
   return (
     <Stack
       sx={{
-        minWidth: '450px',
+        // minWidth: '450px',
         backgroundColor: '#FFFF',
         borderRadius: 1,
         border: '1px solid #E5E5E5',

@@ -17,7 +17,7 @@ const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
   return (
     <Stack
       sx={{
-        minWidth: '752px',
+        // minWidth: '752px',
         backgroundColor: '#FFFF',
         borderRadius: 1,
         border: '1px solid #E5E5E5',
@@ -29,11 +29,12 @@ const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
       <Table>
         <TableHead>
           <TableRow>
-            {tableInfo.colums.map((column, index) => (
-              <TableCell key={index} sx={{ p: 2 }}>
-                {column}
-              </TableCell>
-            ))}
+            {tableInfo.columns &&
+              tableInfo.columns.map((column, index) => (
+                <TableCell key={index} sx={{ p: 2 }}>
+                  {column}
+                </TableCell>
+              ))}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,20 +49,6 @@ const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
               </TableRow>
             );
           })}
-          {/* <TableRow>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-          </TableRow> */}
         </TableBody>
       </Table>
     </Stack>
