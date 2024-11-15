@@ -37,14 +37,15 @@ import NotesProperty from './taskproperties/NotesProperty';
 
 type Props = {
   handleCloseNewTask: () => void;
+  onAddTask: (newTask: IBackendTasks) => void;
 };
 
 interface ICreateTaskRequest {
   taskTypeId?: number;
   taskStatusId: number;
   priorityId: number | undefined;
-  remindDate: string | null; // Puede ser null si no hay fecha recordatorio
-  dueDate: string | null; // Puede ser null si no hay fecha de vencimiento
+  remindDate: string | null;
+  dueDate: string | null;
   categories: ICategory[];
   documents: IDocument[];
   notes?: string;
@@ -57,7 +58,7 @@ interface ICategory {
   categoryId: number | undefined;
 }
 
-export default function NewTaskModal({ handleCloseNewTask }: Props) {
+export default function NewTaskModal({ handleCloseNewTask, onAddTask }: Props) {
   const [title, setTitle] = useState<string>('');
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTitle(e.target.value);
@@ -102,33 +103,53 @@ export default function NewTaskModal({ handleCloseNewTask }: Props) {
   const handleCreateTask = () => {
     //TODO connect to backend with -> {{url}}/tasks/create
     console.log('creating task');
-    const newTask: ICreateTaskRequest = {
-      taskStatusId: 1,
-      priorityId,
-      customTitle: title,
+    const newTask: IBackendTasks = {
+      id: Date.now(), // Genera un ID único como número
+      userId: 1, // Suplente, debe ser asignado según tu lógica de usuario
+      taskTypeId: 1, // Tipo de tarea inicial (puedes ajustarlo)
+      taskStatusId: 1, // Estado inicial, por ejemplo, "To do"
       remindDate: reminderDate ? reminderDate.toISOString() : null,
       dueDate: dueDate ? dueDate.toISOString() : null,
-
-      categories: categories.map((category) => ({
-        categoryId: backendHubs.find((h) => h.name === category.name)?.id,
-      })),
-
+      priorityId, // Asignado desde el estado
       documents: filesAttached.map((file) => ({
         name: file.name,
-        url: '',
+        url: file.url || '', // Deja vacío si no hay URL
       })),
-
-      description: description,
-
+      notes,
       subTasks: subTasks.map((subTask) => ({
         title: subTask.title,
         status: subTask.status,
       })),
-
-      notes,
+      customTitle: title,
+      isActive: true, // La tarea estará activa por defecto
+      createdAt: new Date().toISOString(), // Fecha de creación
+      updatedAt: null, // Inicialmente sin actualizar
+      taskStatus: {
+        name: 'To do', // Ajusta según tu lógica
+        description: 'Task is yet to be started', // Descripción correspondiente
+      },
+      taskType: {
+        name: 'General', // Cambia según el tipo de tarea
+        description: 'Default task type', // Descripción correspondiente
+      },
+      priority: {
+        name: priorities.find((p) => p.name === priority)?.name || 'Low',
+        description:
+          priorities.find((p) => p.name === priority)?.description ||
+          'Low priority',
+      },
+      categories: categories.map((category) => ({
+        categoryId: backendHubs.find((h) => h.name === category.name)?.id || 0, // Asigna ID de categoría
+        category: {
+          name: category.name,
+          description: category.description,
+        },
+      })),
     };
 
     console.log(newTask);
+    onAddTask(newTask); // Agrega la nueva tarea
+    handleCloseNewTask(); // Cierra el modal
   };
 
   return (

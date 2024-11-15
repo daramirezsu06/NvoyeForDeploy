@@ -30,9 +30,16 @@ import SubTasksProperty from './taskproperties/SubTasksProperty';
 interface Iprops {
   task: IBackendTasks;
   handleCloseTaskDetail: () => void;
+  onMarkAsComplete: (taskId: number) => void;
+  onMarkAsIncomplete: (taskId: number) => void;
 }
 
-export default function TaskDetail({ task, handleCloseTaskDetail }: Iprops) {
+export default function TaskDetail({
+  task,
+  handleCloseTaskDetail,
+  onMarkAsComplete,
+  onMarkAsIncomplete,
+}: Iprops) {
   const [reminderDate, setReminderDate] = useState<Dayjs | null>(
     task.remindDate ? dayjs(task.remindDate) : null
   );
@@ -76,8 +83,8 @@ export default function TaskDetail({ task, handleCloseTaskDetail }: Iprops) {
 
   const handleDeleteSubTask = (index: number) => {
     const updatedSubTasks = [...subTasks];
-    updatedSubTasks.splice(index, 1); // Eliminar el subtask en el índice
-    setSubTasks(updatedSubTasks); // Actualizar el estado
+    updatedSubTasks.splice(index, 1);
+    setSubTasks(updatedSubTasks);
   };
 
   return (
@@ -212,7 +219,11 @@ export default function TaskDetail({ task, handleCloseTaskDetail }: Iprops) {
       </Box>
 
       {/* //buttons */}
-      <TaskDetailsButtons task={task} />
+      <TaskDetailsButtons
+        task={task}
+        onMarkAsComplete={onMarkAsComplete}
+        onMarkAsIncomplete={onMarkAsIncomplete}
+      />
     </Box>
   );
 }

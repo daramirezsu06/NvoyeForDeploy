@@ -1,5 +1,5 @@
 export interface IBackendTasks {
-  id?: number;
+  id: number;
   userId?: number;
   taskTypeId?: number;
   taskStatusId: number;

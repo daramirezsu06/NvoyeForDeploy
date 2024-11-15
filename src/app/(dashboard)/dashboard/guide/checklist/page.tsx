@@ -27,18 +27,53 @@ export default function Checklist() {
   // const [userTaskList, setUserTaskList] = useState<IBackendTasks[]>([]); //for no tasks
 
   const [activeTab, setActiveTab] = useState(0);
-  // Función para manejar el cambio de pestaña
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
   };
 
-  // Filtrar las tareas según la pestaña activa
   const filteredTasks = userTaskList.filter((task) => {
     if (activeTab === 0) return task.taskStatus.name !== 'Completed';
     if (activeTab === 1) return task.taskStatus.name === 'Completed';
     if (activeTab === 2) return task.taskStatus.name === 'Archived';
     return true;
   });
+
+  const handleAddTask = (newTask: IBackendTasks) => {
+    setUserTaskList((prevTasks) => [...prevTasks, newTask]);
+  };
+
+  const handleMarkAsComplete = (taskId: number) => {
+    setUserTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              taskStatus: {
+                name: 'Completed',
+                description: 'Task has been completed successfully',
+              },
+            }
+          : task
+      )
+    );
+  };
+
+  const handleMarkAsIncomplete = (taskId: number) => {
+    setUserTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              taskStatus: {
+                name: 'In Progress',
+                description: 'Task is currently in progress',
+              },
+            }
+          : task
+      )
+    );
+  };
 
   return (
     <Container
@@ -57,7 +92,7 @@ export default function Checklist() {
         gap: 4,
       }}
     >
-      <TitleAndButton />
+      <TitleAndButton onAddTask={handleAddTask} />
       <Box
         sx={{
           gap: 4,
@@ -113,12 +148,17 @@ export default function Checklist() {
             }}
           >
             {userTaskList.length === 0 ? (
-              <NoTasksComponent />
+              <NoTasksComponent onAddTask={handleAddTask} />
             ) : filteredTasks.length === 0 ? (
               <Typography>No tasks matching the filter</Typography>
             ) : (
               filteredTasks.map((task: IBackendTasks) => (
-                <TodoComponent key={task.id} task={task} />
+                <TodoComponent
+                  key={task.id}
+                  task={task}
+                  onMarkAsComplete={handleMarkAsComplete}
+                  onMarkAsIncomplete={handleMarkAsIncomplete}
+                />
               ))
             )}
           </Box>
@@ -126,7 +166,7 @@ export default function Checklist() {
         <RecomendedTasksList
           recomendedTasks={recomendedTasks}
           sx={{
-            minWidth: { xs: '60px', md: 'auto' }, // Establece un ancho mínimo en modo colapsado
+            minWidth: { xs: '60px', md: 'auto' },
           }}
         />
       </Box>

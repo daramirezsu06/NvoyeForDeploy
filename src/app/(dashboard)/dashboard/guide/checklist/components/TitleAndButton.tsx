@@ -1,20 +1,19 @@
 'use client';
-import { AddTaskOutlined } from '@mui/icons-material';
 import { Box, Button, Modal, Stack, Typography } from '@mui/material';
 import theme from '@/src/app/theme';
 import React, { useState } from 'react';
 import NewTaskButton from './NewTaskButton';
 import NewTaskModal from './NewTaskModal';
+import { IBackendTasks } from '../mocks/tasksMocks';
 
-type Props = {};
+type Props = {
+  onAddTask: (newTask: IBackendTasks) => void;
+};
 
-export default function TitleAndButton({}: Props) {
+export default function TitleAndButton({ onAddTask }: Props) {
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const handleOpenNewTask = () => setIsNewTaskOpen(true);
-  const handleCloseNewTask = () => {
-    setIsNewTaskOpen(false);
-    // console.log('cerrando');
-  };
+  const handleCloseNewTask = () => setIsNewTaskOpen(false);
 
   return (
     <Box
@@ -49,7 +48,10 @@ export default function TitleAndButton({}: Props) {
           overflow: 'auto',
         }}
       >
-        <NewTaskModal handleCloseNewTask={handleCloseNewTask} />
+        <NewTaskModal
+          handleCloseNewTask={handleCloseNewTask}
+          onAddTask={onAddTask}
+        />
       </Modal>
     </Box>
   );

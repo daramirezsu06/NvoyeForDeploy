@@ -5,10 +5,13 @@ import NewTaskButton from './NewTaskButton';
 import Image from 'next/image';
 import icon from '@/src/icons/AddTaskIcon.png';
 import NewTaskModal from './NewTaskModal';
+import { IBackendTasks } from '../mocks/tasksMocks';
 
-type Props = {};
+type Props = {
+  onAddTask: (newTask: IBackendTasks) => void;
+};
 
-export default function NoTasksComponent({}: Props) {
+export default function NoTasksComponent({ onAddTask }: Props) {
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const handleOpenNewTask = () => setIsNewTaskOpen(true);
   const handleCloseNewTask = () => {
@@ -67,7 +70,10 @@ export default function NoTasksComponent({}: Props) {
             overflow: 'auto',
           }}
         >
-          <NewTaskModal handleCloseNewTask={handleCloseNewTask} />
+          <NewTaskModal
+            handleCloseNewTask={handleCloseNewTask}
+            onAddTask={onAddTask}
+          />
         </Modal>
       </Stack>
     </Box>
