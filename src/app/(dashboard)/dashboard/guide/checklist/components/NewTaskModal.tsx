@@ -43,8 +43,8 @@ interface ICreateTaskRequest {
   taskTypeId?: number;
   taskStatusId: number;
   priorityId: number | undefined;
-  remindDate: string | null; // Puede ser null si no hay fecha recordatorio
-  dueDate: string | null; // Puede ser null si no hay fecha de vencimiento
+  remindDate: string | null;
+  dueDate: string | null;
   categories: ICategory[];
   documents: IDocument[];
   notes?: string;

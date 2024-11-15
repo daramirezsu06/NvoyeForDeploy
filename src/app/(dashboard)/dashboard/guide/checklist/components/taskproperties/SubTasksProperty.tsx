@@ -66,7 +66,7 @@ export default function SubTasksProperty({
               flexDirection: 'row',
               alignItems: 'center',
               width: { xs: '100%', md: '500px' },
-              justifyContent: 'space-between', // Asegura que el checkbox y el icono estén distribuidos
+              justifyContent: 'space-between',
             }}
           >
             <FormControlLabel

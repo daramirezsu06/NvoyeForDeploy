@@ -14,7 +14,7 @@ export default function Home({}: Props) {
     <Box
       sx={{
         display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' }, // Columna en pantallas móviles, fila en pantallas grandes
+        flexDirection: { xs: 'column', sm: 'row' },
         minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
@@ -27,7 +27,7 @@ export default function Home({}: Props) {
         gap: 4,
       }}
     >
-      {/* BOX DE LA IZQUIERDA */}
+      {/* BOX to the Left */}
       <Box
         sx={{
           display: 'flex',
@@ -70,7 +70,7 @@ export default function Home({}: Props) {
         </Stack>
       </Box>
 
-      {/* BOX DE LA DERECHA */}
+      {/* BOX to the Right */}
       <Box
         sx={{
           display: 'flex',
@@ -86,10 +86,10 @@ export default function Home({}: Props) {
           },
         }}
       >
-        {/* Box de arriba */}
+        {/* Box up */}
         <ConnectCalendar />
 
-        {/* Box de abajo */}
+        {/* Box down */}
         <LandingPackage />
       </Box>
     </Box>

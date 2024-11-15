@@ -21,7 +21,7 @@ import icon from '@/src/icons/AddTaskIcon.png';
 
 interface RecomendedTasksListProps {
   recomendedTasks: IRecomendedTask[];
-  sx?: object; // Prop para aplicar estilos personalizados desde el componente padre
+  sx?: object;
 }
 
 export default function RecomendedTasksList({
@@ -39,9 +39,9 @@ export default function RecomendedTasksList({
         borderRadius: 3,
         height: 'min-content',
         border: { xs: '0.5px solid #E5E5E5', md: 'none' },
-        width: isCollapsed ? '60px' : { xs: 'auto', md: '380px' }, // Ajuste de ancho según el estado de colapsado
-        transition: 'width 0.5s ease', // Transición suave para el ancho
-        ...sx, // Permitir estilos personalizados desde el padre
+        width: isCollapsed ? '60px' : { xs: 'auto', md: '380px' },
+        transition: 'width 0.5s ease',
+        ...sx,
       }}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -67,8 +67,8 @@ export default function RecomendedTasksList({
         <IconButton
           sx={{
             display: { xs: 'none', md: 'flex' },
-            transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)', // Rotación del ícono
-            transition: 'transform 0.3s ease', // Transición para la rotación
+            transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)',
+            transition: 'transform 0.3s ease',
           }}
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
@@ -141,15 +141,13 @@ export default function RecomendedTasksList({
             </Stack>
           </Box>
         ) : (
-          // Aplica Collapse solo para pantallas pequeñas (xs)
           <Box
             sx={{
-              display: { xs: 'block', md: 'flex' }, // Siempre visible en pantallas grandes
+              display: { xs: 'block', md: 'flex' },
               flexDirection: 'column',
               gap: 1,
             }}
           >
-            {/* Animación de despliegue solo en pantallas xs */}
             <Collapse in={isShowList} timeout="auto">
               <List
                 sx={{
@@ -167,10 +165,9 @@ export default function RecomendedTasksList({
               </List>
             </Collapse>
 
-            {/* Lista estática visible en pantallas grandes */}
             <List
               sx={{
-                display: { xs: 'none', md: 'flex' }, // Siempre visible en pantallas grandes
+                display: { xs: 'none', md: 'flex' },
                 flexDirection: 'column',
                 gap: 1,
               }}

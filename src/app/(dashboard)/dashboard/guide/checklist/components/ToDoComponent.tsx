@@ -44,7 +44,6 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
   };
 
   return (
-    // TODO ponerle onClick que habra el detalle de la task
     <Paper
       sx={{
         display: 'flex',
@@ -84,7 +83,6 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
           gap={1}
           alignItems="center"
         >
-          {/* //TODO adjust depending on taks */}
           {task.documents.length > 0 && (
             <>
               <FilePresent sx={{ color: 'primary.main' }} />
@@ -142,7 +140,7 @@ export default function TodoComponent({ task }: { task: IBackendTasks }) {
           ))}
         </Stack>
 
-        {/* //TODO darle funcionalidad a este boton */}
+        {/* //TODO give functionality to this button */}
         {task.taskStatus.name === 'Completed' ? (
           <Button
             sx={{

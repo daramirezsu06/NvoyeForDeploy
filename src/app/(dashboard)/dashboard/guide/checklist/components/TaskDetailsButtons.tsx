@@ -9,12 +9,12 @@ type Props = {
 
 export default function TaskDetailsButtons({ task }: Props) {
   const handleArchiveTask = (task: IBackendTasks) => {
-    //TODO archivar esta task y mandr al backend,
+    //TODO make this task archived and send it to backend -> {{url}}/tasks/update/id
     console.log(task);
   };
 
   const handleCompleteTask = (task: IBackendTasks) => {
-    //TODO completar esta task y mandar al backend
+    //TODO make this task completed and send it to backend -> {{url}}/tasks/markAsCompleted/id
     console.log(task);
   };
 

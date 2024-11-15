@@ -76,8 +76,8 @@ export default function TaskDetail({ task, handleCloseTaskDetail }: Iprops) {
 
   const handleDeleteSubTask = (index: number) => {
     const updatedSubTasks = [...subTasks];
-    updatedSubTasks.splice(index, 1); // Eliminar el subtask en el índice
-    setSubTasks(updatedSubTasks); // Actualizar el estado
+    updatedSubTasks.splice(index, 1);
+    setSubTasks(updatedSubTasks);
   };
 
   return (

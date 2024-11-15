@@ -21,7 +21,7 @@ export default function CategoriesProperty({
   categories,
   setCategories,
 }: Props) {
-  //TODO traerse los hubs -> {{url}}/hubs/getAllHubs
+  //TODO bring the hubs -> {{url}}/hubs/getAllHubs
   const [hubs, setHubs] = useState<IBackendHub[]>(backendHubs);
 
   const handleDeleteCategory = (categoryName: string) => {

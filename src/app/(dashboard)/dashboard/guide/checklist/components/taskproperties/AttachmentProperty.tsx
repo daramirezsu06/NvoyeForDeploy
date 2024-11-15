@@ -4,9 +4,6 @@ import {
   Box,
   Icon,
   Typography,
-  Select,
-  MenuItem,
-  Chip,
   Button,
   Divider,
   IconButton,
@@ -33,7 +30,6 @@ export default function AttachmentProperty({
       const newFile: IDocument = {
         name: file.name,
         url: '',
-        // Puedes agregar más propiedades de archivo aquí según necesites
       };
       setFilesAttached([...filesAttached, newFile]);
     }

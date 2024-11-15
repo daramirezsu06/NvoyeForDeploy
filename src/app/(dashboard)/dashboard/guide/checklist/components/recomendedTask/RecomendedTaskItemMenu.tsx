@@ -161,7 +161,6 @@ export default function RecomendedTaskItemMenu({
               alignSelf: 'stretch',
               color: 'error',
             }}
-            // TODO give function to this button
             onClick={handleAddRecomendedTaskToChecklist}
           >
             <Container
