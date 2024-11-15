@@ -15,9 +15,8 @@ export const SidebarDesktop = ({
   sidevbarList: SidebarItemType[];
 }) => {
   const pathname = usePathname();
-  const [isCollapsed, setIsCollapsed] = useState(false); // Estado para controlar el colapso del sidebar
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-  // Función para manejar el clic en el botón de colapsar/expandir
   const toggleSidebar = () => {
     setIsCollapsed((prev) => !prev);
   };
@@ -25,7 +24,7 @@ export const SidebarDesktop = ({
   return (
     <Container
       sx={{
-        display: { xs: 'none', sm: 'flex' }, // Ocultar en pantallas pequeñas
+        display: { xs: 'none', sm: 'flex' },
         width: isCollapsed ? '60px' : '160px',
         paddingX: isCollapsed ? '5px' : '10px',
         paddingY: '20px',
@@ -36,14 +35,14 @@ export const SidebarDesktop = ({
         maxWidth: isCollapsed ? '60px' : '150px',
         paddingLeft: isCollapsed ? '0px' : { xs: '0px', sm: '16px' },
         paddingRight: isCollapsed ? '0px' : { xs: '0px', sm: '16px' },
-        transition: 'width 0.3s ease-in-out', // Animación suave
+        transition: 'width 0.3s ease-in-out',
       }}
     >
       <Stack
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: isCollapsed ? 'center' : 'flex-start', // Alineación de los ítems
+          alignItems: isCollapsed ? 'center' : 'flex-start',
           gap: 0,
           alignSelf: 'stretch',
         }}

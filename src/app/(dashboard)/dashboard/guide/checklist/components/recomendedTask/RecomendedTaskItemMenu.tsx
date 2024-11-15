@@ -7,16 +7,44 @@ import {
   MenuItem,
   Typography,
   Divider,
+  Modal,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import MenuMui from '@mui/material/Menu';
 import { Add, Cancel, CancelOutlined, RemoveRedEye } from '@mui/icons-material';
+import TaskDetail from '../TaskDetail';
+import { IRecomendedTask } from '../../mocks/recomendedTasks';
+import RecomendedTaskDetail from './RecomendedTaskDetail';
+
+interface IProps {
+  recomendedTask: IRecomendedTask;
+  anchorEl: HTMLElement | null;
+  open: boolean;
+  handleClose: () => void;
+}
 
 export default function RecomendedTaskItemMenu({
   anchorEl,
   open,
   handleClose,
-}: any) {
+  recomendedTask,
+}: IProps) {
+  const [isRecomendedTaskDetailOpen, setIsRecomendedTaskDetailOpen] =
+    useState(false);
+
+  const handleOpenRecomendedTaskDetail = () => {
+    setIsRecomendedTaskDetailOpen(true);
+  };
+
+  const handleCloseRecomendedTaskDetail = () => {
+    setIsRecomendedTaskDetailOpen(false);
+  };
+
+  const handleAddRecomendedTaskToChecklist = () => {
+    //TODO send this recomended task to checklist
+    console.log(recomendedTask);
+  };
+
   return (
     <MenuMui
       disableScrollLock={true}
@@ -52,7 +80,6 @@ export default function RecomendedTaskItemMenu({
             padding: '0px 0px',
             borderRadius: '4px',
           }}
-          onClick={handleClose}
         >
           <MenuItem
             sx={{
@@ -63,8 +90,7 @@ export default function RecomendedTaskItemMenu({
               alignSelf: 'stretch',
               color: 'error',
             }}
-            // TODO give function to this button
-            onClick={() => {}}
+            onClick={handleOpenRecomendedTaskDetail}
           >
             <Container
               sx={{
@@ -106,6 +132,26 @@ export default function RecomendedTaskItemMenu({
               </Typography>
             </Container>
           </MenuItem>
+          <Modal
+            open={isRecomendedTaskDetailOpen}
+            onClose={handleCloseRecomendedTaskDetail}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'auto',
+            }}
+          >
+            <RecomendedTaskDetail
+              handleAddRecomendedTaskToChecklist={
+                handleAddRecomendedTaskToChecklist
+              }
+              recomendedTask={recomendedTask}
+              handleCloseRecomendedTaskDetail={handleCloseRecomendedTaskDetail}
+            />
+          </Modal>
           <MenuItem
             sx={{
               display: 'flex',
@@ -115,8 +161,7 @@ export default function RecomendedTaskItemMenu({
               alignSelf: 'stretch',
               color: 'error',
             }}
-            // TODO give function to this button
-            onClick={() => {}}
+            onClick={handleAddRecomendedTaskToChecklist}
           >
             <Container
               sx={{

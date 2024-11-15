@@ -5,16 +5,17 @@ import { Stack, Button } from '@mui/material';
 
 type Props = {
   task: IBackendTasks;
+  onMarkAsComplete: (taskId: number) => void;
+  onMarkAsIncomplete: (taskId: number) => void;
 };
 
-export default function TaskDetailsButtons({ task }: Props) {
+export default function TaskDetailsButtons({
+  task,
+  onMarkAsComplete,
+  onMarkAsIncomplete,
+}: Props) {
   const handleArchiveTask = (task: IBackendTasks) => {
-    //TODO archivar esta task y mandr al backend,
-    console.log(task);
-  };
-
-  const handleCompleteTask = (task: IBackendTasks) => {
-    //TODO completar esta task y mandar al backend
+    //TODO make this task archived and send it to backend -> {{url}}/tasks/update/id
     console.log(task);
   };
 
@@ -40,16 +41,27 @@ export default function TaskDetailsButtons({ task }: Props) {
       >
         Archive task
       </Button>
-
-      <Button
-        variant="contained"
-        color="success"
-        startIcon={<TaskOutlined />}
-        sx={{ textTransform: 'none', borderRadius: 2 }}
-        onClick={() => handleCompleteTask(task)}
-      >
-        Mark as completed
-      </Button>
+      {task.taskStatus.name === 'Completed' ? (
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<TaskOutlined />}
+          sx={{ textTransform: 'none', borderRadius: 2 }}
+          onClick={() => onMarkAsIncomplete(task.id)}
+        >
+          Mark as incompleted
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          color="success"
+          startIcon={<TaskOutlined />}
+          sx={{ textTransform: 'none', borderRadius: 2 }}
+          onClick={() => onMarkAsComplete(task.id)}
+        >
+          Mark as completed
+        </Button>
+      )}
     </Stack>
   );
 }

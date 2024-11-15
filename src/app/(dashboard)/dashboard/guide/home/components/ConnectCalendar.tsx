@@ -14,15 +14,12 @@ import Image from 'next/image';
 import Calendarinfo from '@/src/icons/Calendarinfo.png'; // Asegúrate de usar la ruta correcta de tu imagen
 
 export default function ConnectCalendar() {
-  // Estado para controlar la visibilidad del componente
   const [visible, setVisible] = useState(true);
 
-  // Función para ocultar el componente
   const handleClose = () => {
     setVisible(false);
   };
 
-  // Si no está visible, no se renderiza el componente
   if (!visible) {
     return null;
   }
@@ -55,7 +52,7 @@ export default function ConnectCalendar() {
           right: '0px',
           top: '0px',
         }}
-        onClick={handleClose} // Oculta el contenedor al hacer clic
+        onClick={handleClose}
       >
         <Icon>
           <Close />

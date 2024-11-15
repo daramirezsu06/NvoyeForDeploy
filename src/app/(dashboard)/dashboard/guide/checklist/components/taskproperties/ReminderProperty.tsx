@@ -72,9 +72,8 @@ export default function ReminderProperty({
             label="Add reminder"
             format="DD/MM/YYYY HH:mm"
             value={reminderDate}
-            // onChange={(newValue) => setReminderDate(newValue)}
             onAccept={(newValue) => handleReminderDateChange(newValue)}
-            openTo="day" // Abre el selector de días por defecto
+            openTo="day"
             closeOnSelect={false}
           />
         )}

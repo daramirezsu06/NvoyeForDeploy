@@ -1,15 +1,53 @@
+'use client';
 import {
   backendTasksListMock,
   IBackendTasks,
 } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
 import { Box, Stack, Typography, Button } from '@mui/material';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import TodoComponent from '../../checklist/components/ToDoComponent';
 
 type Props = {};
 
 export default function ScheduledTasks({}: Props) {
+  //TODO connect to the backend and get the checklist tasks -> {{url}}/tasks/getAll?page=1&limit=10&statusId=3
+  //TODO get property data
+  const [userTaskList, setUserTaskList] =
+    useState<IBackendTasks[]>(backendTasksListMock);
+
+  const handleMarkAsComplete = (taskId: number) => {
+    setUserTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              taskStatus: {
+                name: 'Completed',
+                description: 'Task has been completed successfully',
+              },
+            }
+          : task
+      )
+    );
+  };
+
+  const handleMarkAsIncomplete = (taskId: number) => {
+    setUserTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              taskStatus: {
+                name: 'In Progress',
+                description: 'Task is currently in progress',
+              },
+            }
+          : task
+      )
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -64,7 +102,12 @@ export default function ScheduledTasks({}: Props) {
         }}
       >
         {backendTasksListMock.map((task) => (
-          <TodoComponent key={task.id} task={task} />
+          <TodoComponent
+            key={task.id}
+            task={task}
+            onMarkAsComplete={handleMarkAsComplete}
+            onMarkAsIncomplete={handleMarkAsIncomplete}
+          />
         ))}
       </Box>
     </Box>
