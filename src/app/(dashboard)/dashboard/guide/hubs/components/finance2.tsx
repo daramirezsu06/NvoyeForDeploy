@@ -60,31 +60,6 @@ const Finance2 = ({ financeInfo }: { financeInfo: FinanceType }) => {
             </ListItem>
           );
         })}
-        {/* <ListItem
-          sx={{
-            borderRadius: 1,
-            backgroundColor: theme.custom.paperElevationTwo,
-            border: '1px solid #E5E5E5',
-          }}
-        >
-          <Stack
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: '100%',
-              px: 2,
-              py: '4px',
-            }}
-          >
-            <ListItemText
-              sx={{ flexGrow: 1 }}
-              primary="List item"
-              secondary="Secondary"
-            />
-            <Typography variant="body2">Typography</Typography>
-          </Stack>
-        </ListItem> */}
       </List>
     </Stack>
   );

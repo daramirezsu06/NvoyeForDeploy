@@ -7,6 +7,18 @@ export const subHubsJson = {
     overview: 'This is a generic overview for the hub.',
     PrincipalContent: [
       {
+        type: 'table',
+        data: {
+          title: 'Table Title 1',
+          columns: ['Column A', 'Column B', 'Column C'],
+          rows: [
+            ['otro dato', 'vamos bien', 'Data C1'],
+            ['Data A2', 'Data B2', 'Data C2'],
+            ['Data A3', 'Data B3', 'Data C3'],
+          ],
+        },
+      },
+      {
         type: 'list',
         data: {
           title: 'List Title 1',

@@ -41,3 +41,13 @@ export interface ResourceType {
   title: string;
   items: ResourceItemHubsType[];
 }
+
+export interface TextType {
+  title: string;
+  info: string;
+}
+export interface TextButtonType {
+  title: string;
+  info: string;
+  button: string;
+}

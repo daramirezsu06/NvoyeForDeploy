@@ -71,43 +71,6 @@ const ResourceList2 = ({ resourceInfo }: { resourceInfo: ResourceType }) => {
             </ListItem>
           );
         })}
-
-        {/* <ListItem
-          sx={{
-            borderRadius: 1,
-            backgroundColor: theme.custom.paperElevationTwo,
-            border: '1px solid #E5E5E5',
-          }}
-        >
-          <Stack
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: '100%',
-            }}
-          >
-            <TextSnippetOutlined
-              color="primary"
-              sx={{ width: '24px', height: '24px', flexGrow: 0 }}
-            />
-
-            <ListItemText
-              sx={{
-                flexGrow: 1,
-              }}
-              primary="List item"
-              secondary="Secondary"
-            />
-
-            <Stack sx={{ p: 1 }}>
-              <ArrowOutward
-                color="primary"
-                sx={{ width: '24px', height: '24px', flexGrow: 0 }}
-              />
-            </Stack>
-          </Stack>
-        </ListItem> */}
       </List>
     </Stack>
   );

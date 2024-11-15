@@ -34,20 +34,6 @@ const BulletedList = ({ bulletInfo }: { bulletInfo: BulletedListHubsType }) => {
               </ListItem>
             );
           })}
-
-        {/* <ListItem>
-          <Stack
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'start',
-              alignItems: 'center',
-            }}
-          >
-            <FiberManualRecord />
-            <ListItemText>List item</ListItemText>
-          </Stack>
-        </ListItem> */}
       </List>
     </Stack>
   );

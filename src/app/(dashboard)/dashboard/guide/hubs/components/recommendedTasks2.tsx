@@ -59,32 +59,6 @@ const RecommendedTasks2 = ({
               </ListItem>
             );
           })}
-          {/* <ListItem
-            sx={{
-              backgroundColor: '#FFFF',
-              borderRadius: 1,
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
-            <ListItemText sx={{ flexGrow: 1, py: 0.5 }} primary="OV chipcard" />
-            <IconButton sx={{ p: 1 }}>
-              <MoreVert />
-            </IconButton>
-          </ListItem>
-          <ListItem
-            sx={{
-              backgroundColor: '#FFFF',
-              borderRadius: 1,
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
-            <ListItemText sx={{ flexGrow: 1, py: 0.5 }} primary="OV chipcard" />
-            <IconButton sx={{ p: 1 }}>
-              <MoreVert />
-            </IconButton>
-          </ListItem> */}
         </List>
       </Stack>
     </Stack>

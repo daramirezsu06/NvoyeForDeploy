@@ -49,20 +49,6 @@ const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
               </TableRow>
             );
           })}
-          {/* <TableRow>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-            <TableCell sx={{ p: 2 }}>
-              <Typography variant="body2">List item</Typography>
-            </TableCell>
-          </TableRow> */}
         </TableBody>
       </Table>
     </Stack>
