@@ -10,11 +10,13 @@ import {
   NotificationsActiveTwoTone,
 } from '@mui/icons-material';
 import {
+  Alert,
   Button,
   Chip,
   Divider,
   Modal,
   Paper,
+  Snackbar,
   Stack,
   Typography,
 } from '@mui/material';
@@ -33,7 +35,17 @@ export default function TodoComponent({
   onMarkAsComplete: (taskId: number) => void;
   onMarkAsIncomplete: (taskId: number) => void;
 }) {
-  //TODO improve customization to this component
+  const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
+  const handleOpenTaskDetail = () => setIsTaskDetailOpen(true);
+  const handleCloseTaskDetail = () => setIsTaskDetailOpen(false);
+
+  const handleComplete = () => {
+    onMarkAsComplete(task.id);
+  };
+
+  const handleIncomplete = () => {
+    onMarkAsIncomplete(task.id);
+  };
 
   const flagColor =
     task.priority.name === 'Low'
@@ -44,139 +56,130 @@ export default function TodoComponent({
           ? 'error.main'
           : 'info';
 
-  const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
-  const handleOpenTaskDetail = () => setIsTaskDetailOpen(true);
-  const handleCloseTaskDetail = () => setIsTaskDetailOpen(false);
-
   return (
-    <Paper
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 1,
-        py: 2,
-        borderRadius: 2,
-        '&:hover': {
-          backgroundColor: '#F4F0ED',
-          boxShadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.2)',
-          cursor: 'pointer',
-        },
-      }}
-    >
-      <Modal
-        open={isTaskDetailOpen} //modificar
-        onClose={handleCloseTaskDetail} //modificar
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+    <>
+      <Paper
         sx={{
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          overflow: 'auto',
+          flexDirection: 'column',
+          gap: 1,
+          py: 2,
+          borderRadius: 2,
+          '&:hover': {
+            backgroundColor: '#F4F0ED',
+            boxShadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.2)',
+            cursor: 'pointer',
+          },
         }}
       >
-        <TaskDetail
-          task={task}
-          handleCloseTaskDetail={handleCloseTaskDetail}
-          onMarkAsComplete={onMarkAsComplete}
-          onMarkAsIncomplete={onMarkAsIncomplete}
-        />
-      </Modal>
-      <Stack px={2} pb={1} gap={1} onClick={handleOpenTaskDetail}>
-        <Stack direction="row" justifyContent="space-between">
-          <Typography>{task.customTitle}</Typography>
-          <Flag sx={{ color: flagColor }} />
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="start"
-          gap={1}
-          alignItems="center"
-        >
-          {task.documents.length > 0 && (
-            <>
-              <FilePresent sx={{ color: 'primary.main' }} />
-              <Divider orientation="vertical" />
-            </>
-          )}
-          {task.notes && (
-            <>
-              <NoteTwoTone sx={{ color: 'primary.main' }} />
-              <Divider orientation="vertical" />
-            </>
-          )}
-          {task.remindDate && (
-            <>
-              <NotificationsActiveTwoTone sx={{ color: 'primary.main' }} />
-              <Divider orientation="vertical" />
-            </>
-          )}
-          {task.dueDate && (
-            <>
-              <EventAvailable sx={{ color: 'primary.main' }} />
-            </>
-          )}
-        </Stack>
-      </Stack>
-      <Divider />
-
-      <Stack
-        px={2}
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          justifyContent: { xs: 'flex-end', sm: 'space-between' },
-        }}
-      >
-        <Stack
+        <Modal
+          open={isTaskDetailOpen}
+          onClose={handleCloseTaskDetail}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
           sx={{
             display: 'flex',
-            flexDirection: 'row',
-            gap: 1,
-            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'auto',
           }}
         >
-          {/* <Chip icon={<HealthAndSafetyOutlined />} label={task.category} /> */}
-
-          {task.categories?.length === 0 && (
-            <Chip icon={<BrandIcon />} label="Landing package" />
-          )}
-          {task.categories?.map((category, index) => (
-            <Chip
-              key={index}
-              // icon={<BrandIcon />}
-              label={category.category.name}
-            />
-          ))}
+          <TaskDetail
+            task={task}
+            handleCloseTaskDetail={handleCloseTaskDetail}
+            onMarkAsComplete={onMarkAsComplete}
+            onMarkAsIncomplete={onMarkAsIncomplete}
+          />
+        </Modal>
+        <Stack px={2} pb={1} gap={1} onClick={handleOpenTaskDetail}>
+          <Stack direction="row" justifyContent="space-between">
+            <Typography>{task.customTitle}</Typography>
+            <Flag sx={{ color: flagColor }} />
+          </Stack>
+          <Stack
+            direction="row"
+            justifyContent="start"
+            gap={1}
+            alignItems="center"
+          >
+            {task.documents.length > 0 && (
+              <>
+                <FilePresent sx={{ color: 'primary.main' }} />
+                <Divider orientation="vertical" />
+              </>
+            )}
+            {task.notes && (
+              <>
+                <NoteTwoTone sx={{ color: 'primary.main' }} />
+                <Divider orientation="vertical" />
+              </>
+            )}
+            {task.remindDate && (
+              <>
+                <NotificationsActiveTwoTone sx={{ color: 'primary.main' }} />
+                <Divider orientation="vertical" />
+              </>
+            )}
+            {task.dueDate && (
+              <>
+                <EventAvailable sx={{ color: 'primary.main' }} />
+              </>
+            )}
+          </Stack>
         </Stack>
+        <Divider />
 
-        {/* //TODO give functionality to this button */}
-        {task.taskStatus.name === 'Completed' ? (
-          <Button
+        <Stack
+          px={2}
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: { xs: 'flex-end', sm: 'space-between' },
+          }}
+        >
+          <Stack
             sx={{
-              textTransform: 'none',
+              display: 'flex',
+              flexDirection: 'row',
               gap: 1,
-              color: 'success.main',
-              justifyContent: 'flex-end',
+              flexWrap: 'wrap',
             }}
-            onClick={() => onMarkAsIncomplete(task.id)}
           >
-            Completed <CheckBoxOutlined />
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              textTransform: 'none',
-              gap: 1,
-              color: 'black',
-              justifyContent: 'flex-end',
-            }}
-            onClick={() => onMarkAsComplete(task.id)}
-          >
-            Mark as complete <CheckBoxOutlineBlank />
-          </Button>
-        )}
-      </Stack>
-    </Paper>
+            {task.categories?.length === 0 && (
+              <Chip icon={<BrandIcon />} label="Landing package" />
+            )}
+            {task.categories?.map((category, index) => (
+              <Chip key={index} label={category.category.name} />
+            ))}
+          </Stack>
+
+          {task.taskStatus.name === 'Completed' ? (
+            <Button
+              sx={{
+                textTransform: 'none',
+                gap: 1,
+                color: 'success.main',
+                justifyContent: 'flex-end',
+              }}
+              onClick={handleIncomplete}
+            >
+              Completed <CheckBoxOutlined />
+            </Button>
+          ) : (
+            <Button
+              sx={{
+                textTransform: 'none',
+                gap: 1,
+                color: 'black',
+                justifyContent: 'flex-end',
+              }}
+              onClick={handleComplete}
+            >
+              Mark as complete <CheckBoxOutlineBlank />
+            </Button>
+          )}
+        </Stack>
+      </Paper>
+    </>
   );
 }

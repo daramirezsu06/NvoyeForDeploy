@@ -1,6 +1,16 @@
 'use client';
 import { ArchiveOutlined, ListAlt, TaskOutlined } from '@mui/icons-material';
-import { Box, Container, Stack, Tab, Tabs, Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  Snackbar,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from '@mui/material';
 import React, { useState } from 'react';
 import TitleAndButton from './components/TitleAndButton';
 import TodoComponent from './components/ToDoComponent';
@@ -32,6 +42,14 @@ export default function Checklist() {
     setActiveTab(newValue);
   };
 
+  // Snackbar state
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    taskId: null as number | null,
+    customTitle: '',
+  });
+
   const filteredTasks = userTaskList.filter((task) => {
     if (activeTab === 0) return task.taskStatus.name !== 'Completed';
     if (activeTab === 1) return task.taskStatus.name === 'Completed';
@@ -44,6 +62,8 @@ export default function Checklist() {
   };
 
   const handleMarkAsComplete = (taskId: number) => {
+    const taskToComplete = userTaskList.find((task) => task.id === taskId);
+
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -57,9 +77,21 @@ export default function Checklist() {
           : task
       )
     );
+
+    // Mostrar Snackbar con el ID y título de la tarea
+    if (taskToComplete) {
+      setSnackbar({
+        open: true,
+        message: `Task "${taskToComplete.customTitle}" marked as complete!`,
+        taskId: taskId,
+        customTitle: taskToComplete.customTitle,
+      });
+    }
   };
 
   const handleMarkAsIncomplete = (taskId: number) => {
+    const taskToIncomplete = userTaskList.find((task) => task.id === taskId);
+
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -73,6 +105,26 @@ export default function Checklist() {
           : task
       )
     );
+
+    if (taskToIncomplete) {
+      setSnackbar({
+        open: true,
+        message: `Task "${taskToIncomplete.customTitle}" has been marked as incomplete!`,
+        taskId: taskId,
+        customTitle: taskToIncomplete.customTitle,
+      });
+    }
+  };
+  // Cerrar el snackbar
+  const closeSnackbar = () => {
+    setSnackbar({ open: false, message: '', taskId: null, customTitle: '' });
+  };
+  // Función Undo
+  const handleUndo = () => {
+    if (snackbar.taskId !== null) {
+      handleMarkAsIncomplete(snackbar.taskId); // Llama a la función de marcar como incompleta
+      closeSnackbar();
+    }
   };
 
   return (
@@ -170,6 +222,32 @@ export default function Checklist() {
           }}
         />
       </Box>
+      {/* Snackbar */}
+      <Snackbar
+        open={snackbar.open}
+        onClose={closeSnackbar}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert
+          severity="success"
+          variant="filled"
+          onClose={closeSnackbar}
+          action={
+            <Button
+              size="small"
+              color="inherit"
+              variant="text"
+              sx={{ textTransform: 'none' }}
+              onClick={handleUndo} // Pasar referencia, no ejecutar
+            >
+              Undo
+            </Button>
+          }
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
