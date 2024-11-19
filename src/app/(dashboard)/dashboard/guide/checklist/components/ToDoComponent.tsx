@@ -30,10 +30,12 @@ export default function TodoComponent({
   task,
   onMarkAsComplete,
   onMarkAsIncomplete,
+  onMarkAsArchived,
 }: {
   task: IBackendTasks;
   onMarkAsComplete: (taskId: number) => void;
   onMarkAsIncomplete: (taskId: number) => void;
+  onMarkAsArchived: (taskId: number) => void;
 }) {
   const [isTaskDetailOpen, setIsTaskDetailOpen] = useState(false);
   const handleOpenTaskDetail = () => setIsTaskDetailOpen(true);
@@ -89,6 +91,7 @@ export default function TodoComponent({
             handleCloseTaskDetail={handleCloseTaskDetail}
             onMarkAsComplete={onMarkAsComplete}
             onMarkAsIncomplete={onMarkAsIncomplete}
+            onMarkAsArchived={onMarkAsArchived}
           />
         </Modal>
         <Stack px={2} pb={1} gap={1} onClick={handleOpenTaskDetail}>
