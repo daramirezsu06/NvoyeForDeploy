@@ -68,6 +68,7 @@ export default function Checklist() {
   };
 
   const handleMarkAsComplete = (taskId: number) => {
+    //TODO make this task completed  -> {{url}}/tasks/markAsCompleted/taskId
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -94,6 +95,7 @@ export default function Checklist() {
   };
 
   const handleMarkAsIncomplete = (taskId: number) => {
+    //TODO make this task incomplete and send it to backend -> {{url}}/tasks/update/tasskId
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -119,6 +121,7 @@ export default function Checklist() {
     }
   };
   const handleMarkAsArchived = (taskId: number) => {
+    //TODO make this task archived and send it to backend -> {{url}}/tasks/update/taskId
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -155,6 +158,7 @@ export default function Checklist() {
   };
 
   const handleUndo = () => {
+    //TODO make this task whatever it was and send it to backend -> {{url}}/tasks/update/taskId
     if (snackbar.taskId !== null && snackbar.previousStatus) {
       setUserTaskList((prevTasks) =>
         prevTasks.map((task) =>
