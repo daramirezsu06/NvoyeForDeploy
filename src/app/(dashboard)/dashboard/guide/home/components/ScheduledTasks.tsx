@@ -16,6 +16,10 @@ export default function ScheduledTasks({}: Props) {
   const [userTaskList, setUserTaskList] =
     useState<IBackendTasks[]>(backendTasksListMock);
 
+  const incompletedTasks = userTaskList.filter(
+    (task) => task.taskStatus.name !== 'Completed'
+  );
+
   const handleMarkAsComplete = (taskId: number) => {
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
@@ -101,7 +105,7 @@ export default function ScheduledTasks({}: Props) {
           gap: 2,
         }}
       >
-        {backendTasksListMock.map((task) => (
+        {incompletedTasks.map((task) => (
           <TodoComponent
             key={task.id}
             task={task}
