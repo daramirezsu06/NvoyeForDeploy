@@ -1,9 +1,14 @@
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
 import { hubMocks } from '@/src/app/mocks/hubsMocks';
-import CustomHubCard from '../../../components/CustomHubCard';
+import CustomHubCard from '../../../components/CustomSubHubsCard';
 import SubCategory_Header from '../components/subCategory_Header';
 import { subHubMocks } from '@/src/app/mocks/supHubs';
+import Image from 'next/image';
+import WavyBuddiesEuro from '@/src/icons/subHubs/HeaderPages/Wavy_Buddies_Euro.svg';
+import RecommendedTasks2 from '../components/recommendedTasks2';
+import { subHubsJson } from '../components/subHubsJson';
+import { provisionalListTasks } from '../components/provisionalLisTask';
 
 type Props = {};
 
@@ -28,26 +33,27 @@ export default function Hubs({}: Props) {
       <Box
         sx={{
           display: 'flex',
-          minHeight: '200px',
+          minHeight: '250px',
           padding: 3,
-          flexDirection: ' column',
+          flexDirection: 'column',
           justifyContent: 'flex-end',
-          alignItems: ' flex-start',
-          alignSelf: 'stretch',
           position: 'relative',
+          overflow: 'hidden', // Asegura que los elementos fuera del contenedor no se vean
+          backgroundColor: '#F2F0ED',
         }}
       >
-        {/* IMAGENES */}
+        {/* Fondos Circulares */}
         <Box
           sx={{
             position: 'absolute',
-            width: '336px',
-            height: '336px',
-            zIndex: -1,
+
+            width: '200px',
+            height: '200px',
+            borderRadius: '50%',
+            backgroundColor: '#3D5BA5',
+            opacity: 0.4,
+            top: '50px',
             right: '208px',
-            top: '-104px',
-            borderRadius: ' 336px',
-            backgroundColor: ' #F4F0ED',
           }}
         ></Box>
         <Box
@@ -55,75 +61,101 @@ export default function Hubs({}: Props) {
             position: 'absolute',
             width: '234px',
             height: '234px',
-            zIndex: -1,
-            right: '0px',
-            top: '-34px',
-            borderRadius: ' 336px',
-            backgroundColor: '#3D5BA51F',
+
+            borderRadius: '50%',
+            backgroundColor: '#E1840A',
             opacity: 0.4,
+            top: '-34px',
+            right: '0px',
           }}
         ></Box>
 
+        {/* Imagen SVG */}
         <Stack
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 1,
-            alignSelf: 'stretch',
+            position: 'absolute',
+            width: '150px', // Ajusta el tamaño según lo necesites
+            right: '150px',
+            top: '70px',
           }}
         >
-          <Typography variant="h5" color={'primary'}>
-            The Netherlands
-          </Typography>
-          <Typography variant="h5">diplomatic hub</Typography>
+          <Image src={WavyBuddiesEuro} alt="icon" width={250} />
         </Stack>
-        <Typography
-          variant="body1"
+
+        {/* Contenido */}
+        <Stack
+          spacing={2} // Usa spacing en lugar de gap
           sx={{
-            display: 'flex',
-            maxWidth: '450px',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            alignSelf: ' stretch',
+            maxWidth: '600px', // Ajusta el ancho según lo necesites
+            zIndex: 1, // Asegura que el contenido esté sobre los fondos
           }}
         >
-          A curated collection of resources to help you navigate the nuances of
-          daily life in this vibrant and unique country.
-        </Typography>
+          <Typography variant="h5">Finances in the Netherlands</Typography>
+          <Typography variant="body1">
+            This hub is your go-to source for understanding the myriad costs
+            associated with residing in the Hague. From navigating the banking
+            system to deciphering the nuances of daily expenses, we provide
+            detailed insights to help you manage your finances effectively while
+            living in the Netherlands.
+          </Typography>
+        </Stack>
       </Box>
 
       {/* GRID */}
-      <Grid
+      <Stack
         sx={{
           display: 'flex',
-          paddingY: 2,
-          paddingX: {
-            xs: 0,
-            sm: 3,
-          },
-          paddingBottom: {
-            xs: '80px',
-            sm: 2,
-          },
-          justifyContent: ' center',
-          alignItems: 'flex-start',
-          alignContent: 'flex-start',
-          gap: '24px',
-          alignSelf: ' stretch',
-          flexWrap: 'wrap',
-          backgroundColor: '#F8F6F5',
-          borderRadius: '8px',
+          flexDirection: 'column',
+          gap: 3,
+          width: '100%',
+          px: 3,
+          py: 4,
+          m: 0,
         }}
       >
-        {subHubMocks.map((hub) => (
-          <CustomHubCard
-            key={hub.title}
-            icon={hub.icon}
-            title={hub.title}
-            topics={hub.topics}
-          />
-        ))}
-      </Grid>
+        <Typography variant="h5">
+          Financial landscape and living expenses
+        </Typography>
+        <Grid container spacing={2} sx={{ width: '100%' }}>
+          <Grid
+            item
+            xs={8}
+            sx={{
+              width: '100%',
+              display: 'flex',
+              paddingY: 2,
+              paddingX: {
+                xs: 0,
+                sm: 3,
+              },
+              paddingBottom: {
+                xs: '80px',
+                sm: 2,
+              },
+              justifyContent: 'start',
+              alignItems: 'flex-start',
+              alignContent: 'flex-start',
+              gap: 3,
+              alignSelf: ' stretch',
+              flexWrap: 'wrap',
+              backgroundColor: '#F8F6F5',
+              borderRadius: '8px',
+            }}
+          >
+            {subHubMocks.map((hub) => (
+              <CustomHubCard
+                key={hub.title}
+                icon={hub.icon}
+                title={hub.title}
+                topics={hub.topics}
+              />
+            ))}
+          </Grid>
+          <Grid item xs={4}>
+            <RecommendedTasks2 recomendedTaskInfo={provisionalListTasks} />
+          </Grid>
+        </Grid>
+      </Stack>
     </Container>
   );
 }
