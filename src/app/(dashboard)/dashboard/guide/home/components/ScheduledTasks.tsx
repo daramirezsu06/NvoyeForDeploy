@@ -3,7 +3,7 @@ import {
   backendTasksListMock,
   IBackendTasks,
 } from '@/src/app/(dashboard)/dashboard/guide/checklist/mocks/tasksMocks';
-import { Box, Stack, Typography, Button } from '@mui/material';
+import { Box, Stack, Typography, Button, Alert, Snackbar } from '@mui/material';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import TodoComponent from '../../checklist/components/ToDoComponent';
@@ -20,6 +20,14 @@ export default function ScheduledTasks({}: Props) {
     (task) => task.taskStatus.name !== 'Completed'
   );
 
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    taskId: null as number | null,
+    previousStatus: '',
+    severity: 'success' as 'success' | 'warning' | 'info' | 'error',
+  });
+
   const handleMarkAsComplete = (taskId: number) => {
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
@@ -34,6 +42,16 @@ export default function ScheduledTasks({}: Props) {
           : task
       )
     );
+    const taskToComplete = userTaskList.find((task) => task.id === taskId);
+    if (taskToComplete) {
+      setSnackbar({
+        open: true,
+        message: `Task "${taskToComplete.customTitle}" marked as complete!`,
+        taskId: taskId,
+        previousStatus: taskToComplete.taskStatus.name,
+        severity: 'success',
+      });
+    }
   };
 
   const handleMarkAsIncomplete = (taskId: number) => {
@@ -50,6 +68,69 @@ export default function ScheduledTasks({}: Props) {
           : task
       )
     );
+    const taskToIncomplete = userTaskList.find((task) => task.id === taskId);
+    if (taskToIncomplete) {
+      setSnackbar({
+        open: true,
+        message: `Task "${taskToIncomplete.customTitle}" has been marked as incomplete!`,
+        taskId: taskId,
+        previousStatus: taskToIncomplete.taskStatus.name,
+        severity: 'success',
+      });
+    }
+  };
+  const handleMarkAsArchived = (taskId: number) => {
+    setUserTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              taskStatus: {
+                name: 'Archived',
+                description: 'Task is currently in archived',
+              },
+            }
+          : task
+      )
+    );
+    const taskToArcvhive = userTaskList.find((task) => task.id === taskId);
+    if (taskToArcvhive) {
+      setSnackbar({
+        open: true,
+        message: `Task "${taskToArcvhive.customTitle}" has been marked as archived!`,
+        taskId: taskId,
+        previousStatus: taskToArcvhive.taskStatus.name,
+        severity: 'warning',
+      });
+    }
+  };
+  const closeSnackbar = () => {
+    setSnackbar({
+      open: false,
+      message: '',
+      taskId: null,
+      previousStatus: '',
+      severity: 'success',
+    });
+  };
+
+  const handleUndo = () => {
+    if (snackbar.taskId !== null && snackbar.previousStatus) {
+      setUserTaskList((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === snackbar.taskId
+            ? {
+                ...task,
+                taskStatus: {
+                  name: snackbar.previousStatus,
+                  description: `Task has been restored to ${snackbar.previousStatus}`,
+                },
+              }
+            : task
+        )
+      );
+      closeSnackbar();
+    }
   };
 
   return (
@@ -111,9 +192,36 @@ export default function ScheduledTasks({}: Props) {
             task={task}
             onMarkAsComplete={handleMarkAsComplete}
             onMarkAsIncomplete={handleMarkAsIncomplete}
+            onMarkAsArchived={handleMarkAsArchived}
           />
         ))}
       </Box>
+      {/* Snackbar */}
+      <Snackbar
+        open={snackbar.open}
+        onClose={closeSnackbar}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert
+          severity={snackbar.severity}
+          variant="filled"
+          onClose={closeSnackbar}
+          action={
+            <Button
+              size="small"
+              color="inherit"
+              variant="text"
+              sx={{ textTransform: 'none' }}
+              onClick={handleUndo}
+            >
+              Undo
+            </Button>
+          }
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
