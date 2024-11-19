@@ -23,6 +23,7 @@ import RecomendedTasksList from './components/recomendedTask/RecomendedTasksList
 import { IRecomendedTask, recomendedTasksMocks } from './mocks/recomendedTasks';
 
 import NoTasksComponent from './components/NoTasksComponent';
+import NotesProperty from './components/taskproperties/NotesProperty';
 
 export default function Checklist() {
   //TODO connect to the backend and get the recomended tasks  -> {{url}}/tasks/getRecommendedTasks
@@ -47,11 +48,16 @@ export default function Checklist() {
     open: false,
     message: '',
     taskId: null as number | null,
-    customTitle: '',
+    previousStatus: '',
+    severity: 'success' as 'success' | 'warning' | 'info' | 'error',
   });
 
   const filteredTasks = userTaskList.filter((task) => {
-    if (activeTab === 0) return task.taskStatus.name !== 'Completed';
+    if (activeTab === 0)
+      return (
+        task.taskStatus.name === 'In Progress' ||
+        task.taskStatus.name === 'Pending'
+      );
     if (activeTab === 1) return task.taskStatus.name === 'Completed';
     if (activeTab === 2) return task.taskStatus.name === 'Archived';
     return true;
@@ -62,8 +68,6 @@ export default function Checklist() {
   };
 
   const handleMarkAsComplete = (taskId: number) => {
-    const taskToComplete = userTaskList.find((task) => task.id === taskId);
-
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -77,21 +81,19 @@ export default function Checklist() {
           : task
       )
     );
-
-    // Mostrar Snackbar con el ID y título de la tarea
+    const taskToComplete = userTaskList.find((task) => task.id === taskId);
     if (taskToComplete) {
       setSnackbar({
         open: true,
         message: `Task "${taskToComplete.customTitle}" marked as complete!`,
         taskId: taskId,
-        customTitle: taskToComplete.customTitle,
+        previousStatus: taskToComplete.taskStatus.name,
+        severity: 'success',
       });
     }
   };
 
   const handleMarkAsIncomplete = (taskId: number) => {
-    const taskToIncomplete = userTaskList.find((task) => task.id === taskId);
-
     setUserTaskList((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -105,24 +107,68 @@ export default function Checklist() {
           : task
       )
     );
-
+    const taskToIncomplete = userTaskList.find((task) => task.id === taskId);
     if (taskToIncomplete) {
       setSnackbar({
         open: true,
         message: `Task "${taskToIncomplete.customTitle}" has been marked as incomplete!`,
         taskId: taskId,
-        customTitle: taskToIncomplete.customTitle,
+        previousStatus: taskToIncomplete.taskStatus.name,
+        severity: 'success',
       });
     }
   };
-  // Cerrar el snackbar
-  const closeSnackbar = () => {
-    setSnackbar({ open: false, message: '', taskId: null, customTitle: '' });
+  const handleMarkAsArchived = (taskId: number) => {
+    setUserTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              taskStatus: {
+                name: 'Archived',
+                description: 'Task is currently in archived',
+              },
+            }
+          : task
+      )
+    );
+    const taskToArcvhive = userTaskList.find((task) => task.id === taskId);
+    if (taskToArcvhive) {
+      setSnackbar({
+        open: true,
+        message: `Task "${taskToArcvhive.customTitle}" has been marked as archived!`,
+        taskId: taskId,
+        previousStatus: taskToArcvhive.taskStatus.name,
+        severity: 'warning',
+      });
+    }
   };
-  // Función Undo
+
+  const closeSnackbar = () => {
+    setSnackbar({
+      open: false,
+      message: '',
+      taskId: null,
+      previousStatus: '',
+      severity: 'success',
+    });
+  };
+
   const handleUndo = () => {
-    if (snackbar.taskId !== null) {
-      handleMarkAsIncomplete(snackbar.taskId); // Llama a la función de marcar como incompleta
+    if (snackbar.taskId !== null && snackbar.previousStatus) {
+      setUserTaskList((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === snackbar.taskId
+            ? {
+                ...task,
+                taskStatus: {
+                  name: snackbar.previousStatus,
+                  description: `Task has been restored to ${snackbar.previousStatus}`,
+                },
+              }
+            : task
+        )
+      );
       closeSnackbar();
     }
   };
@@ -210,6 +256,7 @@ export default function Checklist() {
                   task={task}
                   onMarkAsComplete={handleMarkAsComplete}
                   onMarkAsIncomplete={handleMarkAsIncomplete}
+                  onMarkAsArchived={handleMarkAsArchived}
                 />
               ))
             )}
@@ -230,7 +277,7 @@ export default function Checklist() {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert
-          severity="success"
+          severity={snackbar.severity}
           variant="filled"
           onClose={closeSnackbar}
           action={
@@ -239,7 +286,7 @@ export default function Checklist() {
               color="inherit"
               variant="text"
               sx={{ textTransform: 'none' }}
-              onClick={handleUndo} // Pasar referencia, no ejecutar
+              onClick={handleUndo}
             >
               Undo
             </Button>

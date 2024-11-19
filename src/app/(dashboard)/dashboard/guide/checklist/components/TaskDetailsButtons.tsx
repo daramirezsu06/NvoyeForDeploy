@@ -7,14 +7,17 @@ type Props = {
   task: IBackendTasks;
   onMarkAsComplete: (taskId: number) => void;
   onMarkAsIncomplete: (taskId: number) => void;
+  onMarkAsArchived: (taskId: number) => void;
 };
 
 export default function TaskDetailsButtons({
   task,
   onMarkAsComplete,
   onMarkAsIncomplete,
+  onMarkAsArchived,
 }: Props) {
   const handleArchiveTask = (task: IBackendTasks) => {
+    onMarkAsArchived(task.id);
     //TODO make this task archived and send it to backend -> {{url}}/tasks/update/id
     console.log(task);
   };

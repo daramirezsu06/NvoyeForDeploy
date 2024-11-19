@@ -32,6 +32,7 @@ interface Iprops {
   handleCloseTaskDetail: () => void;
   onMarkAsComplete: (taskId: number) => void;
   onMarkAsIncomplete: (taskId: number) => void;
+  onMarkAsArchived: (taskId: number) => void;
 }
 
 export default function TaskDetail({
@@ -39,6 +40,7 @@ export default function TaskDetail({
   handleCloseTaskDetail,
   onMarkAsComplete,
   onMarkAsIncomplete,
+  onMarkAsArchived,
 }: Iprops) {
   const [reminderDate, setReminderDate] = useState<Dayjs | null>(
     task.remindDate ? dayjs(task.remindDate) : null
@@ -223,6 +225,7 @@ export default function TaskDetail({
         task={task}
         onMarkAsComplete={onMarkAsComplete}
         onMarkAsIncomplete={onMarkAsIncomplete}
+        onMarkAsArchived={onMarkAsArchived}
       />
     </Box>
   );
