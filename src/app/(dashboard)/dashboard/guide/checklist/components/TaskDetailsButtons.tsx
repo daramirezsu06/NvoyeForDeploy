@@ -16,12 +16,6 @@ export default function TaskDetailsButtons({
   onMarkAsIncomplete,
   onMarkAsArchived,
 }: Props) {
-  const handleArchiveTask = (task: IBackendTasks) => {
-    onMarkAsArchived(task.id);
-    //TODO make this task archived and send it to backend -> {{url}}/tasks/update/id
-    console.log(task);
-  };
-
   return (
     <Stack
       sx={{
@@ -40,7 +34,7 @@ export default function TaskDetailsButtons({
         color="error"
         startIcon={<ArchiveOutlined />}
         sx={{ textTransform: 'none', borderRadius: 2 }}
-        onClick={() => handleArchiveTask(task)}
+        onClick={() => onMarkAsArchived(task.id)}
       >
         Archive task
       </Button>
