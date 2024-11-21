@@ -2,22 +2,27 @@ import { Card, Stack, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 import Link from 'next/link';
-import theme from '@/src/app/theme';
 
 type Props = {
   icon: StaticImageData;
   title: string;
-  topics?: string;
 };
 
-export default function CustomHubCard({ icon, title, topics }: Props) {
-  function toTitleCase(str: string) {
-    return str.replace(
-      /\w\S*/g,
-      (word) => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
-    );
+export default function CustomCategoryCard({ icon, title }: Props) {
+  function toCamelCase(str: string): string {
+    return str
+      .replace(/\s+/g, ' ') // Elimina espacios extra si hay
+      .trim() // Remueve espacios iniciales y finales
+      .split(' ') // Divide el string en palabras
+      .map(
+        (word, index) =>
+          index === 0
+            ? word.charAt(0).toUpperCase() + word.substring(1) // Primera palabra en minúscula
+            : word.charAt(0).toUpperCase() + word.substring(1) // Palabras siguientes con mayúscula inicial
+      )
+      .join(''); // Une las palabras sin espacios
   }
-  const titleCaseTitle = toTitleCase(title);
+  const titleCaseTitle = toCamelCase(title);
 
   return (
     <Card
@@ -26,10 +31,10 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
         flexGrow: 1,
         width: { xs: '150px', sm: '150px' },
         height: { xs: '160px', sm: '200px' },
-        maxWidth: {
-          xs: '200px',
-          sm: '472px',
-        },
+        // maxWidth: {
+        //   xs: '200px',
+        //   sm: '472px',
+        // },
         padding: 2,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -45,7 +50,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
       }}
     >
       <Link
-        href={`/dashboard/guide/hubs/subHubs`} //TODO modify this url acordinly to the hub
+        href={`/dashboard/guide/hubs/${titleCaseTitle}`} //TODO modify this url acordinly to the hub
         style={{
           width: '100%',
           height: '100%',
@@ -67,11 +72,17 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
           }}
         >
           {/* //this must modify */}
-          <Stack sx={{}}>
+          <Stack
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 1,
+              alignItems: 'center',
+            }}
+          >
             <Image src={icon} alt="icon" width={48} height={48} />
+            <Typography variant="subtitle1"> {title}</Typography>
           </Stack>
-          <Typography variant="h5"> {titleCaseTitle}</Typography>
-          <Typography variant="body2"> {topics}</Typography>
         </Stack>
       </Link>
     </Card>

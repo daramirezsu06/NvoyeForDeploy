@@ -1,4 +1,4 @@
-import { hubMocks } from '@/src/app/mocks/hubsMocks';
+import { hubMocks } from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/hubsMocks';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';

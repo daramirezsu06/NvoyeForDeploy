@@ -6,29 +6,24 @@ import InvestmentIcon from '@/src/icons/subHubs/Investment.svg';
 
 export const subHubMocks = [
   {
-    icon: AuxiliarCostIcon,
-    title: 'TheCostOfLiving',
-    topics: 'Systems, Insurance',
-  },
-  {
     icon: BankingIcon,
     title: 'Banking',
-    topics: 'Rent, Moving',
-  },
-  {
-    icon: CostOfLivingIcon,
-    title: 'TheCostOfLiving',
-    topics: 'Geography, Culture',
   },
   {
     icon: ForeignCurrencyUsageIcon,
-    title: 'ForeignCurrencyUsage',
-    topics: 'Banking, Cost of living',
+    title: 'Foreign currency usage',
+  },
+  {
+    icon: CostOfLivingIcon,
+    title: 'Cost of living',
   },
   {
     icon: InvestmentIcon,
-    title: 'GenericHubName',
-    topics: 'Movility, Transport',
+    title: 'Investment',
+  },
+  {
+    icon: AuxiliarCostIcon,
+    title: 'Auxiliary cost',
   },
 ];
 

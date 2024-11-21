@@ -1,5 +1,5 @@
 import { Chip, Stack, Typography } from '@mui/material';
-import Finance from '@/src/icons/FinanceIcon.png';
+import Banking from '@/src/icons/subHubs/Banking.svg';
 import Image from 'next/image';
 import { SubCategoryHubsType } from '../hubs.Types';
 
@@ -29,7 +29,7 @@ const SubCategory_Header = ({
           })}
         </Stack>
       </Stack>
-      <Image src={Finance} alt="Finance" width={48} height={48} />
+      <Image src={Banking} alt="Finance" width={48} height={48} />
     </Stack>
   );
 };
