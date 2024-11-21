@@ -45,7 +45,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
       }}
     >
       <Link
-        href={`/dashboard/guide/hubs/subHubs`} //!modificar esto
+        href={`/dashboard/guide/hubs/${title}`} //!modificar esto
         style={{
           width: '100%',
           height: '100%',

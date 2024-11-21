@@ -6,7 +6,7 @@ const BulletedList = ({ bulletInfo }: { bulletInfo: BulletedListHubsType }) => {
   return (
     <Stack
       sx={{
-        minWidth: '752px',
+        // minWidth: '752px',
         backgroundColor: '#FFFF',
         borderRadius: 1,
         border: '1px solid #E5E5E5',
@@ -16,37 +16,24 @@ const BulletedList = ({ bulletInfo }: { bulletInfo: BulletedListHubsType }) => {
         <Typography variant="h6">{bulletInfo.title}</Typography>
       </Stack>
       <List sx={{ py: 1 }}>
-        {bulletInfo.content.map((item, index) => {
-          return (
-            <ListItem key={index}>
-              <Stack
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'start',
-                  alignItems: 'center',
-                }}
-              >
-                <FiberManualRecord />
-                <ListItemText>{item}</ListItemText>
-              </Stack>
-            </ListItem>
-          );
-        })}
-
-        {/* <ListItem>
-          <Stack
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'start',
-              alignItems: 'center',
-            }}
-          >
-            <FiberManualRecord />
-            <ListItemText>List item</ListItemText>
-          </Stack>
-        </ListItem> */}
+        {bulletInfo.items &&
+          bulletInfo.items.map((item, index) => {
+            return (
+              <ListItem key={index}>
+                <Stack
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                  }}
+                >
+                  <FiberManualRecord />
+                  <ListItemText>{item}</ListItemText>
+                </Stack>
+              </ListItem>
+            );
+          })}
       </List>
     </Stack>
   );
