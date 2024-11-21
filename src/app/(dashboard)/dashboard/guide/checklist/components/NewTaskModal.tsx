@@ -32,7 +32,7 @@ import AttachmentProperty from './taskproperties/AttachmentProperty';
 import DescriptionProperty from './taskproperties/DescriptionProperty';
 import SubTasksProperty from './taskproperties/SubTasksProperty';
 import { priorities } from '../mocks/priorities';
-import { backendHubs } from '@/src/app/mocks/hubsMocks';
+import { backendHubs } from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/hubsMocks';
 import NotesProperty from './taskproperties/NotesProperty';
 
 type Props = {

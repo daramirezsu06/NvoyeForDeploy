@@ -10,7 +10,10 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import { ICategoryDetail } from '../../mocks/tasksMocks';
-import { backendHubs, IBackendHub } from '@/src/app/mocks/hubsMocks';
+import {
+  backendHubs,
+  IBackendHub,
+} from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/hubsMocks';
 
 interface Props {
   categories: ICategoryDetail[];

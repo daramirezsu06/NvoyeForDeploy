@@ -14,13 +14,13 @@ export default function Home({}: Props) {
     <Box
       sx={{
         display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' },
-        minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
+        flexDirection: { xs: 'column', md: 'row' },
+        minHeight: { xs: '100vh', md: 'calc(100vh - 64px)' },
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        paddingLeft: { xs: '8px', sm: 3 },
-        paddingRight: { xs: '8px', sm: 3 },
-        paddingY: { xs: 0, sm: 2 },
+        paddingLeft: { xs: '8px', md: 3 },
+        paddingRight: { xs: '8px', md: 3 },
+        paddingY: { xs: 0, md: 2 },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
         flex: 1,
@@ -74,7 +74,7 @@ export default function Home({}: Props) {
       <Box
         sx={{
           display: 'flex',
-          maxWidth: '500px',
+          maxWidth: { xs: '100%', md: '500px' },
           flexDirection: 'column',
           alignItems: 'flex-start',
           gap: 3,
@@ -82,7 +82,7 @@ export default function Home({}: Props) {
           alignSelf: ' stretch',
           paddingBottom: {
             xs: '70px',
-            sm: ' 0px',
+            md: ' 0px',
           },
         }}
       >

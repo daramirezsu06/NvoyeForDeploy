@@ -1,14 +1,18 @@
-import { Box, Container, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
-import { hubMocks } from '@/src/app/mocks/hubsMocks';
+import { hubMocks } from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/hubsMocks';
 import CustomHubCard from '../../../components/CustomSubHubsCard';
 import SubCategory_Header from '../components/subCategory_Header';
-import { subHubMocks } from '@/src/app/mocks/supHubs';
+import { subHubMocks } from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/supHubs';
 import Image from 'next/image';
 import WavyBuddiesEuro from '@/src/icons/subHubs/HeaderPages/Wavy_Buddies_Euro.svg';
 import RecommendedTasks2 from '../components/recommendedTasks2';
 import { subHubsJson } from '../components/subHubsJson';
 import { provisionalListTasks } from '../components/provisionalLisTask';
+import theme from '@/src/app/theme';
+import { West, WestOutlined } from '@mui/icons-material';
+import Link from 'next/link';
+import CustomCategoryCard from '../../../components/CustomCategoryCard';
 
 type Props = {};
 
@@ -21,27 +25,45 @@ export default function Hubs({}: Props) {
         minHeight: '100vh',
         width: '100%',
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        paddingLeft: { xs: '8px', sm: 3 },
-        paddingRight: { xs: '8px', sm: 3 },
+        paddingLeft: { xs: 0, sm: 0 },
+        paddingRight: { xs: 0, sm: 0 },
         paddingY: { xs: 0, sm: 2 },
         marginLeft: { xs: '0px', sm: '0px' },
         marginRight: { xs: '0px', sm: '0px' },
         flex: 1,
+        paddingBottom: { xs: 6, md: 0 },
       }}
     >
       {/* UPPER BOX */}
-      <Box
+      <Container
         sx={{
           display: 'flex',
           minHeight: '250px',
           padding: 3,
           flexDirection: 'column',
-          justifyContent: 'flex-end',
+          width: '100%',
+          maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+          // justifyContent: 'flex-end',
           position: 'relative',
           overflow: 'hidden', // Asegura que los elementos fuera del contenedor no se vean
           backgroundColor: '#F2F0ED',
+          gap: 4,
         }}
       >
+        {/* //back button and title */}
+        <Box>
+          <Link href={'/dashboard/guide/hubs'}>
+            <Button
+              variant="text"
+              sx={{ textTransform: 'none' }}
+              startIcon={<WestOutlined />}
+            >
+              {/* //TODO hub name should be dinamic acording ti the url */}
+              HubName
+            </Button>
+          </Link>
+        </Box>
+
         {/* Fondos Circulares */}
         <Box
           sx={{
@@ -51,7 +73,7 @@ export default function Hubs({}: Props) {
             height: '200px',
             borderRadius: '50%',
             backgroundColor: '#3D5BA5',
-            opacity: 0.4,
+            opacity: 0.1,
             top: '50px',
             right: '208px',
           }}
@@ -64,7 +86,7 @@ export default function Hubs({}: Props) {
 
             borderRadius: '50%',
             backgroundColor: '#E1840A',
-            opacity: 0.4,
+            opacity: 0.1,
             top: '-34px',
             right: '0px',
           }}
@@ -73,6 +95,7 @@ export default function Hubs({}: Props) {
         {/* Imagen SVG */}
         <Stack
           sx={{
+            display: { xs: 'none', md: 'flex' },
             position: 'absolute',
             width: '150px', // Ajusta el tamaño según lo necesites
             right: '150px',
@@ -86,11 +109,16 @@ export default function Hubs({}: Props) {
         <Stack
           spacing={2} // Usa spacing en lugar de gap
           sx={{
-            maxWidth: '600px', // Ajusta el ancho según lo necesites
-            zIndex: 1, // Asegura que el contenido esté sobre los fondos
+            maxWidth: { xs: '100%', md: '60%' },
+            zIndex: 1,
           }}
         >
-          <Typography variant="h5">Finances in the Netherlands</Typography>
+          <Typography variant="h4" sx={{ display: { xs: 'none', sm: 'flex' } }}>
+            Finances in the Netherlands
+          </Typography>
+          <Typography variant="h5" sx={{ display: { xs: 'flex', sm: 'none' } }}>
+            Finances in the Netherlands
+          </Typography>
           <Typography variant="body1">
             This hub is your go-to source for understanding the myriad costs
             associated with residing in the Hague. From navigating the banking
@@ -99,10 +127,10 @@ export default function Hubs({}: Props) {
             living in the Netherlands.
           </Typography>
         </Stack>
-      </Box>
+      </Container>
 
       {/* GRID */}
-      <Stack
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -116,10 +144,18 @@ export default function Hubs({}: Props) {
         <Typography variant="h5">
           Financial landscape and living expenses
         </Typography>
-        <Grid container spacing={2} sx={{ width: '100%' }}>
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 4,
+            // alignSelf: 'stretch',
+          }}
+        >
           <Grid
             item
-            xs={8}
+            // xs={8}
             sx={{
               width: '100%',
               display: 'flex',
@@ -138,24 +174,23 @@ export default function Hubs({}: Props) {
               gap: 3,
               alignSelf: ' stretch',
               flexWrap: 'wrap',
-              backgroundColor: '#F8F6F5',
+              backgroundColor: { xs: '', md: '#F8F6F5' },
               borderRadius: '8px',
+              flex: 1,
             }}
           >
             {subHubMocks.map((hub) => (
-              <CustomHubCard
+              <CustomCategoryCard
                 key={hub.title}
                 icon={hub.icon}
                 title={hub.title}
-                topics={hub.topics}
               />
             ))}
           </Grid>
-          <Grid item xs={4}>
-            <RecommendedTasks2 recomendedTaskInfo={provisionalListTasks} />
-          </Grid>
-        </Grid>
-      </Stack>
+
+          <RecommendedTasks2 recomendedTaskInfo={provisionalListTasks} />
+        </Box>
+      </Box>
     </Container>
   );
 }

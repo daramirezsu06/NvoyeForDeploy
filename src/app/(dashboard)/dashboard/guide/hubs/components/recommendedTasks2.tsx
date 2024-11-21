@@ -18,6 +18,12 @@ const RecommendedTasks2 = ({
   return (
     <Stack
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: { xs: '100%', md: '350px' },
+        maxWidth: '100%',
+        borderRadius: 2,
+
         p: 2,
         backgroundColor: '#F5F3F1',
       }}
@@ -31,7 +37,9 @@ const RecommendedTasks2 = ({
         }}
       >
         <Typography variant="h6">{recomendedTaskInfo.title}</Typography>
-        <Button variant="contained">View checklist</Button>
+        <Button variant="contained" sx={{ textTransform: 'none' }}>
+          View checklist
+        </Button>
       </Stack>
       <Typography sx={{ mb: 2 }} variant="caption">
         Recommended checklist tasks to help you meet your needs.

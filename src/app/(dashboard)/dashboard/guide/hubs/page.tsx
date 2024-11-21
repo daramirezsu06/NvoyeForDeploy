@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
-import { hubMocks } from '@/src/app/mocks/hubsMocks';
+import { hubMocks } from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/hubsMocks';
 import CustomHubCard from '../../components/CustomHubCard';
 import SubCategory_Header from './components/subCategory_Header';
 
