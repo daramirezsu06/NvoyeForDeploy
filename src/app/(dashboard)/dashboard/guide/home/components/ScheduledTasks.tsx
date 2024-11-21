@@ -7,10 +7,9 @@ import { Box, Stack, Typography, Button, Alert, Snackbar } from '@mui/material';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import TodoComponent from '../../checklist/components/ToDoComponent';
+import { useTaskActions } from '../../utils/hooks/useTaskActions';
 
-type Props = {};
-
-export default function ScheduledTasks({}: Props) {
+export default function ScheduledTasks() {
   //TODO connect to the backend and get the checklist tasks -> {{url}}/tasks/getAll?page=1&limit=10&statusId=3
   //TODO get property data
   const [userTaskList, setUserTaskList] =
@@ -20,118 +19,14 @@ export default function ScheduledTasks({}: Props) {
     (task) => task.taskStatus.name !== 'Completed'
   );
 
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: '',
-    taskId: null as number | null,
-    previousStatus: '',
-    severity: 'success' as 'success' | 'warning' | 'info' | 'error',
-  });
-
-  const handleMarkAsComplete = (taskId: number) => {
-    setUserTaskList((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              taskStatus: {
-                name: 'Completed',
-                description: 'Task has been completed successfully',
-              },
-            }
-          : task
-      )
-    );
-    const taskToComplete = userTaskList.find((task) => task.id === taskId);
-    if (taskToComplete) {
-      setSnackbar({
-        open: true,
-        message: `Task "${taskToComplete.customTitle}" marked as complete!`,
-        taskId: taskId,
-        previousStatus: taskToComplete.taskStatus.name,
-        severity: 'success',
-      });
-    }
-  };
-
-  const handleMarkAsIncomplete = (taskId: number) => {
-    setUserTaskList((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              taskStatus: {
-                name: 'In Progress',
-                description: 'Task is currently in progress',
-              },
-            }
-          : task
-      )
-    );
-    const taskToIncomplete = userTaskList.find((task) => task.id === taskId);
-    if (taskToIncomplete) {
-      setSnackbar({
-        open: true,
-        message: `Task "${taskToIncomplete.customTitle}" has been marked as incomplete!`,
-        taskId: taskId,
-        previousStatus: taskToIncomplete.taskStatus.name,
-        severity: 'success',
-      });
-    }
-  };
-  const handleMarkAsArchived = (taskId: number) => {
-    setUserTaskList((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              taskStatus: {
-                name: 'Archived',
-                description: 'Task is currently in archived',
-              },
-            }
-          : task
-      )
-    );
-    const taskToArcvhive = userTaskList.find((task) => task.id === taskId);
-    if (taskToArcvhive) {
-      setSnackbar({
-        open: true,
-        message: `Task "${taskToArcvhive.customTitle}" has been marked as archived!`,
-        taskId: taskId,
-        previousStatus: taskToArcvhive.taskStatus.name,
-        severity: 'warning',
-      });
-    }
-  };
-  const closeSnackbar = () => {
-    setSnackbar({
-      open: false,
-      message: '',
-      taskId: null,
-      previousStatus: '',
-      severity: 'success',
-    });
-  };
-
-  const handleUndo = () => {
-    if (snackbar.taskId !== null && snackbar.previousStatus) {
-      setUserTaskList((prevTasks) =>
-        prevTasks.map((task) =>
-          task.id === snackbar.taskId
-            ? {
-                ...task,
-                taskStatus: {
-                  name: snackbar.previousStatus,
-                  description: `Task has been restored to ${snackbar.previousStatus}`,
-                },
-              }
-            : task
-        )
-      );
-      closeSnackbar();
-    }
-  };
+  const {
+    handleMarkAsComplete,
+    handleMarkAsIncomplete,
+    handleMarkAsArchived,
+    handleUndo,
+    snackbar,
+    closeSnackbar,
+  } = useTaskActions(userTaskList, setUserTaskList);
 
   return (
     <Box
