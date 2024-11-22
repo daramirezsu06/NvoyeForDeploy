@@ -1,14 +1,20 @@
-import { FiberManualRecord } from '@mui/icons-material';
-import {
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  Typography,
-} from '@mui/material';
+'use client';
+import { Button, Collapse, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
 
-const TextButton = ({ info }: { info: string }) => {
+interface IProps {
+  title: string;
+  text: string;
+}
+
+const TextButton = ({ info }: { info: IProps }) => {
+  const [expanded, setExpanded] = useState(false);
+  const toggleExpanded = () => {
+    setExpanded((prev) => !prev);
+  };
+  const previewText =
+    info.text.length > 200 ? info.text.substring(0, 200) + '...' : info.text;
+
   return (
     <Stack
       sx={{
@@ -19,15 +25,32 @@ const TextButton = ({ info }: { info: string }) => {
       }}
     >
       <Stack sx={{ px: 2, py: 1, borderBottom: '1px solid #E5E5E5' }}>
-        <Typography variant="h6">medium</Typography>
+        {/* //TODO this title should be dynamic */}
+        <Typography variant="h6">{info.title}</Typography>
       </Stack>
       <Stack
-        sx={{ px: 2, py: 1, display: 'flex', flexDirection: 'column', gap: 2 }}
+        sx={{
+          px: 2,
+          py: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          transition: 'max-height 0.5s ease',
+          overflow: 'hidden',
+          maxHeight: expanded ? '1000px' : '200px',
+        }}
       >
-        <Typography>{info}</Typography>
-        <Button sx={{ alignSelf: 'end' }} variant="text" color="primary">
-          Read more
-        </Button>
+        <Typography>{expanded ? info.text : `${previewText}...`}</Typography>
+        {info.text.length > 200 && (
+          <Button
+            sx={{ alignSelf: 'end', textTransform: 'none' }}
+            variant="text"
+            color="primary"
+            onClick={toggleExpanded}
+          >
+            {expanded ? 'Read less' : 'Read more'}
+          </Button>
+        )}
       </Stack>
     </Stack>
   );

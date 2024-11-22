@@ -1,10 +1,75 @@
 export const provisionalListTasks = {
   title: 'Recomended Tasks',
   items: [
-    { title: 'Task 1', description: 'Description of task 1' },
-    { title: 'Task 2', description: 'Description of task 2' },
-    { title: 'Task 3', description: 'Description of task 3' },
-    { title: 'Task 4', description: 'Description of task 4' },
-    { title: 'Task 5', description: 'Description of task 5' },
+    {
+      id: 1,
+      userId: 1,
+      taskTypeId: 1,
+      taskStatusId: 1,
+      priorityId: 1,
+      notes: 'Ensure all migration documents are verified.',
+      isActive: true,
+      createdAt: '2024-10-24T14:56:02.817Z',
+      updatedAt: null,
+      taskStatus: {
+        name: 'Pending',
+        description: 'Task is pending approval',
+      },
+      taskType: {
+        name: 'Open a bank account',
+        description: 'Tasks related to opening a bank account',
+      },
+      priority: {
+        name: 'High',
+        description: 'Urgent tasks that need immediate attention',
+      },
+      categories: [
+        {
+          taskId: null,
+          recommendedTaskId: 1,
+          categoryId: 2,
+          isActive: true,
+          category: {
+            name: 'Banking',
+            description: 'Tasks related to the banking and financial services',
+          },
+        },
+      ],
+    },
+    {
+      id: 2,
+      userId: 1,
+      taskTypeId: 1,
+      taskStatusId: 1,
+      priorityId: 1,
+      notes: 'Ensure all migration documents are verified.',
+      isActive: true,
+      createdAt: '2024-10-24T14:56:02.817Z',
+      updatedAt: null,
+      taskStatus: {
+        name: 'Pending',
+        description: 'Task is pending approval',
+      },
+      taskType: {
+        name: 'Open a bank account',
+        description: 'Tasks related to opening a bank account',
+      },
+      priority: {
+        name: 'High',
+        description: 'Urgent tasks that need immediate attention',
+      },
+      categories: [
+        {
+          taskId: null,
+          recommendedTaskId: 1,
+          categoryId: 2,
+          isActive: true,
+          category: {
+            name: 'Banking',
+            description: 'Tasks related to the banking and financial services',
+          },
+        },
+      ],
+    },
   ],
 };

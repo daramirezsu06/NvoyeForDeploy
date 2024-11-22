@@ -1,4 +1,4 @@
-import { Grid, Stack } from '@mui/material';
+import { Box, Breadcrumbs, Container, Grid, Stack } from '@mui/material';
 import BulletedList from '../components/bulletedList';
 import TableHubs from '../components/table';
 import TextButton from '../components/textButton';
@@ -7,6 +7,8 @@ import Finance2 from '../components/finance2';
 import RecommendedTasks2 from '../components/recommendedTasks2';
 import ResourceList2 from '../components/resourceList2';
 import { subHubsJson } from '../components/subHubsJson';
+import Link from 'next/link';
+import { ChevronRight } from '@mui/icons-material';
 
 export default function SubHubs({
   params,
@@ -39,8 +41,58 @@ export default function SubHubs({
   };
 
   return (
-    <Grid container spacing={2} sx={{ px: 2 }}>
-      <Grid item xs={8}>
+    <Container
+      sx={{
+        // px: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
+        maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+
+        flex: 1,
+      }}
+    >
+      <Box
+        sx={{
+          display: { xs: 'none', sm: 'flex' },
+          flexDirection: 'row',
+          width: '100%',
+          paddingTop: 3,
+        }}
+      >
+        <Breadcrumbs aria-label="breadcrumb" separator={<ChevronRight />}>
+          <Link
+            href="/dashboard/guide/hubs"
+            style={{ color: 'inherit', textDecoration: 'none' }}
+          >
+            Hubs
+          </Link>
+          <Link
+            href="/dashboard/guide/hubs/subHubs"
+            style={{ color: 'inherit', textDecoration: 'none' }}
+          >
+            Hub Name
+          </Link>
+          <Link
+            href="/dashboard/guide/hubs/subHubs/actualCategory"
+            style={{ color: 'inherit', textDecoration: 'none' }}
+          >
+            actual category
+          </Link>
+        </Breadcrumbs>
+      </Box>
+      <Stack
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          width: '100%',
+          maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+          gap: 3,
+          paddingTop: 3,
+        }}
+      >
+        {/* //LEft column */}
         <Stack spacing={2}>
           <SubCategory_Header infoHeader={{ name, tags }} />
           <Stack
@@ -53,20 +105,22 @@ export default function SubHubs({
               backgroundColor: '#F5F3F1',
             }}
           >
-            <TextButton info={overview} />
+            {overview && (
+              <TextButton info={{ title: 'Overview', text: overview }} />
+            )}
             {PrincipalContent.map((component, index) =>
               renderComponent(component, index)
             )}
           </Stack>
         </Stack>
-      </Grid>
-      <Grid item xs={4}>
+
+        {/* //Right column */}
         <Stack spacing={2}>
           {rightContend.map((component, index) =>
             renderComponent(component, index)
           )}
         </Stack>
-      </Grid>
-    </Grid>
+      </Stack>
+    </Container>
   );
 }
