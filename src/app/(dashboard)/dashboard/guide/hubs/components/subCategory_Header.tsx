@@ -19,17 +19,26 @@ const SubCategory_Header = ({
         backgroundColor: '#F5F3F1',
       }}
     >
-      <Stack sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <Stack sx={{ display: 'flex', flexDirection: 'column', gap: 2, flex: 1 }}>
         <Typography variant="h4">
           {infoHeader.name && infoHeader.name}
         </Typography>
         <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
           {infoHeader.tags.map((tag, index) => {
-            return <Chip key={index} label={tag} />;
+            return (
+              <Chip
+                key={index}
+                label={tag}
+                size="small"
+                variant="filled"
+                color="default"
+                sx={{ borderRadius: '4px', backgroundColor: '#3D5BA54D' }}
+              />
+            );
           })}
         </Stack>
       </Stack>
-      <Image src={Banking} alt="Finance" width={48} height={48} />
+      <Image src={Banking} alt="Finance" width={84} height={84} />
     </Stack>
   );
 };

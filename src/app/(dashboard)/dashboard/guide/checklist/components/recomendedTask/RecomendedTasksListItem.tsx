@@ -18,6 +18,7 @@ export default function RecomendedTasksListItem({ recomendedTask }: Props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  console.log(recomendedTask);
 
   return (
     <ListItem
@@ -42,7 +43,7 @@ export default function RecomendedTasksListItem({ recomendedTask }: Props) {
           paddingRight: { xs: '16px', sm: '16px' },
         }}
       >
-        {recomendedTask.taskType.name}
+        {recomendedTask.taskType?.name}
         <IconButton onClick={handleClick}>
           <MoreVert sx={{ ml: 'auto' }} />
         </IconButton>

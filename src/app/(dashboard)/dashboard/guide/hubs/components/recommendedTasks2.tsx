@@ -1,3 +1,4 @@
+'use client';
 import { MoreVert } from '@mui/icons-material';
 import {
   Button,
@@ -9,12 +10,16 @@ import {
   IconButton,
 } from '@mui/material';
 import { recomendedTaskItemType, recomendedTaskType } from '../hubs.Types';
+import RecomendedTasksListItem from '../../checklist/components/recomendedTask/RecomendedTasksListItem';
+import { IRecomendedTask } from '../../checklist/mocks/recomendedTasks';
+import Link from 'next/link';
 
 const RecommendedTasks2 = ({
   recomendedTaskInfo,
 }: {
-  recomendedTaskInfo: recomendedTaskType;
+  recomendedTaskInfo: any;
 }) => {
+  console.log('recomendedTaskInfo:', recomendedTaskInfo);
   return (
     <Stack
       sx={{
@@ -23,7 +28,7 @@ const RecommendedTasks2 = ({
         width: { xs: '100%', md: '350px' },
         maxWidth: '100%',
         borderRadius: 2,
-
+        height: 'min-content',
         p: 2,
         backgroundColor: '#F5F3F1',
       }}
@@ -36,9 +41,14 @@ const RecommendedTasks2 = ({
           justifyContent: 'space-between',
         }}
       >
-        <Typography variant="h6">{recomendedTaskInfo.title}</Typography>
+        <Typography variant="h6">Recommended tasks</Typography>
         <Button variant="contained" sx={{ textTransform: 'none' }}>
-          View checklist
+          <Link
+            href="/dashboard/guide/checklist"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            View checklist
+          </Link>
         </Button>
       </Stack>
       <Typography sx={{ mb: 2 }} variant="caption">
@@ -46,27 +56,13 @@ const RecommendedTasks2 = ({
       </Typography>
       <Stack sx={{ gap: 2 }}>
         <List sx={{ display: 'flex', flexDirection: 'column', py: 1, gap: 1 }}>
-          {recomendedTaskInfo.items.map((item, index) => {
-            return (
-              <ListItem
-                key={index}
-                sx={{
-                  backgroundColor: '#FFFF',
-                  borderRadius: 1,
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}
-              >
-                <ListItemText
-                  sx={{ flexGrow: 1, py: 0.5 }}
-                  primary={item.title}
-                />
-                <IconButton sx={{ p: 1 }}>
-                  <MoreVert />
-                </IconButton>
-              </ListItem>
-            );
-          })}
+          {recomendedTaskInfo.items.map(
+            (item: IRecomendedTask, index: number) => {
+              return (
+                <RecomendedTasksListItem key={index} recomendedTask={item} />
+              );
+            }
+          )}
         </List>
       </Stack>
     </Stack>
