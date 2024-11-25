@@ -171,6 +171,7 @@ export default function Menu({ anchorEl, open, handleClose }: any) {
                   lineHeight: '150%' /* 24px */,
                   letterSpacing: '0.15px',
                 }}
+                component={'span'}
               >
                 Log out
               </Typography>

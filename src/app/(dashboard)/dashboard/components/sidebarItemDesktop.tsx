@@ -79,7 +79,9 @@ export const SidebarItemDesktop = ({
                     flex: '1 0 0',
                   }}
                 >
-                  <Typography variant="body1">{item.text}</Typography>
+                  <Typography variant="body1" component={'span'}>
+                    {item.text}
+                  </Typography>
                 </ListItemText>
               )}
             </IconButton>

@@ -198,8 +198,10 @@ const FormSection = ({
 
 const ProfilePictureSection = () => (
   <Stack spacing={1}>
-    <Typography variant="subtitle2">Profile picture</Typography>
-    <Typography variant="body2">
+    <Typography variant="subtitle2" component={'h3'}>
+      Profile picture
+    </Typography>
+    <Typography variant="body2" component={'span'}>
       Not ready to upload a profile picture now? You can update this at any time
       in your Profile Settings.
     </Typography>
@@ -219,10 +221,16 @@ const ProfilePictureSection = () => (
       <Stack spacing={1} alignItems="center" position="absolute" zIndex={2}>
         <Box width={40} height={40} borderRadius="50%" bgcolor="#ccc" />
         <Link sx={{ '&:hover': { color: 'action.hover' } }}>
-          <Typography variant="subtitle1">Click to upload</Typography>
+          <Typography variant="subtitle1" component={'span'}>
+            Click to upload
+          </Typography>
         </Link>
-        <Typography variant="body2">or drag and drop</Typography>
-        <Typography variant="body2">SVG, PNG, JPG or GIF (max. 3MB)</Typography>
+        <Typography variant="body2" component={'span'}>
+          or drag and drop
+        </Typography>
+        <Typography variant="body2" component={'span'}>
+          SVG, PNG, JPG or GIF (max. 3MB)
+        </Typography>
       </Stack>
       <input
         type="file"

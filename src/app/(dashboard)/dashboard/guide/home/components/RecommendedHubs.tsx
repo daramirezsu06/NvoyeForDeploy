@@ -27,7 +27,9 @@ export default function RecommendedHubs() {
           alignSelf: 'stretch',
         }}
       >
-        <Typography variant="h6">Recommended hubs</Typography>
+        <Typography variant="h6" component={'h2'}>
+          Recommended hubs
+        </Typography>
         <Button
           variant="outlined"
           color="inherit"

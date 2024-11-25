@@ -81,7 +81,10 @@ export default function CustomCategoryCard({ icon, title }: Props) {
             }}
           >
             <Image src={icon} alt="icon" width={48} height={48} />
-            <Typography variant="subtitle1"> {title}</Typography>
+            <Typography variant="subtitle1" component={'h5'}>
+              {' '}
+              {title}
+            </Typography>
           </Stack>
         </Stack>
       </Link>

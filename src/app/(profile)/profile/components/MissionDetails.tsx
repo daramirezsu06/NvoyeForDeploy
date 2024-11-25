@@ -103,13 +103,13 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   return (
     <>
       <Stack direction="row" justifyContent="space-between">
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom component={'h4'}>
           Mission Details
         </Typography>
         <ProgressWithLabel value={step} />
       </Stack>
 
-      <Typography paragraph>
+      <Typography paragraph component={'span'}>
         Please provide the details of the home nation you represent and the
         country of your current assignation.
       </Typography>

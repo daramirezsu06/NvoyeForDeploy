@@ -14,7 +14,9 @@ export default function NewTaskButton({ handleOpenNewTask }: Props) {
       onClick={handleOpenNewTask}
     >
       <AddTaskOutlined sx={{ mx: 0, my: 0 }} />
-      <Typography sx={{ mx: 0, my: 0 }}>New task</Typography>
+      <Typography sx={{ mx: 0, my: 0 }} component={'span'}>
+        New task
+      </Typography>
     </Button>
   );
 }

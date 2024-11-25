@@ -45,6 +45,7 @@ const CustomMenuItem: React.FC<CustomMenuItemProps> = ({ icon, label }) => {
             lineHeight: '150%' /* 24px */,
             letterSpacing: '0.15px',
           }}
+          component={'span'}
         >
           {label}
         </Typography>

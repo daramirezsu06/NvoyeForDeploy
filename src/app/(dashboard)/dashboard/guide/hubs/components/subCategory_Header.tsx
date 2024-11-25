@@ -20,7 +20,7 @@ const SubCategory_Header = ({
       }}
     >
       <Stack sx={{ display: 'flex', flexDirection: 'column', gap: 2, flex: 1 }}>
-        <Typography variant="h4">
+        <Typography variant="h4" component={'h1'}>
           {infoHeader.name && infoHeader.name}
         </Typography>
         <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1 }}>

@@ -45,7 +45,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
       }}
     >
       <Link
-        href={`/dashboard/guide/hubs/${title}`} //!modificar esto
+        href={`/dashboard/guide/hubs/${title}`} //!TODO modify this
         style={{
           width: '100%',
           height: '100%',
@@ -66,12 +66,18 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
             textAlign: 'center',
           }}
         >
-          {/* //!ESTO DEBE MODIFICARSE */}
+          {/* //!TODO this should be dinamic */}
           <Stack sx={{}}>
             <Image src={icon} alt="icon" width={48} height={48} />
           </Stack>
-          <Typography variant="h5"> {titleCaseTitle}</Typography>
-          <Typography variant="body2"> {topics}</Typography>
+          <Typography variant="h5" component={'h4'}>
+            {' '}
+            {titleCaseTitle}
+          </Typography>
+          <Typography variant="body2" component={'span'}>
+            {' '}
+            {topics}
+          </Typography>
         </Stack>
       </Link>
     </Card>

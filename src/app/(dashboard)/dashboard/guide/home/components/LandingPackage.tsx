@@ -1,11 +1,21 @@
+'use client';
 import BrandLogo from '@/src/icons/BrandLogo';
 import { Box, Stack, Typography, List } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import LandingListItem from './LandingListItem';
+import {
+  IRecomendedTask,
+  recomendedTasksMocks,
+} from '../../checklist/mocks/recomendedTasks';
+import RecomendedTasksListItem from '../../checklist/components/recomendedTask/RecomendedTasksListItem';
 
 type Props = {};
 
 export default function LandingPackage({}: Props) {
+  //TODO connect to the backend and get the recomended tasks  -> {{url}}/tasks/getRecommendedTasks
+  const [recomendedTasks, setRecomendedTasks] =
+    useState<IRecomendedTask[]>(recomendedTasksMocks);
+
   return (
     <Box
       sx={{
@@ -29,7 +39,7 @@ export default function LandingPackage({}: Props) {
         }}
       >
         <BrandLogo />
-        <Typography variant="h6" color="primary">
+        <Typography variant="h6" color="primary" component={'h2'}>
           Nvoye landing package
         </Typography>
       </Stack>
@@ -52,10 +62,13 @@ export default function LandingPackage({}: Props) {
             alignSelf: ' stretch',
           }}
         >
+          {recomendedTasks.map((task) => (
+            <RecomendedTasksListItem key={task.id} recomendedTask={task} />
+          ))}
+          {/* <LandingListItem />
           <LandingListItem />
           <LandingListItem />
-          <LandingListItem />
-          <LandingListItem />
+          <LandingListItem /> */}
         </List>
       </Box>
     </Box>

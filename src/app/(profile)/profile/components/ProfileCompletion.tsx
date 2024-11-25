@@ -33,8 +33,10 @@ export const ProfileCompletion: React.FC = () => {
       >
         ✓
       </Box>
-      <Typography variant="h4">You’re in!</Typography>
-      <Typography variant="body1" align="center">
+      <Typography variant="h4" component={'h4'}>
+        You’re in!
+      </Typography>
+      <Typography variant="body1" align="center" component={'span'}>
         Welcome to Nvoy’s exclusive diplomatic community. Ready to take a look
         around?
       </Typography>

@@ -55,7 +55,9 @@ const Finance2 = ({ financeInfo }: { financeInfo: FinanceType }) => {
                   primary={item.title}
                   secondary={item.secounText}
                 />
-                <Typography variant="body2">{item.value}</Typography>
+                <Typography variant="body2" component={'span'}>
+                  {item.value}
+                </Typography>
               </Stack>
             </ListItem>
           );

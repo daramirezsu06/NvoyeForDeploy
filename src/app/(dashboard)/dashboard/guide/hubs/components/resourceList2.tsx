@@ -27,7 +27,9 @@ const ResourceList2 = ({ resourceInfo }: { resourceInfo: ResourceType }) => {
           backgroundColor: theme.custom.paperElevationFour,
         }}
       >
-        <Typography variant="h6">{resourceInfo.title}</Typography>
+        <Typography variant="h6" component={'h4'}>
+          {resourceInfo.title}
+        </Typography>
       </Stack>
       <List sx={{ p: 2, gap: 8, display: 'flex', flexDirection: 'column' }}>
         {resourceInfo.items.map((resource, index) => {

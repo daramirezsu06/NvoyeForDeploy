@@ -47,7 +47,9 @@ export default function RecomendedTasksList({
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         {!isCollapsed && (
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Typography variant="h6">Recommended tasks</Typography>
+            <Typography variant="h6" component={'h3'}>
+              Recommended tasks
+            </Typography>
 
             <Badge
               sx={{
@@ -96,6 +98,7 @@ export default function RecomendedTasksList({
           sx={{
             display: { xs: 'none', md: 'flex' },
           }}
+          component={'span'}
         >
           Recommended checklist tasks to help you meet your needs.
         </Typography>
@@ -136,7 +139,9 @@ export default function RecomendedTasksList({
                 }}
                 mb={3}
               >
-                <Typography variant="h6">Nothing here yet!</Typography>
+                <Typography variant="h6" component={'span'}>
+                  Nothing here yet!
+                </Typography>
               </Stack>
             </Stack>
           </Box>

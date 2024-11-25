@@ -28,8 +28,13 @@ export default function TitleAndButton({ onAddTask }: Props) {
       }}
     >
       <Stack>
-        <Typography variant="h4">Checklist</Typography>
-        <Typography sx={{ display: { xs: 'none', sm: 'flex' } }}>
+        <Typography variant="h4" component={'h1'}>
+          Checklist
+        </Typography>
+        <Typography
+          sx={{ display: { xs: 'none', sm: 'flex' } }}
+          component={'h2'}
+        >
           A guided list of tasks to help you relocate and integrate.
         </Typography>
       </Stack>

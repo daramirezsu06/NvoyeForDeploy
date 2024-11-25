@@ -7,6 +7,10 @@ import SubCategory_Header from './components/subCategory_Header';
 type Props = {};
 
 export default function Hubs({}: Props) {
+  //TODO country should be fetch from user
+
+  //TODO hubs should be fetch from country
+
   return (
     <Container
       sx={{
@@ -71,10 +75,12 @@ export default function Hubs({}: Props) {
             alignSelf: 'stretch',
           }}
         >
-          <Typography variant="h5" color={'primary'}>
+          <Typography variant="h5" color={'primary'} component={'h1'}>
             The Netherlands
           </Typography>
-          <Typography variant="h5">diplomatic hub</Typography>
+          <Typography variant="h5" component={'h1'}>
+            diplomatic hub
+          </Typography>
         </Stack>
         <Typography
           variant="body1"
@@ -85,6 +91,7 @@ export default function Hubs({}: Props) {
             alignItems: 'flex-start',
             alignSelf: ' stretch',
           }}
+          component={'h2'}
         >
           A curated collection of resources to help you navigate the nuances of
           daily life in this vibrant and unique country.

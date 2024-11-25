@@ -63,6 +63,7 @@ export const SidebarDesktop = ({
               color={
                 pathname.includes('/dashboard/guide') ? 'primary' : 'default'
               }
+              component={'span'}
             >
               Guide
             </Typography>

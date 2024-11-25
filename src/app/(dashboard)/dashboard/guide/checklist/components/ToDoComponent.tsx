@@ -96,7 +96,7 @@ export default function TodoComponent({
         </Modal>
         <Stack px={2} pb={1} gap={1} onClick={handleOpenTaskDetail}>
           <Stack direction="row" justifyContent="space-between">
-            <Typography>{task.customTitle}</Typography>
+            <Typography component={'h5'}>{task.customTitle}</Typography>
             <Flag sx={{ color: flagColor }} />
           </Stack>
           <Stack

@@ -41,7 +41,9 @@ const RecommendedTasks2 = ({
           justifyContent: 'space-between',
         }}
       >
-        <Typography variant="h6">Recommended tasks</Typography>
+        <Typography variant="h6" component={'h3'}>
+          Recommended tasks
+        </Typography>
         <Button variant="contained" sx={{ textTransform: 'none' }}>
           <Link
             href="/dashboard/guide/checklist"
@@ -51,7 +53,7 @@ const RecommendedTasks2 = ({
           </Link>
         </Button>
       </Stack>
-      <Typography sx={{ mb: 2 }} variant="caption">
+      <Typography sx={{ mb: 2 }} variant="caption" component={'span'}>
         Recommended checklist tasks to help you meet your needs.
       </Typography>
       <Stack sx={{ gap: 2 }}>
