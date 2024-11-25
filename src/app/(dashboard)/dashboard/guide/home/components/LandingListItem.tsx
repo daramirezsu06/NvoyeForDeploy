@@ -43,7 +43,9 @@ export default function LandingListItem({}: Props) {
             flex: 1,
           }}
         >
-          <Typography variant="body1">Gym Registration</Typography>
+          <Typography variant="body1" component={'span'}>
+            Gym Registration
+          </Typography>
         </ListItemText>
         <IconButton>
           <Icon>

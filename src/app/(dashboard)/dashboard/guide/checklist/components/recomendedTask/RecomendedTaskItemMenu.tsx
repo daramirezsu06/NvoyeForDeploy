@@ -127,6 +127,7 @@ export default function RecomendedTaskItemMenu({
                   lineHeight: '150%' /* 24px */,
                   letterSpacing: '0.15px',
                 }}
+                component={'span'}
               >
                 View task
               </Typography>
@@ -198,6 +199,7 @@ export default function RecomendedTaskItemMenu({
                   lineHeight: '150%' /* 24px */,
                   letterSpacing: '0.15px',
                 }}
+                component={'span'}
               >
                 Add to checklist
               </Typography>
@@ -252,6 +254,7 @@ export default function RecomendedTaskItemMenu({
                   lineHeight: '150%' /* 24px */,
                   letterSpacing: '0.15px',
                 }}
+                component={'span'}
               >
                 Dismiss item
               </Typography>

@@ -19,12 +19,14 @@ const Text = ({ info }: { info: string }) => {
       }}
     >
       <Stack sx={{ px: 2, py: 1, borderBottom: '1px solid #E5E5E5' }}>
-        <Typography variant="h6">medium</Typography>
+        <Typography variant="h6" component={'h3'}>
+          medium
+        </Typography>
       </Stack>
       <Stack
         sx={{ px: 2, py: 1, display: 'flex', flexDirection: 'column', gap: 2 }}
       >
-        <Typography>{info}</Typography>
+        <Typography component={'p'}>{info}</Typography>
       </Stack>
     </Stack>
   );

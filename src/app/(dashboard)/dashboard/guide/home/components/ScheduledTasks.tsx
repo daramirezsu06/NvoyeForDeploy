@@ -49,7 +49,9 @@ export default function ScheduledTasks() {
           alignSelf: 'stretch',
         }}
       >
-        <Typography variant="h6">Scheduled tasks</Typography>
+        <Typography variant="h6" component={'h2'}>
+          Scheduled tasks
+        </Typography>
         <Button
           variant="outlined"
           color="inherit"

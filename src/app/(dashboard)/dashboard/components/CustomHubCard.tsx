@@ -70,8 +70,14 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
           <Stack sx={{}}>
             <Image src={icon} alt="icon" width={48} height={48} />
           </Stack>
-          <Typography variant="h5"> {titleCaseTitle}</Typography>
-          <Typography variant="body2"> {topics}</Typography>
+          <Typography variant="h5" component={'h4'}>
+            {' '}
+            {titleCaseTitle}
+          </Typography>
+          <Typography variant="body2" component={'h5'}>
+            {' '}
+            {topics}
+          </Typography>
         </Stack>
       </Link>
     </Card>

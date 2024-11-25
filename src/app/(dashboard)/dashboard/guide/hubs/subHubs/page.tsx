@@ -113,13 +113,21 @@ export default function Hubs({}: Props) {
             zIndex: 1,
           }}
         >
-          <Typography variant="h4" sx={{ display: { xs: 'none', sm: 'flex' } }}>
+          <Typography
+            variant="h4"
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
+            component={'h1'}
+          >
             Finances in the Netherlands
           </Typography>
-          <Typography variant="h5" sx={{ display: { xs: 'flex', sm: 'none' } }}>
+          <Typography
+            variant="h5"
+            sx={{ display: { xs: 'flex', sm: 'none' } }}
+            component={'h1'}
+          >
             Finances in the Netherlands
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" component={'h4'}>
             This hub is your go-to source for understanding the myriad costs
             associated with residing in the Hague. From navigating the banking
             system to deciphering the nuances of daily expenses, we provide
@@ -141,7 +149,7 @@ export default function Hubs({}: Props) {
           m: 0,
         }}
       >
-        <Typography variant="h5">
+        <Typography variant="h5" component={'h2'}>
           Financial landscape and living expenses
         </Typography>
         <Box

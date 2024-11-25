@@ -105,13 +105,13 @@ const LanguageSkills: React.FC<{
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, minHeight: 300 }}>
       <Stack direction="row" justifyContent="space-between">
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom component={'h3'}>
           Language Skills
         </Typography>
         <ProgressWithLabel value={step} />
       </Stack>
 
-      <Typography paragraph>
+      <Typography paragraph component={'span'}>
         Please indicate the languages you speak and your proficiency level in
         each below.
       </Typography>
@@ -130,11 +130,16 @@ const LanguageSkills: React.FC<{
                 paddingBottom: 1,
               }}
             >
-              <Typography variant="body1">{lang.language}</Typography>
-              <Typography variant="body1">{lang.proficiency}</Typography>
+              <Typography variant="body1" component={'span'}>
+                {lang.language}
+              </Typography>
+              <Typography variant="body1" component={'span'}>
+                {lang.proficiency}
+              </Typography>
               <Typography
                 variant="body1"
                 sx={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}
+                component={'span'}
               >
                 X
               </Typography>

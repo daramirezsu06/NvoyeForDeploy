@@ -1,13 +1,15 @@
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
 
-//TODO -> get the user name
+//TODO -> get the user name and country
 
 const getCurrentDate = () => {
   const today = new Date();
-  const weekday = today.toLocaleDateString('en-US', { weekday: 'short' });
-  const day = today.getDate();
-  return `${weekday}, ${day}`;
+  const weekday = today.toLocaleDateString('en-US', { weekday: 'short' }); // Día de la semana (corto)
+  const day = today.getDate(); // Día del mes
+  const month = today.toLocaleDateString('en-US', { month: 'short' }); // Mes (corto)
+  const year = today.getFullYear(); // Año completo
+  return `${weekday}, ${day} ${month} ${year}`;
 };
 
 export default function WelcomeUser() {
@@ -34,9 +36,13 @@ export default function WelcomeUser() {
           flex: 1,
         }}
       >
-        {/* //! HERE GOES THE USER NAME */}
-        <Typography variant="subtitle2">Welcome, Michael</Typography>
-        <Typography variant="h6">Netherland diplomatic hub</Typography>
+        {/* //! HERE GOES THE USER NAME and the country*/}
+        <Typography variant="subtitle2" component={'span'}>
+          Welcome, Michael
+        </Typography>
+        <Typography variant="h6" component={'h1'}>
+          Your Hub for the Netherlands
+        </Typography>
       </Stack>
       <Stack
         sx={{
@@ -46,8 +52,12 @@ export default function WelcomeUser() {
           justifyContent: 'flex-end',
         }}
       >
-        <Typography variant="caption">Today&apos;s</Typography>
-        <Typography variant="h6">{currentDate}</Typography>
+        <Typography variant="caption" component={'span'}>
+          Today&apos;s
+        </Typography>
+        <Typography variant="h6" component={'span'}>
+          {currentDate}
+        </Typography>
       </Stack>
     </Stack>
   );

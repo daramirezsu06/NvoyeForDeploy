@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material';
 import React from 'react';
-import WelcomeUser from '../components/WelcomeUser';
+import WelcomeUser from './components/WelcomeUser';
 import RecommendedHubs from './components/RecommendedHubs';
 import ConnectCalendar from './components/ConnectCalendar';
 import LandingPackage from './components/LandingPackage';

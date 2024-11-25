@@ -78,11 +78,13 @@ export default function ConnectCalendar() {
             alignSelf: 'stretch',
           }}
         >
-          <Typography variant="caption">Recommended for you</Typography>
-          <Typography variant="h6">
+          <Typography variant="caption" component={'span'}>
+            Recommended for you
+          </Typography>
+          <Typography variant="h6" component={'h2'}>
             Connect your calendar and sync your tasks
           </Typography>
-          <Typography variant="caption">
+          <Typography variant="caption" component={'span'}>
             Connect your calendar to receive notifications and reminders for all
             checklist task items.
           </Typography>

@@ -185,6 +185,7 @@ export default function NewTaskModal({ handleCloseNewTask, onAddTask }: Props) {
             alignItems: 'flex-start',
             flex: 1,
           }}
+          component={'h2'}
         >
           Create new task
         </Typography>
@@ -268,7 +269,7 @@ export default function NewTaskModal({ handleCloseNewTask, onAddTask }: Props) {
               filesAttached={filesAttached}
               setFilesAttached={setFilesAttached}
             />
-            <NotesProperty notes={notes} setNotes={setNotes} />
+            {/* <NotesProperty notes={notes} setNotes={setNotes} /> */}
           </Stack>
         </Stack>
         {/* //others */}

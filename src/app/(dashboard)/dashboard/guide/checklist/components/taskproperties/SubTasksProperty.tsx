@@ -116,8 +116,11 @@ export default function SubTasksProperty({
                     '&:active': {
                       backgroundColor: 'transparent',
                     },
+                    textTransform: 'none',
+                    gap: 1,
                   }}
                 >
+                  Add
                   <AddTaskOutlined />
                 </Button>
               </InputAdornment>

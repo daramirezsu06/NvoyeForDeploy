@@ -24,7 +24,9 @@ const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
       }}
     >
       <Stack sx={{ px: 2, py: 1, borderBottom: '1px solid #E5E5E5' }}>
-        <Typography variant="h6">{tableInfo.title}</Typography>
+        <Typography variant="h6" component={'h3'}>
+          {tableInfo.title}
+        </Typography>
       </Stack>
       <Table>
         <TableHead>

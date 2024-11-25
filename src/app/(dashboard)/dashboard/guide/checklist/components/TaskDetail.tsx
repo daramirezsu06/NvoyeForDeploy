@@ -121,6 +121,7 @@ export default function TaskDetail({
             alignItems: 'flex-start',
             flex: 1,
           }}
+          component={'h2'}
         >
           {title}
         </Typography>

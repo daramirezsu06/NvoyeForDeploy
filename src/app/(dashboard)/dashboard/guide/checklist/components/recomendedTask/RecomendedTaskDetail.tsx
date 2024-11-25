@@ -56,6 +56,7 @@ export default function RecomendedTaskDetail({
             alignItems: 'flex-start',
             flex: 1,
           }}
+          component={'h2'}
         >
           {recomendedTask.taskType.name}
         </Typography>
@@ -89,7 +90,7 @@ export default function RecomendedTaskDetail({
             gap: 1,
           }}
         >
-          <Typography variant="h6" sx={{ flex: 1 }}>
+          <Typography variant="h6" sx={{ flex: 1 }} component={'h3'}>
             {recomendedTask.taskType.name}
           </Typography>
           {recomendedTask.categories.length > 0 && (
@@ -120,8 +121,10 @@ export default function RecomendedTaskDetail({
               alignSelf: 'stretch',
             }}
           >
-            <Typography variant="h6">Description</Typography>
-            <Typography variant="body1">
+            <Typography variant="h6" component={'h3'}>
+              Description
+            </Typography>
+            <Typography variant="body1" component={'p'}>
               {recomendedTask.taskType.description}
             </Typography>
           </Stack>

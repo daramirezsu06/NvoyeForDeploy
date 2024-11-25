@@ -26,7 +26,9 @@ const TextButton = ({ info }: { info: IProps }) => {
     >
       <Stack sx={{ px: 2, py: 1, borderBottom: '1px solid #E5E5E5' }}>
         {/* //TODO this title should be dynamic */}
-        <Typography variant="h6">{info.title}</Typography>
+        <Typography variant="h6" component={'h3'}>
+          {info.title}
+        </Typography>
       </Stack>
       <Stack
         sx={{
@@ -40,7 +42,9 @@ const TextButton = ({ info }: { info: IProps }) => {
           maxHeight: expanded ? '1000px' : '200px',
         }}
       >
-        <Typography>{expanded ? info.text : `${previewText}...`}</Typography>
+        <Typography component={'p'}>
+          {expanded ? info.text : `${previewText}...`}
+        </Typography>
         {info.text.length > 200 && (
           <Button
             sx={{ alignSelf: 'end', textTransform: 'none' }}

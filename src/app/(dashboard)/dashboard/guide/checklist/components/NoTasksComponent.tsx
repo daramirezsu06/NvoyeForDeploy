@@ -52,8 +52,10 @@ export default function NoTasksComponent({ onAddTask }: Props) {
           }}
           mb={3}
         >
-          <Typography variant="h6">Nothing here yet!</Typography>
-          <Typography variant="subtitle2">
+          <Typography variant="h6" component={'span'}>
+            Nothing here yet!
+          </Typography>
+          <Typography variant="subtitle2" component={'span'}>
             Add something to your checklist
           </Typography>
         </Stack>
