@@ -19,14 +19,14 @@ const RecommendedTasks2 = ({
 }: {
   recomendedTaskInfo: any;
 }) => {
-  console.log('recomendedTaskInfo:', recomendedTaskInfo);
+  // console.log('recomendedTaskInfo:', recomendedTaskInfo);
   return (
     <Stack
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        width: { xs: '100%', md: '350px' },
-        maxWidth: '100%',
+        width: { xs: '100%', md: '100%' },
+        maxWidth: { xs: '100%', md: '305px' },
         borderRadius: 2,
         height: 'min-content',
         p: 2,

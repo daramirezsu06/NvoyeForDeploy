@@ -9,3 +9,10 @@ html {
   font-size: 14px; /* Si tu diseño está basado en 14px en lugar de 16px */
   /* padding: 0 0; */
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

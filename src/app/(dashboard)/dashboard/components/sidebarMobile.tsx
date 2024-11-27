@@ -12,7 +12,7 @@ export const SidebarMobile = ({
   return (
     <Paper
       sx={{
-        display: { xs: 'block', sm: 'none' }, // Mostrar solo en pantallas pequeñas
+        display: { xs: 'block', sm: 'none' },
         position: 'fixed',
         bottom: 0,
         left: 0,

@@ -68,6 +68,8 @@ export default function Checklist() {
     closeSnackbar,
   } = useTaskActions(userTaskList, setUserTaskList);
 
+  console.log(userTaskList);
+
   return (
     <Container
       sx={{

@@ -9,14 +9,24 @@ import ResourceList2 from '../components/resourceList2';
 import { subHubsJson } from '../components/subHubsJson';
 import Link from 'next/link';
 import { ChevronRight } from '@mui/icons-material';
+import CategoryBottomNavigation from './CategoryBottomNavigation';
+import { toCamelCase } from '@/src/utils/helpers/toCamelCase';
 
 export default function SubHubs({
   params,
 }: {
-  params: { slug: keyof typeof subHubsJson };
+  params: { slug: string }; // Permitir un string genérico para `slug`
 }) {
+  const camelCaseKey = toCamelCase(params.slug); // Convertir el slug
+
+  // Validar si la clave existe en `subHubsJson`
+  if (!(camelCaseKey in subHubsJson)) {
+    throw new Error(`Invalid slug: ${params.slug}`);
+  }
+
+  // TypeScript ahora sabe que `camelCaseKey` es una clave válida
   const { name, tags, overview, PrincipalContent, rightContend, description } =
-    subHubsJson[params.slug];
+    subHubsJson[camelCaseKey as keyof typeof subHubsJson];
 
   const renderComponent = (
     component: { type: string; data: any },
@@ -47,15 +57,16 @@ export default function SubHubs({
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
+        minHeight: { xs: '100vh', sm: 'calc(100vh - 190px)' },
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
 
         flex: 1,
+        paddingBottom: '190px',
       }}
     >
       <Box
         sx={{
-          display: { xs: 'none', sm: 'flex' },
+          display: { xs: 'none', md: 'flex' },
           flexDirection: 'row',
           width: '100%',
           paddingTop: 3,
@@ -75,10 +86,10 @@ export default function SubHubs({
             Hub Name
           </Link>
           <Link
-            href="/dashboard/guide/hubs/subHubs/actualCategory"
+            href={`/dashboard/guide/hubs/subHubs/${name}`}
             style={{ color: 'inherit', textDecoration: 'none' }}
           >
-            actual category
+            {name}
           </Link>
         </Breadcrumbs>
       </Box>
@@ -90,10 +101,17 @@ export default function SubHubs({
           maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
           gap: 3,
           paddingTop: 3,
+          paddingBottom: { xs: '', sm: '190px' },
         }}
       >
         {/* //LEft column */}
-        <Stack spacing={2}>
+        <Stack
+          spacing={2}
+          sx={{
+            // width: { xs: '100%', md: '100%' },
+            flex: 1,
+          }}
+        >
           <SubCategory_Header infoHeader={{ name, tags }} />
           <Stack
             sx={{
@@ -115,7 +133,13 @@ export default function SubHubs({
         </Stack>
 
         {/* //Right column */}
-        <Stack spacing={2}>
+        <Stack
+          spacing={2}
+          sx={{
+            // width: { xs: '100%', md: '100%' },
+            maxWidth: { xs: '100%', md: '400px' },
+          }}
+        >
           {rightContend.map((component, index) =>
             renderComponent(component, index)
           )}

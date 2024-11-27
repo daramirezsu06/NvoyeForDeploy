@@ -2,6 +2,7 @@ import { Card, Stack, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 import Link from 'next/link';
+import { toCamelCase } from '../../../../utils/helpers/toCamelCase';
 
 type Props = {
   icon: StaticImageData;
@@ -9,19 +10,6 @@ type Props = {
 };
 
 export default function CustomCategoryCard({ icon, title }: Props) {
-  function toCamelCase(str: string): string {
-    return str
-      .replace(/\s+/g, ' ') // Elimina espacios extra si hay
-      .trim() // Remueve espacios iniciales y finales
-      .split(' ') // Divide el string en palabras
-      .map(
-        (word, index) =>
-          index === 0
-            ? word.charAt(0).toUpperCase() + word.substring(1) // Primera palabra en minúscula
-            : word.charAt(0).toUpperCase() + word.substring(1) // Palabras siguientes con mayúscula inicial
-      )
-      .join(''); // Une las palabras sin espacios
-  }
   const titleCaseTitle = toCamelCase(title);
 
   return (
