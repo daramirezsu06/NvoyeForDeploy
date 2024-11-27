@@ -339,7 +339,7 @@ export const subHubsJson = {
   },
   CostOfLiving: {
     id: 1,
-    name: 'The cost of living',
+    name: 'Cost of living',
     description: 'General description of the hub',
     tags: ['Housing affordability', 'Different wages', 'Variable food price'],
     overview:

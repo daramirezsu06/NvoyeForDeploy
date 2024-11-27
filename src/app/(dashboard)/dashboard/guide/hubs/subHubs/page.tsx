@@ -1,5 +1,6 @@
+'use client';
 import { Box, Button, Container, Grid, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { hubMocks } from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/hubsMocks';
 import CustomHubCard from '../../../components/CustomSubHubsCard';
 import SubCategory_Header from '../components/subCategory_Header';
@@ -13,10 +14,16 @@ import theme from '@/src/app/theme';
 import { West, WestOutlined } from '@mui/icons-material';
 import Link from 'next/link';
 import CustomCategoryCard from '../../../components/CustomCategoryCard';
+import { usePathname } from 'next/navigation';
 
 type Props = {};
 
 export default function Hubs({}: Props) {
+  //TODO should get the subhubs from the backend
+  const [subHubs, setSubHubs] = useState(subHubMocks);
+  const pathname = usePathname();
+  const subHubName = pathname?.split('/').pop();
+
   return (
     <Container
       sx={{
@@ -51,7 +58,7 @@ export default function Hubs({}: Props) {
         }}
       >
         {/* //back button and title */}
-        <Box>
+        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Link href={'/dashboard/guide/hubs'}>
             <Button
               variant="text"
@@ -59,7 +66,7 @@ export default function Hubs({}: Props) {
               startIcon={<WestOutlined />}
             >
               {/* //TODO hub name should be dinamic acording ti the url */}
-              HubName
+              {subHubName}
             </Button>
           </Link>
         </Box>
@@ -107,7 +114,7 @@ export default function Hubs({}: Props) {
 
         {/* Contenido */}
         <Stack
-          spacing={2} // Usa spacing en lugar de gap
+          spacing={2}
           sx={{
             maxWidth: { xs: '100%', md: '60%' },
             zIndex: 1,
@@ -187,7 +194,7 @@ export default function Hubs({}: Props) {
               flex: 1,
             }}
           >
-            {subHubMocks.map((hub) => (
+            {subHubs.map((hub) => (
               <CustomCategoryCard
                 key={hub.title}
                 icon={hub.icon}

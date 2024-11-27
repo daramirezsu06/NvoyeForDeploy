@@ -18,7 +18,7 @@ export default function RecomendedTasksListItem({ recomendedTask }: Props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(recomendedTask);
+  // console.log(recomendedTask);
 
   return (
     <ListItem

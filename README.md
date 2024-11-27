@@ -33,7 +33,6 @@ Open http://localhost:3000 with your browser to see the result.
   - **(auth)**: Handles authentication-related pages such as signup, signin.
   - **(profile)**: Manages profile.
   - **(hubs)**: Manages hub and related pages suchs as transport, housing, etc.
-  - **(checklist)**: Manages checklist related informations.
   - **(location)**: Manages location information.
   - **components/**: Contains shared components used across the application.
   - **\_lib/**: Shared utility functions used throughout the application.
