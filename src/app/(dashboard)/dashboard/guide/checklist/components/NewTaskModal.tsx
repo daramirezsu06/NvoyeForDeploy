@@ -21,6 +21,7 @@ import {
   recomendedTasksMocks,
 } from '../mocks/recomendedTasks';
 import CreateCustomTaskForm from './CreateCustomTaskForm';
+import RecomendedTaskDetail from './recomendedTask/RecomendedTaskDetail';
 
 type Props = {
   handleCloseNewTask: () => void;
@@ -39,6 +40,15 @@ export default function NewTaskModal({ handleCloseNewTask, onAddTask }: Props) {
 
   const handleCloseCreateCustomTask = () => {
     setIsCreateCustomTaskOpen(false);
+  };
+
+  const [isSelectedTask, setIsSelectedTask] = useState(false);
+  const handleCloseRecomendedTaskDetail = () => {
+    setIsSelectedTask(false);
+  };
+  const handleAddRecomendedTaskToChecklist = () => {
+    //TODO send this recomended task to checklist
+    console.log(selectedTask);
   };
 
   return (
@@ -115,7 +125,10 @@ export default function NewTaskModal({ handleCloseNewTask, onAddTask }: Props) {
             getOptionLabel={(option) => option.taskType.name || ''} // Especificar qué propiedad mostrar
             isOptionEqualToValue={(option, value) => option.id === value.id} // Comparar objetos correctamente
             value={selectedTask}
-            onChange={(event, newValue) => setSelectedTask(newValue)}
+            onChange={(event, newValue) => {
+              setSelectedTask(newValue);
+              setIsSelectedTask(true);
+            }}
             renderInput={(params) => (
               <TextField {...params} label="e.g. insurance" />
             )}
@@ -124,6 +137,28 @@ export default function NewTaskModal({ handleCloseNewTask, onAddTask }: Props) {
             }}
           />
         </Stack>
+        {selectedTask && (
+          <Modal
+            open={isSelectedTask}
+            onClose={handleCloseRecomendedTaskDetail}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'auto',
+            }}
+          >
+            <RecomendedTaskDetail
+              handleAddRecomendedTaskToChecklist={
+                handleAddRecomendedTaskToChecklist
+              }
+              recomendedTask={selectedTask}
+              handleCloseRecomendedTaskDetail={handleCloseRecomendedTaskDetail}
+            />
+          </Modal>
+        )}
       </Box>
       {/* buttons */}
       <Stack

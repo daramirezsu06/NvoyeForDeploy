@@ -66,7 +66,8 @@ export default function Hubs({}: Props) {
               startIcon={<WestOutlined />}
             >
               {/* //TODO hub name should be dinamic acording ti the url */}
-              {subHubName}
+              {/* {subHubName} */}
+              To Hubs
             </Button>
           </Link>
         </Box>
