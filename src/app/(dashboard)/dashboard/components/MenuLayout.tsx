@@ -50,7 +50,7 @@ export default function MenuLayout({
           }}
           onClick={handleCloseMenuLayout}
         >
-          <Link href="/dashboard/guide" sx={{ width: '100%' }}>
+          <Link href="/dashboard/guide/home" sx={{ width: '100%' }}>
             <Button
               size="medium"
               color={pathname.includes('/dashboard/guide') ? 'primary' : 'info'}
