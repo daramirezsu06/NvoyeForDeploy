@@ -26,7 +26,7 @@ const RecommendedTasks2 = ({
         display: 'flex',
         flexDirection: 'column',
         width: { xs: '100%', md: '100%' },
-        maxWidth: { xs: '100%', md: '305px' },
+        maxWidth: { xs: '100%', md: '400px' },
         borderRadius: 2,
         height: 'min-content',
         p: 2,
