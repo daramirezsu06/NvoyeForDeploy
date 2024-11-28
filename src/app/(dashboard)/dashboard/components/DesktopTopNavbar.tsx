@@ -49,7 +49,7 @@ const DesktopTopNavbar: React.FC<DesktopTopNavbarProps> = ({
     >
       <BrandIcon />
       <Stack direction="row" alignItems="center" gap="24px" flex={1} pl={2}>
-        <Link href="/dashboard/guide">
+        <Link href="/dashboard/guide/home">
           <Button
             size="medium"
             color={pathname.includes('/dashboard/guide') ? 'primary' : 'info'}

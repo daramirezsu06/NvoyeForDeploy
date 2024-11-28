@@ -137,6 +137,7 @@ export default function SubHubs({
           spacing={2}
           sx={{
             // width: { xs: '100%', md: '100%' },
+            minWidth: { xs: '', md: '350px' },
             maxWidth: { xs: '100%', md: '400px' },
           }}
         >
