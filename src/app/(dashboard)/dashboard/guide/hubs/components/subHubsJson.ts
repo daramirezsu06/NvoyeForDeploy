@@ -1,3 +1,25 @@
+export type SubHub = {
+  PrincipalContent: { type: string; data: { title: string } }[];
+  rightContend: { type: string; data: { title: string } }[];
+};
+
+export const extractTitles = (subHubsJson: SubHub[]) => {
+  return subHubsJson.map((hub) => {
+    const principalTitles = hub.PrincipalContent.map(
+      (content) => content.data.title
+    );
+
+    const rightContentTitles = hub.rightContend.map(
+      (content) => content.data.title
+    );
+
+    return {
+      principalTitles,
+      rightContentTitles,
+    };
+  });
+};
+
 export const subHubsJson = {
   Investment: {
     id: 1,
@@ -84,9 +106,9 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'financial',
+        type: 'categoryAditionalInfo',
         data: {
-          title: 'Financial',
+          title: 'Finance',
           items: [
             {
               title: 'Familys estimated monthly cost',
@@ -102,9 +124,9 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'resource',
+        type: 'resources',
         data: {
-          title: 'Resource',
+          title: 'Resources',
           items: [
             { title: 'Product Comparator', link: 'https://www.vergelijk.nl/' },
             {
@@ -221,9 +243,9 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'financial',
+        type: 'categoryAditionalInfo',
         data: {
-          title: 'Financial',
+          title: 'Finance',
           items: [
             {
               title: 'ATM withdrawals',
@@ -321,9 +343,9 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'financial',
+        type: 'categoryAditionalInfo',
         data: {
-          title: 'Financial',
+          title: 'Finance',
           items: [
             {
               title: 'USD to Euro conversion',
@@ -405,7 +427,7 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'financial',
+        type: 'categoryAditionalInfo',
         data: {
           title: 'Finance',
           items: [
@@ -418,9 +440,9 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'resource',
+        type: 'resources',
         data: {
-          title: 'Resource',
+          title: 'Resources',
           items: [
             { title: 'Product Comparator', link: 'https://www.vergelijk.nl/' },
           ],
@@ -515,9 +537,9 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'financial',
+        type: 'categoryAditionalInfo',
         data: {
-          title: 'Financial',
+          title: 'Finance',
           items: [
             {
               title: 'Familys estimated monthly cost',
@@ -533,9 +555,9 @@ export const subHubsJson = {
         },
       },
       {
-        type: 'resource',
+        type: 'resources',
         data: {
-          title: 'Resource',
+          title: 'Resources',
           items: [
             { title: 'Product Comparator', link: 'https://www.vergelijk.nl/' },
             {

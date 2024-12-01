@@ -13,7 +13,9 @@ const BulletedList = ({ bulletInfo }: { bulletInfo: BulletedListHubsType }) => {
       }}
     >
       <Stack sx={{ px: 2, py: 1, borderBottom: '1px solid #E5E5E5' }}>
-        <Typography variant="h6">{bulletInfo.title}</Typography>
+        <Typography variant="h6" component={'h3'}>
+          {bulletInfo.title}
+        </Typography>
       </Stack>
       <List sx={{ py: 1 }}>
         {bulletInfo.items &&
@@ -26,9 +28,10 @@ const BulletedList = ({ bulletInfo }: { bulletInfo: BulletedListHubsType }) => {
                     flexDirection: 'row',
                     justifyContent: 'start',
                     alignItems: 'center',
+                    gap: 1,
                   }}
                 >
-                  <FiberManualRecord />
+                  <FiberManualRecord fontSize="small" color="primary" />
                   <ListItemText>{item}</ListItemText>
                 </Stack>
               </ListItem>

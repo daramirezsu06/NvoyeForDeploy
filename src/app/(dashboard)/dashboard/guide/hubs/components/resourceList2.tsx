@@ -31,7 +31,7 @@ const ResourceList2 = ({ resourceInfo }: { resourceInfo: ResourceType }) => {
           {resourceInfo.title}
         </Typography>
       </Stack>
-      <List sx={{ p: 2, gap: 8, display: 'flex', flexDirection: 'column' }}>
+      <List sx={{ p: 2, gap: 2, display: 'flex', flexDirection: 'column' }}>
         {resourceInfo.items.map((resource, index) => {
           return (
             <ListItem

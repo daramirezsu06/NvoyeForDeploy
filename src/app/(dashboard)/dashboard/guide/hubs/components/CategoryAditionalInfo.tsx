@@ -9,7 +9,11 @@ import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material';
 import theme from '@/src/app/theme';
 import { FinanceItemhubsType, FinanceType } from '../hubs.Types';
 
-const Finance2 = ({ financeInfo }: { financeInfo: FinanceType }) => {
+const CategoryAditionalInfo = ({
+  financeInfo,
+}: {
+  financeInfo: FinanceType;
+}) => {
   return (
     <Stack
       sx={{
@@ -27,9 +31,11 @@ const Finance2 = ({ financeInfo }: { financeInfo: FinanceType }) => {
           backgroundColor: theme.custom.paperElevationFour,
         }}
       >
-        <Typography variant="h6">{financeInfo.title}</Typography>
+        <Typography variant="h6" component={'h2'}>
+          {financeInfo.title}
+        </Typography>
       </Stack>
-      <List sx={{ p: 2, gap: 8, display: 'flex', flexDirection: 'column' }}>
+      <List sx={{ p: 2, gap: 2, display: 'flex', flexDirection: 'column' }}>
         {financeInfo.items.map((item, index) => {
           return (
             <ListItem
@@ -67,4 +73,4 @@ const Finance2 = ({ financeInfo }: { financeInfo: FinanceType }) => {
   );
 };
 
-export default Finance2;
+export default CategoryAditionalInfo;
