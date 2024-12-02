@@ -41,9 +41,9 @@ const IdentityEssentials: React.FC<{
     const fetchGenders = async () => {
       try {
         const data = await GetGenders();
-        // console.log(data.data);
+
         if (Array.isArray(data.data)) {
-          setGenderList(data.data); // Asegurarse de que `data` sea un array
+          setGenderList(data.data);
         } else {
           console.error('Data format is incorrect:', data);
         }
@@ -70,12 +70,11 @@ const IdentityEssentials: React.FC<{
   };
 
   const handleNext = async () => {
-    // Crear el objeto de datos
     const data = {
       firstName,
       lastName,
       genderId: gender,
-      profilePicture, // Aquí puedes enviar la imagen o un identificador
+      profilePicture,
     };
     console.log('Enviando:', data);
     const updateDiplomat = async () => {
@@ -112,7 +111,7 @@ const IdentityEssentials: React.FC<{
 const HeaderSection: React.FC<{ step: number }> = ({ step }) => (
   <>
     <Stack direction="row" justifyContent="space-between">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom component="h2">
         Identity essentials
       </Typography>
       <ProgressWithLabel value={step} />
@@ -260,6 +259,7 @@ const ButtonSection: React.FC<{
       color="inherit"
       sx={{
         backgroundColor: 'inherit',
+        textTransform: 'none',
         color: 'black',
         width: '100px',
         '&:hover': {
@@ -275,7 +275,7 @@ const ButtonSection: React.FC<{
       variant="contained"
       color="primary"
       onClick={handleNext}
-      sx={{ width: '100px' }}
+      sx={{ width: '100px', textTransform: 'none' }}
     >
       Next
     </Button>

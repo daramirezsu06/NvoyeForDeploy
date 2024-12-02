@@ -56,21 +56,18 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const data = await GetContries(); // Obtener datos de países
-        const countries: ICountry[] = data.data; // Asegúrate de que el formato sea correcto
-        // console.log(countries);
+        const data = await GetContries();
+        const countries: ICountry[] = data.data;
 
-        setNationsList(countries); // Establecer la lista de países
+        setNationsList(countries);
       } catch (error) {
         console.error('Error fetching countries:', error);
       }
     };
 
     fetchCountries();
-    // console.log(nationsList);
   }, []);
 
-  // const homeNations = ['USA', 'Canada', 'UK', 'Australia'];
   const possibleCountries = [
     {
       id: 121,
@@ -193,9 +190,9 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
         variant="contained"
         color="primary"
         fullWidth
-        sx={{ mt: 2 }}
+        sx={{ mt: 2, textTransform: 'none' }}
         onClick={handleNext}
-        disabled={isButtonDisabled} // Deshabilitar el botón si no están seleccionados
+        disabled={isButtonDisabled}
       >
         Next
       </Button>

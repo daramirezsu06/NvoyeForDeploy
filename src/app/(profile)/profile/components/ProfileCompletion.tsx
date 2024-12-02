@@ -40,7 +40,12 @@ export const ProfileCompletion: React.FC = () => {
         Welcome to Nvoy’s exclusive diplomatic community. Ready to take a look
         around?
       </Typography>
-      <Button variant="contained" color="primary" onClick={redirectToProfile}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={redirectToProfile}
+        sx={{ textTransform: 'none' }}
+      >
         Access Account
       </Button>
     </Stack>
