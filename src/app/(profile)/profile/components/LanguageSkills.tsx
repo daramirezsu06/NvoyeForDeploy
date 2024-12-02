@@ -136,6 +136,7 @@ const LanguageSkills: React.FC<{
               <Typography variant="body1" component={'span'}>
                 {lang.proficiency}
               </Typography>
+              {/* //TODO here should be a edit and a delete icon with funtions */}
               <Typography
                 variant="body1"
                 sx={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}
