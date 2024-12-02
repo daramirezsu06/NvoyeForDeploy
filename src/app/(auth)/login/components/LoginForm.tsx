@@ -49,6 +49,7 @@ export default function LoginForm() {
   useEffect(() => {
     if (profile) {
       redirectToProfile();
+      console.log(profile);
     }
   }, [profile, redirectToProfile]);
 

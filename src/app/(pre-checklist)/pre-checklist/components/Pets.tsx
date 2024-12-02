@@ -79,6 +79,8 @@ const Pets = ({
   const { buttonDisabled, answers, handleAnswerChange, handleChangeOptions } =
     UseAnswers([...questions, conditionalQuestion, conditionalQuestion2]);
   useEffect(() => {
+    if (answers.isWithPets === true) {
+    }
     console.log(answers);
   }, [answers]);
 
