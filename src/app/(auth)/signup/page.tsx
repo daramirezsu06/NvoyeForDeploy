@@ -99,7 +99,9 @@ const SignUpPage = () => {
       >
         {error && (
           <Alert severity="error" sx={{ margin: 4 }}>
-            {error}
+            {typeof error === 'string'
+              ? error
+              : 'Ha ocurrido un error inesperado.'}
           </Alert>
         )}
 

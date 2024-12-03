@@ -184,7 +184,7 @@ export default function SignupForm() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, textTransform: 'none' }}
             >
               {isCodeSent ? 'Continue' : 'Sign Up'}
             </Button>
@@ -203,7 +203,7 @@ export default function SignupForm() {
                 priority
               />
             }
-            sx={{ mt: 2, mb: 2 }}
+            sx={{ mt: 2, mb: 2, textTransform: 'none' }}
           >
             Continue with Google
           </Button>

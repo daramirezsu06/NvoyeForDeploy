@@ -136,6 +136,7 @@ const LanguageSkills: React.FC<{
               <Typography variant="body1" component={'span'}>
                 {lang.proficiency}
               </Typography>
+              {/* //TODO here should be a edit and a delete icon with funtions */}
               <Typography
                 variant="body1"
                 sx={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}
@@ -152,7 +153,7 @@ const LanguageSkills: React.FC<{
         variant="contained"
         color="primary"
         fullWidth
-        sx={{ mt: 2 }}
+        sx={{ mt: 2, textTransform: 'none' }}
         onClick={handleClickOpen}
         disabled={languages.length >= 5}
       >
@@ -194,7 +195,11 @@ const LanguageSkills: React.FC<{
           </TextField>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={handleClose}
+            color="primary"
+            sx={{ textTransform: 'none' }}
+          >
             Close
           </Button>
           <Button
@@ -202,6 +207,7 @@ const LanguageSkills: React.FC<{
             color="primary"
             variant="contained"
             disabled={disableSave}
+            sx={{ textTransform: 'none' }}
           >
             Save
           </Button>
@@ -216,6 +222,7 @@ const LanguageSkills: React.FC<{
             backgroundColor: 'inherit',
             color: 'black',
             width: '100px',
+            textTransform: 'none',
             '&:hover': {
               backgroundColor: 'inherit',
               color: 'black',
@@ -228,7 +235,7 @@ const LanguageSkills: React.FC<{
           variant="contained"
           color="primary"
           onClick={onNext}
-          sx={{ width: '100px' }}
+          sx={{ width: '100px', textTransform: 'none' }}
           disabled={disableNext}
         >
           Next

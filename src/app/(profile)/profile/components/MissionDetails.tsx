@@ -15,14 +15,7 @@ import Flag from 'react-world-flags'; // Importa la librería
 import diplomatUpdate1 from '@/src/utils/api/profile/sendDiplomatUpdate1';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
-
-interface ICountry {
-  id: number;
-  name: string;
-  code: string;
-  flag: string;
-  dialingCode: string;
-}
+import { countriesMock, ICountry } from '../mocks/countries.mock';
 
 const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   onNext,
@@ -30,7 +23,7 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
 }) => {
   const [homeNation, setHomeNation] = useState<ICountry | null>(null);
   const [assignedCountry, setAssignedCountry] = useState<ICountry | null>(null);
-  const [nationsList, setNationsList] = useState<ICountry[]>([]);
+  const [nationsList, setNationsList] = useState<ICountry[]>(countriesMock);
   const dispatch = useAppDispatch();
 
   const handleHomeNationChange = (
@@ -56,21 +49,18 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const data = await GetContries(); // Obtener datos de países
-        const countries: ICountry[] = data.data; // Asegúrate de que el formato sea correcto
-        // console.log(countries);
+        const data = await GetContries();
+        const countries: ICountry[] = data.data;
 
-        setNationsList(countries); // Establecer la lista de países
+        setNationsList(countries);
       } catch (error) {
         console.error('Error fetching countries:', error);
       }
     };
 
     fetchCountries();
-    // console.log(nationsList);
   }, []);
 
-  // const homeNations = ['USA', 'Canada', 'UK', 'Australia'];
   const possibleCountries = [
     {
       id: 121,
@@ -82,6 +72,7 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   ];
 
   const handleNext = () => {
+    //!descoment for functionality
     const data = { homeCountry: homeNation, assignedCountry };
 
     const updateDiplomat = async () => {
@@ -96,6 +87,9 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
     };
 
     updateDiplomat();
+
+    // !coment for sample functionality
+    // onNext();
   };
 
   const isButtonDisabled = !homeNation || !assignedCountry;
@@ -193,9 +187,9 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
         variant="contained"
         color="primary"
         fullWidth
-        sx={{ mt: 2 }}
+        sx={{ mt: 2, textTransform: 'none' }}
         onClick={handleNext}
-        disabled={isButtonDisabled} // Deshabilitar el botón si no están seleccionados
+        disabled={isButtonDisabled}
       >
         Next
       </Button>
