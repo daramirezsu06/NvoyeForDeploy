@@ -89,6 +89,7 @@ const IdentityEssentials: React.FC<{
     };
 
     updateDiplomat();
+    //  onNext();
   };
   return (
     <>
