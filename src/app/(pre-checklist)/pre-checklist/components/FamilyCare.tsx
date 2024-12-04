@@ -28,8 +28,8 @@ const FamilyCare = ({
           'Is your partner planning to join you both now or in the future, during your mission?',
         inputType: 'radio',
         options: [
-          { id: 1, name: 'yes', value: true },
-          { id: 2, name: 'NO', value: false },
+          { id: 1, name: 'Yes', value: true },
+          { id: 2, name: 'No', value: false },
         ],
       },
       {
@@ -38,8 +38,8 @@ const FamilyCare = ({
         question: 'Do you have children who will be moving with you?',
         inputType: 'radio',
         options: [
-          { id: 1, name: 'yes', value: true },
-          { id: 2, name: 'NO', value: false },
+          { id: 1, name: 'Yes', value: true },
+          { id: 2, name: 'No', value: false },
         ],
       },
     ],
@@ -118,7 +118,7 @@ const FamilyCare = ({
               zIndex: 2,
             }}
           >
-            <Typography variant="h3" color="#F7910B">
+            <Typography variant="h3" color="#F7910B" component={'h1'}>
               Insight
             </Typography>
             <Typography
@@ -127,6 +127,7 @@ const FamilyCare = ({
               sx={{
                 width: '90%',
               }}
+              component={'h2'}
             >
               Family life often revolves around a balance between work and
               personal time, with a strong emphasis on quality family time and a
@@ -178,6 +179,7 @@ const FamilyCare = ({
               fontSize: '1.2rem',
               zIndex: 2,
             }}
+            component={'h2'}
           >
             Family life often revolves around a balance between work and
             personal time, with a strong emphasis on quality family time and a
@@ -239,7 +241,7 @@ const FamilyCare = ({
 
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               variant="outlined"
               onClick={onBack}
               disabled={false}
@@ -248,7 +250,7 @@ const FamilyCare = ({
             </Button>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               disabled={buttonDisabled}
               onClick={onNext}
             >

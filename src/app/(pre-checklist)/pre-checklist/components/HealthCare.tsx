@@ -32,8 +32,8 @@ const HealthCare = ({
         'It could be a health insurance from your home country or an international health insurance',
       inputType: 'radio',
       options: [
-        { id: 1, name: 'yes', value: true },
-        { id: 2, name: 'NO', value: false },
+        { id: 1, name: 'Yes', value: true },
+        { id: 2, name: 'No', value: false },
       ],
     },
     {
@@ -44,8 +44,8 @@ const HealthCare = ({
         'Please let us know if you, your partner, or children have any chronic or medical conditions',
       inputType: 'radio',
       options: [
-        { id: 1, name: 'yes', value: true },
-        { id: 2, name: 'NO', value: false },
+        { id: 1, name: 'Yes', value: true },
+        { id: 2, name: 'No', value: false },
       ],
     },
   ];
@@ -151,7 +151,7 @@ const HealthCare = ({
               zIndex: 2,
             }}
           >
-            <Typography variant="h3" color="#F7910B">
+            <Typography variant="h3" color="#F7910B" component={'h1'}>
               Insight
             </Typography>
             <Typography
@@ -160,6 +160,7 @@ const HealthCare = ({
               sx={{
                 width: '90%',
               }}
+              component={'h2'}
             >
               In the Netherlands, while basic health insurance is mandatory and
               covers a lot, dental care for adults is not included in the
@@ -211,6 +212,7 @@ const HealthCare = ({
               fontSize: '1.2rem',
               zIndex: 2,
             }}
+            component={'h2'}
           >
             In the Netherlands, while basic health insurance is mandatory and
             covers a lot, dental care for adults is not included in the standard
@@ -294,7 +296,7 @@ const HealthCare = ({
 
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               variant="outlined"
               onClick={onBack}
               disabled={false}
@@ -303,7 +305,7 @@ const HealthCare = ({
             </Button>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               disabled={buttonDisabled}
               onClick={onNext}
             >

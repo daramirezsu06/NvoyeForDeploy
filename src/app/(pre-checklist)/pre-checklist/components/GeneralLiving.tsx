@@ -105,7 +105,7 @@ const GeneralLiving = ({
               zIndex: 2,
             }}
           >
-            <Typography variant="h3" color="#F7910B">
+            <Typography variant="h3" color="#F7910B" component={'h1'}>
               Insight
             </Typography>
             <Typography
@@ -114,6 +114,7 @@ const GeneralLiving = ({
               sx={{
                 width: '90%',
               }}
+              component={'h2'}
             >
               The Netherlands is a cyclist&apos; paradise with extensive bike
               paths, making it a fun and healthy way to explore the beautiful
@@ -166,6 +167,7 @@ const GeneralLiving = ({
               fontSize: '1.2rem',
               zIndex: 2,
             }}
+            component={'h2'}
           >
             The Netherlands is a cyclist&apos; paradise with extensive bike
             paths, making it a fun and healthy way to explore the beautiful
@@ -228,7 +230,7 @@ const GeneralLiving = ({
 
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               variant="outlined"
               onClick={onBack}
               disabled={false}
@@ -237,7 +239,7 @@ const GeneralLiving = ({
             </Button>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               disabled={buttonDisabled}
               onClick={onNext}
             >

@@ -27,10 +27,12 @@ const CuestionBase = ({
     <>
       <Stack spacing={2}>
         <Box>
-          <Typography variant="h5" sx={{ pb: 1 }}>
+          <Typography variant="h5" sx={{ pb: 1 }} component={'p'}>
             {question.question}
           </Typography>
-          <Typography variant="body1">{question.smallQuestion}</Typography>
+          <Typography variant="body1" component={'p'}>
+            {question.smallQuestion}
+          </Typography>
         </Box>
         <Box
           sx={{
