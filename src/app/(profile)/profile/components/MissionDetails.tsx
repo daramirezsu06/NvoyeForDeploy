@@ -97,7 +97,7 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
   return (
     <>
       <Stack direction="row" justifyContent="space-between">
-        <Typography variant="h4" gutterBottom component={'h4'}>
+        <Typography variant="h4" gutterBottom component={'h1'}>
           Mission Details
         </Typography>
         <ProgressWithLabel value={step} />
