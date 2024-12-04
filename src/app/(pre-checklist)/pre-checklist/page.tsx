@@ -15,23 +15,27 @@ import GetVehicleTypes from '@/src/utils/api/prechecklist/getVehicleTypes';
 import GetHobbies from '@/src/utils/api/prechecklist/getHobbies';
 import PutPrechecklist from '@/src/utils/api/prechecklist/putPrechecklist';
 import { useAppSelector } from '../../state/hooks';
+import { chronicDiseasesMock } from './mocks/chronicDiseases.mock';
+import { insurancesMock } from './mocks/insurances.mock';
+import { vehiclesMock } from './mocks/vehicles.mock';
+import { hobbiesMock } from './mocks/hobbies.mock';
 
 export default function PreChecklist() {
   const prechecklist = useAppSelector((state) => state.preChecklistanswers);
   const [step, setStep] = useState(0);
   const [completed, setCompleted] = useState(false);
-  const [insuranceTypes, setInsuranceTypes] = useState<
-    { id: number; name: string; description: string }[]
-  >([]);
-  const [chronicDiseases, setChronicDiseases] = useState<
-    { id: number; name: string; description: string }[]
-  >([]);
-  const [vehicleTypes, setVehicleTypes] = useState<
-    { id: number; name: string; description: string }[]
-  >([]);
-  const [hobbies, setHobbies] = useState<
-    { id: number; name: string; description: string }[]
-  >([]);
+  const [insuranceTypes, setInsuranceTypes] =
+    useState<{ id: number; name: string; description: string }[]>(
+      insurancesMock
+    );
+  const [chronicDiseases, setChronicDiseases] =
+    useState<{ id: number; name: string; description: string }[]>(
+      chronicDiseasesMock
+    );
+  const [vehicleTypes, setVehicleTypes] =
+    useState<{ id: number; name: string; description: string }[]>(vehiclesMock);
+  const [hobbies, setHobbies] =
+    useState<{ id: number; name: string; description: string }[]>(hobbiesMock);
 
   useEffect(() => {
     const fechData = async () => {
