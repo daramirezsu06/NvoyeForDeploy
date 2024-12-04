@@ -19,6 +19,7 @@ import GetGenders from '@/src/utils/api/profile/getGenders';
 import diplomatUpdate2 from '@/src/utils/api/profile/sendDiplomatUpdate2';
 import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { useAppDispatch } from '@/src/app/state/hooks';
+import { gendersMock } from '../mocks/genders.mock';
 
 interface Gender {
   id: number;
@@ -30,7 +31,7 @@ const IdentityEssentials: React.FC<{
   onBack: () => void;
   step: number;
 }> = ({ onNext, onBack, step }) => {
-  const [genderList, setGenderList] = useState<Gender[]>([]);
+  const [genderList, setGenderList] = useState<Gender[]>(gendersMock);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState<number | ''>('');
@@ -87,10 +88,13 @@ const IdentityEssentials: React.FC<{
         console.log(error);
       }
     };
-
     updateDiplomat();
+
     //  onNext();
   };
+
+  const isDisabled = !firstName || !lastName || !gender;
+
   return (
     <>
       <HeaderSection step={step} />
@@ -104,6 +108,7 @@ const IdentityEssentials: React.FC<{
         handleNext={handleNext}
         onBack={onBack}
         genderList={genderList}
+        isDisabled={isDisabled}
       />
     </>
   );
@@ -134,6 +139,7 @@ interface FormSectionProps {
   handleNext: () => void;
   onBack: () => void;
   genderList: Gender[];
+  isDisabled: boolean;
 }
 
 const FormSection = ({
@@ -146,6 +152,7 @@ const FormSection = ({
   handleNext,
   onBack,
   genderList,
+  isDisabled,
 }: FormSectionProps) => (
   <Stack spacing={3}>
     <TextField
@@ -192,7 +199,11 @@ const FormSection = ({
       </Select>
     </FormControl>
     <ProfilePictureSection />
-    <ButtonSection handleNext={handleNext} onBack={onBack} />
+    <ButtonSection
+      handleNext={handleNext}
+      onBack={onBack}
+      isDisabled={isDisabled}
+    />
   </Stack>
 );
 
@@ -252,7 +263,8 @@ const ProfilePictureSection = () => (
 const ButtonSection: React.FC<{
   handleNext: () => void;
   onBack: () => void;
-}> = ({ handleNext, onBack }) => (
+  isDisabled: boolean;
+}> = ({ handleNext, onBack, isDisabled }) => (
   <Stack direction="row" justifyContent="space-between">
     <Button
       onClick={onBack}
@@ -277,6 +289,7 @@ const ButtonSection: React.FC<{
       color="primary"
       onClick={handleNext}
       sx={{ width: '100px', textTransform: 'none' }}
+      disabled={isDisabled}
     >
       Next
     </Button>
