@@ -42,8 +42,8 @@ const ForgotPasswordPage = () => {
               position: 'absolute',
               top: '100px',
               right: '-70px',
-              zIndex: 20, // Asegura que el logo esté por encima de la imagen grande
-              width: '230px', // Ajusta el tamaño del logo
+              zIndex: 20,
+              width: '230px',
               height: 'auto',
               transform: 'rotate(90deg)',
             }}
@@ -103,7 +103,9 @@ const ForgotPasswordPage = () => {
 
         {error && (
           <Alert severity="error" sx={{ margin: 4 }}>
-            {error}
+            {typeof error === 'string'
+              ? error
+              : 'Ha ocurrido un error inesperado.'}
           </Alert>
         )}
 

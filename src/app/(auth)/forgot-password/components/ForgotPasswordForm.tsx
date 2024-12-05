@@ -134,7 +134,7 @@ export default function ForgotPasswordForm() {
         )}
 
         <Button
-          sx={{ borderRadius: '8px', marginBottom: 1.5 }}
+          sx={{ borderRadius: '8px', marginBottom: 1.5, textTransform: 'none' }}
           type="submit"
           variant="contained"
           color="primary"

@@ -30,7 +30,7 @@ const Transportation = ({
       inputType: 'radio',
       options: [
         { id: 1, name: 'Yes', value: true },
-        { id: 1, name: 'NO', value: false },
+        { id: 1, name: 'No', value: false },
       ],
     },
   ];
@@ -120,7 +120,7 @@ const Transportation = ({
               zIndex: 2,
             }}
           >
-            <Typography variant="h3" color="#F7910B">
+            <Typography variant="h3" color="#F7910B" component={'h1'}>
               Insight
             </Typography>
             <Typography
@@ -129,6 +129,7 @@ const Transportation = ({
               sx={{
                 width: '90%',
               }}
+              component={'h2'}
             >
               The Netherlands is known for its extensive and well-integrated
               public transport system, with trains, buses, trams, and metros
@@ -181,6 +182,7 @@ const Transportation = ({
               fontSize: '1.2rem',
               zIndex: 2,
             }}
+            component={'h2'}
           >
             The Netherlands is known for its extensive and well-integrated
             public transport system, with trains, buses, trams, and metros
@@ -252,7 +254,7 @@ const Transportation = ({
 
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               variant="outlined"
               onClick={onBack}
               disabled={false}
@@ -261,7 +263,7 @@ const Transportation = ({
             </Button>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               disabled={buttonDisabled}
               onClick={onNext}
             >

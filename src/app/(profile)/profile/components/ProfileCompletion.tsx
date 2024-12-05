@@ -1,4 +1,5 @@
 import { useRedirectionProfile } from '@/src/app/hooks/useRedirectConditional';
+import { CheckCircleOutline } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
@@ -13,36 +14,24 @@ export const ProfileCompletion: React.FC = () => {
       justifyContent={'center'}
       sx={{ width: '100%', height: 350, gap: 2 }}
     >
-      <Box
-        sx={{
-          width: {
-            xs: 100,
-            sm: 100,
-          },
-          height: {
-            xs: 100,
-            sm: 100,
-          },
-          borderRadius: '100%',
-          bgcolor: '#3f51b5',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#fff',
-          fontSize: '48px',
-        }}
-      >
-        ✓
-      </Box>
+      <CheckCircleOutline
+        sx={{ width: '125px', height: '125px' }}
+        color="primary"
+      />
+
       <Typography variant="h4" component={'h4'}>
         You’re in!
       </Typography>
       <Typography variant="body1" align="center" component={'span'}>
-        Welcome to Nvoy’s exclusive diplomatic community. Ready to take a look
+        Welcome to Nvoye’s exclusive diplomatic community. Ready to take a look
         around?
       </Typography>
       <Link href="/dashboard/guide/home">
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ textTransform: 'none' }}
+        >
           Access Account
         </Button>
       </Link>

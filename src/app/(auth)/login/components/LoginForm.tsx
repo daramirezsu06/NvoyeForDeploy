@@ -96,7 +96,7 @@ export default function LoginForm() {
           label="Remember me"
         />
         <Button
-          sx={{ borderRadius: '8px', marginBottom: 1.5 }}
+          sx={{ borderRadius: '8px', marginBottom: 1.5, textTransform: 'none' }}
           type="submit"
           variant="contained"
           color="primary"
@@ -106,6 +106,7 @@ export default function LoginForm() {
           Log in
         </Button>
         <Divider>Or</Divider>
+        {/* //TODO give function to this button */}
         <Button
           fullWidth
           variant="outlined"
@@ -118,7 +119,7 @@ export default function LoginForm() {
               priority
             />
           }
-          sx={{ mt: 2, mb: 2 }}
+          sx={{ mt: 2, mb: 2, textTransform: 'none' }}
         >
           Continue with Google
         </Button>
@@ -128,6 +129,7 @@ export default function LoginForm() {
 
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
           <Link href="/forgot-password">Reset password</Link> or{' '}
+          {/* //TODO give link to this link */}
           <Link href="#">Visit our help center</Link>
         </Typography>
 

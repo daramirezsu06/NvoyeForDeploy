@@ -11,6 +11,7 @@ import {
   TextField,
   MenuItem,
   Stack,
+  IconButton,
 } from '@mui/material';
 import ProgressWithLabel from './ProgressWithLabel';
 import GetLanguages from '@/src/utils/api/profile/getLanguages';
@@ -19,6 +20,9 @@ import PutStep3 from '@/src/utils/api/profile/putStep3';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { UserData } from '@/src/app/(dashboard)/redux/profileTypes';
+import { levelsMock } from '../mocks/levels.mock';
+import { languagesMock } from '../mocks/languages.mock';
+import { DeleteForeverOutlined, Edit, EditOutlined } from '@mui/icons-material';
 
 interface Language {
   language: string;
@@ -32,17 +36,18 @@ const LanguageSkills: React.FC<{
 }> = ({ onBack, onNext, step }) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
-  const [languages, setLanguages] = useState<Language[]>([]);
+  const [languages, setLanguages] = useState<Language[]>([
+    // { language: 'English', proficiency: 'Beginner' },
+    // { language: 'Spanish', proficiency: 'Fluent' },
+  ]);
   const [languageID, setLanguageID] = useState<number | null>(null); // Inicializado como null
   const [proficiencyID, setProficiencyID] = useState<number | null>(null); // Inicializado como null
   const [disableNext, setDisableNext] = useState<boolean>(true);
   const [disableSave, setDisableSave] = useState<boolean>(true);
-  const [languagesOptions, setLanguagesOptions] = useState<
-    { id: number; name: string }[]
-  >([]);
-  const [levelsOptions, setLevelsOptions] = useState<
-    { id: number; name: string; description: string }[]
-  >([]);
+  const [languagesOptions, setLanguagesOptions] =
+    useState<{ id: number; name: string }[]>(languagesMock);
+  const [levelsOptions, setLevelsOptions] =
+    useState<{ id: number; name: string; description: string }[]>(levelsMock);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,7 +93,6 @@ const LanguageSkills: React.FC<{
       const newLanguage = { languageId: languageID, levelId: proficiencyID };
       const profileUpdate: UserData = await PutStep3(newLanguage);
       dispatch(setProfile(profileUpdate));
-
       setLanguages(
         profileUpdate.languageSkills.map((item) => {
           return { language: item.language.name, proficiency: item.level.name };
@@ -102,10 +106,17 @@ const LanguageSkills: React.FC<{
     }
   };
 
+  //TODO this function should contact the backend and update the user
+  const handleDeleteLanguage = (index: number) => {
+    const updatedLanguages = [...languages];
+    updatedLanguages.splice(index, 1);
+    setLanguages(updatedLanguages);
+  };
+
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, minHeight: 300 }}>
       <Stack direction="row" justifyContent="space-between">
-        <Typography variant="h4" gutterBottom component={'h3'}>
+        <Typography variant="h4" gutterBottom component={'h1'}>
           Language Skills
         </Typography>
         <ProgressWithLabel value={step} />
@@ -130,19 +141,27 @@ const LanguageSkills: React.FC<{
                 paddingBottom: 1,
               }}
             >
-              <Typography variant="body1" component={'span'}>
-                {lang.language}
-              </Typography>
-              <Typography variant="body1" component={'span'}>
-                {lang.proficiency}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}
-                component={'span'}
-              >
-                X
-              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+                <Typography variant="body1" component={'span'}>
+                  {lang.language}
+                </Typography>
+                <Typography variant="body1" component={'span'}>
+                  {lang.proficiency}
+                </Typography>
+              </Box>
+
+              {/* //TODO here should be a edit and a delete icon with funtions */}
+              <Box>
+                {/* <IconButton color="primary">
+                  <EditOutlined/>
+                </IconButton> */}
+                <IconButton
+                  color="error"
+                  onClick={() => handleDeleteLanguage(index)}
+                >
+                  <DeleteForeverOutlined />
+                </IconButton>
+              </Box>
             </Box>
           ))}
         </Box>
@@ -152,7 +171,7 @@ const LanguageSkills: React.FC<{
         variant="contained"
         color="primary"
         fullWidth
-        sx={{ mt: 2 }}
+        sx={{ mt: 2, textTransform: 'none' }}
         onClick={handleClickOpen}
         disabled={languages.length >= 5}
       >
@@ -194,7 +213,11 @@ const LanguageSkills: React.FC<{
           </TextField>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={handleClose}
+            color="primary"
+            sx={{ textTransform: 'none' }}
+          >
             Close
           </Button>
           <Button
@@ -202,6 +225,7 @@ const LanguageSkills: React.FC<{
             color="primary"
             variant="contained"
             disabled={disableSave}
+            sx={{ textTransform: 'none' }}
           >
             Save
           </Button>
@@ -216,6 +240,7 @@ const LanguageSkills: React.FC<{
             backgroundColor: 'inherit',
             color: 'black',
             width: '100px',
+            textTransform: 'none',
             '&:hover': {
               backgroundColor: 'inherit',
               color: 'black',
@@ -228,7 +253,7 @@ const LanguageSkills: React.FC<{
           variant="contained"
           color="primary"
           onClick={onNext}
-          sx={{ width: '100px' }}
+          sx={{ width: '100px', textTransform: 'none' }}
           disabled={disableNext}
         >
           Next

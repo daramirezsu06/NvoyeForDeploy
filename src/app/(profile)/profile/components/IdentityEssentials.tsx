@@ -19,6 +19,7 @@ import GetGenders from '@/src/utils/api/profile/getGenders';
 import diplomatUpdate2 from '@/src/utils/api/profile/sendDiplomatUpdate2';
 import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { useAppDispatch } from '@/src/app/state/hooks';
+import { gendersMock } from '../mocks/genders.mock';
 
 interface Gender {
   id: number;
@@ -30,7 +31,7 @@ const IdentityEssentials: React.FC<{
   onBack: () => void;
   step: number;
 }> = ({ onNext, onBack, step }) => {
-  const [genderList, setGenderList] = useState<Gender[]>([]);
+  const [genderList, setGenderList] = useState<Gender[]>(gendersMock);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState<number | ''>('');
@@ -41,9 +42,9 @@ const IdentityEssentials: React.FC<{
     const fetchGenders = async () => {
       try {
         const data = await GetGenders();
-        // console.log(data.data);
+
         if (Array.isArray(data.data)) {
-          setGenderList(data.data); // Asegurarse de que `data` sea un array
+          setGenderList(data.data);
         } else {
           console.error('Data format is incorrect:', data);
         }
@@ -70,12 +71,11 @@ const IdentityEssentials: React.FC<{
   };
 
   const handleNext = async () => {
-    // Crear el objeto de datos
     const data = {
       firstName,
       lastName,
       genderId: gender,
-      profilePicture, // Aquí puedes enviar la imagen o un identificador
+      profilePicture,
     };
     console.log('Enviando:', data);
     const updateDiplomat = async () => {
@@ -88,9 +88,13 @@ const IdentityEssentials: React.FC<{
         console.log(error);
       }
     };
-
     updateDiplomat();
+
+    //  onNext();
   };
+
+  const isDisabled = !firstName || !lastName || !gender;
+
   return (
     <>
       <HeaderSection step={step} />
@@ -104,6 +108,7 @@ const IdentityEssentials: React.FC<{
         handleNext={handleNext}
         onBack={onBack}
         genderList={genderList}
+        isDisabled={isDisabled}
       />
     </>
   );
@@ -112,7 +117,7 @@ const IdentityEssentials: React.FC<{
 const HeaderSection: React.FC<{ step: number }> = ({ step }) => (
   <>
     <Stack direction="row" justifyContent="space-between">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom component="h2">
         Identity essentials
       </Typography>
       <ProgressWithLabel value={step} />
@@ -134,6 +139,7 @@ interface FormSectionProps {
   handleNext: () => void;
   onBack: () => void;
   genderList: Gender[];
+  isDisabled: boolean;
 }
 
 const FormSection = ({
@@ -146,6 +152,7 @@ const FormSection = ({
   handleNext,
   onBack,
   genderList,
+  isDisabled,
 }: FormSectionProps) => (
   <Stack spacing={3}>
     <TextField
@@ -192,7 +199,11 @@ const FormSection = ({
       </Select>
     </FormControl>
     <ProfilePictureSection />
-    <ButtonSection handleNext={handleNext} onBack={onBack} />
+    <ButtonSection
+      handleNext={handleNext}
+      onBack={onBack}
+      isDisabled={isDisabled}
+    />
   </Stack>
 );
 
@@ -252,7 +263,8 @@ const ProfilePictureSection = () => (
 const ButtonSection: React.FC<{
   handleNext: () => void;
   onBack: () => void;
-}> = ({ handleNext, onBack }) => (
+  isDisabled: boolean;
+}> = ({ handleNext, onBack, isDisabled }) => (
   <Stack direction="row" justifyContent="space-between">
     <Button
       onClick={onBack}
@@ -260,6 +272,7 @@ const ButtonSection: React.FC<{
       color="inherit"
       sx={{
         backgroundColor: 'inherit',
+        textTransform: 'none',
         color: 'black',
         width: '100px',
         '&:hover': {
@@ -275,7 +288,8 @@ const ButtonSection: React.FC<{
       variant="contained"
       color="primary"
       onClick={handleNext}
-      sx={{ width: '100px' }}
+      sx={{ width: '100px', textTransform: 'none' }}
+      disabled={isDisabled}
     >
       Next
     </Button>

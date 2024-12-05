@@ -33,7 +33,7 @@ export default function SubHubTopNavigation({}: Props) {
   const currentIndex = subHubMocks.findIndex(
     (item) => item.title.toLowerCase() === subHubName.toLowerCase() // Comparar de forma insensible a mayúsculas
   );
-  console.log(currentIndex);
+  // console.log(currentIndex);
 
   // URLs de navegación
   const prevUrl =

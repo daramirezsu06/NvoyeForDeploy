@@ -124,6 +124,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
               textAlign: 'center',
               fontSize: '1.7rem',
             }}
+            component={'h1'}
           >
             Netherland Diplomatic Mission
           </Typography>
@@ -163,10 +164,10 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
           }}
         >
           <Stack>
-            <Typography variant="h5" sx={{ pb: 1 }}>
+            <Typography variant="h5" sx={{ pb: 1 }} component={'h2'}>
               Pre-Checklist Questionnaire
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" component={'h3'}>
               Tell us more about you to help us make your journey better and
               more personalized.
             </Typography>
@@ -182,7 +183,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
                 px: 3,
               }}
             >
-              <Typography variant="body1">
+              <Typography variant="body1" component={'span'}>
                 These questionnaires help us personalize content for:
               </Typography>
               <Grid container spacing={1}>
@@ -201,7 +202,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               onClick={setStart}
             >
               Get started

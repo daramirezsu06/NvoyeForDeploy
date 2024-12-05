@@ -35,7 +35,7 @@ const Pets = ({
         inputType: 'radio',
         options: [
           { id: 1, name: 'Yes', value: true },
-          { id: 2, name: 'NO', value: false },
+          { id: 2, name: 'No', value: false },
         ],
       },
     ],
@@ -53,6 +53,7 @@ const Pets = ({
       { id: 2, name: 'Bird' },
       { id: 3, name: 'Dog' },
       { id: 4, name: 'Rabbit' },
+      { id: 5, name: 'Other' },
     ],
     condition: {
       stateCondition: 'isWithPets',
@@ -67,8 +68,7 @@ const Pets = ({
     inputType: 'radio',
     options: [
       { id: 1, name: 'Yes', value: true },
-      { id: 1, name: 'NO', value: false },
-      // { id: 1, name: 'Maybe', value: false },
+      { id: 1, name: 'No', value: false },
     ],
     condition: {
       stateCondition: 'isWithPets',
@@ -158,7 +158,7 @@ const Pets = ({
               zIndex: 2,
             }}
           >
-            <Typography variant="h3" color="#F7910B">
+            <Typography variant="h3" color="#F7910B" component={'h1'}>
               Insight
             </Typography>
             <Typography
@@ -167,6 +167,7 @@ const Pets = ({
               sx={{
                 width: '90%',
               }}
+              component={'h2'}
             >
               The Netherlands is known for its pet-friendly culture, with many
               public spaces and accommodations accommodating pets. Additionally,
@@ -218,6 +219,7 @@ const Pets = ({
               fontSize: '1.2rem',
               zIndex: 2,
             }}
+            component={'h2'}
           >
             The Netherlands is known for its pet-friendly culture, with many
             public spaces and accommodations accommodating pets. Additionally,
@@ -300,7 +302,7 @@ const Pets = ({
 
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               variant="outlined"
               onClick={onBack}
               disabled={false}
@@ -309,7 +311,7 @@ const Pets = ({
             </Button>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               disabled={buttonDisabled}
               onClick={onNext}
             >

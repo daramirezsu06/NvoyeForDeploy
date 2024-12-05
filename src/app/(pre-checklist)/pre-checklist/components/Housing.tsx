@@ -25,7 +25,7 @@ const Housing = ({
         nameState: 'isNeedHousingHelp',
         question: 'Would you like help finding housing when you arrive?',
         smallQuestion:
-          'Tell us more about you to help us make your journey better and more personalized?',
+          'Tell us more about you to help us make your journey better and more personalized',
         inputType: 'radio',
         options: [
           { id: 1, name: 'Yes, I need assistance', value: true },
@@ -108,7 +108,7 @@ const Housing = ({
               zIndex: 2,
             }}
           >
-            <Typography variant="h3" color="#F7910B">
+            <Typography variant="h3" color="#F7910B" component={'h1'}>
               Insight
             </Typography>
             <Typography
@@ -117,6 +117,7 @@ const Housing = ({
               sx={{
                 width: '90%',
               }}
+              component={'h2'}
             >
               In the Netherlands, the concept of &apohousing cooperatives&apo is
               gaining popularity, where residents collectively own and manage
@@ -167,6 +168,7 @@ const Housing = ({
               fontSize: '1.2rem',
               zIndex: 2,
             }}
+            component={'h3'}
           >
             In the Netherlands, the concept of&apohousing cooperatives&apo is
             gaining popularity, where residents collectively own and manage
@@ -227,7 +229,7 @@ const Housing = ({
 
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               variant="outlined"
               onClick={onBack}
               disabled={false}
@@ -236,7 +238,7 @@ const Housing = ({
             </Button>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1 }}
+              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
               disabled={buttonDisabled}
               onClick={onNext}
             >
