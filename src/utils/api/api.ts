@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseURL } from './env';
-import { store } from '@/src/app/state/store'; // Usa la tienda que has exportado
+import { getServerSession } from '@/src/actions/session';
 
 export const axiosApi = axios.create({
   baseURL: baseURL,
@@ -9,18 +9,14 @@ export const axiosApi = axios.create({
   },
 });
 
-// Función para obtener el token del estado de Redux
-const getToken = () => {
-  const state = store.getState(); // Usa la tienda exportada
-  return state.auth.token; // Asegúrate de que esta ruta sea correcta
-};
-
 axiosApi.interceptors.request.use(
-  (config) => {
-    const token = getToken(); // Obtiene el token
+  async (config) => {
+    const session = await getServerSession(); // Obtiene el token
+    const token = session?.token;
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
+    console.log('Token obtenido:', token);
     return config;
   },
   (error) => {

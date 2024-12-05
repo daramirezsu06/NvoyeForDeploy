@@ -12,14 +12,13 @@ import {
 import { useEffect, useState } from 'react';
 import { login } from '../../redux';
 import { useAppDispatch, useAppSelector } from '@/src/app/state/hooks';
-import { selectToken } from '../../redux/authSlice';
 import { getProfile } from '@/src/app/(dashboard)/redux/profileThunks';
 import { selectProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { useRedirectionProfile } from '@/src/app/hooks/useRedirectConditional';
 import Image from 'next/image';
 
 export default function LoginForm() {
-  const token = useAppSelector(selectToken);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
   const redirectToProfile = useRedirectionProfile();
@@ -35,22 +34,32 @@ export default function LoginForm() {
     setPassword(event.target.value);
   };
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(login({ email, password }));
+    try {
+      await dispatch(login({ email, password }));
+      const profile = await dispatch(getProfile());
+      console.log(
+        'profile optenido en el handlelogin de el login form',
+        profile
+      );
+      redirectToProfile(profile.payload.data);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
-  useEffect(() => {
-    if (token) {
-      dispatch(getProfile());
-    }
-  }, [token, dispatch]);
+  // useEffect(() => {
+  //   dispatch(getProfile());
+  // }, [dispatch]);
 
-  useEffect(() => {
-    if (profile) {
-      redirectToProfile();
-    }
-  }, [profile, redirectToProfile]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     console.log('profile', profile);
+
+  //     redirectToProfile();
+  //   }
+  // }, [profile, isLoggedIn]);
 
   return (
     <Container component="main" maxWidth="md">

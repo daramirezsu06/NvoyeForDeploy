@@ -20,10 +20,10 @@ import MenuMui from '@mui/material/Menu';
 import { useRouter } from 'next/navigation';
 
 import React from 'react';
-import { logout } from '../../redux/profileSlice';
-import { authlogout } from '@/src/app/(auth)/redux/authSlice';
+// import { authlogout } from '@/src/app/(auth)/redux/authSlice';
 import Links from 'next/link';
 import CustomMenuItem from './CustomMenuItem';
+import { logout } from '@/src/app/(auth)/redux';
 
 export default function Menu({ anchorEl, open, handleClose }: any) {
   const dispatch = useAppDispatch();
@@ -132,7 +132,7 @@ export default function Menu({ anchorEl, open, handleClose }: any) {
             }}
             onClick={() => {
               dispatch(logout());
-              dispatch(authlogout());
+              // dispatch(authlogout());
               router.push('/');
             }}
           >

@@ -1,6 +1,7 @@
 import { useRedirectionProfile } from '@/src/app/hooks/useRedirectConditional';
 import { CheckCircleOutline } from '@mui/icons-material';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 
 export const ProfileCompletion: React.FC = () => {
   // Usamos el hook para obtener la función que hará la redirección condicional
@@ -25,14 +26,15 @@ export const ProfileCompletion: React.FC = () => {
         Welcome to Nvoye’s exclusive diplomatic community. Ready to take a look
         around?
       </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={redirectToProfile}
-        sx={{ textTransform: 'none' }}
-      >
-        Access Account
-      </Button>
+      <Link href="/dashboard/guide/home">
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ textTransform: 'none' }}
+        >
+          Access Account
+        </Button>
+      </Link>
     </Stack>
   );
 };

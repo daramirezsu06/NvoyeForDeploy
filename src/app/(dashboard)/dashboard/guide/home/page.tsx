@@ -6,6 +6,7 @@ import ConnectCalendar from './components/ConnectCalendar';
 import LandingPackage from './components/LandingPackage';
 import theme from '@/src/app/theme';
 import ScheduledTasks from './components/ScheduledTasks';
+import AlertCompletePrechecklist from './components/alertCompletePrecheklist';
 
 type Props = {};
 
@@ -91,6 +92,7 @@ export default function Home({}: Props) {
 
         {/* Box down */}
         <LandingPackage />
+        <AlertCompletePrechecklist />
       </Box>
     </Box>
   );

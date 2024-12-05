@@ -1,14 +1,14 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'; // Importa combineReducers
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // Usamos localStorage en el cliente
 import authSlice from '../(auth)/redux/authSlice';
 import prechecklistReducer from '../(pre-checklist)/redux/checkListSlice';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import profileReducer from '../(dashboard)/redux/profileSlice';
 
-// Configuración de persistencia
+// Configuración de persistencia solo en el cliente
 const persistConfig = {
-  key: 'root', // clave que se utilizará en el almacenamiento
-  storage, // define el almacenamiento a utilizar (localStorage)
+  key: 'root',
+  storage,
 };
 
 // Combina los reductores
@@ -18,19 +18,23 @@ const rootReducer = combineReducers({
   profile: profileReducer,
 });
 
-// Crea un persist reducer
+// Crea el persistReducer solo para el cliente
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
-  reducer: persistedReducer,
-});
+// Creación de la store
+export const makeStore = () => {
+  return configureStore({
+    reducer: persistedReducer, // Reducer persistido
+  });
+};
 
-// Crea el persistor
+// Crear la store directamente, usando la función makeStore
+export const store = makeStore(); // Instancia de la store
+
+// Crear el persistor (esto solo debe hacerse en el cliente)
 export const persistor = persistStore(store);
 
-// Inferir el tipo de store
-export type AppStore = typeof store;
-
-// Inferir los tipos `RootState` y `AppDispatch` desde la tienda misma
+// Inferir tipos
+export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];

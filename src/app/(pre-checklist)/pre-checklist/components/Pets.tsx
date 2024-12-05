@@ -69,7 +69,6 @@ const Pets = ({
     options: [
       { id: 1, name: 'Yes', value: true },
       { id: 1, name: 'No', value: false },
-      { id: 1, name: 'Maybe', value: false },
     ],
     condition: {
       stateCondition: 'isWithPets',
@@ -80,6 +79,8 @@ const Pets = ({
   const { buttonDisabled, answers, handleAnswerChange, handleChangeOptions } =
     UseAnswers([...questions, conditionalQuestion, conditionalQuestion2]);
   useEffect(() => {
+    if (answers.isWithPets === true) {
+    }
     console.log(answers);
   }, [answers]);
 

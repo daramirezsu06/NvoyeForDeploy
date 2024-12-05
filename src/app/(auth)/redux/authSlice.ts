@@ -1,11 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from './authTypes';
-import { login, sendOtp, setPassword, signUp, verifyOtp } from './authThunks';
+import {
+  login,
+  logout,
+  sendOtp,
+  setPassword,
+  signUp,
+  verifyOtp,
+} from './authThunks';
 import { RootState } from '../../state/store';
 
 const initialState: AuthState = {
   user: null,
-  token: null,
   error: null,
   isCodeSent: false,
   requestId: null,
@@ -28,17 +34,16 @@ const authSlice = createSlice({
     setUser: (state, action: PayloadAction<string>) => {
       state.user = action.payload;
     },
-    authlogout: (state) => {
-      state.user = null;
-      state.token = null;
-      state.error = null;
-      state.isCodeSent = false;
-      state.requestId = null;
-      state.isOtpVerified = false;
-      state.isPasswordCreated = false;
-      state.isOtpSent = false;
-      state.isLoggedIn = false;
-    },
+    // authlogout: (state) => {
+    //   state.user = null;
+    //   state.error = null;
+    //   state.isCodeSent = false;
+    //   state.requestId = null;
+    //   state.isOtpVerified = false;
+    //   state.isPasswordCreated = false;
+    //   state.isOtpSent = false;
+    //   state.isLoggedIn = false;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -57,8 +62,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.meta.arg.email;
         state.error = null;
-        state.token = action.payload.data.token;
-        state.user = action.payload.data.email;
+        state.user = action.payload.email;
         state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -87,10 +91,22 @@ const authSlice = createSlice({
       })
       .addCase(setPassword.rejected, (state, action) => {
         state.error = (action.payload as string) || 'Password setting failed';
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
+        state.error = null;
+        state.isCodeSent = false;
+        state.requestId = null;
+        state.isOtpVerified = false;
+        state.isPasswordCreated = false;
+        state.isOtpSent = false;
+        state.isLoggedIn = false;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.error = (action.payload as string) || 'Logout failed';
       });
   },
 });
 
-export const { setUser, setError, clearError, authlogout } = authSlice.actions;
-export const selectToken = (state: RootState) => state.auth.token;
+export const { setUser, setError, clearError } = authSlice.actions;
 export default authSlice.reducer;

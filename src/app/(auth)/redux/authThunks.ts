@@ -6,134 +6,82 @@ import {
   LoginPayload,
   SendOtpPayload,
 } from './authTypes';
-import { baseURL } from '@/src/utils/api/env';
-import { log } from 'console';
-
+import {
+  postLogin,
+  postSendOtp,
+  postSetPassword,
+  postSignUp,
+  postVerifyOtp,
+} from '@/src/utils/api/auth/auth';
+import { createSession } from '@/src/lib/session';
+import {
+  createServerSession,
+  logoutServerSession,
+} from '@/src/actions/session';
 export const signUp = createAsyncThunk(
   'auth/signUp',
-  async ({ email, userTypeId }: SignUpPayload, { rejectWithValue }) => {
+  async (payload: SignUpPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${baseURL}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, userTypeId }),
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      return rejectWithValue(error);
+      return await postSignUp(payload);
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
 export const verifyOtp = createAsyncThunk(
   'auth/verifyOtp',
-  async ({ email, code }: VerifyOtpPayload, { rejectWithValue }) => {
+  async (payload: VerifyOtpPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${baseURL}/auth/verifyOTP`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, code }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      return rejectWithValue(error);
+      return await postVerifyOtp(payload);
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
 export const sendOtp = createAsyncThunk(
   'auth/sendOtp',
-  async ({ email }: SendOtpPayload, { rejectWithValue }) => {
+  async (payload: SendOtpPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${baseURL}/auth/sendOtp`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      return rejectWithValue(error);
+      return await postSendOtp(payload);
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
 export const setPassword = createAsyncThunk(
   'auth/setPassword',
-  async (
-    { email, code, password }: SetPasswordPayload,
-    { rejectWithValue }
-  ) => {
+  async (payload: SetPasswordPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${baseURL}/auth/setPassword`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, code, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      return rejectWithValue(error);
+      return await postSetPassword(payload);
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ email, password }: LoginPayload, { rejectWithValue }) => {
+  async (payload: LoginPayload, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${baseURL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const data = await createServerSession(payload.email, payload.password);
+      return { email: data.email };
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message);
-        console.log('el error es', errorData);
-      }
-
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.log('el error es', error);
-      return rejectWithValue(error);
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await logoutServerSession();
+      return 'Logged out successfully';
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );

@@ -1,7 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProfileState } from './profileTypes';
+import { createSlice } from '@reduxjs/toolkit';
 import { getProfile } from './profileThunks';
+import { ProfileState } from './profileTypes';
 import { RootState } from '../../state/store';
+import { logout } from '../../(auth)/redux';
 
 const initialState: ProfileState = {
   userState: {
@@ -57,29 +58,34 @@ const profileSlice = createSlice({
     setProfile: (state, action) => {
       state.userState = action.payload;
     },
-    logout: (state) => {
-      state.userState = initialState.userState;
-      state.status = 'idle';
-    },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(getProfile.pending, (state) => {
-  //       state.status = 'loading';
-  //     })
-  //     .addCase(getProfile.fulfilled, (state, action) => {
-  //       state.status = 'succeeded';
-  //       state.userState = action.payload;
-  //     })
-  //     .addCase(getProfile.rejected, (state, action) => {
-  //       state.status = 'failed';
-  //       state.error = (action.error.message as string) || 'get profile failed';
-  //     });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getProfile.pending, (state) => {
+        state.status = 'loading';
+        state.error = null; // Limpia errores previos
+      })
+      .addCase(getProfile.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.userState = action.payload.data; // Guarda los datos en el estado
+      })
+      .addCase(getProfile.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload as string; // Guarda el mensaje de error
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.userState = initialState.userState;
+        state.status = 'idle';
+        state.error = null;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload as string;
+      });
+  },
 });
 
-export const { setProfile, logout } = profileSlice.actions;
-
+export const { setProfile } = profileSlice.actions;
 export const selectProfile = (state: RootState) => state.profile.userState;
 
 export default profileSlice.reducer;
