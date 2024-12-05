@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Box, Alert } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
@@ -7,11 +7,18 @@ import SignupForm from './components/signupForm';
 import { RootState } from '@/src/app/state/store';
 import Confirmation from './components/confirmation';
 import iconnamewhite from '@/src/icons/iconnamewhite.png';
+import { useAppDispatch } from '../../state/hooks';
+import { clearError } from '../redux/authSlice';
 
 const SignUpPage = () => {
   const { isPasswordCreated, isCodeSent, isOtpVerified, error } = useSelector(
     (state: RootState) => state.auth
   );
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(clearError());
+  }, []);
 
   return (
     <Container

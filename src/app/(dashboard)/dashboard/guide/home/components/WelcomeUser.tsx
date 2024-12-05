@@ -1,5 +1,7 @@
+'use client';
+import { selectProfile } from '@/src/app/(dashboard)/redux/profileSlice';
+import { useAppSelector } from '@/src/app/state/hooks';
 import { Stack, Typography } from '@mui/material';
-import React from 'react';
 
 //TODO -> get the user name and country
 
@@ -13,6 +15,7 @@ const getCurrentDate = () => {
 };
 
 export default function WelcomeUser() {
+  const profile = useAppSelector(selectProfile);
   const currentDate = getCurrentDate();
 
   return (
@@ -38,7 +41,7 @@ export default function WelcomeUser() {
       >
         {/* //! HERE GOES THE USER NAME and the country*/}
         <Typography variant="subtitle2" component={'span'}>
-          Welcome, Michael
+          Welcome, {profile.firstName} {profile.lastName}
         </Typography>
         <Typography variant="h6" component={'h1'}>
           Your Hub for the Netherlands

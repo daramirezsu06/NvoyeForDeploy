@@ -23,7 +23,7 @@ const initialState: AnswersState = {
   isWithChildren: null,
   isWithPets: null,
   typeOfPets: null,
-  isPlanAdoptingPets: null,
+  isPlanAdoptingPets: false,
   hasHealthInsurance: null,
   insuranceTypeId: null,
   hasChronicConditions: null,

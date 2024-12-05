@@ -14,10 +14,12 @@ import GetInsuranceTypes from '@/src/utils/api/prechecklist/getInsuranceType';
 import GetVehicleTypes from '@/src/utils/api/prechecklist/getVehicleTypes';
 import GetHobbies from '@/src/utils/api/prechecklist/getHobbies';
 import PutPrechecklist from '@/src/utils/api/prechecklist/putPrechecklist';
-import { useAppSelector } from '../../state/hooks';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { getProfile } from '../../(dashboard)/redux/profileThunks';
 
 export default function PreChecklist() {
   const prechecklist = useAppSelector((state) => state.preChecklistanswers);
+  const dispatch = useAppDispatch();
   const [step, setStep] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [insuranceTypes, setInsuranceTypes] = useState<
@@ -91,11 +93,13 @@ export default function PreChecklist() {
     console.log(profile);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step < 6) {
       setStep(step + 1);
     } else {
-      sentPrechecklist();
+      await sentPrechecklist();
+      await dispatch(getProfile());
+
       setCompleted(true);
     }
   };

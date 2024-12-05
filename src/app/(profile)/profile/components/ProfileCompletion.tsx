@@ -1,5 +1,6 @@
 import { useRedirectionProfile } from '@/src/app/hooks/useRedirectConditional';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 
 export const ProfileCompletion: React.FC = () => {
   // Usamos el hook para obtener la función que hará la redirección condicional
@@ -40,9 +41,11 @@ export const ProfileCompletion: React.FC = () => {
         Welcome to Nvoy’s exclusive diplomatic community. Ready to take a look
         around?
       </Typography>
-      <Button variant="contained" color="primary" onClick={redirectToProfile}>
-        Access Account
-      </Button>
+      <Link href="/dashboard/guide/home">
+        <Button variant="contained" color="primary">
+          Access Account
+        </Button>
+      </Link>
     </Stack>
   );
 };

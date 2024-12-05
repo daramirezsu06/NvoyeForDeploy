@@ -3,8 +3,8 @@ import { ThemeProvider } from '@mui/material/styles';
 
 import theme from './theme';
 import './globals.css';
-import StoreProvider from './StoreProvider';
 import { CssBaseline } from '@mui/material';
+import StoreProvider from './StoreProvider'; // Aquí envolvemos con el provider cliente
 
 export default function RootLayout({
   children,
@@ -15,6 +15,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StoreProvider>
+          {' '}
+          {/* StoreProvider contiene lógica cliente */}
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
               <CssBaseline />

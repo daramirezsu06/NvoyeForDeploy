@@ -68,7 +68,7 @@ const Pets = ({
     options: [
       { id: 1, name: 'Yes', value: true },
       { id: 1, name: 'NO', value: false },
-      { id: 1, name: 'Maybe', value: false },
+      // { id: 1, name: 'Maybe', value: false },
     ],
     condition: {
       stateCondition: 'isWithPets',

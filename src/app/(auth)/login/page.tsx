@@ -1,13 +1,21 @@
 'use client';
 import { Container, Box, Alert } from '@mui/material';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/src/app/state/store';
 import LoginForm from './components/LoginForm';
 import iconnamewhite from '@/src/icons/iconnamewhite.png';
+import { useEffect } from 'react';
+import { clearError } from '../redux/authSlice';
+import { useAppDispatch } from '../../state/hooks';
 
 const LoginPage = () => {
-  const { error, isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(clearError());
+  }, []);
+
+  const { error } = useSelector((state: RootState) => state.auth);
 
   return (
     <Container
