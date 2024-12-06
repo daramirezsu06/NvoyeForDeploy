@@ -28,7 +28,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
         height: { xs: '160px', sm: '200px' },
         maxWidth: {
           xs: '200px',
-          sm: '472px',
+          sm: '272px',
         },
         padding: 2,
         flexDirection: 'column',

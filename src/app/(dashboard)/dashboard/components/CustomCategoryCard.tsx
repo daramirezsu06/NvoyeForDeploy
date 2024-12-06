@@ -17,12 +17,16 @@ export default function CustomCategoryCard({ icon, title }: Props) {
       sx={{
         display: { xs: 'inline-flex', sm: 'flex' },
         flexGrow: 1,
-        width: { xs: '150px', sm: '150px' },
+        width: { xs: '160px', sm: '225px' },
         height: { xs: '160px', sm: '200px' },
-        // maxWidth: {
-        //   xs: '200px',
-        //   sm: '472px',
-        // },
+        minWidth: {
+          xs: '150px',
+          sm: '225px',
+        },
+        maxWidth: {
+          xs: '160px',
+          sm: '225px',
+        },
         padding: 2,
         flexDirection: 'column',
         justifyContent: 'center',

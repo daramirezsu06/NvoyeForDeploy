@@ -111,7 +111,7 @@ export default function Hubs({}: Props) {
             xs: '80px',
             sm: 2,
           },
-          justifyContent: ' center',
+          justifyContent: 'flex-start',
           alignItems: 'flex-start',
           alignContent: 'flex-start',
           gap: '24px',
