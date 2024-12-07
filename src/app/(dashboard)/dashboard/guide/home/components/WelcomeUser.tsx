@@ -3,8 +3,6 @@ import { selectProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { useAppSelector } from '@/src/app/state/hooks';
 import { Stack, Typography } from '@mui/material';
 
-//TODO -> get the user name and country
-
 const getCurrentDate = () => {
   const today = new Date();
   const weekday = today.toLocaleDateString('en-US', { weekday: 'short' }); // Día de la semana (corto)
