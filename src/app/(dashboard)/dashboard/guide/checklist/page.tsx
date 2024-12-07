@@ -71,127 +71,138 @@ export default function Checklist() {
   console.log(userTaskList);
 
   return (
-    <Container
+    <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
-        width: '100%',
-        maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        marginLeft: { xs: '0px', sm: '0px' },
-        marginRight: { xs: '0px', sm: '0px' },
-        backgroundColor: '##F8F6F5',
-        paddingX: { xs: '8px', sm: 3 },
-        paddingY: { xs: 0, sm: 2 },
-        marginBottom: 8,
-        gap: 4,
+        alignItems: 'center',
+        flex: 1,
+        alignSelf: 'stretch',
       }}
     >
-      <TitleAndButton onAddTask={handleAddTask} />
-      <Box
+      <Container
         sx={{
-          gap: 4,
           display: 'flex',
-          flexDirection: { xs: 'column-reverse', md: 'row' },
+          flexDirection: 'column',
+          minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
+          width: '100%',
+          maxWidth: '1440px',
+          // maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+          marginLeft: { xs: '0px', sm: '0px' },
+          marginRight: { xs: '0px', sm: '0px' },
+          backgroundColor: '##F8F6F5',
+          paddingX: { xs: '8px', sm: 3 },
+          paddingY: { xs: 0, sm: 2 },
+          marginBottom: 8,
+          gap: 4,
         }}
       >
-        <Stack sx={{ width: '100%', flexGrow: 1 }} gap={1}>
-          <Box
-            sx={{
-              backgroundColor: theme.custom.paperElevationOne,
-              borderRadius: 2,
-              height: '40px',
-            }}
-          >
-            <Tabs
-              value={activeTab}
-              onChange={handleTabChange}
+        <TitleAndButton onAddTask={handleAddTask} />
+        <Box
+          sx={{
+            gap: 4,
+            display: 'flex',
+            flexDirection: { xs: 'column-reverse', md: 'row' },
+          }}
+        >
+          <Stack sx={{ width: '100%', flexGrow: 1 }} gap={1}>
+            <Box
               sx={{
+                backgroundColor: theme.custom.paperElevationOne,
+                borderRadius: 2,
                 height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                '& .MuiTab-root': {
-                  textTransform: 'none',
-                  fontWeight: 500,
-                },
-                '& .Mui-selected': {
-                  color: 'blue',
-                },
               }}
             >
-              <Tab iconPosition="start" icon={<ListAlt />} label="To do" />
-              <Tab
-                iconPosition="start"
-                icon={<TaskOutlined />}
-                label="Completed"
-              />
-              <Tab
-                iconPosition="start"
-                icon={<ArchiveOutlined />}
-                label="Archived"
-              />
-            </Tabs>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              p: 2,
-              backgroundColor: theme.custom.paperElevationTwo,
-              borderRadius: 3,
-              gap: 2,
-            }}
-          >
-            {userTaskList.length === 0 ? (
-              <NoTasksComponent onAddTask={handleAddTask} />
-            ) : filteredTasks.length === 0 ? (
-              <Typography>No tasks matching the filter</Typography>
-            ) : (
-              filteredTasks.map((task: IBackendTasks) => (
-                <TodoComponent
-                  key={task.id}
-                  task={task}
-                  onMarkAsComplete={handleMarkAsComplete}
-                  onMarkAsIncomplete={handleMarkAsIncomplete}
-                  onMarkAsArchived={handleMarkAsArchived}
+              <Tabs
+                value={activeTab}
+                onChange={handleTabChange}
+                sx={{
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  '& .MuiTab-root': {
+                    textTransform: 'none',
+                    fontWeight: 500,
+                  },
+                  '& .Mui-selected': {
+                    color: 'blue',
+                  },
+                }}
+              >
+                <Tab iconPosition="start" icon={<ListAlt />} label="To do" />
+                <Tab
+                  iconPosition="start"
+                  icon={<TaskOutlined />}
+                  label="Completed"
                 />
-              ))
-            )}
-          </Box>
-        </Stack>
-        <RecomendedTasksList
-          recomendedTasks={recomendedTasks}
-          sx={{
-            minWidth: { xs: '60px', md: 'auto' },
-          }}
-        />
-      </Box>
-      {/* Snackbar */}
-      <Snackbar
-        open={snackbar.open}
-        onClose={closeSnackbar}
-        autoHideDuration={3000}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <Alert
-          severity={snackbar.severity}
-          variant="filled"
-          onClose={closeSnackbar}
-          action={
-            <Button
-              size="small"
-              color="inherit"
-              variant="text"
-              sx={{ textTransform: 'none' }}
-              onClick={handleUndo}
+                <Tab
+                  iconPosition="start"
+                  icon={<ArchiveOutlined />}
+                  label="Archived"
+                />
+              </Tabs>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                p: 2,
+                backgroundColor: theme.custom.paperElevationTwo,
+                borderRadius: 3,
+                gap: 2,
+              }}
             >
-              Undo
-            </Button>
-          }
+              {userTaskList.length === 0 ? (
+                <NoTasksComponent onAddTask={handleAddTask} />
+              ) : filteredTasks.length === 0 ? (
+                <Typography>No tasks matching the filter</Typography>
+              ) : (
+                filteredTasks.map((task: IBackendTasks) => (
+                  <TodoComponent
+                    key={task.id}
+                    task={task}
+                    onMarkAsComplete={handleMarkAsComplete}
+                    onMarkAsIncomplete={handleMarkAsIncomplete}
+                    onMarkAsArchived={handleMarkAsArchived}
+                  />
+                ))
+              )}
+            </Box>
+          </Stack>
+          <RecomendedTasksList
+            recomendedTasks={recomendedTasks}
+            sx={{
+              minWidth: { xs: '60px', md: 'auto' },
+            }}
+          />
+        </Box>
+        {/* Snackbar */}
+        <Snackbar
+          open={snackbar.open}
+          onClose={closeSnackbar}
+          autoHideDuration={3000}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
-    </Container>
+          <Alert
+            severity={snackbar.severity}
+            variant="filled"
+            onClose={closeSnackbar}
+            action={
+              <Button
+                size="small"
+                color="inherit"
+                variant="text"
+                sx={{ textTransform: 'none' }}
+                onClick={handleUndo}
+              >
+                Undo
+              </Button>
+            }
+          >
+            {snackbar.message}
+          </Alert>
+        </Snackbar>
+      </Container>
+    </Box>
   );
 }

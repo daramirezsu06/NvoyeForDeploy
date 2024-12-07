@@ -6,10 +6,7 @@ import ConnectCalendar from './components/ConnectCalendar';
 import LandingPackage from './components/LandingPackage';
 import theme from '@/src/app/theme';
 import ScheduledTasks from './components/ScheduledTasks';
-import AlertCompletePrechecklist from './components/alertCompletePrecheklist';
-import ModalPrechecklistCall from './components/ModalPrechecklistCall';
 import PersonalizeExperienceCard from './components/PersonalizeExperienceCard';
-import { useVerifyPrechecklist } from '@/src/app/hooks/verifyPrechecklist';
 
 type Props = {};
 
@@ -18,85 +15,95 @@ export default function Home({}: Props) {
     <Box
       sx={{
         display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        minHeight: { xs: '100vh', md: 'calc(100vh - 64px)' },
-        width: '100%',
-        maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-        paddingLeft: { xs: '8px', md: 3 },
-        paddingRight: { xs: '8px', md: 3 },
-        paddingY: { xs: 0, md: 2 },
-        marginLeft: { xs: '0px', sm: '0px' },
-        marginRight: { xs: '0px', sm: '0px' },
+        flexDirection: 'column',
+        alignItems: 'center',
         flex: 1,
-        gap: 4,
+        alignSelf: 'stretch',
       }}
     >
-      {/* BOX to the Left */}
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
+          flexDirection: { xs: 'column', md: 'row' },
+          minHeight: { xs: '100vh', md: 'calc(100vh - 64px)' },
+          width: '100%',
+          maxWidth: '1440px',
+          paddingLeft: { xs: '8px', md: 3 },
+          paddingRight: { xs: '8px', md: 3 },
+          paddingY: { xs: 0, md: 2 },
+          marginLeft: { xs: '0px', sm: '0px' },
+          marginRight: { xs: '0px', sm: '0px' },
           flex: 1,
-          gap: 3,
+          gap: 4,
         }}
       >
-        <WelcomeUser />
-
-        <PersonalizeExperienceCard />
-
-        {/* Recommended hubs */}
-        <Stack
+        {/* BOX to the Left */}
+        <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            gap: 4,
-            alignSelf: 'stretch',
-            borderRadius: 2,
-            backgroundColor: '#F8F6F5',
+            flex: 1,
+            gap: 3,
           }}
         >
-          <RecommendedHubs />
-        </Stack>
+          <WelcomeUser />
 
-        {/* Scheduled task */}
-        <Stack
+          <PersonalizeExperienceCard />
+
+          {/* Recommended hubs */}
+          <Stack
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: 4,
+              alignSelf: 'stretch',
+              borderRadius: 2,
+              backgroundColor: '#F8F6F5',
+            }}
+          >
+            <RecommendedHubs />
+          </Stack>
+
+          {/* Scheduled task */}
+          <Stack
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: 4,
+              alignSelf: 'stretch',
+              borderRadius: 2,
+              backgroundColor: '#F8F6F5',
+            }}
+          >
+            <ScheduledTasks />
+          </Stack>
+        </Box>
+
+        {/* BOX to the Right */}
+        <Box
           sx={{
             display: 'flex',
+            maxWidth: { xs: '100%', md: '500px' },
             flexDirection: 'column',
             alignItems: 'flex-start',
-            gap: 4,
-            alignSelf: 'stretch',
-            borderRadius: 2,
-            backgroundColor: '#F8F6F5',
+            gap: 3,
+            flex: 1,
+            alignSelf: ' stretch',
+            paddingBottom: {
+              xs: '70px',
+              md: ' 0px',
+            },
           }}
         >
-          <ScheduledTasks />
-        </Stack>
-      </Box>
+          {/* Box up */}
+          <ConnectCalendar />
 
-      {/* BOX to the Right */}
-      <Box
-        sx={{
-          display: 'flex',
-          maxWidth: { xs: '100%', md: '500px' },
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          gap: 3,
-          flex: 1,
-          alignSelf: ' stretch',
-          paddingBottom: {
-            xs: '70px',
-            md: ' 0px',
-          },
-        }}
-      >
-        {/* Box up */}
-        <ConnectCalendar />
-
-        {/* Box down */}
-        <LandingPackage />
+          {/* Box down */}
+          <LandingPackage />
+        </Box>
       </Box>
     </Box>
   );

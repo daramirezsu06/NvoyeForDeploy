@@ -74,140 +74,149 @@ export default function SubHubs({
   };
 
   return (
-    <Container
+    <Box
       sx={{
-        // px: 2,
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
-        minHeight: { xs: '100vh', sm: 'calc(100vh - 190px)' },
-        maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-
+        alignItems: 'center',
         flex: 1,
-        paddingBottom: '190px',
+        alignSelf: 'stretch',
       }}
     >
-      {/* Breadcrumbs to be seen only in big screens */}
-      <Box
-        sx={{
-          display: { xs: 'none', sm: 'flex' },
-          flexDirection: 'row',
-          width: '100%',
-          paddingTop: 3,
-        }}
-      >
-        <Breadcrumbs aria-label="breadcrumb" separator={<ChevronRight />}>
-          <Link
-            href="/dashboard/guide/hubs"
-            style={{ color: 'inherit', textDecoration: 'none' }}
-          >
-            Hubs
-          </Link>
-          <Link
-            href="/dashboard/guide/hubs/subHubs"
-            style={{ color: 'inherit', textDecoration: 'none' }}
-          >
-            Hub Name
-          </Link>
-          <Link
-            href={`/dashboard/guide/hubs/subHubs/${name}`}
-            style={{ color: 'inherit', textDecoration: 'none' }}
-          >
-            {name}
-          </Link>
-        </Breadcrumbs>
-      </Box>
-
-      <Stack
+      <Container
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+          flexDirection: 'column',
           width: '100%',
-          maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
-          gap: 3,
-          paddingTop: 3,
-          paddingBottom: { xs: '', sm: '190px' },
+          maxWidth: '1440px',
+          minHeight: { xs: '100vh', sm: 'calc(100vh - 190px)' },
+          // maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+          flex: 1,
+          paddingBottom: '190px',
         }}
       >
-        {/* //LEft column */}
-        <Stack
-          // spacing={2}
+        {/* Breadcrumbs to be seen only in big screens */}
+        <Box
           sx={{
-            flex: 1,
+            display: { xs: 'none', sm: 'flex' },
+            flexDirection: 'row',
+            width: '100%',
+            paddingTop: 3,
           }}
         >
-          <SubCategory_Header infoHeader={{ name, tags }} />
+          <Breadcrumbs aria-label="breadcrumb" separator={<ChevronRight />}>
+            <Link
+              href="/dashboard/guide/hubs"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              Hubs
+            </Link>
+            <Link
+              href="/dashboard/guide/hubs/subHubs"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              Hub Name
+            </Link>
+            <Link
+              href={`/dashboard/guide/hubs/subHubs/${name}`}
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              {name}
+            </Link>
+          </Breadcrumbs>
+        </Box>
 
-          {/* tabs to be seen only in small screens */}
-          <Tabs
-            value={activeTab}
-            onChange={handleTabChange}
-            variant="scrollable"
-            scrollButtons
-            allowScrollButtonsMobile
-            sx={{
-              display: { xs: 'flex', sm: 'none' },
-              backgroundColor: '#F5F3F1',
-              marginTop: 2,
-            }}
-          >
-            {tabs.map((title, index) => (
-              <Tab
-                key={index}
-                label={title}
-                sx={{ textTransform: 'none', fontSize: '1rem' }}
-              />
-            ))}
-          </Tabs>
-          {/* Overview component */}
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            width: '100%',
+            maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
+            gap: 3,
+            paddingTop: 3,
+            paddingBottom: { xs: '', sm: '190px' },
+          }}
+        >
+          {/* //LEft column */}
           <Stack
+            // spacing={2}
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 3,
-              p: 3,
-              borderRadius: 2,
-              backgroundColor: '#F5F3F1',
-              marginTop: { xs: 0, sm: 2 },
+              flex: 1,
             }}
           >
-            {/* {overview && (
+            <SubCategory_Header infoHeader={{ name, tags }} />
+
+            {/* tabs to be seen only in small screens */}
+            <Tabs
+              value={activeTab}
+              onChange={handleTabChange}
+              variant="scrollable"
+              scrollButtons
+              allowScrollButtonsMobile
+              sx={{
+                display: { xs: 'flex', sm: 'none' },
+                backgroundColor: '#F5F3F1',
+                marginTop: 2,
+              }}
+            >
+              {tabs.map((title, index) => (
+                <Tab
+                  key={index}
+                  label={title}
+                  sx={{ textTransform: 'none', fontSize: '1rem' }}
+                />
+              ))}
+            </Tabs>
+            {/* Overview component */}
+            <Stack
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 3,
+                p: 3,
+                borderRadius: 2,
+                backgroundColor: '#F5F3F1',
+                marginTop: { xs: 0, sm: 2 },
+              }}
+            >
+              {/* {overview && (
               <TextButton info={{ title: 'Overview', text: overview }} />
             )}
             {PrincipalContent.map((component, index) =>
               renderComponent(component, index)
             )} */}
-            {activeTab === 0 ? (
-              <>
-                <TextButton info={{ title: 'Overview', text: overview }} />
-                {PrincipalContent.map((component, index) =>
-                  renderComponent(component, index)
-                )}
-              </>
-            ) : (
-              renderComponent(
-                rightContend[activeTab - 1], // Ajusta índice para rightContend
-                activeTab - 1
-              )
+              {activeTab === 0 ? (
+                <>
+                  <TextButton info={{ title: 'Overview', text: overview }} />
+                  {PrincipalContent.map((component, index) =>
+                    renderComponent(component, index)
+                  )}
+                </>
+              ) : (
+                renderComponent(
+                  rightContend[activeTab - 1], // Ajusta índice para rightContend
+                  activeTab - 1
+                )
+              )}
+            </Stack>
+          </Stack>
+
+          {/* //Right column */}
+          <Stack
+            spacing={2}
+            sx={{
+              display: { xs: 'none', sm: 'block' },
+              // width: { xs: '100%', md: '100%' },
+              minWidth: { xs: '', md: '350px' },
+              maxWidth: { xs: '100%', md: '400px' },
+            }}
+          >
+            {rightContend.map((component, index) =>
+              renderComponent(component, index)
             )}
           </Stack>
         </Stack>
-
-        {/* //Right column */}
-        <Stack
-          spacing={2}
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            // width: { xs: '100%', md: '100%' },
-            minWidth: { xs: '', md: '350px' },
-            maxWidth: { xs: '100%', md: '400px' },
-          }}
-        >
-          {rightContend.map((component, index) =>
-            renderComponent(component, index)
-          )}
-        </Stack>
-      </Stack>
-    </Container>
+      </Container>
+    </Box>
   );
 }

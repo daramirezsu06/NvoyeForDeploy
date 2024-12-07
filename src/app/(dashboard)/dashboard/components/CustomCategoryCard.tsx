@@ -1,4 +1,4 @@
-import { Card, Stack, Typography } from '@mui/material';
+import { Box, Card, Stack, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 import Link from 'next/link';
@@ -13,12 +13,11 @@ export default function CustomCategoryCard({ icon, title }: Props) {
   const titleCaseTitle = toCamelCase(title);
 
   return (
-    <Card
+    <Box
       sx={{
         display: { xs: 'inline-flex', sm: 'flex' },
-        flexGrow: 1,
+        height: { xs: '133px', sm: '150px' },
         width: { xs: '160px', sm: '225px' },
-        height: { xs: '160px', sm: '200px' },
         minWidth: {
           xs: '150px',
           sm: '225px',
@@ -27,6 +26,7 @@ export default function CustomCategoryCard({ icon, title }: Props) {
           xs: '160px',
           sm: '225px',
         },
+        flexGrow: 1,
         padding: 2,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -34,10 +34,12 @@ export default function CustomCategoryCard({ icon, title }: Props) {
         gap: '8px',
         flexShrink: 0,
         borderRadius: ' 16px',
-        backgroundColor: '#F5F3F1',
+        backgroundColor: '#F4F0ED',
+        border: '1px solid rgba(0, 0, 0, 0.12)',
         '&:hover': {
           boxShadow: ' 0px 5px 10px -2px',
           cursor: 'pointer',
+          backgroundColor: '#F5F3F1',
         },
       }}
     >
@@ -63,7 +65,6 @@ export default function CustomCategoryCard({ icon, title }: Props) {
             textAlign: 'center',
           }}
         >
-          {/* //this must modify */}
           <Stack
             sx={{
               display: 'flex',
@@ -80,6 +81,6 @@ export default function CustomCategoryCard({ icon, title }: Props) {
           </Stack>
         </Stack>
       </Link>
-    </Card>
+    </Box>
   );
 }
