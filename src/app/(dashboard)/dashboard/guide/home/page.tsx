@@ -1,5 +1,5 @@
-import { Box, Stack } from '@mui/material';
-import React from 'react';
+import { Box, Modal, Stack } from '@mui/material';
+import React, { useState } from 'react';
 import WelcomeUser from './components/WelcomeUser';
 import RecommendedHubs from './components/RecommendedHubs';
 import ConnectCalendar from './components/ConnectCalendar';
@@ -7,6 +7,9 @@ import LandingPackage from './components/LandingPackage';
 import theme from '@/src/app/theme';
 import ScheduledTasks from './components/ScheduledTasks';
 import AlertCompletePrechecklist from './components/alertCompletePrecheklist';
+import ModalPrechecklistCall from './components/ModalPrechecklistCall';
+import PersonalizeExperienceCard from './components/PersonalizeExperienceCard';
+import { useVerifyPrechecklist } from '@/src/app/hooks/verifyPrechecklist';
 
 type Props = {};
 
@@ -39,6 +42,8 @@ export default function Home({}: Props) {
         }}
       >
         <WelcomeUser />
+
+        <PersonalizeExperienceCard />
 
         {/* Recommended hubs */}
         <Stack
@@ -92,7 +97,6 @@ export default function Home({}: Props) {
 
         {/* Box down */}
         <LandingPackage />
-        <AlertCompletePrechecklist />
       </Box>
     </Box>
   );

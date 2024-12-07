@@ -24,14 +24,14 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
       sx={{
         display: { xs: 'inline-flex', sm: 'flex' },
         flexGrow: 1,
-        width: { xs: '220px', sm: '272x' },
         height: { xs: '160px', sm: '200px' },
+        width: { xs: '150px', sm: '272x' },
         minWidth: {
           xs: '150px',
           sm: '250px',
         },
         maxWidth: {
-          xs: '200px',
+          xs: '150px',
           sm: '272px',
         },
         padding: 2,
