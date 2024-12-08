@@ -1,3 +1,4 @@
+'use client';
 import { ThemeProvider } from '@mui/material/styles';
 import {
   AppBar,
@@ -11,12 +12,20 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Checklist, DeviceHub, Home } from '@mui/icons-material';
+import MobileTopNavbar from '../(dashboard)/dashboard/components/MobileTopNavbar';
+import React from 'react';
+import { SidebarMobile } from '../(dashboard)/dashboard/components/sidebarMobile';
+import { guideSidebarList } from '../(dashboard)/dashboard/guide/utils/sidevbarGuideList';
+import DesktopTopNavbar from '../(dashboard)/dashboard/components/DesktopTopNavbar';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorElMenuLayout, setAnchorElMenuLayout] =
+    React.useState<null | HTMLElement>(null);
   return (
     <html lang="en">
       <body>
@@ -24,11 +33,13 @@ export default function RootLayout({
           color="default"
           sx={{
             display: {
-              sm: 'none',
+              md: 'none',
             },
+            boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0)',
+            backgroundColor: '#FDFCFB',
           }}
         >
-          <Toolbar>
+          {/* <Toolbar>
             <IconButton
               size="large"
               edge="start"
@@ -42,13 +53,30 @@ export default function RootLayout({
               News
             </Typography>
             <Button color="inherit">Login</Button>
-          </Toolbar>
+          </Toolbar> */}
+          <DesktopTopNavbar
+            onAvatarClick={(event) => setAnchorEl(event.currentTarget)}
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            handleClose={() => setAnchorEl(null)}
+          />
+          <MobileTopNavbar
+            onMenuClick={(event) => setAnchorElMenuLayout(event.currentTarget)}
+            anchorElMenuLayout={anchorElMenuLayout}
+            openMenuLayout={Boolean(anchorElMenuLayout)}
+            handleCloseMenuLayout={() => setAnchorElMenuLayout(null)}
+            onAvatarClick={(event) => setAnchorEl(event.currentTarget)}
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            handleClose={() => setAnchorEl(null)}
+          />
         </AppBar>
 
         <CssBaseline />
         {children}
 
-        <BottomNavigation
+        <SidebarMobile sidevbarList={guideSidebarList} />
+        {/* <BottomNavigation
           sx={{
             display: {
               sm: 'none',
@@ -62,7 +90,7 @@ export default function RootLayout({
           <BottomNavigationAction label="Recents" icon={<Home />} />
           <BottomNavigationAction label="Recents" icon={<DeviceHub />} />
           <BottomNavigationAction label="Recents" icon={<Checklist />} />
-        </BottomNavigation>
+        </BottomNavigation> */}
       </body>
     </html>
   );
