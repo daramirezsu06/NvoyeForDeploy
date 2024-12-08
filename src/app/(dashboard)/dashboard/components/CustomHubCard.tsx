@@ -27,7 +27,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
         height: { xs: '160px', md: '200px' },
         width: { xs: '100%', md: '272x' },
         minWidth: {
-          xs: '150px',
+          xs: '144px',
           md: '250px',
         },
         maxWidth: {

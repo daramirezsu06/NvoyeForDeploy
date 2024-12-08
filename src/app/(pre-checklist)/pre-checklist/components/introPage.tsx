@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 import theme from '@/src/app/theme';
-import { Verified } from '@mui/icons-material';
+import { Verified, VerifiedTwoTone } from '@mui/icons-material';
 import Brandlogo from '@/src/icons/BrandLogo';
 
 const sectionsArray = [
@@ -31,17 +31,17 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
         margin: 0,
         padding: 0,
         width: '100%',
-        flexDirection: { xs: 'column', sm: 'row' },
+        flexDirection: { xs: 'column', md: 'row' },
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
         paddingLeft: { xs: '0px', sm: '0px' },
         paddingRight: { xs: '0px', sm: '0px' },
       }}
     >
       {/* Imagen en pantallas grandes, parte izquierda */}
-      <Box sx={{ flex: 1, position: 'relative' }}>
+      <Box sx={{ flex: { xs: '', md: 1 }, position: 'relative' }}>
         <Box
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: 'none', md: 'block' },
             position: 'relative',
             height: '100%',
             // width: 700,
@@ -98,9 +98,9 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
         {/* Imagen para pantallas pequeñas */}
         <Box
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             position: 'relative',
-            height: 250,
+            height: { xs: 250, sm: 300 },
             width: '100%',
             transform: { xs: 'translateX(0px)', sm: 'none' },
           }}
@@ -118,11 +118,14 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
               position: 'absolute',
               top: '50%',
               left: '50%',
-              transform: 'translate(-55%, -0%)',
+              transform: {
+                xs: 'translate(-55%, -0%)',
+                sm: 'translate(-65%, -0%)',
+              },
               color: 'white',
               width: '100%',
               textAlign: 'center',
-              fontSize: '1.7rem',
+              fontSize: { xs: '1.7rem', sm: '1.9rem' },
             }}
             component={'h1'}
           >
@@ -136,34 +139,27 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: { xs: 'flex-start', md: 'center' },
           alignItems: 'center',
           justifyItems: 'center',
-          padding: { xs: 2, md: 6 }, // Diferente padding para móvil y desktop
-          transform: { xs: 'translateY(-40px)', sm: 'none' },
+          padding: { xs: 2, md: 6 },
         }}
       >
         <Box
           sx={{
-            padding: 4,
-            boxShadow: {
-              xs: 0,
-              sm: 3,
-            },
+            padding: { xs: 1, md: 4 },
             display: 'flex',
             flexDirection: 'column',
+            justifyContent: { xs: 'flex-start', md: 'center' },
             gap: 4,
             borderRadius: 4,
             backgroundColor: {
               xs: theme.custom.paperElevationOne,
-              sm: theme.custom.paperElevationTwo,
+              md: theme.custom.paperElevationTwo,
             },
-
-            // width: '90%',
-            margin: 'auto',
           }}
         >
-          <Stack>
+          <Stack sx={{}}>
             <Typography variant="h5" sx={{ pb: 1 }} component={'h2'}>
               Pre-Checklist Questionnaire
             </Typography>
@@ -176,11 +172,11 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
               sx={{
                 backgroundColor: {
                   xs: theme.custom.paperElevationOne,
-                  sm: theme.custom.paperElevationFour,
+                  md: theme.custom.paperElevationFour,
                 },
                 borderRadius: 2,
                 py: 3,
-                px: 3,
+                px: { xs: 1, md: 3 },
               }}
             >
               <Typography variant="body1" component={'span'}>
@@ -190,7 +186,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
                 {sectionsArray.map((item) => (
                   <Grid item xs={6} key={item}>
                     <ListItem>
-                      <Verified sx={{ mr: 1 }} />
+                      <VerifiedTwoTone sx={{ mr: 1 }} color="primary" />
                       {item}
                     </ListItem>
                   </Grid>
@@ -202,7 +198,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
           <Stack direction="row" justifyContent="end" spacing={4}>
             <Button
               variant="contained"
-              sx={{ px: 3, py: 1, borderRadius: 1, textTransform: 'none' }}
+              sx={{ px: 3, py: 1, borderRadius: 2, textTransform: 'none' }}
               onClick={setStart}
             >
               Get started
