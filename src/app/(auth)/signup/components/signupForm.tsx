@@ -13,8 +13,12 @@ import {
   FormLabel,
   FormControlLabel,
   Radio,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
 } from '@mui/material';
-import { Check, Close } from '@mui/icons-material';
+import { Check, Close, Visibility, VisibilityOff } from '@mui/icons-material';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { RootState } from '@/src/app/state/store';
 import { useSelector } from 'react-redux';
@@ -37,6 +41,18 @@ export default function SignupForm() {
   const [code, setOtp] = useState<string>('');
   const [password, setNewPassword] = useState<string>('');
   const [inputError, setError] = useState<IValidateInput[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+  const handleMouseUpPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,9 +80,7 @@ export default function SignupForm() {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setError(validatefield(name as keyof typeof fields, value));
-
     console.log(inputError);
-
     setNewPassword(value);
   };
 
@@ -138,7 +152,7 @@ export default function SignupForm() {
 
             {isOtpVerified && (
               <>
-                <TextField
+                {/* <TextField
                   name="password"
                   label="Create your password"
                   type="password"
@@ -149,7 +163,45 @@ export default function SignupForm() {
                     sx: { borderRadius: '16px', marginBottom: 2 },
                   }}
                   required
-                />
+                /> */}
+                <FormControl
+                  sx={{ width: '100%', marginBottom: 1 }}
+                  variant="outlined"
+                  required
+                  onChange={handlePasswordChange}
+                >
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label={
+                            showPassword
+                              ? 'hide the password'
+                              : 'display the password'
+                          }
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          onMouseUp={handleMouseUpPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                    sx={{
+                      borderRadius: '16px',
+                      // '& .MuiOutlinedInput-notchedOutline': {
+                      //   borderRadius: '16px',
+                      // },
+                    }}
+                  />
+                </FormControl>
                 {inputError.map((itemError, index) => (
                   <div
                     key={index}
