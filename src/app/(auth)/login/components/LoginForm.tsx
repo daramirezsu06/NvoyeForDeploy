@@ -3,8 +3,13 @@ import {
   Checkbox,
   Container,
   Divider,
+  FormControl,
   FormControlLabel,
+  IconButton,
+  InputAdornment,
+  InputLabel,
   Link,
+  OutlinedInput,
   Stack,
   TextField,
   Typography,
@@ -16,6 +21,7 @@ import { getProfile } from '@/src/app/(dashboard)/redux/profileThunks';
 import { selectProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { useRedirectionProfile } from '@/src/app/hooks/useRedirectConditional';
 import Image from 'next/image';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
 
 export default function LoginForm() {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -25,7 +31,19 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
+  const handleMouseUpPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -49,18 +67,6 @@ export default function LoginForm() {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(getProfile());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     console.log('profile', profile);
-
-  //     redirectToProfile();
-  //   }
-  // }, [profile, isLoggedIn]);
-
   return (
     <Container component="main" maxWidth="md">
       <Stack sx={{ marginBottom: 4 }}>
@@ -80,7 +86,7 @@ export default function LoginForm() {
           onChange={handleEmailChange}
           required
         />
-        <TextField
+        {/* <TextField
           label="Password"
           type="password"
           fullWidth
@@ -90,7 +96,44 @@ export default function LoginForm() {
           }}
           onChange={handlePasswordChange}
           required
-        />
+          
+        /> */}
+        <FormControl
+          sx={{ width: '100%', marginBottom: 1 }}
+          variant="outlined"
+          required
+          onChange={handlePasswordChange}
+        >
+          <InputLabel htmlFor="outlined-adornment-password">
+            Password
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={
+                    showPassword ? 'hide the password' : 'display the password'
+                  }
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  onMouseUp={handleMouseUpPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+            sx={{
+              borderRadius: '16px',
+              // '& .MuiOutlinedInput-notchedOutline': {
+              //   borderRadius: '16px',
+              // },
+            }}
+          />
+        </FormControl>
         <FormControlLabel
           control={<Checkbox color="primary" />}
           label="Remember me"
