@@ -189,7 +189,7 @@ const FormSection = ({
             </MenuItem>
           ))
         ) : (
-          <MenuItem disabled>Cargando géneros...</MenuItem>
+          <MenuItem disabled>Loading...</MenuItem>
         )}
         {/* <MenuItem value="Female">Female</MenuItem>
         <MenuItem value="Male">Male</MenuItem>
@@ -214,7 +214,7 @@ const ProfilePictureSection = () => (
     </Typography>
     <Typography variant="body2" component={'span'}>
       Not ready to upload a profile picture now? You can update this at any time
-      in your Profile Settings.
+      in your Profile settings.
     </Typography>
     <Container
       sx={{

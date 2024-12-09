@@ -19,7 +19,7 @@ const SubCategory_Header = ({
         flexDirection: { xs: 'row-reverse', md: 'row' },
         gap: 3,
         p: 3,
-        borderRadius: 2,
+        borderRadius: '16px',
         backgroundColor: '#F5F3F1',
         // flex: 'wrap',
       }}

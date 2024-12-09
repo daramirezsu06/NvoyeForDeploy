@@ -13,11 +13,14 @@ import Link from 'next/link';
 
 const PreChecklistCompletion = () => {
   const [progress, setProgress] = useState(0);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress === 100) {
-          return 0;
+          setIsButtonEnabled(true);
+          return 100;
         }
         const diff = Math.random() * 10;
         return Math.min(oldProgress + diff, 100);
@@ -76,7 +79,13 @@ const PreChecklistCompletion = () => {
           </Box>
         </Stack>
         <Link href="/dashboard/guide">
-          <Button variant="contained">View My dashboard</Button>
+          <Button
+            variant="contained"
+            sx={{ textTransform: 'none' }}
+            disabled={!isButtonEnabled}
+          >
+            View my dashboard
+          </Button>
         </Link>
       </Box>
     </Container>

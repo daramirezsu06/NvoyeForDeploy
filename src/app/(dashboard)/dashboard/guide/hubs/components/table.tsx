@@ -19,7 +19,7 @@ const TableHubs = ({ tableInfo }: { tableInfo: TableHubsType }) => {
       sx={{
         // minWidth: '752px',
         backgroundColor: '#FFFF',
-        borderRadius: 1,
+        borderRadius: '8px',
         border: '1px solid #E5E5E5',
       }}
     >

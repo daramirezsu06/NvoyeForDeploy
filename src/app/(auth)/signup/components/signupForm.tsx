@@ -209,8 +209,8 @@ export default function SignupForm() {
           </Button>
           <Typography variant="body2" align="center" sx={{ mt: 2 }}>
             By proceeding, you agree to Nvoye&apos;s
-            <Link href="#">Terms of Services</Link> and{' '}
-            <Link href="#">Privacy Policy</Link>.
+            <Link href="#">Terms of services</Link> and{' '}
+            <Link href="#">Privacy policy</Link>.
           </Typography>
           <Typography variant="body2" align="center" sx={{ mt: 2 }}>
             Already have an account? <Link href="/login">Log in</Link>

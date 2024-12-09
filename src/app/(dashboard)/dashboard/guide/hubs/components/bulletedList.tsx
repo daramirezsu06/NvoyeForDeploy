@@ -8,7 +8,7 @@ const BulletedList = ({ bulletInfo }: { bulletInfo: BulletedListHubsType }) => {
       sx={{
         // minWidth: '752px',
         backgroundColor: '#FFFF',
-        borderRadius: 1,
+        borderRadius: '8px',
         border: '1px solid #E5E5E5',
       }}
     >

@@ -80,14 +80,13 @@ export default function Checklist() {
         alignSelf: 'stretch',
       }}
     >
-      <Container
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           minHeight: { xs: '100vh', sm: 'calc(100vh - 64px)' },
           width: '100%',
           maxWidth: '1440px',
-          // maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
           marginLeft: { xs: '0px', sm: '0px' },
           marginRight: { xs: '0px', sm: '0px' },
           backgroundColor: '##F8F6F5',
@@ -105,7 +104,7 @@ export default function Checklist() {
             flexDirection: { xs: 'column-reverse', md: 'row' },
           }}
         >
-          <Stack sx={{ width: '100%', flexGrow: 1 }} gap={1}>
+          <Stack sx={{ flexGrow: 1 }} gap={1}>
             <Box
               sx={{
                 backgroundColor: theme.custom.paperElevationOne,
@@ -169,12 +168,7 @@ export default function Checklist() {
               )}
             </Box>
           </Stack>
-          <RecomendedTasksList
-            recomendedTasks={recomendedTasks}
-            sx={{
-              minWidth: { xs: '60px', md: 'auto' },
-            }}
-          />
+          <RecomendedTasksList recomendedTasks={recomendedTasks} />
         </Box>
         {/* Snackbar */}
         <Snackbar
@@ -202,7 +196,7 @@ export default function Checklist() {
             {snackbar.message}
           </Alert>
         </Snackbar>
-      </Container>
+      </Box>
     </Box>
   );
 }

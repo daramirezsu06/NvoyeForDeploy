@@ -92,7 +92,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
               zIndex: 2,
             }}
           >
-            Netherland Diplomatic Mission
+            Netherland diplomatic mission
           </Typography>
         </Box>
         {/* Imagen para pantallas pequeñas */}
@@ -129,7 +129,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
             }}
             component={'h1'}
           >
-            Netherland Diplomatic Mission
+            Netherland diplomatic mission
           </Typography>
         </Box>
       </Box>
@@ -161,7 +161,7 @@ const IntroPage = ({ setStart }: { setStart: () => void }) => {
         >
           <Stack sx={{}}>
             <Typography variant="h5" sx={{ pb: 1 }} component={'h2'}>
-              Pre-Checklist Questionnaire
+              Pre-checklist questionnaire
             </Typography>
             <Typography variant="body1" component={'h3'}>
               Tell us more about you to help us make your journey better and

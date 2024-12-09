@@ -208,7 +208,7 @@ export default function Hubs({}: Props) {
                 alignSelf: ' stretch',
                 flexWrap: 'wrap',
                 backgroundColor: { xs: '', md: theme.custom.paperElevationTwo },
-                borderRadius: '8px',
+                borderRadius: '16px',
                 flex: 1,
               }}
             >

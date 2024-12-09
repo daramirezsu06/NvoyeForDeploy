@@ -14,11 +14,12 @@ const Text = ({ info }: { info: string }) => {
       sx={{
         // minWidth: '450px',
         backgroundColor: '#FFFF',
-        borderRadius: 1,
+        borderRadius: '8px',
         border: '1px solid #E5E5E5',
       }}
     >
       <Stack sx={{ px: 2, py: 1, borderBottom: '1px solid #E5E5E5' }}>
+        {/* //TODO this title should be dynamic */}
         <Typography variant="h6" component={'h3'}>
           medium
         </Typography>

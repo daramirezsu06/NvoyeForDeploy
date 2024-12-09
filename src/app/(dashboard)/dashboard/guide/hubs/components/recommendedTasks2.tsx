@@ -27,7 +27,7 @@ const RecommendedTasks2 = ({
         flexDirection: 'column',
         width: { xs: '100%', md: '100%' },
         maxWidth: { xs: '100%', md: '400px' },
-        borderRadius: 2,
+        borderRadius: '16px',
         height: 'min-content',
         p: 2,
         backgroundColor: '#F5F3F1',

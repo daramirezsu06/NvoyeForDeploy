@@ -7,9 +7,10 @@ import { toCamelCase } from '../../../../utils/helpers/toCamelCase';
 type Props = {
   icon: StaticImageData;
   title: string;
+  topics?: string[];
 };
 
-export default function CustomCategoryCard({ icon, title }: Props) {
+export default function CustomCategoryCard({ icon, title, topics }: Props) {
   const titleCaseTitle = toCamelCase(title);
 
   return (
@@ -37,7 +38,7 @@ export default function CustomCategoryCard({ icon, title }: Props) {
         backgroundColor: '#F4F0ED',
         border: '1px solid rgba(0, 0, 0, 0.12)',
         '&:hover': {
-          boxShadow: ' 0px 5px 10px -2px',
+          boxShadow: ' 0px 5px 10px -2px rgba(0, 0, 0, 0.20)',
           cursor: 'pointer',
           backgroundColor: '#F5F3F1',
         },
@@ -77,6 +78,10 @@ export default function CustomCategoryCard({ icon, title }: Props) {
             <Typography variant="subtitle1" component={'h5'}>
               {' '}
               {title}
+            </Typography>
+            <Typography variant="body2" component={'h5'}>
+              {' '}
+              {topics}
             </Typography>
           </Stack>
         </Stack>
