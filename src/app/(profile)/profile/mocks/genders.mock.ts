@@ -1,18 +1,22 @@
 export const gendersMock = [
   {
     id: 1,
-    name: 'MALE',
+    name: 'Male',
   },
   {
     id: 2,
-    name: 'FEMALE',
+    name: 'Female',
   },
   {
     id: 3,
-    name: 'OTHER',
+    name: 'Non-binary',
   },
-  // {
-  //   id: 4,
-  //   name: '',
-  // },
+  {
+    id: 4,
+    name: 'Prefer not to say',
+  },
+  {
+    id: 4,
+    name: 'Other',
+  },
 ];

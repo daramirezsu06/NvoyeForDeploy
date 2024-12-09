@@ -25,9 +25,9 @@ export default function Hubs({}: Props) {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          minHeight: '100vh',
+          minHeight: { xs: '100vh', md: 'calc(100vh - 64px)' },
           width: '100%',
-          maxWidth: '1280px',
+          maxWidth: '1440px',
           paddingLeft: { xs: 1, sm: 0 },
           paddingRight: { xs: 1, sm: 0 },
           paddingY: { xs: 0, sm: 0 },

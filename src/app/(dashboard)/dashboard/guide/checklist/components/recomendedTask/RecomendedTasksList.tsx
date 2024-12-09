@@ -39,7 +39,8 @@ export default function RecomendedTasksList({
         borderRadius: 3,
         height: 'min-content',
         border: { xs: '0.5px solid #E5E5E5', md: 'none' },
-        width: isCollapsed ? '60px' : { xs: 'auto', md: '380px' },
+        width: isCollapsed ? '80px' : { xs: 'auto', md: '400px' },
+        // minWidth: isCollapsed ? '80px' : { xs: 'auto', md: '400px' },
         transition: 'width 0.5s ease',
         ...sx,
       }}

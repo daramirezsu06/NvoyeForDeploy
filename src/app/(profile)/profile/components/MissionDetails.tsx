@@ -98,14 +98,14 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
     <>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h4" gutterBottom component={'h1'}>
-          Mission Details
+          Mission details
         </Typography>
         <ProgressWithLabel value={step} />
       </Stack>
 
       <Typography paragraph component={'span'}>
         Please provide the details of the home nation you represent and the
-        country of your current assignation.
+        country of your current assignment.
       </Typography>
       <TextField
         select
@@ -180,7 +180,7 @@ const MissionDetails: React.FC<{ onNext: () => void; step: number }> = ({
             </MenuItem>
           ))
         ) : (
-          <MenuItem disabled>Cargando países...</MenuItem>
+          <MenuItem disabled>Loading...</MenuItem>
         )}
       </TextField>
       <Button

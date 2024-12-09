@@ -25,7 +25,7 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
         display: { xs: 'inline-flex', md: 'flex' },
         flexGrow: 1,
         height: { xs: '160px', md: '200px' },
-        width: { xs: '100%', md: '272x' },
+        width: { xs: '100%', md: '262x' },
         minWidth: {
           xs: '144px',
           md: '250px',
@@ -43,10 +43,12 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
         flexShrink: 0,
         borderRadius: ' 16px',
         backgroundColor: '#F5F3F1',
+        boxShadow: ' 0px 0px 0px 0px',
+        border: '1px solid rgba(0, 0, 0, 0.12)',
         '&:hover': {
           cursor: 'pointer',
           backgroundColor: '#F4F0ED',
-          boxShadow: ' 0px 5px 10px -2px',
+          boxShadow: ' 0px 5px 10px -2px rgba(0, 0, 0, 0.20)',
         },
       }}
     >

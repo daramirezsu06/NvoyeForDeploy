@@ -174,7 +174,7 @@ export default function SubHubs({
                 flexDirection: 'column',
                 gap: 3,
                 p: 3,
-                borderRadius: 2,
+                borderRadius: '16px',
                 backgroundColor: '#F5F3F1',
                 marginTop: { xs: 0, sm: 2 },
               }}

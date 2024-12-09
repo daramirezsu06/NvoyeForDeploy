@@ -10,7 +10,7 @@ export default function Confirmation() {
   return (
     <Container component="main" maxWidth="md" sx={{ gap: 3 }}>
       <Typography variant="h4" align="center" component={'h1'}>
-        Account Created!
+        Account created!
       </Typography>
       <Typography variant="body1" align="center" component={'h2'}>
         Just a few more questions to help us complete your profile.
