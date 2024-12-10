@@ -40,7 +40,7 @@ export default function PriorityProperty({ priority, setPriority }: Props) {
         alignItems: 'center',
         alignSelf: 'stretch',
         gap: 1,
-        height: '55px',
+        height: '35px',
       }}
     >
       <Box
@@ -66,7 +66,18 @@ export default function PriorityProperty({ priority, setPriority }: Props) {
           onChange={(event) =>
             handlePriorityChange(event.target.value as string)
           }
-          sx={{ minWidth: 120 }}
+          sx={{
+            '& .MuiInputBase-root': {
+              minWidth: 120,
+              height: '36px',
+              border: 'none',
+              backgroundColor: 'transparent',
+              padding: '26px',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: 'none',
+            },
+          }}
         >
           <MenuItem value="" disabled>
             Add priority
@@ -77,7 +88,7 @@ export default function PriorityProperty({ priority, setPriority }: Props) {
         </Select>
       ) : (
         <Chip
-          size="small"
+          size="medium"
           variant="outlined"
           label={priority}
           color={chipColor}

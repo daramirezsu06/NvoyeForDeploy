@@ -33,7 +33,7 @@ export default function DueDateProperty({
         alignItems: 'center',
         alignSelf: 'stretch',
         gap: 1,
-        height: '55px',
+        height: '35px',
       }}
     >
       <Box
@@ -74,11 +74,21 @@ export default function DueDateProperty({
           </Stack>
         ) : (
           <DatePicker
-            label="Due date"
+            label="Set due date"
             format="DD/MM/YYYY "
             value={dueDate}
             onChange={(newValue) => handleDueDateChange(newValue)}
-            // sx={{ width: '100%' }}
+            sx={{
+              '& .MuiInputBase-root': {
+                height: '35px', // Ajusta el alto del campo
+                border: 'none',
+                backgroundColor: 'transparent',
+                padding: '26px',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none', // Elimina el borde del contorno
+              },
+            }}
           />
         )}
       </LocalizationProvider>
