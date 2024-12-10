@@ -5,6 +5,7 @@ import { DateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { AddAlertOutlined, Clear } from '@mui/icons-material';
 import dayjs, { Dayjs } from 'dayjs';
+import theme from '@/src/app/theme';
 
 interface ReminderPickerProps {
   reminderDate: Dayjs | null;
@@ -28,7 +29,7 @@ export default function ReminderProperty({
         alignItems: 'center',
         alignSelf: 'stretch',
         gap: 1,
-        height: '55px',
+        height: '35px',
       }}
     >
       <Box
@@ -37,7 +38,7 @@ export default function ReminderProperty({
           flexDirection: 'row',
           alignItems: 'center',
           gap: 1,
-          color: 'text.secondary',
+          color: theme.palette.text.secondary,
           width: '100px',
           minWidth: '100px',
         }}
@@ -75,6 +76,18 @@ export default function ReminderProperty({
             onAccept={(newValue) => handleReminderDateChange(newValue)}
             openTo="day"
             closeOnSelect={false}
+            sx={{
+              '& .MuiInputBase-root': {
+                height: '36px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                padding: '26px',
+                color: 'black',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
+              },
+            }}
           />
         )}
       </LocalizationProvider>

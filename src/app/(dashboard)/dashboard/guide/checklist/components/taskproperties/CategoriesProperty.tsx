@@ -14,6 +14,7 @@ import {
   backendHubs,
   IBackendHub,
 } from '@/src/app/(dashboard)/dashboard/guide/hubs/mocks/hubsMocks';
+import theme from '@/src/app/theme';
 
 interface Props {
   categories: ICategoryDetail[];
@@ -49,7 +50,7 @@ export default function CategoriesProperty({
         alignItems: 'center',
         alignSelf: 'stretch',
         gap: 1,
-        height: '55px',
+        height: '35px',
       }}
     >
       <Box
@@ -58,7 +59,7 @@ export default function CategoriesProperty({
           flexDirection: 'row',
           alignItems: 'center',
           gap: 1,
-          color: 'text.secondary',
+          color: theme.palette.text.secondary,
           width: '100px',
           minWidth: '100px',
         }}
@@ -71,13 +72,27 @@ export default function CategoriesProperty({
 
       {categories.length === 0 ? (
         <Select
+          label="Select category"
           value=""
           displayEmpty
           onChange={(event) => handleAddCategory(event.target.value as string)}
-          sx={{ minWidth: 120 }}
+          sx={{
+            '& .MuiInputBase-root': {
+              minWidth: 120,
+              height: '36px',
+              border: 'none',
+              backgroundColor: 'transparent',
+              padding: '26px',
+              color: theme.palette.text.secondary,
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: 'none',
+              color: theme.palette.text.secondary,
+            },
+          }}
         >
           <MenuItem value="" disabled>
-            Select Category
+            Select category
           </MenuItem>
           {hubs.map((hub) => (
             <MenuItem key={hub.name} value={hub.name}>
