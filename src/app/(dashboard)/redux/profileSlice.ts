@@ -50,6 +50,8 @@ const initialState: ProfileState = {
     updatedAt: null,
     currentOnboardingStep: 0,
     languageSkills: [],
+    displayEmail: null,
+    customRole: null,
   },
   status: 'idle',
   error: null,
