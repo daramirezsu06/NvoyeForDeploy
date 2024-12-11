@@ -109,7 +109,7 @@ export default function CreateCustomTaskForm({
     //TODO connect to backend with -> {{url}}/tasks/create
     console.log('creating task');
     const newTask: IBackendTasks = {
-      id: Date.now(), // Genera un ID único como número
+      id: Date.now(),
       userId: 1, // Suplente, debe ser asignado según tu lógica de usuario
       taskTypeId: 1, // Tipo de tarea inicial (puedes ajustarlo)
       taskStatusId: 1, // Estado inicial, por ejemplo, "To do"
@@ -237,13 +237,12 @@ export default function CreateCustomTaskForm({
             }}
           >
             <TextField
-              variant="standard"
+              variant="filled"
               value={title}
               onChange={handleTitleChange}
+              size="small"
               sx={{
-                backgroundColor: theme.custom.paperElevationFour,
                 flex: 1,
-                width: '100%',
               }}
               placeholder="Enter task title"
             />

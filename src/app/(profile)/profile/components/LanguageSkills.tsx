@@ -117,7 +117,7 @@ const LanguageSkills: React.FC<{
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, minHeight: 300 }}>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h4" gutterBottom component={'h1'}>
-          Language Skills
+          Language skills
         </Typography>
         <ProgressWithLabel value={step} />
       </Stack>

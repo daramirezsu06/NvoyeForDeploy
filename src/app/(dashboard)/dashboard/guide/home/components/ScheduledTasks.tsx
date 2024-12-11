@@ -8,12 +8,17 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import TodoComponent from '../../checklist/components/ToDoComponent';
 import { useTaskActions } from '../../utils/hooks/useTaskActions';
+import NoTasksComponent from '../../checklist/components/NoTasksComponent';
 
 export default function ScheduledTasks() {
   //TODO connect to the backend and get the checklist tasks -> {{url}}/tasks/getAll?page=1&limit=10&statusId=3
   //TODO get property data
   const [userTaskList, setUserTaskList] =
     useState<IBackendTasks[]>(backendTasksListMock);
+
+  const handleAddTask = (newTask: IBackendTasks) => {
+    setUserTaskList((prevTasks) => [...prevTasks, newTask]);
+  };
 
   const incompletedTasks = userTaskList.filter(
     (task) => task.taskStatus.name !== 'Completed'
@@ -83,7 +88,20 @@ export default function ScheduledTasks() {
           gap: 2,
         }}
       >
-        {incompletedTasks.map((task) => (
+        {incompletedTasks.length === 0 ? (
+          <NoTasksComponent onAddTask={handleAddTask} />
+        ) : (
+          incompletedTasks.map((task: IBackendTasks) => (
+            <TodoComponent
+              key={task.id}
+              task={task}
+              onMarkAsComplete={handleMarkAsComplete}
+              onMarkAsIncomplete={handleMarkAsIncomplete}
+              onMarkAsArchived={handleMarkAsArchived}
+            />
+          ))
+        )}
+        {/* {incompletedTasks.map((task) => (
           <TodoComponent
             key={task.id}
             task={task}
@@ -91,7 +109,7 @@ export default function ScheduledTasks() {
             onMarkAsIncomplete={handleMarkAsIncomplete}
             onMarkAsArchived={handleMarkAsArchived}
           />
-        ))}
+        ))} */}
       </Box>
       {/* Snackbar */}
       <Snackbar

@@ -1,7 +1,15 @@
-import { Box, Container, Stack, Button, Typography } from '@mui/material';
+'use client';
+import {
+  Box,
+  Container,
+  Stack,
+  Button,
+  Typography,
+  Drawer,
+} from '@mui/material';
 import CuestionBase from './shares/cuestionBase';
 import Image from 'next/image';
-import { ChevronLeft } from '@mui/icons-material';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import theme from '@/src/app/theme';
 import ProgressLine from './shares/progressLine';
 import { UseAnswers } from '../hooks/useAnswers';
@@ -9,6 +17,7 @@ import DropdownMenu1 from './shares/dropdownMenuCopy';
 import Brandlogo from '@/src/icons/BrandLogo';
 import GetInsuranceTypes from '@/src/utils/api/prechecklist/getInsuranceType';
 import { Question } from '../types/question.types';
+import { useState } from 'react';
 
 const HealthCare = ({
   onNext,
@@ -80,6 +89,11 @@ const HealthCare = ({
   const showTypeOfInsurance = answers.hasHealthInsurance === true;
   const showChronicConditions = answers.hasChronicConditions === true;
 
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setIsOpenDrawer(newOpen);
+  };
+
   return (
     <Container
       sx={{
@@ -89,19 +103,18 @@ const HealthCare = ({
         margin: 0,
         padding: 0,
         width: '100%',
-        flexDirection: { xs: 'column', sm: 'row' },
+        flexDirection: { xs: 'column', md: 'row' },
         maxWidth: { xs: '100%', sm: '100%', md: '100%', lg: '100%' },
         paddingLeft: { xs: '0px', sm: '0px' },
         paddingRight: { xs: '0px', sm: '0px' },
       }}
     >
-      <Box sx={{ flex: 1, position: 'relative' }}>
+      <Box sx={{ flex: { xs: '', md: 1 }, position: 'relative' }}>
         <Box
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: 'none', md: 'block' },
             position: 'relative',
             height: '100%',
-            // width: 700,
           }}
         >
           {' '}
@@ -170,85 +183,122 @@ const HealthCare = ({
             </Typography>
           </Box>
         </Box>
-        {/* Imagen para pantallas pequeñas */}
-        <Box
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            position: 'relative',
-            height: 350,
-            width: '100%',
-            transform: { xs: 'translateX(0px)', sm: 'none' },
-          }}
-        >
-          <Image
-            src="/images/health-big.jpg"
-            alt="Profile image"
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background:
-                'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7))',
-              zIndex: 1,
-            }}
-          />
-          <Typography
-            variant="h6"
-            sx={{
-              position: 'absolute',
-              top: '25%',
-              left: '10%',
-              // transform: 'translate(-55%, -0%)',
-              color: 'white',
-              width: '80%',
-              // textAlign: 'center',
-              fontSize: '1.2rem',
-              zIndex: 2,
-            }}
-            component={'h2'}
-          >
-            In the Netherlands, while basic health insurance is mandatory and
-            covers a lot, dental care for adults is not included in the standard
-            package. This means many people in the Netherlands opt for
-            additional dental insurance to cover checkups, cleanings, and other
-            procedures.
-          </Typography>
-        </Box>
       </Box>
+
       <Container
         sx={{
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
-          // justifyContent: 'center',
-          // alignItems: 'center',
-          // justifyItems: 'center',
-          padding: { xs: 2, md: 6 }, // Diferente padding para móvil y desktop
+          padding: { xs: 2, md: 6 },
           transform: { xs: 'translateY(-20px)', sm: 'none' },
+          mt: 7,
         }}
       >
+        <Button
+          size="large"
+          color="secondary"
+          variant="text"
+          endIcon={<ChevronRight />}
+          sx={{
+            textTransform: 'none',
+            fontSize: '1.2rem',
+            display: { sx: 'flex', md: 'none' },
+          }}
+          onClick={toggleDrawer(true)}
+        >
+          See insight
+        </Button>
         <ProgressLine step={step} />
-
+        <Drawer
+          open={isOpenDrawer}
+          onClose={toggleDrawer(false)}
+          anchor="bottom"
+        >
+          <Box sx={{ flex: { xs: 1, md: 1 }, position: 'relative' }}>
+            <Box
+              sx={{
+                height: '70vh',
+                width: '100vw',
+              }}
+            >
+              {' '}
+              {/* Logo en la esquina superior izquierda */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '100px',
+                  left: '170px',
+                  zIndex: 20,
+                  width: '120px',
+                  height: 'auto',
+                  scale: '3',
+                  // transform: 'rotate(90deg)',
+                }}
+              >
+                <Brandlogo />
+              </Box>
+              <Image
+                src="/images/health-big.jpg"
+                alt="Profile image"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background:
+                    'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6))',
+                  zIndex: 1,
+                }}
+              />
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'absolute',
+                  justifyContent: 'center',
+                  gap: 4,
+                  bottom: 100,
+                  left: 50,
+                  zIndex: 2,
+                }}
+              >
+                <Typography variant="h3" color="#F7910B" component={'h1'}>
+                  Insight
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color="#FFFFFFDE"
+                  sx={{
+                    width: '90%',
+                  }}
+                  component={'h2'}
+                >
+                  In the Netherlands, while basic health insurance is mandatory
+                  and covers a lot, dental care for adults is not included in
+                  the standard package. This means many people in the
+                  Netherlands opt for additional dental insurance to cover
+                  checkups, cleanings, and other procedures.
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Drawer>
         <Box
           sx={{
             padding: {
               sx: 4,
-              sm: 4,
+              md: 4,
             },
             paddingBottom: {
               xs: 10,
-              sm: 4,
-            },
-            boxShadow: {
-              xs: 0,
-              sm: 3,
+              md: 4,
             },
             display: 'flex',
             flexDirection: 'column',
@@ -258,9 +308,6 @@ const HealthCare = ({
               xs: theme.custom.paperElevationOne,
               sm: theme.custom.paperElevationTwo,
             },
-
-            // width: '90%',
-            // margin: 'auto',
           }}
         >
           <CuestionBase

@@ -22,18 +22,19 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
   return (
     <Card
       sx={{
-        display: { xs: 'inline-flex', sm: 'flex' },
+        display: { xs: 'inline-flex', md: 'flex' },
         flexGrow: 1,
-        width: { xs: '220px', sm: '272x' },
-        height: { xs: '160px', sm: '200px' },
+        height: { xs: '160px', md: '200px' },
+        width: { xs: '100%', md: '260x' },
         minWidth: {
-          xs: '150px',
-          sm: '250px',
+          xs: '144px',
+          md: '260px',
         },
         maxWidth: {
-          xs: '200px',
-          sm: '272px',
+          xs: '190px',
+          md: '260px',
         },
+        flex: 1,
         padding: 2,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -42,9 +43,12 @@ export default function CustomHubCard({ icon, title, topics }: Props) {
         flexShrink: 0,
         borderRadius: ' 16px',
         backgroundColor: '#F5F3F1',
+        boxShadow: ' 0px 0px 0px 0px',
+        border: '1px solid rgba(0, 0, 0, 0.12)',
         '&:hover': {
-          boxShadow: ' 0px 5px 10px -2px',
           cursor: 'pointer',
+          backgroundColor: '#F4F0ED',
+          boxShadow: ' 0px 5px 10px -2px rgba(0, 0, 0, 0.20)',
         },
       }}
     >
