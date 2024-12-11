@@ -26,7 +26,7 @@ export const ProfileCompletion: React.FC = () => {
         Welcome to Nvoye’s exclusive diplomatic community. Ready to take a look
         around?
       </Typography>
-      <Link href="/dashboard/guide/home">
+      <Link href="/dashboard/guide">
         <Button
           variant="contained"
           color="primary"
