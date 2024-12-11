@@ -79,6 +79,8 @@ export default function SignupForm() {
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
+    console.log(value, name);
+
     setError(validatefield(name as keyof typeof fields, value));
     console.log(inputError);
     setNewPassword(value);
@@ -174,6 +176,7 @@ export default function SignupForm() {
                     Password
                   </InputLabel>
                   <OutlinedInput
+                    name="password"
                     id="outlined-adornment-password"
                     type={showPassword ? 'text' : 'password'}
                     endAdornment={
