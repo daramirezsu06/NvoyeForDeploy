@@ -9,6 +9,10 @@ const initialState: ProfileState = {
     userId: 0,
     firstName: '',
     lastName: '',
+    gender: {
+      id: 0,
+      name: '',
+    },
     email: '',
     profilePicture: '',
     displayName: null,

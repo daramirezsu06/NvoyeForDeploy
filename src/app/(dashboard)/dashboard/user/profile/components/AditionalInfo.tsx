@@ -1,4 +1,9 @@
 import {
+  CityType,
+  RoleType,
+  yearsOfExperiencesType,
+} from '@/src/utils/api/profile/types/types';
+import {
   FormControl,
   InputLabel,
   Select,
@@ -8,7 +13,15 @@ import {
   MenuItem,
 } from '@mui/material';
 
-export const AditionalInfo = () => {
+export const AditionalInfo = ({
+  rolesList,
+  yearsOfExperiencesList,
+  citesList,
+}: {
+  rolesList: RoleType[];
+  yearsOfExperiencesList: yearsOfExperiencesType[];
+  citesList: CityType[];
+}) => {
   return (
     <Stack gap={2}>
       <Stack>
@@ -38,12 +51,17 @@ export const AditionalInfo = () => {
             value=""
             label="Assigned city"
           >
-            <MenuItem value="">
+            {citesList.map((city) => (
+              <MenuItem key={city.id} value={city.id}>
+                {city.name}
+              </MenuItem>
+            ))}
+            {/* <MenuItem value="">
               <em>None</em>
             </MenuItem>
             <MenuItem value={10}>New York</MenuItem>
             <MenuItem value={20}>Paris</MenuItem>
-            <MenuItem value={30}>Milan</MenuItem>
+            <MenuItem value={30}>Milan</MenuItem> */}
           </Select>
         </FormControl>
 
@@ -74,12 +92,17 @@ export const AditionalInfo = () => {
             value=""
             label="Job role"
           >
-            <MenuItem value="">
+            {rolesList.map((role) => (
+              <MenuItem key={role.id} value={role.id}>
+                {role.name}
+              </MenuItem>
+            ))}
+            {/* <MenuItem value="">
               <em>None</em>
             </MenuItem>
             <MenuItem value={10}>New York</MenuItem>
             <MenuItem value={20}>Paris</MenuItem>
-            <MenuItem value={30}>Milan</MenuItem>
+            <MenuItem value={30}>Milan</MenuItem> */}
           </Select>
         </FormControl>
 
@@ -93,12 +116,19 @@ export const AditionalInfo = () => {
             value=""
             label="Years of experience"
           >
-            <MenuItem value="">
+            {yearsOfExperiencesList.map((years) => (
+              <MenuItem key={years.id} value={years.id}>
+                {years.name} {'('}
+                {years.description}
+                {')'}
+              </MenuItem>
+            ))}
+            {/* <MenuItem value="">
               <em>None</em>
             </MenuItem>
             <MenuItem value={10}>New York</MenuItem>
             <MenuItem value={20}>Paris</MenuItem>
-            <MenuItem value={30}>Milan</MenuItem>
+            <MenuItem value={30}>Milan</MenuItem> */}
           </Select>
         </FormControl>
         <TextField

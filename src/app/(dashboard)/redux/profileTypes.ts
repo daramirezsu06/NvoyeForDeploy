@@ -8,6 +8,10 @@ export interface UserData {
   userId: number;
   firstName: string;
   lastName: string;
+  gender: {
+    id: number;
+    name: string;
+  };
   email: string;
   profilePicture: string;
   displayName: string | null;

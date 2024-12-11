@@ -1,8 +1,16 @@
 import { axiosApi } from '../api';
 
-const GetContries = async () => {
+const GetMissionInstitutions = async ({
+  countryId,
+  cityId,
+}: {
+  countryId: number;
+  cityId: number;
+}) => {
   try {
-    const { data } = await axiosApi.get('/getCountries');
+    const { data } = await axiosApi.get(
+      `/getMissionInstitutions?countryId=${countryId}&cityId=${cityId}`
+    );
     return data;
   } catch (error: any) {
     // Si el error es de Axios, manejar con error.response, de lo contrario, usar el mensaje genérico
@@ -12,4 +20,4 @@ const GetContries = async () => {
   }
 };
 
-export default GetContries;
+export default GetMissionInstitutions;
