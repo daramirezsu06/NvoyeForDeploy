@@ -1,8 +1,8 @@
 import { axiosApi } from '../api';
 
-const GetContries = async () => {
+const GetYearsOfExperiences = async () => {
   try {
-    const { data } = await axiosApi.get('/getCountries');
+    const { data } = await axiosApi.get('/getYearsOfExperiences');
     return data;
   } catch (error: any) {
     // Si el error es de Axios, manejar con error.response, de lo contrario, usar el mensaje genérico
@@ -12,4 +12,4 @@ const GetContries = async () => {
   }
 };
 
-export default GetContries;
+export default GetYearsOfExperiences;

@@ -18,84 +18,96 @@ import PutStep3 from '@/src/utils/api/profile/putStep3';
 import { useAppDispatch } from '@/src/app/state/hooks';
 import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
 import { UserData } from '@/src/app/(dashboard)/redux/profileTypes';
+import {
+  LanguageType,
+  LivelsOptionType,
+} from '@/src/utils/api/profile/types/types';
 
 interface Language {
   language: string;
   proficiency: string;
 }
 
-const ProfileLanguageSkills: React.FC = () => {
-  const dispatch = useAppDispatch();
+const ProfileLanguageSkills = ({
+  profileData,
+  lenguagesList,
+  livelList,
+}: {
+  profileData: UserData;
+  lenguagesList: LanguageType[];
+  livelList: LivelsOptionType[];
+}) => {
+  // const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
-  const [languages, setLanguages] = useState<Language[]>([]);
-  const [languageID, setLanguageID] = useState<number | null>(null); // Inicializado como null
-  const [proficiencyID, setProficiencyID] = useState<number | null>(null); // Inicializado como null
-  const [disableNext, setDisableNext] = useState<boolean>(true);
-  const [disableSave, setDisableSave] = useState<boolean>(true);
-  const [languagesOptions, setLanguagesOptions] = useState<
-    { id: number; name: string }[]
-  >([]);
-  const [levelsOptions, setLevelsOptions] = useState<
-    { id: number; name: string; description: string }[]
-  >([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const languagesData = await GetLanguages();
-        const levelsData = await GetLevels();
-        setLanguagesOptions(languagesData);
-        setLevelsOptions(levelsData);
-      } catch (error) {
-        console.error('Error fetching data', error);
-      }
-    };
+  // const [languages, setLanguages] = useState<Language[]>([]);
+  // const [languageID, setLanguageID] = useState<number | null>(null); // Inicializado como null
+  // const [proficiencyID, setProficiencyID] = useState<number | null>(null); // Inicializado como null
+  // const [disableNext, setDisableNext] = useState<boolean>(true);
+  // const [disableSave, setDisableSave] = useState<boolean>(true);
+  // const [languagesOptions, setLanguagesOptions] = useState<
+  //   { id: number; name: string }[]
+  // >([]);
+  // const [levelsOptions, setLevelsOptions] = useState<
+  //   { id: number; name: string; description: string }[]
+  // >([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const languagesData = await GetLanguages();
+  //       const levelsData = await GetLevels();
+  //       setLanguagesOptions(languagesData);
+  //       setLevelsOptions(levelsData);
+  //     } catch (error) {
+  //       console.error('Error fetching data', error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
-  useEffect(() => {
-    if (languages.length > 0) {
-      setDisableNext(false);
-    } else {
-      setDisableNext(true);
-    }
-  }, [languages]);
+  //   fetchData();
+  // }, []);
+  // useEffect(() => {
+  //   if (languages.length > 0) {
+  //     setDisableNext(false);
+  //   } else {
+  //     setDisableNext(true);
+  //   }
+  // }, [languages]);
 
-  useEffect(() => {
-    if (languageID && proficiencyID) {
-      setDisableSave(false);
-    } else {
-      setDisableSave(true);
-    }
-  }, [languageID, proficiencyID]);
+  // useEffect(() => {
+  //   if (languageID && proficiencyID) {
+  //     setDisableSave(false);
+  //   } else {
+  //     setDisableSave(true);
+  //   }
+  // }, [languageID, proficiencyID]);
 
-  const handleNext = () => {};
+  // const handleNext = () => {};
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSave = async () => {
-    if (languageID && proficiencyID) {
-      const newLanguage = { languageId: languageID, levelId: proficiencyID };
-      const profileUpdate: UserData = await PutStep3(newLanguage);
-      dispatch(setProfile(profileUpdate));
+  // const handleSave = async () => {
+  //   if (languageID && proficiencyID) {
+  //     const newLanguage = { languageId: languageID, levelId: proficiencyID };
+  //     const profileUpdate: UserData = await PutStep3(newLanguage);
+  //     dispatch(setProfile(profileUpdate));
 
-      setLanguages(
-        profileUpdate.languageSkills.map((item) => {
-          return { language: item.language.name, proficiency: item.level.name };
-        })
-      );
+  //     setLanguages(
+  //       profileUpdate.languageSkills.map((item) => {
+  //         return { language: item.language.name, proficiency: item.level.name };
+  //       })
+  //     );
 
-      setLanguageID(null);
-      setProficiencyID(null);
-      setOpen(false);
-      setDisableSave(true);
-    }
-  };
+  //     setLanguageID(null);
+  //     setProficiencyID(null);
+  //     setOpen(false);
+  //     setDisableSave(true);
+  //   }
+  // };
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, minHeight: 300 }}>
@@ -110,9 +122,9 @@ const ProfileLanguageSkills: React.FC = () => {
         each below.
       </Typography>
 
-      {languages.length > 0 && (
+      {profileData && profileData.languageSkills.length > 0 && (
         <Box sx={{ mb: 2 }}>
-          {languages.map((lang, index) => (
+          {profileData.languageSkills.map((lang, index) => (
             <Box
               key={index}
               sx={{
@@ -124,8 +136,8 @@ const ProfileLanguageSkills: React.FC = () => {
                 paddingBottom: 1,
               }}
             >
-              <Typography variant="body1">{lang.language}</Typography>
-              <Typography variant="body1">{lang.proficiency}</Typography>
+              <Typography variant="body1">{lang.language.name}</Typography>
+              <Typography variant="body1">{lang.level.name}</Typography>
               <Typography
                 variant="body1"
                 sx={{ cursor: 'pointer', color: 'red', fontWeight: 'bold' }}
@@ -142,8 +154,8 @@ const ProfileLanguageSkills: React.FC = () => {
         color="primary"
         fullWidth
         sx={{ mt: 2 }}
-        onClick={handleClickOpen}
-        disabled={languages.length >= 5}
+        // onClick={handleClickOpen}
+        // disabled={languages.length >= 5}
       >
         + Add a language
       </Button>
@@ -155,42 +167,42 @@ const ProfileLanguageSkills: React.FC = () => {
             select
             fullWidth
             label="Select a language"
-            value={languageID}
-            onChange={(e) => setLanguageID(+e.target.value)}
+            // value={languageID}
+            // onChange={(e) => setLanguageID(+e.target.value)}
             margin="normal"
             variant="outlined"
           >
-            {languagesOptions.map((lang) => (
-              <MenuItem key={lang.id} value={lang.id}>
-                {lang.name}
-              </MenuItem>
-            ))}
+            {lenguagesList &&
+              lenguagesList.map((lang) => (
+                <MenuItem key={lang.id} value={lang.id}>
+                  {lang.name}
+                </MenuItem>
+              ))}
           </TextField>
           <TextField
             select
             fullWidth
             label="Select your proficiency"
-            value={proficiencyID}
-            onChange={(e) => setProficiencyID(+e.target.value)}
+            // value={proficiencyID}
+            // onChange={(e) => setProficiencyID(+e.target.value)}
             margin="normal"
             variant="outlined"
           >
-            {levelsOptions.map((level) => (
-              <MenuItem key={level.id} value={level.id}>
-                {level.name}
-              </MenuItem>
-            ))}
+            {livelList &&
+              livelList.map((level) => (
+                <MenuItem key={level.id} value={level.id}>
+                  {level.name}
+                </MenuItem>
+              ))}
           </TextField>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
+          <Button color="primary">Close</Button>
           <Button
-            onClick={handleSave}
+            // onClick={handleSave}
             color="primary"
             variant="contained"
-            disabled={disableSave}
+            // disabled={disableSave}
           >
             Save
           </Button>
