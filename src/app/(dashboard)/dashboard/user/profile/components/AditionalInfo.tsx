@@ -1,3 +1,4 @@
+import { UserData } from '@/src/app/(dashboard)/redux/profileTypes';
 import {
   CityType,
   RoleType,
@@ -11,17 +12,41 @@ import {
   TextField,
   Typography,
   MenuItem,
+  Button,
 } from '@mui/material';
+import { useState } from 'react';
+interface AditionalInfoProps {
+  displayName: string | null;
+  displayEmail: string | null;
+  assignedCity: CityType | null;
+  missionInstitutionId: number | null;
+  roleId: number | null;
+  customRole: string | null;
+  yearsOfExperienceId: number | null;
+  introduction: string | null;
+}
 
 export const AditionalInfo = ({
   rolesList,
   yearsOfExperiencesList,
   citesList,
+  profileInfo,
 }: {
   rolesList: RoleType[];
   yearsOfExperiencesList: yearsOfExperiencesType[];
   citesList: CityType[];
+  profileInfo: UserData;
 }) => {
+  const [aditionalInfo, setAditionalInfo] = useState<AditionalInfoProps>({
+    displayName: profileInfo.displayName,
+    displayEmail: profileInfo.displayEmail,
+    assignedCity: profileInfo.assignedCity,
+    missionInstitutionId: profileInfo.missionInstitutionId || 0,
+    roleId: profileInfo.roleId,
+    customRole: profileInfo.customRole,
+    yearsOfExperienceId: profileInfo.yearsOfExperience,
+    introduction: profileInfo.introduction,
+  });
   return (
     <Stack gap={2}>
       <Stack>
@@ -33,15 +58,15 @@ export const AditionalInfo = ({
       <Stack gap={2}>
         <TextField
           id="outlined-helperText"
-          label="Display name"
+          label="Displayed name"
           defaultValue="Default Value"
           helperText="This is the name displayed in your public profile."
         />
         <TextField
           id="outlined-helperText"
-          label="Display name"
+          label="Displayed email"
           defaultValue="Default Value"
-          helperText="This is the name displayed in your public profile."
+          helperText="This is email appear on your community profile."
         />
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Assigned city</InputLabel>
@@ -139,6 +164,9 @@ export const AditionalInfo = ({
           variant="outlined"
         />
       </Stack>
+      <Button variant="contained" color="primary">
+        Save
+      </Button>
     </Stack>
   );
 };

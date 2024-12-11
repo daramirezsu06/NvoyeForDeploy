@@ -39,22 +39,22 @@ export default function PreChecklist() {
   const [hobbies, setHobbies] =
     useState<{ id: number; name: string; description: string }[]>(hobbiesMock);
 
-  useEffect(() => {
-    const fechData = async () => {
-      const chronicDiseases = await GetChronicDiseases();
-      const insuranceTypes = await GetInsuranceTypes();
-      const vehicleTypes = await GetVehicleTypes();
-      const hobbies = await GetHobbies();
-      console.log(hobbies);
+  // useEffect(() => {
+  //   const fechData = async () => {
+  //     const chronicDiseases = await GetChronicDiseases();
+  //     const insuranceTypes = await GetInsuranceTypes();
+  //     const vehicleTypes = await GetVehicleTypes();
+  //     const hobbies = await GetHobbies();
+  //     console.log(hobbies);
 
-      setInsuranceTypes(insuranceTypes);
-      setChronicDiseases(chronicDiseases);
-      setVehicleTypes(vehicleTypes);
-      setHobbies(hobbies);
-    };
+  //     setInsuranceTypes(insuranceTypes);
+  //     setChronicDiseases(chronicDiseases);
+  //     setVehicleTypes(vehicleTypes);
+  //     setHobbies(hobbies);
+  //   };
 
-    fechData();
-  }, []);
+  //   fechData();
+  // }, []);
 
   const sentPrechecklist = async () => {
     const {

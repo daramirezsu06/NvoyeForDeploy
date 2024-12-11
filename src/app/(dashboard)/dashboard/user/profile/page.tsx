@@ -135,6 +135,7 @@ export default function Profile() {
               rolesList={roles}
               yearsOfExperiencesList={yearsOfExperiences}
               citesList={cities}
+              profileInfo={profile}
             />
           </Stack>
         </Stack>

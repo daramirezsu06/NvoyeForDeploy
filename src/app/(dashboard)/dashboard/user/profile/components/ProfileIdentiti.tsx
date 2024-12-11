@@ -18,6 +18,7 @@ import {
 import { possibleCountries } from './conuntries';
 import { UserData } from '@/src/app/(dashboard)/redux/profileTypes';
 import { GenderType, ICountryType } from '@/src/utils/api/profile/types/types';
+import { gendersMock } from '@/src/app/(profile)/profile/mocks/genders.mock';
 
 interface FormSectionProps {
   firstName: string;
@@ -91,6 +92,8 @@ export const IdentitiForm = ({
               fullWidth
               name="firstName"
               onChange={handleChangenames}
+              disabled
+              variant="filled"
               //   value={firstName}
               //   onChange={handleChangeFirstName}
             />
@@ -102,10 +105,13 @@ export const IdentitiForm = ({
               fullWidth
               name="lastName"
               onChange={handleChangenames}
+              disabled
+              variant="filled"
               //   value={lastName}
               //   onChange={handleChangeLastName}
             />
             <FormControl required size="small" fullWidth>
+              <InputLabel id="gender-select-label">Gender</InputLabel>
               <Select
                 labelId="gender-select-label"
                 id="gender-select"
@@ -115,7 +121,12 @@ export const IdentitiForm = ({
                 onChange={handleChangegender}
                 // onChange={handleGenderChange}
               >
-                {gendersList && gendersList.length > 0 ? (
+                {gendersMock.map((item: GenderType) => (
+                  <MenuItem key={item.id} value={item.id}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+                {/* {gendersList && gendersList.length > 0 ? (
                   gendersList.map((item: GenderType) => (
                     <MenuItem key={item.id} value={item.id}>
                       {item.name}
@@ -123,7 +134,7 @@ export const IdentitiForm = ({
                   ))
                 ) : (
                   <MenuItem disabled>Cargando géneros...</MenuItem>
-                )}
+                )} */}
                 {/* <MenuItem value="Female">Female</MenuItem>
                 <MenuItem value="Male">Male</MenuItem>
                 <MenuItem value="Non-binary">Non-binary</MenuItem>

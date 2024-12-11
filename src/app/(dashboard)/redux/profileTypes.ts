@@ -1,3 +1,5 @@
+import { CityType } from '@/src/utils/api/profile/types/types';
+
 export interface ProfileState {
   status: string;
   error: string | null;
@@ -15,11 +17,12 @@ export interface UserData {
   email: string;
   profilePicture: string;
   displayName: string | null;
+  displayEmail: string | null;
   isEmailVerified: boolean;
   isOfficialEmailVerified: boolean;
   homeCountry: Country;
   assignedCountry: Country;
-  assignedCity: string | null;
+  assignedCity: CityType | null;
   roleId: number | null;
   yearsOfExperience: number | null;
   introduction: string | null;
@@ -37,6 +40,7 @@ export interface UserData {
   updatedAt: string | null;
   currentOnboardingStep: number;
   languageSkills: LanguageSkill[];
+  customRole: string | null;
 }
 
 interface Country {
