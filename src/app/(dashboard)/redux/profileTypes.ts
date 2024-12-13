@@ -52,6 +52,7 @@ interface Country {
 }
 
 interface LanguageSkill {
+  id: number;
   language: Language;
   level: LanguageLevel;
 }
