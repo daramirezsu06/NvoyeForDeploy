@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getProfile } from './profileThunks';
+import { deleteLanguageSkills, getProfile } from './profileThunks';
 import { ProfileState } from './profileTypes';
 import { RootState } from '../../state/store';
 import { logout } from '../../(auth)/redux';
@@ -87,6 +87,18 @@ const profileSlice = createSlice({
       .addCase(logout.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
+      })
+      .addCase(deleteLanguageSkills.pending, (state) => {
+        state.status = 'loading';
+        state.error = null; // Limpia errores previos
+      })
+      .addCase(deleteLanguageSkills.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.userState = action.payload.data; // Guarda los datos en el estado
+      })
+      .addCase(deleteLanguageSkills.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload as string; // Guarda el mensaje de error
       });
   },
 });

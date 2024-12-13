@@ -17,14 +17,19 @@ import ProgressWithLabel from './ProgressWithLabel';
 import GetLanguages from '@/src/utils/api/profile/getLanguages';
 import GetLevels from '@/src/utils/api/profile/getLevels';
 import PutStep3 from '@/src/utils/api/profile/putStep3';
-import { useAppDispatch } from '@/src/app/state/hooks';
-import { setProfile } from '@/src/app/(dashboard)/redux/profileSlice';
+import { useAppDispatch, useAppSelector } from '@/src/app/state/hooks';
+import {
+  selectProfile,
+  setProfile,
+} from '@/src/app/(dashboard)/redux/profileSlice';
 import { UserData } from '@/src/app/(dashboard)/redux/profileTypes';
 import { levelsMock } from '../mocks/levels.mock';
 import { languagesMock } from '../mocks/languages.mock';
 import { DeleteForeverOutlined, Edit, EditOutlined } from '@mui/icons-material';
+import { deleteLanguageSkills } from '@/src/app/(dashboard)/redux/profileThunks';
 
 interface Language {
+  id: number;
   language: string;
   proficiency: string;
 }
@@ -34,6 +39,7 @@ const LanguageSkills: React.FC<{
   onBack: () => void;
   step: number;
 }> = ({ onBack, onNext, step }) => {
+  const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [languages, setLanguages] = useState<Language[]>([
@@ -95,7 +101,11 @@ const LanguageSkills: React.FC<{
       dispatch(setProfile(profileUpdate));
       setLanguages(
         profileUpdate.languageSkills.map((item) => {
-          return { language: item.language.name, proficiency: item.level.name };
+          return {
+            language: item.language.name,
+            proficiency: item.level.name,
+            id: item.id,
+          };
         })
       );
 
@@ -112,6 +122,10 @@ const LanguageSkills: React.FC<{
     updatedLanguages.splice(index, 1);
     setLanguages(updatedLanguages);
   };
+  const handleDeleteLanguageSkill = async (languageSkillId: number) => {
+    const response = await dispatch(deleteLanguageSkills(languageSkillId));
+    console.log('response from deleteLanguageSkills', response);
+  };
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, minHeight: 300 }}>
@@ -127,9 +141,9 @@ const LanguageSkills: React.FC<{
         each below.
       </Typography>
 
-      {languages.length > 0 && (
+      {profile.languageSkills.length > 0 && (
         <Box sx={{ mb: 2 }}>
-          {languages.map((lang, index) => (
+          {profile.languageSkills.map((lang, index) => (
             <Box
               key={index}
               sx={{
@@ -143,10 +157,10 @@ const LanguageSkills: React.FC<{
             >
               <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
                 <Typography variant="body1" component={'span'}>
-                  {lang.language}
+                  {lang.language.name}
                 </Typography>
                 <Typography variant="body1" component={'span'}>
-                  {lang.proficiency}
+                  {lang.level.name}
                 </Typography>
               </Box>
 
@@ -157,7 +171,7 @@ const LanguageSkills: React.FC<{
                 </IconButton> */}
                 <IconButton
                   color="error"
-                  onClick={() => handleDeleteLanguage(index)}
+                  onClick={() => handleDeleteLanguageSkill(lang.id)}
                 >
                   <DeleteForeverOutlined />
                 </IconButton>
